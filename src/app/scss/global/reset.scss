@@ -1,0 +1,164 @@
+/*
+*************
+* Reset CSS *
+************* */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+* {
+    // forzar tema blanco en navegadores configurados con tema oscuro
+    color-scheme: only light !important;
+}
+
+html {
+    font-size: 16px;
+    text-size-adjust: 100% !important;
+    scroll-behavior: smooth !important;
+}
+
+body {
+    display: block;
+    width: 100% !important;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    text-rendering: optimizeSpeed !important;
+
+    overflow-x: hidden;
+}
+
+html,
+body {
+    line-height: 1.1;
+    //font-family: $font-ubuntu;
+}
+
+p:not([class*="text-["]),
+h5:not([class*="text-["]),
+h6:not([class*="text-["]),
+button:not([class*="text-["]),
+select:not([class*="text-["]),
+textarea:not([class*="text-["]),
+input:not([class*="text-["]),
+table:not([class*="text-["]),
+th:not([class*="text-["]),
+td:not([class*="text-["]),
+thead:not([class*="text-["]),
+tbody,
+a:not([class*="text-["]),
+label:not([class*="text-["]) {
+    font-size: var(--step--1);
+}
+
+p:not([class*="text-["]) {
+    span:not([class*="text-["]) {
+        font-size: var(--step--1);
+    }
+}
+
+a {
+    text-decoration-line: none;
+}
+
+h1:not([class*="text-["]) {
+    font-size: var(--step-0) !important;
+    font-weight: 500 !important;
+
+    span:not([class*="text-["]) {
+        font-size: var(--step-0);
+    }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500 !important;
+}
+
+/* Mejorar proporsion de los saltos de linea del texto
+  https://www.youtube.com/watch?v=66ky3Dopcq0&t=282s */
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+p,
+h5,
+h6 {
+    text-wrap: pretty;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// cursor de los botones
+button:enabled,
+input[type="button"]:enabled,
+input[type="submit"]:enabled,
+input[type="reset"]:enabled,
+input[type="image"]:enabled,
+input[type="range"]:enabled,
+input[type="color"]:enabled,
+input[type="file"]:enabled::file-selector-button,
+input[type="file"]:enabled {
+    cursor: pointer;
+}
+
+
+button:disabled,
+fieldset:disabled,
+optgroup:disabled,
+option:disabled,
+select:disabled,
+textarea:disabled,
+input:disabled,
+input[type="file"]:disabled::file-selector-button,
+input[type="file"]:disabled,
+input:read-only,
+textarea:read-only {
+    //cursor: not-allowed !important;
+    opacity: 0.75 !important;
+    font-weight: 500 !important;
+}
+
+/*
+  *******************************************************
+  * Multimedia Responsive                               *
+  * https://www.youtube.com/watch?v=udGrXWeJp1Y&t=4090s *
+  ******************************************************* */
+
+img,
+audio,
+video,
+canvas,
+svg,
+picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+img,
+video {
+    object-fit: cover;
+}
+
+
+/* Eliminar color de fondo azul cuando se hace click en los enlaces <a>
+  https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic */
+a {
+    -webkit-tap-highlight-color: transparent !important;
+}

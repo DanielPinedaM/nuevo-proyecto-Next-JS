@@ -1,0 +1,33 @@
+/*
+*******************
+* barra de scroll *
+******************* */
+
+$scrollbarColor: #bdbdbd;
+
+*::-webkit-scrollbar {
+  display: block;
+  width: 0.3125rem;
+  height: 0.3125rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbarColor;
+  border-radius: 0.625rem;
+  border-right: none;
+  border-left: none;
+}
+
+*::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 1.25rem;
+}
+
+*::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 1.25rem;
+}

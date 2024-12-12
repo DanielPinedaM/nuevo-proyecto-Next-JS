@@ -1,0 +1,12 @@
+@use "./global/branding.scss";
+@use "./global/root.scss";
+@use "./global/reset.scss";
+@use "./global/scroll-bar.scss";
+
+@use '../../../node_modules/primeicons/primeicons.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer tailwind-base, primereact, tailwind-utilities;
