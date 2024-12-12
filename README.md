@@ -34,8 +34,8 @@ nvm use 22.12.0
 
 comando | apunta a... | ruta archivo
 ------------ | ------------- | -------------
-node --run build:test | pruebas | src/environments/environment.test.ts
-node --run build:prod | producción | src/environments/environment.ts
+node --run build:test | pruebas | environment.test.ts
+node --run build:prod | producción | environment.ts
 
 #### Tecnologías
 
