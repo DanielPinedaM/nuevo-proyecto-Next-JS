@@ -3,7 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f ./environments/.env.dev next dev --turbopack",
+    "start:dev": "env-cmd -f ./environments/.env.development next dev --turbopack",
+    "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack",
+    "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack",
+
+    "build:test": "env-cmd -f ./environments/.env.test next build",
+    "build:prod": "env-cmd -f ./environments/.env.production next build",
+
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {

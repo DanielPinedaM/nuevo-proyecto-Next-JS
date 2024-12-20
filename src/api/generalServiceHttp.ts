@@ -20,9 +20,9 @@ export async function httpRequest<T = any, B = any>(
   options: RequestOptions<B> = {}
 ): Promise<T> {
   if (typeof url !== "string" || String(url)?.trim() === "") {
-    const errorMessageURL: string = `❌ error la url tiene q ser un string y NO puede estar vacio '' \n la url es ${url}`;
-    console.error(errorMessageURL, url);
-    throw new Error(errorMessageURL + url);
+    const errorMessage: string = "\n ❌ error la url tiene q ser tipo string y NO puede estar vacia '' \n";
+    console.error(errorMessage, "la url es ", url)
+    throw new Error(errorMessage);
   }
 
   const {

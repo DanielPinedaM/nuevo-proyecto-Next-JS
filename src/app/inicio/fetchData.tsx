@@ -6,7 +6,7 @@ async function loadPost() {
   try {
     /* llamar a funcion general httpRequest() para hacer peticiones http */
     console.log("env", process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER)
-    const response = await httpRequest('GET', 'https://jsonplaceholder.typicode.com/todos');
+    const response = await httpRequest('GET', process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER);
     return response;
   } catch {
     return [];

@@ -22,9 +22,9 @@ nvm use 22.12.0
 
 comando | apunta a... | ruta archivo
 ------------ | ------------- | -------------
-node --run start:dev | localhost | environment.development.ts
-node --run start:test | pruebas | environment.test.ts
-node --run start:prod | producción | environment.ts
+node --run start:dev | localhost | environments/.env.development
+node --run start:test | pruebas | environments/.env.test
+node --run start:prod | producción | environments/.env.production
 
 #### Generar build (dist) para desplegar
 
@@ -34,8 +34,8 @@ nvm use 22.12.0
 
 comando | apunta a... | ruta archivo
 ------------ | ------------- | -------------
-node --run build:test | pruebas | environment.test.ts
-node --run build:prod | producción | environment.ts
+node --run build:test | pruebas | environments/.env.test
+node --run build:prod | producción | environments/.env.production
 
 #### Tecnologías
 

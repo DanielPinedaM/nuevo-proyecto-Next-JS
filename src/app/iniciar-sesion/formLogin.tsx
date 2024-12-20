@@ -24,8 +24,8 @@ export default function FormLogin() {
 
   useEffect(() => {
     console.log("env")
-    console.log(process.env.NEXT_PUBLIC_PRUEBA_UNO);
-    console.log(process.env.NEXT_PUBLIC_PRUEBA_DOS)
+    console.log("NEXT_PUBLIC_PRUEBA_UNO", process.env.NEXT_PUBLIC_PRUEBA_UNO);
+    console.log("NEXT_PUBLIC_PRUEBA_DOS", process.env.NEXT_PUBLIC_PRUEBA_DOS)
   }, [])
 
   const onSubmit = async (body: IFormLogin) => {
