@@ -62,7 +62,9 @@ node --run build:prod | producción | environments/.env.production
 
 * Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
 
-#### Estructura de módulos
+#### Estructura de carpetas
+* **/environments**: Variables de entorno .env para desarrollo (local host), produccion y pruebas
+
 * **src/app/**: Enrutado de Next JS
 
 * **src/components**: Componentes generales que se pueden re-utilizar en cualquier parte de la aplicacion
