@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=dev APP_ENV=dev next dev --turbopack",
-    "start:test": "cross-env NODE_ENV=test APP_ENV=test next dev --turbopack",
-    "start:prod": "cross-env NODE_ENV=prod APP_ENV=prod next dev --turbopack",
-    "build:test": "cross-env NODE_ENV=test APP_ENV=test next build",
-    "build:prod": "cross-env NODE_ENV=prod APP_ENV=prod next build",
+    "start": "env-cmd -f ./environments/.env.dev next dev --turbopack",
     "lint": "next lint"
   },
   "dependencies": {
@@ -15,6 +11,7 @@
     "@next/env": "^15.1.0",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "env-cmd": "^10.1.0",
     "fs": "^0.0.1-security",
     "next": "^15.1.0",
     "next-auth": "^4.24.11",
@@ -30,7 +27,6 @@
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
-    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "js-cookie": "^3.0.5",

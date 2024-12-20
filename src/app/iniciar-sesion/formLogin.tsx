@@ -8,6 +8,7 @@ import IFormLogin from '@/types/interface/interface-login';
 import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 export default function FormLogin() {
@@ -32,6 +33,12 @@ export default function FormLogin() {
       console.error('❌ error \n', error);
     }
   };
+
+  useEffect(() => {
+    console.log("env")
+    console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
+    console.log(process.env.ENV1)
+  }, [])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
