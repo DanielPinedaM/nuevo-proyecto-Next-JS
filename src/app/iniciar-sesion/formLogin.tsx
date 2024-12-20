@@ -22,6 +22,12 @@ export default function FormLogin() {
 
   const router = useRouter();
 
+  useEffect(() => {
+    console.log("env")
+    console.log(process.env.NEXT_PUBLIC_PRUEBA_UNO);
+    console.log(process.env.NEXT_PUBLIC_PRUEBA_DOS)
+  }, [])
+
   const onSubmit = async (body: IFormLogin) => {
     console.log('🚀 ~ onSubmit ~ body:', body);
 
@@ -33,12 +39,6 @@ export default function FormLogin() {
       console.error('❌ error \n', error);
     }
   };
-
-  useEffect(() => {
-    console.log("env")
-    console.log(process.env.NEXT_PUBLIC_SECRET_KEY)
-    console.log(process.env.ENV1)
-  }, [])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
