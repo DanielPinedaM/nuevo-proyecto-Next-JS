@@ -1,6 +1,6 @@
 'use client';
+import { constPath } from '@/types/constant/const-path';
 import { usePathname, useRouter } from 'next/navigation';
-import { constPath } from './types/constant/const-path';
 
 export default function NotFound() {
   const pathname: string = usePathname();

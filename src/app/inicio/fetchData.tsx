@@ -1,4 +1,5 @@
-import { httpRequest } from '../api/generalServiceHttp';
+
+import { httpRequest } from '@/api/generalServiceHttp';
 import ListData from './listData';
 
 async function loadPost() {

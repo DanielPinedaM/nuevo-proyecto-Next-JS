@@ -1,5 +1,6 @@
 import FormLogin from "./formLogin";
 
+
 export default function Page() {
   return (
     <section
@@ -16,7 +17,7 @@ export default function Page() {
           <div className="xsm:w-[70%]">
             <h1 className="text-dark-blue text-center text-[25px] leading-6 font-medium mb-5">
               <span className="block">Bienvenido a</span>
-              <span>AudicuentasMED</span>
+              <span>tu plataforma web</span>
             </h1>
 
             <FormLogin />

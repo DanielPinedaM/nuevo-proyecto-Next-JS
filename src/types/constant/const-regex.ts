@@ -1,6 +1,6 @@
-import IRegExp from '../interface/interface-reg-exp';
+import IRegExp from "../interface/interface-reg-exp";
 
-export const constRegExp: IRegExp = {
+export const constRegex: IRegExp = {
   number: {
     // valida numeros enteros, negativos y decimales con coma y punto
     integerOrDecimal: /^(-?\d{0,}(\,|\.)?){0,}$/,
@@ -13,9 +13,11 @@ export const constRegExp: IRegExp = {
     any: /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ\s]+$/,
 
     // valida correo electronico
-    email: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    email:
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 
     // contraseña segura debe contener un caracter especial, un número, una mayúscula y una minúscula
-    strongPassword:  /^(?=.*[!@#$%^&*()_+\[\]{};':"\\|,.<>/?])(?=.*[0-9])(?=.*[A-ZÑÁÉÍÓÚ])(?=.*[a-zñáéíóú])/
+    strongPassword:
+      /^(?=.[!@#$%^&()_+\[\]{};':"\\|,.<>/?])(?=.[0-9])(?=.[A-ZÑÁÉÍÓÚ])(?=.*[a-zñáéíóú])/,
   },
 };

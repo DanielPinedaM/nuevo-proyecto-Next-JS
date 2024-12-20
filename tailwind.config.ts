@@ -1,12 +1,9 @@
-import { breakpoint } from "./src/app/types/constant/const-layout";
 import type { Config } from "tailwindcss";
-
+import { breakpoint } from "./src/types/constant/const-layout";
 
 export default {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     screens: {

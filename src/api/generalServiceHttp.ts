@@ -19,8 +19,8 @@ export async function httpRequest<T = any, B = any>(
   url: string = "",
   options: RequestOptions<B> = {}
 ): Promise<T> {
-  if (typeof url !== "string" || url?.trim() === "") {
-    const errorMessageURL: string = "❌ error la url tiene q ser un string y NO puede estar vacio ''  \n ";
+  if (typeof url !== "string" || String(url)?.trim() === "") {
+    const errorMessageURL: string = `❌ error la url tiene q ser un string y NO puede estar vacio '' \n la url es ${url}`;
     console.error(errorMessageURL, url);
     throw new Error(errorMessageURL + url);
   }
@@ -73,10 +73,11 @@ export async function httpRequest<T = any, B = any>(
     const response = await fetch(requestUrl, fetchOptions);
 
     if (!response.ok) {
-      console.error("❌ error 401 no tiene autorizacion para realizar esta accion \n", response);
-
       if (response.status === 401) {
+        console.error("❌ error 401 no tiene autorizacion para realizar esta accion \n", response);
         handleUnauthorized();
+      } else {
+        console.error("\n ❌ error al ejecutar la petición HTTP \n", "metodo HTTP ", method, "\n", "url " + url, "\n");
       }
     }
 
@@ -86,13 +87,15 @@ export async function httpRequest<T = any, B = any>(
       return (await response.text()) as T;
     } else if (responseType === "blob") {
       return (await response.blob()) as T;
+    } else {
+      console.error("\n ❌ error formato de respuesta no valido \n", "metodo HTTP ", method, "\n", "url ", url, "\n", "response ", response, "\n", "responseType ", responseType, " \n")
     }
 
     const errorMessage: string = "❌ error tipo de respuesta no soportado \n ";
     console.error(errorMessage, "\n", response, "\n");
     throw new Error(errorMessage);
   } catch (error) {
-    console.error("❌ error al ejecutar la petición HTTP \n", error, "\n", "metodo HTTP ", method, "\n", "url " + url, "\n");
+    console.error("\n ❌ error al ejecutar la petición HTTP \n", error, "\n", "metodo HTTP ", method, "\n", "url " + url, "\n");
     throw error;
   }
 }

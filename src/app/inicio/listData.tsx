@@ -1,5 +1,4 @@
 'use client';
-
 import { GrView } from 'react-icons/gr';
 
 export default function ListData({ post }) {

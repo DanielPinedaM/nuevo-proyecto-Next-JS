@@ -1,50 +1,50 @@
 'use client';
-import { useForm } from 'react-hook-form';
-import { InputText } from 'primereact/inputtext';
-import IFormLogin from '../types/interface/interface-login';
-import GeneralErrorMessage from '../components/GeneralErrorMessage';
+import { login } from '@/api/login/login';
+import GeneralErrorMessage from '@/components/GeneralErrorMessage';
+import { globalTailwindStyle } from '@/types/constant/const-layout';
+import { constPath } from '@/types/constant/const-path';
+import { constRegex } from '@/types/constant/const-regex';
+import IFormLogin from '@/types/interface/interface-login';
 import { useRouter } from 'next/navigation';
-import { constPath } from '../types/constant/const-path';
-import { httpRequest } from '../api/generalServiceHttp';
-import { constRegExp } from '../types/constant/const-reg-exp';
-import { IResponse } from '../types/interface/interface-response';
-import { globalTailwindStyle } from '../types/constant/const-layout';
+import { InputText } from 'primereact/inputtext';
+import { Password } from 'primereact/password';
+import { Controller, useForm } from 'react-hook-form';
 
 export default function FormLogin() {
-  const { register, formState: { errors }, handleSubmit } = useForm<IFormLogin>({
+  const {
+    formState: { errors },
+    handleSubmit,
+    control,
+  } = useForm<IFormLogin>({
     criteriaMode: 'all',
   });
 
   const router = useRouter();
 
   const onSubmit = async (body: IFormLogin) => {
-    try {
-      const { success, message }: IResponse = await httpRequest('POST', process.env.NEXT_PUBLIC_ENVIRONMENT, {
-        body,
-      });
+    console.log('🚀 ~ onSubmit ~ body:', body);
 
-      if (success) {
-        router.push('/' + constPath.home + '/' + constPath.home);
-      } else {
-        console.error('❌ error \n', message);
-      }
+    router.push('/' + constPath.home);
+
+    try {
+      await login(body);
     } catch (error) {
       console.error('❌ error \n', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
       <div className='mb-2'>
         <label>
-          <p className='cursor-pointer'>Correo electrónico</p>
-          <InputText
-            placeholder='Correo electrónico'
-            className={`${globalTailwindStyle.input.general} block w-full`}
-            {...register('user', {
+          <span className='cursor-pointer'>Correo electrónico</span>
+          <Controller
+            name='user'
+            control={control}
+            rules={{
               required: 'Digite correo electrónico',
               pattern: {
-                value: constRegExp.text.email,
+                value: constRegex.text.email,
                 message: 'Correo electrónico invalido',
               },
               minLength: {
@@ -55,7 +55,18 @@ export default function FormLogin() {
                 value: 30,
                 message: 'Máximo 30 caracteres',
               },
-            })}
+            }}
+            render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+              <InputText
+                {...field}
+                id={name}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                onBlur={onBlur}
+                placeholder='nombre@correo.com'
+                className={`${globalTailwindStyle.input.general} block w-full`}
+              />
+            )}
           />
         </label>
         <GeneralErrorMessage errors={errors} name='user' />
@@ -63,25 +74,34 @@ export default function FormLogin() {
 
       <div className='mb-2'>
         <label>
-          <p className='cursor-pointer'>Contraseña</p>
-          <InputText
-            placeholder='Contraseña'
-            className={`${globalTailwindStyle.input.general} block w-full`}
-            {...register('password', {
+          <span className='cursor-pointer'>Contraseña</span>
+          <Controller
+            name='password'
+            control={control}
+            rules={{
               required: 'Digite contraseña',
-              pattern: {
-                value: constRegExp.text.strongPassword,
-                message: "contraseña insegura, debe contener un caracter especial, un número, una mayúscula y una minúscula",
-              }
-            })}
+            }}
+            render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+              <Password
+                {...field}
+                id={name}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                onBlur={onBlur}
+                variant='filled'
+                feedback={false}
+                placeholder='Contraseña'
+                className={`${globalTailwindStyle.input.general}`}
+              />
+            )}
           />
         </label>
         <GeneralErrorMessage errors={errors} name='password' />
       </div>
 
       <div className='flex justify-end'>
-        <button type='submit' className={`${globalTailwindStyle.button}`}>
-          INGRESAR
+        <button type='submit' className={`${globalTailwindStyle.button} uppercase`}>
+          ingresar
         </button>
       </div>
     </form>

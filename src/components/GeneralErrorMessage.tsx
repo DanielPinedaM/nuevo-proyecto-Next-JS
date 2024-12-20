@@ -1,6 +1,6 @@
 'use client';
 import { ErrorMessage } from '@hookform/error-message';
-import { IGeneralErrorMessage } from '../types/interface/interface-general-error-message';
+import { IGeneralErrorMessage } from '../app/types/interface/interface-general-error-message';
 
 /** * Componente que muestra los mensajes de error asociados a un campo de un formulario de React Hook Form */
 export default function GeneralErrorMessage({ errors, name }: IGeneralErrorMessage) {

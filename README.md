@@ -2,21 +2,21 @@
 
 #### Instalar paquetes
 
-```javascript
+```console
 nvm install 22.12.0
 ```
 
-```javascript
+```console
 nvm use 22.12.0
 ```
 
-```javascript
+```console
 npm i
 ```
 
 #### Ejecutar proyecto
 
-```javascript
+```console
 nvm use 22.12.0
 ```
 
@@ -28,7 +28,7 @@ node --run start:prod | producción | environment.ts
 
 #### Generar build (dist) para desplegar
 
-```javascript
+```console
 nvm use 22.12.0
 ```
 
@@ -63,24 +63,26 @@ node --run build:prod | producción | environment.ts
 * Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
 
 #### Estructura de módulos
-* **src/app/components**: Componentes generales que se pueden re-utilizar en cualquier parte de la aplicacion
+* **src/app/**: Enrutado de Next JS
 
-* **src/app/componentsp/GeneralErrorMessage.tsx**: Componente que muestra los mensajes de error asociados a un campo de un formulario de React Hook Form
+* **src/components**: Componentes generales que se pueden re-utilizar en cualquier parte de la aplicacion
 
-* **src/app/scss**: Estilos globales de Sass
+* **src/components/GeneralErrorMessage.tsx**: Componente que muestra los mensajes de error asociados a un campo de un formulario de React Hook Form
 
-* **src/app/types/constant**: Constantes
+* **src/scss**: Estilos globales de Sass
 
-* **src/app/types/interface**: Interface asociadas a las constantes
+* **src/types/constant**: Constantes
 
-* **src/app/utils/func/general.ts**: Funciones generalres que se pueden re-utilizar en cualquier parte de la aplicacion
+* **src/types/interface**: Interface asociadas a las constantes
 
-* **src/app/utils/func/sessionStorage.ts**: Funciones para guardar, listar, actualizar y eliminar propiedad:valor en sessionStorage, codifica y de-codifica en base 64, detecta cuando usar JSON.stringify() y JSON.parse()
+* **src/utils/func/general.ts**: Funciones generalres que se pueden re-utilizar en cualquier parte de la aplicacion
+
+* **src/utils/func/sessionStorage.ts**: Funciones para guardar, listar, actualizar y eliminar propiedad:valor en sessionStorage, codifica y de-codifica en base 64, detecta cuando usar JSON.stringify() y JSON.parse()
 
 * **public/assets/icon**: Iconos
 
 * **public/assets/img**: Imagenes
 
-* **src/app/store**: Estado global en Zustand para compartir estados entre componentes
+* **src/store**: Estado global en Zustand para compartir estados entre componentes
 
-* **src/app/api/generalServiceHttp.ts**: Funcion general para hacer peticiones HTTP usando fetch, sirve para Server Side Rendering y "use client"
+* **src/api/generalServiceHttp.ts**: Funcion general para hacer peticiones HTTP usando fetch, sirve para Server Side Rendering y "use client"
