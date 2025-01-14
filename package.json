@@ -6,10 +6,8 @@
     "start:dev": "env-cmd -f ./environments/.env.development next dev --turbopack",
     "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack",
     "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack",
-
     "build:test": "env-cmd -f ./environments/.env.test next build",
     "build:prod": "env-cmd -f ./environments/.env.production next build",
-
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,6 +15,7 @@
     "@hookform/error-message": "^2.0.1",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
+    "cookies-next": "^5.0.2",
     "env-cmd": "^10.1.0",
     "fs": "^0.0.1-security",
     "next": "^15.1.0",

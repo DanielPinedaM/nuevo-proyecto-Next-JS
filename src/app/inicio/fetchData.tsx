@@ -1,21 +1,15 @@
-
-import { httpRequest } from '@/api/generalServiceHttp';
+import { loadPost } from '@/services/posts';
 import ListData from './listData';
-
-async function loadPost() {
-  try {
-    /* llamar a funcion general httpRequest() para hacer peticiones http */
-    console.log("env", process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER)
-    const response = await httpRequest('GET', process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER);
-    return response;
-  } catch {
-    return [];
-  }
-}
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */
-  const posts = await loadPost();
+  let posts = [];
+  try {
+    posts = await loadPost();
+  } catch (error) {
+    posts = [];
+    console.error("❌ error ", error);
+  }
 
   return (
     <>

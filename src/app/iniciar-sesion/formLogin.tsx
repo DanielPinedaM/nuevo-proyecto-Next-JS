@@ -29,8 +29,6 @@ export default function FormLogin() {
   }, [])
 
   const onSubmit = async (body: IFormLogin) => {
-    console.log('🚀 ~ onSubmit ~ body:', body);
-
     router.push('/' + constPath.home);
 
     try {
