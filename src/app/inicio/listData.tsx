@@ -3,7 +3,6 @@ import { GrView } from 'react-icons/gr';
 
 export default function ListData({ post }) {
   const { id, userId, title, completed } = post;
-  console.log('🚀 ~ ListData ~ post:', post);
 
   const onClickViewAlert = (userId: number): void => {
     alert(userId);

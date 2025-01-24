@@ -5,6 +5,7 @@ import { globalTailwindStyle } from '@/types/constant/const-layout';
 import { constPath } from '@/types/constant/const-path';
 import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
+import { IResponse } from '@/types/interface/interface-response';
 import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
@@ -29,12 +30,10 @@ export default function FormLogin() {
   }, [])
 
   const onSubmit = async (body: IFormLogin) => {
-    router.push('/' + constPath.home);
+    const { success }: IResponse = await login(body);
 
-    try {
-      await login(body);
-    } catch (error) {
-      console.error('❌ error \n', error);
+    if (success) {
+      router.push('/' + constPath.home);
     }
   };
 

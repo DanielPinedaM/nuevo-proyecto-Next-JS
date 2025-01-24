@@ -3,13 +3,7 @@ import ListData from './listData';
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */
-  let posts = [];
-  try {
-    posts = await loadPost();
-  } catch (error) {
-    posts = [];
-    console.error("❌ error ", error);
-  }
+  const posts = await loadPost();
 
   return (
     <>

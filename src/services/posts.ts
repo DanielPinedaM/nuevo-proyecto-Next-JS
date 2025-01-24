@@ -1,5 +1,5 @@
 import { IResponse } from '@/types/interface/interface-response';
-import { httpRequest } from './generalServiceHttp';
+import { httpRequest } from './generalService/httpRequest';
 
 export async function loadPost() {
   const response/* : IResponse */ = await httpRequest(
