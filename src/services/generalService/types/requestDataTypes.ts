@@ -3,7 +3,7 @@
 export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 /**
- * parametros de funcion httpRequest para llamar a la API */
+parametros de funcion httpRequest para llamar a la API */
 export interface IRequestOptions {
   isASecurityEndpoint?: boolean;
   body?: any;
@@ -13,7 +13,7 @@ export interface IRequestOptions {
 }
 
 /**
- * parametros de funcion errorLogs() q se imprimen por consola  cuando hay errores */
+parametros de funcion errorLogs() q se imprimen por consola  cuando hay errores */
 export interface IObjectLogs {
   message?: string;
   method?: Method;
@@ -30,7 +30,7 @@ interface IData {
 }
 
 /**
- * asi es como responde la api de NestJS */
+asi es como responde la api de NestJS */
 export interface IResponse {
   success: boolean;
   status: number;

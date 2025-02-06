@@ -1,11 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { login } from '@/api/login/login';
+import errorNotification from '@/components/dialog/errorNotification';
 import GeneralErrorMessage from '@/components/GeneralErrorMessage';
+import { login } from '@/services/auth/auth';
+import { cookieOptionsInLogin } from '@/types/constant/const-cookie-storage';
 import { globalTailwindStyle } from '@/types/constant/const-layout';
-import { constPath } from '@/types/constant/const-path';
 import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
+import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
+import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
@@ -24,17 +28,67 @@ export default function FormLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log("env")
-    console.log("NEXT_PUBLIC_PRUEBA_UNO", process.env.NEXT_PUBLIC_PRUEBA_UNO);
-    console.log("NEXT_PUBLIC_PRUEBA_DOS", process.env.NEXT_PUBLIC_PRUEBA_DOS)
-  }, [])
+    deleteStorageAndCookies();
+  }, []);
 
-  const onSubmit = async (body: IFormLogin) => {
-    const { success }: IResponse = await login(body);
+  const deleteStorageAndCookies = (): void => {
+    deleteAllCookies();
+    sessionStorageDeleteAll();
+  };
 
-    if (success) {
-      router.push('/' + constPath.home);
+  const deleteAllCookies = (): void => {
+    const cookies = getCookies();
+
+    if (cookies) {
+      Object.keys(cookies).forEach((cookieName: string) => {
+        deleteCookie(cookieName);
+      });
     }
+  };
+
+  const iterateUserData = (data: any): void => {
+    const errorMessage: string =
+      '❌ error, NO se puede setear las cookies porque la api NO ha respondido con los datos q se guardan en las cookies ';
+
+    if (!data || Object?.keys(data)?.length === 0) {
+      console.error(errorMessage, '\n', data);
+      return;
+    }
+
+    // el tiempo de expiracion de las cookies en front y el token en back son los mismos
+    const maxAge: number = data?.expiresIn;
+
+    if (!maxAge) {
+      console.error(errorMessage, '\n', maxAge);
+      return;
+    }
+
+    Object.entries(data).forEach((entry) => {
+      const [key, value] = entry;
+      if (!key || !value) {
+        console.error(errorMessage, '\n', key, value);
+        return;
+      }
+
+      setCookie(key, value, cookieOptionsInLogin({ maxAge }));
+    });
+  };
+
+  const onSubmit = async (body: IFormLogin): Promise<void> => {
+    //des-comentar lo q esta comentado a continuacion para hacer peticion http de iniciar sesion
+
+    //const { success, message, data }: IResponse = await login(body);
+
+    //if (success) {
+    iterateUserData({
+      expiresIn: 7200,
+      accessToken: 'aqui va el token',
+    });
+    router.push('/inicio/administrador');
+    //} else {
+    //deleteStorageAndCookies();
+    //errorNotification(message);
+    //}
   };
 
   return (

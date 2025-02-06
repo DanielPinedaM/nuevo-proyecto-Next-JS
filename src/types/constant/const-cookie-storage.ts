@@ -1,20 +1,20 @@
-import { IObjCookie, IObjStorage } from "../interface/interface-cookie-storage";
+import { INameCookieKey, IObjStorage } from '../interface/interface-cookie-storage';
 
 /* ********
-* cookies *
-* ********* */
+ * cookies *
+ * ********* */
 
 // nombres de las propiedades q se guardan en las COOKIES
-export const objCookie: IObjCookie = {
-  token: "dG9rZW4",
-  userType: "dXNlciB0eXBl",
+export const nameCookieKey: INameCookieKey = {
+  accessToken: 'accessToken',
+  userType: 'userType',
+  role: 'role',
+  email: 'email',
 };
 
-// opciones de la cookie q guarda el token en el login
-export const cookieOptionsInLogin = (token: string) => ({
-  name: objCookie.token,
-  value: token,
-
+/**
+lista de opciones de configuracion de las cookies al loguearse */
+export const cookieOptionsInLogin = ({ maxAge }: { maxAge: number }) => ({
   // la cookie es accesible por el servidor y cliente
   httpOnly: false,
 
@@ -24,22 +24,22 @@ export const cookieOptionsInLogin = (token: string) => ({
   // la cookie solamente esta disponible en el mismo dominio donde se genera
   sameSite: "strict" as const,
 
-  // la cookie expira despues de 1 dia
-  maxAge: 86400,
+  // tiempo de espiracion de la cookie en segundos
+  maxAge,
 
   // dominio donde la cookie es valida
   domain: process.env.NEXT_PUBLIC_DOMAIN,
 
   // la cookie es accesible desde todas las rutas en el dominio donde se esta ejecutando la pagina web
-  path: "/"
+  path: "/",
 });
 
 /* ***************
-* sessionStorage *
-* **************** */
+ * sessionStorage *
+ * **************** */
 
 // nombres de las propiedades q se guardan en SESSION STORAGE
 export const objStorage: IObjStorage = {
   // hace q la petición http de listar menu se ejecuta UNA VEZ, solamente al cargar la página por primera vez
-  menuOptions: "menuOptions"
+  menuOptions: 'menuOptions',
 };

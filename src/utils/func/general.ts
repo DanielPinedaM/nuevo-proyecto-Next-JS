@@ -17,3 +17,15 @@ export const normalizeStr = (string: string | any): string | any => {
     return string;
   }
 };
+
+/**
+el codigo se ejecuta en el servidor o cliente */
+export const isUseClient = (): boolean => {
+  // 'use client' - cliente - CSR - frontend
+  if (typeof window !== "undefined") {
+    return true;
+  } else {
+  // 'use server' - servidor - SSR - backend
+    return false;
+  }
+};

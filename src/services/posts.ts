@@ -1,4 +1,3 @@
-import { IResponse } from '@/types/interface/interface-response';
 import { httpRequest } from './generalService/httpRequest';
 
 export async function loadPost() {

@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { errorLogs, getToken, handleUnauthorized, loggerRequestInServer, uploadFile } from "./func/requestFunctions";
+import { isUseClient } from "@/utils/func/general";
+import {
+  errorLogs,
+  getToken,
+  handleUnauthorized,
+  successLogs,
+  uploadFile,
+} from "./func/requestFunctions";
 import { IRequestOptions, Method } from "./types/requestDataTypes";
 
 /**
-* funcion general para llamar a API */
+funcion general para llamar a API */
 export async function httpRequest<T = any>(
   method: Method,
   url: string = "",
@@ -19,11 +26,12 @@ export async function httpRequest<T = any>(
 
   if (typeof url !== "string" || url?.trim() === "" || String(url)?.includes("undefined")) {
     errorLogs({
-      message: "la url tiene que ser un string y NO puede estar vacia ''",
+      message: "la URL tiene que ser tipo string y NO puede estar vacia ''",
       method,
       url,
       options,
     });
+
     return {} as T;
   }
 
@@ -34,7 +42,22 @@ export async function httpRequest<T = any>(
 
   // Agregar token si el endpoint lo necesita
   if (isASecurityEndpoint) {
-    const token = getToken();
+    const token = await getToken();
+
+    if (!token) {
+      errorLogs({
+        message:
+          "NO se pudo obtener token en el " + isUseClient()
+            ? "CLIENTE 'use client'"
+            : "SERVIDOR 'use server'" + " \ntoken " + token,
+        method,
+        url,
+        options,
+      });
+
+      return {} as T;
+    }
+
     if (token) {
       finalHeaders["Authorization"] = `Bearer ${token}`;
     }
@@ -106,7 +129,7 @@ export async function httpRequest<T = any>(
       // saltar al catch y capturar el error dependiendo del status de la respuesta
       throw new Error(JSON.stringify(result));
     } else {
-      loggerRequestInServer({
+      successLogs({
         method,
         url,
         options,
@@ -123,14 +146,25 @@ export async function httpRequest<T = any>(
         parsedError = JSON?.parse(message);
       }
     } catch {
-      console.error("no se pudo capturar error de la API \n");
+      console.error("no se pudo capturar error de la API \n", error);
     }
 
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
-    if (parsedError?.status === 401) {
+    if (
+      parsedError?.status === 401 &&
+      // NO detener la ejecucion del codigo al de-codificar token en middleware.ts
+      // redirect() solamente funciona en componentes servidor, NO en middleware.ts
+      url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
+    ) {
+      console.error("❌ httpRequest.ts - error 401: Unauthorized - NO tiene permisos para acceder");
+
       handleUnauthorized();
-    } else if (parsedError?.status === 404) {
-      console.error(`❌ error 404 Not Found, endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`);
+    }
+
+    if (parsedError?.status === 404) {
+      console.error(
+        `❌ error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
+      );
     }
   }
 

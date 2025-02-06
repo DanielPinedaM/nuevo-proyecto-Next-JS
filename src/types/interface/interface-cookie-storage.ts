@@ -1,9 +1,11 @@
 /* ********
 * cookies *
 * ********* */
-export interface IObjCookie {
-  token: string;
+export interface INameCookieKey {
+  accessToken: string;
   userType: string;
+  role: string;
+  email: string;
 }
 
 /* ***************
