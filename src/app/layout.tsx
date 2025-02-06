@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { PrimeReactProvider } from "primereact/api";
+import { Toaster } from "react-hot-toast";
 import "../scss/index.scss";
 
 const geistSans = localFont({
@@ -28,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Toaster position="top-right" reverseOrder={true} />
+
+        <PrimeReactProvider>{children}</PrimeReactProvider>
       </body>
     </html>
   );
