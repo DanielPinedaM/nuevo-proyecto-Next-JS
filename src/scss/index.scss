@@ -1,12 +1,20 @@
-@use "./global/branding.scss";
-@use "./global/root.scss";
-@use "./global/reset.scss";
-@use "./global/scroll-bar.scss";
+// global
+@use './global/branding.scss';
+@use './global/reset.scss';
+@use './global/table.scss';
+@use './global/root.scss';
+@use './global/scroll-bar.scss';
 
+// iconos de Prime React
 @use '../../node_modules/primeicons/primeicons.css';
 
+// estilos generales de Prime React
+@use '../../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
+
+// sobrescribir escribir estilos generales de Prime React
+@use './global/prime-react.scss';
+
+// Tailwind
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer tailwind-base, primereact, tailwind-utilities;

@@ -1,0 +1,86 @@
+/*
+********************************************
+* Prime React - ventanas modales (dialog) *
+******************************************* */
+
+// fondo negro semi-transparente al contenido q NO es de la ventana modal
+.p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+// hacer q input de type password ocupe todo el ancho de su contenedor padre
+.p-password,
+.p-password-input {
+  display: block !important;
+  width: 100% !important;
+}
+
+/*
+***********************
+* Prime React - boton *
+*********************** */
+
+// eliminar borde al hacer click en botones de Prime React
+.p-button:focus {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/*
+********************************
+* Prime React - <table> tablas *
+******************************** */
+
+// centrar icono y numero de paginador
+.p-dropdown {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/*
+****************************
+* Prime React - <chexcbox> *
+**************************** */
+
+.p-checkbox .p-checkbox-box {
+  border: 1px solid #6b7280 !important; // Gris oscuro para mejor contraste
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/*
+*******************************
+* Prime React - Ventana modal *
+******************************* */
+
+.p-dialog {
+  max-height: 98dvh !important;
+}
+
+div.p-dialog-content,
+div.p-dialog-header,
+div.p-dialog-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+div.p-dialog-header-icons {
+  button.p-dialog-header-close {
+    // situar el boton para cerrar ventana modal en la esquina superior derecha
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+  }
+}
+
+/*
+*********************************************************
+* Prime React - radio button - input de seleccion unica *
+********************************************************* */
+
+div.p-radiobutton {
+  outline: 1.5px solid #d1d5db !important;
+  border-radius: 100% !important;
+}
