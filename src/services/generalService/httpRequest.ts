@@ -1,4 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { isUseClient } from "@/utils/func/general";
 import {
   errorLogs,
   getToken,
@@ -6,20 +9,31 @@ import {
   successLogs,
   uploadFile,
 } from "@/services/generalService/func/requestFunctions";
+import { IRequestOptions, Method } from "@/services/generalService/types/requestDataTypes";
 import { ILoaderState } from "@/store/loaderStore";
-import { isUseClient } from "@/utils/func/general";
-import { IRequestOptions, Method } from "./types/requestDataTypes";
 
 /**
 funcion general para llamar a API */
 export async function httpRequest<T = any>(
   method: Method,
-  url: string = '',
+  url: string = "",
   options: IRequestOptions = {}
 ): Promise<T> {
-  if (typeof url !== 'string' || url?.trim() === '' || String(url)?.includes('undefined')) {
+  if (!url) {
     errorLogs({
       message: "la URL tiene que ser tipo string y NO puede estar vacia ''",
+      method,
+      url,
+      options,
+    });
+
+    return {} as T;
+  }
+
+  if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
+    errorLogs({
+      message:
+        "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''",
       method,
       url,
       options,
@@ -34,16 +48,14 @@ export async function httpRequest<T = any>(
   // acceder al valor booleano del loader
   if (isUseClient()) {
     try {
-      const { useLoaderStore } = await import('@/store/loaderStore');
+      const { useLoaderStore } = await import("@/store/loaderStore");
 
       loaderStore = useLoaderStore.getState();
       loaderStore.showLoader();
-
-      console.log('🚀 1 ~ loaderStore:', loaderStore);
     } catch (error) {
       loaderStore = null;
 
-      console.error('❌ ', error);
+      console.error("❌ ", error);
 
       errorLogs({
         message: "error al mostrar/ocultar icono de loader en componente cliente 'use cliente'",
@@ -55,11 +67,13 @@ export async function httpRequest<T = any>(
   }
 
   const {
-    isASecurityEndpoint = false,
+    // enviar token en TODOS los endpoint, EXCEPTO al iniciar sesion
+    isASecurityEndpoint = url !== process.env.NEXT_PUBLIC_AUTH_LOGIN,
+
     body,
     queryParams,
     headers = {},
-    responseType = 'json',
+    responseType = "json",
   } = options;
 
   // Construir encabezados
@@ -74,9 +88,9 @@ export async function httpRequest<T = any>(
     if (!token) {
       errorLogs({
         message:
-          'NO se pudo obtener token en el ' + isUseClient()
+          "NO se pudo obtener token en el " + isUseClient()
             ? "CLIENTE 'use client'"
-            : "SERVIDOR 'use server'" + ' \ntoken ' + token,
+            : "SERVIDOR 'use server'" + " \ntoken " + token,
         method,
         url,
         options,
@@ -86,19 +100,19 @@ export async function httpRequest<T = any>(
     }
 
     if (token) {
-      finalHeaders['Authorization'] = `Bearer ${token}`;
+      finalHeaders["Authorization"] = `Bearer ${token}`;
     }
   }
 
   // No establecer 'Content-Type' si el body es un FormData (archivo)
   if (!uploadFile(body)) {
-    finalHeaders['Content-Type'] = 'application/json';
+    finalHeaders["Content-Type"] = "application/json";
   }
 
   // Convertir queryParams si el endpoint es por query
   const queryString = queryParams
     ? `?${new URLSearchParams(queryParams as Record<string, string>).toString()}`
-    : '';
+    : "";
   const requestUrl: string = `${url}${queryString}`;
 
   // Configurar opciones de fetch
@@ -122,17 +136,17 @@ export async function httpRequest<T = any>(
   let result: any;
 
   try {
-    if (responseType === 'json') {
+    if (responseType === "json") {
       result = (await response.json()) as T;
-    } else if (responseType === 'text') {
+    } else if (responseType === "text") {
       result = (await response.text()) as T;
-    } else if (responseType === 'blob') {
+    } else if (responseType === "blob") {
       result = (await response.blob()) as T;
     } else {
       result = response;
 
       errorLogs({
-        message: 'formato de respuesta responseType no valido',
+        message: "formato de respuesta responseType no valido",
         method,
         url,
         options,
@@ -140,12 +154,12 @@ export async function httpRequest<T = any>(
         response,
       });
 
-      throw new Error('');
+      throw new Error("");
     }
 
     if (response.ok === false || result.success === false) {
       errorLogs({
-        message: 'al ejecutar peticion HTTP',
+        message: "al ejecutar peticion HTTP",
         method,
         url,
         options,
@@ -173,7 +187,7 @@ export async function httpRequest<T = any>(
         parsedError = JSON?.parse(message);
       }
     } catch {
-      console.error('no se pudo capturar error de la API \n', error);
+      console.error("no se pudo capturar error de la API \n", error);
     }
 
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
@@ -183,7 +197,7 @@ export async function httpRequest<T = any>(
       // redirect() solamente funciona en componentes servidor, NO en middleware.ts
       url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
     ) {
-      console.error('❌ httpRequest.ts - error 401: Unauthorized - NO tiene permisos para acceder');
+      console.error("❌ httpRequest.ts - error 401: Unauthorized - NO tiene permisos para acceder");
 
       handleUnauthorized();
     }
@@ -197,11 +211,11 @@ export async function httpRequest<T = any>(
     // ocultar loader en componente cliente 'use cliente'
     if (isUseClient()) {
       try {
-        if (!loaderStore) throw new Error('');
+        if (!loaderStore) throw new Error("");
 
         loaderStore.hideLoader();
       } catch (error) {
-        console.error('❌ error ', error);
+        console.error("❌ error ", error);
 
         errorLogs({
           message: "error al OCULTAR icono de loader en componente cliente 'use cliente'",
