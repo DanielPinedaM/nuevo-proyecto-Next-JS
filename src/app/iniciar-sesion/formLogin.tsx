@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import errorNotification from '@/components/dialog/errorNotification';
+import errorNotification from '@/components/dialog/notification/errorNotification';
 import GeneralErrorMessage from '@/components/GeneralErrorMessage';
 import { login } from '@/services/auth/auth';
 import { cookieOptionsInLogin } from '@/types/constant/const-cookie-storage';

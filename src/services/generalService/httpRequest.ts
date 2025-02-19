@@ -1,15 +1,18 @@
 /* eslint-disable prefer-const */
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isUseClient } from "@/utils/func/general";
+import { isFile } from "@/utils/func/dataType";
 import {
+  errorHandling,
   errorLogs,
   getToken,
-  handleUnauthorized,
   successLogs,
-  uploadFile,
 } from "@/services/generalService/func/requestFunctions";
-import { IRequestOptions, Method } from "@/services/generalService/types/requestDataTypes";
+import {
+  IRequestOptions,
+  IResponse,
+  Method,
+} from "@/services/generalService/types/requestDataTypes";
 import { ILoaderState } from "@/store/loaderStore";
 
 /**
@@ -19,9 +22,10 @@ export async function httpRequest<T = any>(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<T> {
-  if (!url) {
+  if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
     errorLogs({
-      message: "la URL tiene que ser tipo string y NO puede estar vacia ''",
+      message:
+        "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''",
       method,
       url,
       options,
@@ -30,10 +34,15 @@ export async function httpRequest<T = any>(
     return {} as T;
   }
 
-  if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
+  if (
+    !url ||
+    String(url)?.includes("undefined") ||
+    String(url)?.includes("null") ||
+    String(url)?.includes("NaN") ||
+    !String(url)?.includes("http")
+  ) {
     errorLogs({
-      message:
-        "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''",
+      message: "URL invalida",
       method,
       url,
       options,
@@ -47,23 +56,9 @@ export async function httpRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient()) {
-    try {
-      const { useLoaderStore } = await import("@/store/loaderStore");
-
-      loaderStore = useLoaderStore.getState();
-      loaderStore.showLoader();
-    } catch (error) {
-      loaderStore = null;
-
-      console.error("❌ ", error);
-
-      errorLogs({
-        message: "error al mostrar/ocultar icono de loader en componente cliente 'use cliente'",
-        method,
-        url,
-        options,
-      });
-    }
+    const { useLoaderStore } = await import("@/store/loaderStore");
+    loaderStore = useLoaderStore.getState();
+    loaderStore.showLoader();
   }
 
   const {
@@ -105,7 +100,7 @@ export async function httpRequest<T = any>(
   }
 
   // No establecer 'Content-Type' si el body es un FormData (archivo)
-  if (!uploadFile(body)) {
+  if (!isFile(body)) {
     finalHeaders["Content-Type"] = "application/json";
   }
 
@@ -123,7 +118,7 @@ export async function httpRequest<T = any>(
 
   if (body) {
     // enviar body directamente cuando el body contiene un archivo (FormData)
-    if (uploadFile(body)) {
+    if (isFile(body)) {
       fetchOptions.body = body;
     } else {
       // cuando se envia un JSON y NO se hace JSON.stringify el backend de NestJS da error
@@ -141,7 +136,25 @@ export async function httpRequest<T = any>(
     } else if (responseType === "text") {
       result = (await response.text()) as T;
     } else if (responseType === "blob") {
-      result = (await response.blob()) as T;
+      // capturar respuesta de error de la API cuando falla la descarga del archivo
+      const contentType: string = response?.headers?.get("content-type") ?? "";
+
+      if (contentType && contentType?.includes("application/json")) {
+        result = (await response.json()) as T;
+
+        errorLogs({
+          message: "error al descargar archivo(s)",
+          method,
+          url,
+          options,
+          result,
+          response,
+        });
+
+        throw new Error(JSON.stringify(result));
+      } else {
+        result = (await response.blob()) as T;
+      }
     } else {
       result = response;
 
@@ -153,8 +166,6 @@ export async function httpRequest<T = any>(
         result,
         response,
       });
-
-      throw new Error("");
     }
 
     if (response.ok === false || result.success === false) {
@@ -178,45 +189,25 @@ export async function httpRequest<T = any>(
       });
     }
   } catch (error: any) {
-    const { message } = error;
-
-    let parsedError;
+    let parsedError: IResponse | null = null;
 
     try {
-      if (message) {
-        parsedError = JSON?.parse(message);
+      if (error?.message) {
+        parsedError = JSON?.parse(error.message);
       }
     } catch {
       console.error("no se pudo capturar error de la API \n", error);
     }
 
-    // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
-    if (
-      parsedError?.status === 401 &&
-      // NO detener la ejecucion del codigo al de-codificar token en middleware.ts
-      // redirect() solamente funciona en componentes servidor, NO en middleware.ts
-      url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
-    ) {
-      console.error("❌ httpRequest.ts - error 401: Unauthorized - NO tiene permisos para acceder");
+    const { status } = parsedError ?? {};
 
-      handleUnauthorized();
-    }
-
-    if (parsedError?.status === 404) {
-      console.error(
-        `❌ error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
-      );
-    }
+    errorHandling(status, url);
   } finally {
     // ocultar loader en componente cliente 'use cliente'
     if (isUseClient()) {
-      try {
-        if (!loaderStore) throw new Error("");
-
+      if (loaderStore) {
         loaderStore.hideLoader();
-      } catch (error) {
-        console.error("❌ error ", error);
-
+      } else {
         errorLogs({
           message: "error al OCULTAR icono de loader en componente cliente 'use cliente'",
           method,

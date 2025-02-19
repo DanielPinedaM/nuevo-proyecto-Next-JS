@@ -15,15 +15,26 @@ export interface IBreakpoint {
   xl: number;
 
   // => @media (min-width: 1536px) { ... }
-  '2xl': number;
+  "2xl": number;
 
   // => @media (min-width: 1920px) { ... }
-  '3xl': number;
+  "3xl": number;
 }
 
 export interface IGlobalTailwindStyle {
-  button: string;
+  button: {
+    darkBlue: string;
+    lightBlue: string;
+    green: string;
+    red: string;
+  };
   input: {
     general: string;
+  };
+  dialog: {
+    container: {
+      contour: string;
+      content: string;
+    };
   };
 }

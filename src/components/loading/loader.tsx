@@ -19,11 +19,8 @@ export default function Loader() {
 
       const timeoutId = setTimeout(() => {
         hideLoader();
-
         console.warn(`⚠️ se oculto el icono de cargando despues de ${milliseconds / 60000} minutos porque una peticion HTTP tardo en responder`);
       }, milliseconds);
-
-      console.log("🚀 timeoutId ", timeoutId);
 
       return () => clearTimeout(timeoutId);
     }

@@ -84,3 +84,23 @@ div.p-radiobutton {
   outline: 1.5px solid #d1d5db !important;
   border-radius: 100% !important;
 }
+
+/*
+***************************
+* Prime React - <TabView> *
+*************************** */
+
+ul.p-tabview-nav {
+  column-gap: 10px !important;
+
+  li.p-unselectable-text {
+
+    a.p-tabview-nav-link {
+      margin: 0 !important;
+      padding: 10px 6px !important;
+      background-color: #004884 !important;
+      border-radius: 100px !important;
+    }
+  }
+}
+

@@ -1,8 +1,12 @@
-'use client';
-import { ErrorMessage } from '@hookform/error-message';
-import { IGeneralErrorMessage } from '../app/types/interface/interface-general-error-message';
+"use client";
+import { IGeneralErrorMessage } from "@/types/interface/interface-general-error-message";
+import { ErrorMessage } from "@hookform/error-message";
 
-/** * Componente que muestra los mensajes de error asociados a un campo de un formulario de React Hook Form */
+const generateUniqueKey = (): string =>  Math.random().toString(36).slice(2, 11);
+
+/**
+Componente que muestra los mensajes de error
+asociados a un campo de un formulario de React Hook Form */
 export default function GeneralErrorMessage({ errors, name }: IGeneralErrorMessage) {
   return (
     <ErrorMessage
@@ -10,10 +14,14 @@ export default function GeneralErrorMessage({ errors, name }: IGeneralErrorMessa
       name={name}
       render={({ messages }) =>
         messages &&
-        Object.entries(messages).map(([type, message]) => (
-          <p className='text-red-600' key={type}>
-            {message}
-          </p>
+        Object.entries(messages).map(([type, message], i) => (
+          <>
+            {message && (
+              <p className="text-red-600" key={`${type}-${i}-${generateUniqueKey()}`}>
+                {message}
+              </p>
+            )}
+          </>
         ))
       }
     />
