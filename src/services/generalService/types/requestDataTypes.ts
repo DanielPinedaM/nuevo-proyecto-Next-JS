@@ -42,7 +42,6 @@ export interface IResponse {
 
 /**
 validar respuesta del backend */
-
 export interface IValidateApiResponse {
   result: IResponse | any;
   responseType: IResponseType;
