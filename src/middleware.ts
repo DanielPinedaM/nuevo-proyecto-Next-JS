@@ -46,6 +46,11 @@ export async function middleware(request: NextRequest) {
   const { success, message, status, data }: IResponse = await decodeTokenInServer();
   const { email, role } = data;
 
+  if (status >= 500) {
+    console.error(`❌ middleware.ts - error en el servidor en la URL ${url}`);
+    return NextResponse.next();
+  }
+
   if (status === 401) {
     console.error("❌ middleware.ts - error 401: Unauthorized - NO tiene permisos para acceder");
     console.error("mensaje de la API ", message);

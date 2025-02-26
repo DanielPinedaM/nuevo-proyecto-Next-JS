@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 /**
 parametros de funcion httpRequest para llamar a la API */
+export type IResponseType = 'json' | 'text' | 'blob';
+
 export interface IRequestOptions {
   isASecurityEndpoint?: boolean;
   body?: any;
   queryParams?: Record<string, string | number | boolean | (string | number | boolean)[]>;
   headers?: Record<string, string | number>;
-  responseType?: "json" | "text" | "blob";
+  responseType?: IResponseType;
 }
 
 /**
@@ -36,4 +38,16 @@ export interface IResponse {
   status: number;
   message: string;
   data: IData | any;
+}
+
+/**
+validar respuesta del backend */
+
+export interface IValidateApiResponse {
+  result: IResponse | any;
+  responseType: IResponseType;
+  method: Method;
+  url: string;
+  options: IRequestOptions;
+  response: Response;
 }

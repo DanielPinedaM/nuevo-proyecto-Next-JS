@@ -136,8 +136,8 @@ export const isValidJSONparse = (string: string): boolean => {
 
 /**
 ¿se esta subiendo archivo(s)? */
-export function isFile(body: Blob | any): boolean {
-  return body instanceof FormData;
+export function isFile(variable: Blob | any): boolean {
+  return variable instanceof FormData || variable instanceof Blob;
 }
 
 /**

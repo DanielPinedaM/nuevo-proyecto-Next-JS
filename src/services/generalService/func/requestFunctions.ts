@@ -1,25 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
-import errorNotification from "@/components/dialog/notification/errorNotification";
-import { nameCookieKey } from "@/types/constant/const-cookie-storage";
-import { constPath } from "@/types/constant/const-path";
-import { isUseClient } from "@/utils/func/general";
-import { literalObjectLength } from "@/utils/func/dataType";
-import { redirect } from "next/navigation";
-import { IObjectLogs, IResponse } from "@/services/generalService/types/requestDataTypes";
-import { getCookie } from "cookies-next";
-import { isFile } from "@/utils/func/dataType";
+import errorNotification from '@/components/dialog/notification/errorNotification';
+import {
+  IObjectLogs,
+  IResponse,
+  IValidateApiResponse,
+} from '@/services/generalService/types/requestDataTypes';
+import { nameCookieKey } from '@/types/constant/const-cookie-storage';
+import { constPath } from '@/types/constant/const-path';
+import { isFile, literalObjectLength } from '@/utils/func/dataType';
+import { isUseClient } from '@/utils/func/general';
+import { getCookie } from 'cookies-next';
+import { redirect } from 'next/navigation';
 
 function pathnameIsLogin(): boolean {
   if (!isUseClient()) {
     console.error(
-      "❌ error, NO se puede determinar si la URL actual es iniciar sesion /",
+      '❌ error, NO se puede determinar si la URL actual es iniciar sesion /',
       constPath.login
     );
     return false;
   }
 
-  const login: string = "/" + constPath.login;
+  const login: string = '/' + constPath.login;
 
   const pathname: string = window.location.pathname;
 
@@ -28,11 +31,11 @@ function pathnameIsLogin(): boolean {
 
 function redirectToLoginInUseClient(): void {
   if (!isUseClient()) {
-    console.error("❌ error al re-dirigir a /", constPath.login);
+    console.error('❌ error al re-dirigir a /', constPath.login);
     return;
   }
 
-  const login: string = "/" + constPath.login;
+  const login: string = '/' + constPath.login;
 
   if (!pathnameIsLogin()) {
     window.location.href = login;
@@ -50,7 +53,7 @@ export async function getToken(): Promise<string | null> {
   } else {
     // 'use server'
     try {
-      const headers = await import("next/headers");
+      const headers = await import('next/headers');
       const cookieStore = await headers.cookies();
       token = cookieStore.get(nameCookieKey.accessToken)?.value ?? null;
     } catch (error) {
@@ -69,7 +72,7 @@ export async function getToken(): Promise<string | null> {
 /**
 funcion para cerrar sesion en 'use client' y 'use server', */
 export function handleUnauthorized(): void {
-  const login: string = "/" + constPath.login;
+  const login: string = '/' + constPath.login;
 
   // 1) eliminar token
   // 2) re-dirigir a iniciar sesion
@@ -88,7 +91,7 @@ export function handleUnauthorized(): void {
 /**
 funcion para devolver a la pagina web anterior en 'use client' y 'use server', */
 export function returnToBrowserHistory(): void {
-  const login: string = "/" + constPath.login;
+  const login: string = '/' + constPath.login;
 
   // 'use client'
   if (isUseClient()) {
@@ -108,7 +111,7 @@ export function returnToBrowserHistory(): void {
 imprimir por consola los errores */
 export function errorLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
+  if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'production') return;
 
   const { message, method, url, options, result, response } = objectLogs;
 
@@ -118,16 +121,16 @@ export function errorLogs(objectLogs: IObjectLogs): void {
     console.error("\n❌ error en el SERVIDOR 'use server'");
   }
 
-  if (message) console.error("❌ error ", message);
-  if (method) console.error("metodo HTTP", method);
-  if (url) console.error("url ", url);
+  if (message) console.error('❌ error ', message);
+  if (method) console.error('metodo HTTP', method);
+  if (url) console.error('url ', url);
   if (process.env.NEXT_PUBLIC_ENVIRONMENT)
     console.error(
       `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`
     );
 
   if (result || response) {
-    console.error("respuesta de la API");
+    console.error('respuesta de la API');
   }
 
   // imprimir respuesta de la api de NestJS
@@ -136,27 +139,27 @@ export function errorLogs(objectLogs: IObjectLogs): void {
   // imprimir respuesta de fetch
   //if (response) console.error(response);
 
-  if (options) console.error("options ", options);
+  if (options) console.error('options ', options);
 
-  console.info("\n");
+  console.info('\n');
 }
 
 /**
 imprimir por consola las solicitudes HTTP que se realizan con éxito en el servidor 'use server' */
 export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
+  if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'production') return;
 
   const { method, url, options, result } = objectLogs;
 
-  console.info("\n", "✅ ", "[", method, "]", url);
+  console.info('\n', '✅ ', '[', method, ']', url);
 
   if (isFile(options?.body)) {
-    console.info("✅ archivo(s) subido(s)");
+    console.info('✅ archivo(s) subido(s)');
   }
 
   if (options?.body) {
-    console.info("body ", options?.body);
+    console.info('body ', options?.body);
   }
 
   if (result) {
@@ -165,11 +168,11 @@ export function successLogs(objectLogs: IObjectLogs): void {
     if (data) {
       if (Array.isArray(data)) {
         if (data.length === 0) {
-          data = "array vacío ➡️ (0) []";
+          data = 'array vacío ➡️ (0) []';
         } else {
           // data es un array de objetos [{}]
           const areAllObjects: boolean = data?.every(
-            (item) => typeof item === "object" && item && item !== null
+            (item) => typeof item === 'object' && item && item !== null
           );
           if (areAllObjects) {
             data = `array de objetos con ${data.length} elemento ➡️ (${data.length}) [{}]`;
@@ -183,12 +186,12 @@ export function successLogs(objectLogs: IObjectLogs): void {
       // data es un objeto literal {}
       else if (
         Object.getPrototypeOf(data) === Object.prototype ||
-        Object.prototype.toString.call(data) === "[object Object]"
+        Object.prototype.toString.call(data) === '[object Object]'
       ) {
-        const length: number | null = literalObjectLength(data)
+        const length: number | null = literalObjectLength(data);
 
         if (length === 0) {
-          data = "objeto literal vacío ➡️ (0) {}";
+          data = 'objeto literal vacío ➡️ (0) {}';
         } else {
           data = `objeto literal con ${length} keys ➡️ (${length}) {}`;
         }
@@ -214,7 +217,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
     );
   }
 
-  console.info("\n");
+  console.info('\n');
 }
 
 /**
@@ -229,10 +232,10 @@ export function errorHandling(status: number | undefined, url: string): void {
     url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
   ) {
     console.error(
-      "❌ httpRequest.ts - Error 401: unauthenticated",
-      "\nDetalle: El usuario no está autenticado o la sesión ha expirado",
-      "\nAcción: Re-dirigir al usuario a la página de inicio de sesión",
-      "\nURL solicitada: ",
+      '❌ httpRequest.ts - Error 401: unauthenticated',
+      '\nDetalle: El usuario no está autenticado o la sesión ha expirado',
+      '\nAcción: Re-dirigir al usuario a la página de inicio de sesión',
+      '\nURL solicitada: ',
       url
     );
 
@@ -240,14 +243,14 @@ export function errorHandling(status: number | undefined, url: string): void {
     handleUnauthorized();
 
     if (isUseClient() && !pathnameIsLogin()) {
-      errorNotification("Inicie sesión para continuar");
+      errorNotification('Inicie sesión para continuar');
     }
   } else if (status === 403) {
     console.error(
-      "❌ httpRequest.ts - Error 403: Forbidden",
-      "\nDetalle: El usuario está autenticado pero no tiene permisos para acceder al recurso",
+      '❌ httpRequest.ts - Error 403: Forbidden',
+      '\nDetalle: El usuario está autenticado pero no tiene permisos para acceder al recurso',
       "\nAcción: Mostrar un mensaje de 'acceso denegado' o re-dirigir y re-dirigir a la pagina web anterior en el historial del navegador",
-      "\nURL solicitada:",
+      '\nURL solicitada:',
       url
     );
 
@@ -255,7 +258,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     returnToBrowserHistory();
 
     if (isUseClient()) {
-      errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
+      errorNotification('Acceso denegado, no tiene permisos para realizar esta acción');
     }
   } else if (status === 404) {
     console.error(
@@ -264,7 +267,7 @@ export function errorHandling(status: number | undefined, url: string): void {
 
     if (isUseClient()) {
       errorNotification(
-        "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
+        'Ha ocurrido un error, por favor comuniquese con el administrador del sistema'
       );
     }
   } else if (status >= 500) {
@@ -272,8 +275,70 @@ export function errorHandling(status: number | undefined, url: string): void {
 
     if (isUseClient()) {
       errorNotification(
-        "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
+        'Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo'
       );
     }
   }
+}
+
+/**
+validar respuesta de la API 
+para NO detener la ejecucion del front
+cuando la API (backend) esta caida */
+export function validateApiResponse({
+  result,
+  responseType,
+  method,
+  url,
+  options,
+  response,
+}: IValidateApiResponse): IResponse | Blob | FormData {
+  const errorMessage: string =
+    '❌ Error 503 Service Unavailable - Posibles causas: \n' +
+    '1) La API del backend podría estar caída. \n' +
+    '2) El backend no está respondiendo con el tipo esperado (IResponse). \n' +
+    '3) Si está intentando descargar un archivo, asegúrese de que el backend responda con un tipo FormData o Blob.';
+
+  // objeto q se devuelve en caso de q NO funcione la respuesta de la API del back
+  const finalResponse: IResponse = {
+    success: false,
+    status: 503,
+    message: errorMessage,
+    data: [],
+  };
+
+  // retorna el archivo o texto plano recibido del backend
+  if (isFile(result) || responseType === 'blob' || responseType === 'text') return result;
+
+  // a partir de aqui la respuesta de la api tiene q ser un responseType === "json"
+  // validar q exista la respuesta de la API del backend
+  if (!result || typeof result?.success !== 'boolean' || typeof result?.status !== 'number') {
+    errorLogs({
+      message: errorMessage,
+      method,
+      url,
+      options,
+      result,
+      response,
+    });
+
+    return finalResponse;
+  }
+
+  // siempre extraer `data` en un solo nivel, eliminando `data.data`
+  let searchData: any = result?.data;
+  while (typeof searchData === 'object' && 'data' in searchData) {
+    searchData = searchData.data;
+  }
+
+  const searchMessage: string =
+    typeof result?.message === 'string' || typeof result?.message === 'number'
+      ? result.message
+      : '';
+
+  return {
+    ...result,
+    message: searchMessage,
+    data: searchData,
+  };
 }

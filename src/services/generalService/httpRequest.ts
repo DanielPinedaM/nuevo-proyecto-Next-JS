@@ -1,12 +1,10 @@
-/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isUseClient } from "@/utils/func/general";
-import { isFile } from "@/utils/func/dataType";
 import {
   errorHandling,
   errorLogs,
   getToken,
   successLogs,
+  validateApiResponse,
 } from "@/services/generalService/func/requestFunctions";
 import {
   IRequestOptions,
@@ -14,6 +12,8 @@ import {
   Method,
 } from "@/services/generalService/types/requestDataTypes";
 import { ILoaderState } from "@/store/loaderStore";
+import { isFile } from "@/utils/func/dataType";
+import { isUseClient } from "@/utils/func/general";
 
 /**
 funcion general para llamar a API */
@@ -21,17 +21,18 @@ export async function httpRequest<T = any>(
   method: Method,
   url: string = "",
   options: IRequestOptions = {}
-): Promise<T> {
+): Promise<IResponse | Blob | FormData > {
   if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
+    const message: string = "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''";
+
     errorLogs({
-      message:
-        "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''",
+      message,
       method,
       url,
       options,
     });
 
-    return {} as T;
+    return { success: false, status: 401, message, data: [] };
   }
 
   if (
@@ -41,14 +42,16 @@ export async function httpRequest<T = any>(
     String(url)?.includes("NaN") ||
     !String(url)?.includes("http")
   ) {
+    const message: string = "URL invalida";
+
     errorLogs({
-      message: "URL invalida",
+      message,
       method,
       url,
       options,
     });
 
-    return {} as T;
+    return { success: false, status: 400, message, data: [] };
   }
 
   // loader global q se muestra y oculta en componentes cliente 'use client'
@@ -80,22 +83,22 @@ export async function httpRequest<T = any>(
   if (isASecurityEndpoint) {
     const token = await getToken();
 
-    if (!token) {
+    if (token) {
+      finalHeaders["Authorization"] = `Bearer ${token}`;
+    } else {
+      const message: string =
+        "NO se pudo obtener token en el " + isUseClient()
+          ? "CLIENTE 'use client'"
+          : "SERVIDOR 'use server'" + " \ntoken " + token;
+
       errorLogs({
-        message:
-          "NO se pudo obtener token en el " + isUseClient()
-            ? "CLIENTE 'use client'"
-            : "SERVIDOR 'use server'" + " \ntoken " + token,
+        message,
         method,
         url,
         options,
       });
 
-      return {} as T;
-    }
-
-    if (token) {
-      finalHeaders["Authorization"] = `Bearer ${token}`;
+      return { success: false, status: 401, message, data: [] };
     }
   }
 
@@ -126,11 +129,15 @@ export async function httpRequest<T = any>(
     }
   }
 
-  const response: Response = await fetch(requestUrl, fetchOptions);
+  // variable q usa fetch para llamar a la API
+  let response: Response | null | any = null;
 
-  let result: any;
+  // intenta convertir la respuesta de la API a json, text o blob y guarda la respuesta de la API
+  let result: null | any = null;
 
   try {
+    response = await fetch(requestUrl, fetchOptions);
+
     if (responseType === "json") {
       result = (await response.json()) as T;
     } else if (responseType === "text") {
@@ -158,6 +165,7 @@ export async function httpRequest<T = any>(
     } else {
       result = response;
 
+      console.error("❌ responseType ", responseType);
       errorLogs({
         message: "formato de respuesta responseType no valido",
         method,
@@ -168,7 +176,7 @@ export async function httpRequest<T = any>(
       });
     }
 
-    if (response.ok === false || result.success === false) {
+    if (!response || response?.ok === false || !result || result?.success === false) {
       errorLogs({
         message: "al ejecutar peticion HTTP",
         method,
@@ -186,8 +194,10 @@ export async function httpRequest<T = any>(
         url,
         options,
         result,
+        response,
       });
     }
+
   } catch (error: any) {
     let parsedError: IResponse | null = null;
 
@@ -214,12 +224,11 @@ export async function httpRequest<T = any>(
           url,
           options,
           result,
-          response,
         });
       }
     }
   }
 
   // retornar respuesta de la api sin importar si fue exitosa o no
-  return result as T;
+   return validateApiResponse({result, responseType, method, url, options, response})
 }
