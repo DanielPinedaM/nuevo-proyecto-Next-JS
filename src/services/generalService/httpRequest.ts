@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { isUseClient } from "@/utils/func/general";
+import { isFile } from "@/utils/func/dataType";
 import {
   errorHandling,
   errorLogs,
@@ -12,8 +14,6 @@ import {
   Method,
 } from "@/services/generalService/types/requestDataTypes";
 import { ILoaderState } from "@/store/loaderStore";
-import { isFile } from "@/utils/func/dataType";
-import { isUseClient } from "@/utils/func/general";
 
 /**
 funcion general para llamar a API */
@@ -21,7 +21,7 @@ export async function httpRequest<T = any>(
   method: Method,
   url: string = "",
   options: IRequestOptions = {}
-): Promise<IResponse | Blob | FormData > {
+): Promise<IResponse | Blob | FormData | any> {
   if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
     const message: string = "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''";
 
@@ -37,10 +37,11 @@ export async function httpRequest<T = any>(
 
   if (
     !url ||
+    String(url)?.trim() === '' ||
     String(url)?.includes("undefined") ||
     String(url)?.includes("null") ||
     String(url)?.includes("NaN") ||
-    !String(url)?.includes("http")
+    !(String(url)?.includes("http"))
   ) {
     const message: string = "URL invalida";
 
@@ -230,5 +231,5 @@ export async function httpRequest<T = any>(
   }
 
   // retornar respuesta de la api sin importar si fue exitosa o no
-   return validateApiResponse({result, responseType, method, url, options, response})
+  return validateApiResponse({result, responseType, method, url, options, response})
 }

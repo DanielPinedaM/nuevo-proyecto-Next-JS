@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 
   // acceder a las cookiess
   const cookieAccessToken: string | undefined = cookies.get(nameCookieKey.accessToken)?.value;
-  console.log("🚀 ~ middleware ~ cookieAccessToken:", cookieAccessToken)
+
   /*
    el siguiente codigo funciona, esta bueno, lo comente porque no existe el endpoint que llama la funcion decodeTokenInServer()
   const cookieRole: string | undefined = cookies.get(nameCookieKey.role)?.value;
