@@ -8,6 +8,7 @@ import { globalTailwindStyle } from '@/types/constant/const-layout';
 import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
+import { downloadExcel } from '@/utils/func/file/downloadFile';
 import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -92,76 +93,76 @@ export default function FormLogin() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-      <div className='mb-2'>
-        <label>
-          <span className='cursor-pointer'>Correo electrónico</span>
-          <Controller
-            name='user'
-            control={control}
-            rules={{
-              required: 'Digite correo electrónico',
-              pattern: {
-                value: constRegex.text.email,
-                message: 'Correo electrónico invalido',
-              },
-              minLength: {
-                value: 2,
-                message: 'Mínimo 2 caracteres',
-              },
-              maxLength: {
-                value: 30,
-                message: 'Máximo 30 caracteres',
-              },
-            }}
-            render={({ field, field: { name, value = '', onChange, onBlur } }) => (
-              <InputText
-                {...field}
-                id={name}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                onBlur={onBlur}
-                placeholder='nombre@correo.com'
-                className={`${globalTailwindStyle.input.general} block w-full`}
-              />
-            )}
-          />
-        </label>
-        <GeneralErrorMessage errors={errors} name='user' />
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+        <div className='mb-2'>
+          <label>
+            <span className='cursor-pointer'>Correo electrónico</span>
+            <Controller
+              name='user'
+              control={control}
+              rules={{
+                required: 'Digite correo electrónico',
+                pattern: {
+                  value: constRegex.text.email,
+                  message: 'Correo electrónico invalido',
+                },
+                minLength: {
+                  value: 2,
+                  message: 'Mínimo 2 caracteres',
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Máximo 30 caracteres',
+                },
+              }}
+              render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+                <InputText
+                  {...field}
+                  id={name}
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                  onBlur={onBlur}
+                  placeholder='nombre@correo.com'
+                  className={`${globalTailwindStyle.input.general} block w-full`}
+                />
+              )}
+            />
+          </label>
+          <GeneralErrorMessage errors={errors} name='user' />
+        </div>
 
-      <div className='mb-2'>
-        <label>
-          <span className='cursor-pointer'>Contraseña</span>
-          <Controller
-            name='password'
-            control={control}
-            rules={{
-              required: 'Digite contraseña',
-            }}
-            render={({ field, field: { name, value = '', onChange, onBlur } }) => (
-              <Password
-                {...field}
-                id={name}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                onBlur={onBlur}
-                variant='filled'
-                feedback={false}
-                placeholder='Contraseña'
-                className={`${globalTailwindStyle.input.general}`}
-              />
-            )}
-          />
-        </label>
-        <GeneralErrorMessage errors={errors} name='password' />
-      </div>
+        <div className='mb-2'>
+          <label>
+            <span className='cursor-pointer'>Contraseña</span>
+            <Controller
+              name='password'
+              control={control}
+              rules={{
+                required: 'Digite contraseña',
+              }}
+              render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+                <Password
+                  {...field}
+                  id={name}
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                  onBlur={onBlur}
+                  variant='filled'
+                  feedback={false}
+                  placeholder='Contraseña'
+                  className={`${globalTailwindStyle.input.general}`}
+                />
+              )}
+            />
+          </label>
+          <GeneralErrorMessage errors={errors} name='password' />
+        </div>
 
-      <div className='flex justify-end'>
-        <button type='submit' className={`${globalTailwindStyle.button} uppercase`}>
-          ingresar
-        </button>
-      </div>
-    </form>
+        <div className='flex justify-end'>
+          <button type='submit' className={`${globalTailwindStyle.button} uppercase`}>
+            ingresar
+          </button>
+        </div>
+      </form>
   );
 }
