@@ -1,9 +1,36 @@
-// global
-@use './global/branding.scss';
-@use './global/reset.scss';
-@use './global/table.scss';
-@use './global/root.scss';
-@use './global/scroll-bar.scss';
+/*
+*************
+* Reset CSS *
+************* */
+
+@use './global/reset.scss' as reset;;
+
+/*
+*******************
+* <table> - tabla *
+******************* */
+
+@use './global/table.scss' as table;
+
+
+/*
+***************
+* sweet alert *
+*************** */
+
+@use "./global/sweet-alert-2" as sweetAlert;
+
+/*
+*******************
+* Barra de scroll *
+******************* */
+
+@use './global/scroll-bar.scss' as scrollBar;
+
+/*
+***************
+* Prime React *
+*************** */
 
 // iconos de Prime React
 @use '../../node_modules/primeicons/primeicons.css';
@@ -14,7 +41,11 @@
 // sobrescribir escribir estilos generales de Prime React
 @use './global/prime-react.scss';
 
-// Tailwind
+/*
+************
+* Tailwind *
+************ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

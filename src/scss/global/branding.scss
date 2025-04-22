@@ -1,17 +1,55 @@
 /*
+***********
+* Fuentes *
+*********** */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+// Fuentes para texto
+$inter: "Inter", "DM Sans", "Helvetica Neue", Helvetica, sans-serif, system-ui;
+
+// Fuentes para numeros
+$monospace: "Lucida Console", monospace, "Courier New", Consolas, Courier, Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono", ui-monospace;
+
+/*
+*******************
+* Colores de Sass *
+******************* */
+
+// azul
+$blue-dark: #3465cc;
+$blue-primary: #2196f3;
+$sky-blue: #61aaec;
+$soft-blue: #9bcdec;
+
+// gris
+$gray-blue: #585b76;
+$gray-dark: #59595b;
+$gray-light: #cccccc;
+
+// verde
+$green-dark: #8cc63f;
+$green-light: #bfd492;
+
+// blanco
+$white-smoke: #f5f5f5;
+
+// amarillo
+$yellow: #f4d745;
+
+// semi-transparente
+$navy-light: rgba(38, 49, 79, 0.25);
+$blue-light: rgba(33, 150, 243, 0.25);
+
+/*
 **************************************************
 * Breakpoints para media queries (Responsive)    *
 * https://tailwindcss.com/docs/responsive-design *
 ************************************************** */
-$xsm: 30rem;   // 480px
-$sm: 40rem;    // 640px
-$md: 48rem;    // 768px
-$lg: 64rem;    // 1024px
-$xl: 80rem;    // 1280px
-$xxl: 96rem;   // 1536px
-$xxxl: 120rem; // 1920px
-
-/*
-***********
-* Colores *
-*********** */
+$xsm: 30rem;    // 480px
+$sm: 40rem;     // 640px
+$md: 48rem;     // 768px
+$lg: 64rem;     // 1024px
+$xl: 80rem;     // 1280px
+$xxl: 96rem;    // 1536px
+$xxxl: 120rem;  // 1920px

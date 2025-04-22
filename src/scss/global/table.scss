@@ -1,3 +1,5 @@
+@use "./branding";
+
 /*
 *******************
 * <table> - tabla *
@@ -9,9 +11,9 @@ table {
   border-spacing: 0;
 
   // borde redondeado de tabla
-  border: 1px solid #ddd;
-  border-radius: 1rem;
+  border: 1px solid branding.$gray-light;
   border-style: hidden;
+  border-radius: 15px;
   overflow: hidden;
 
   // centrar <th>
@@ -26,8 +28,8 @@ table {
   thead,
   tfoot,
   th {
-    background-color: #00aeef !important;
-    color: white !important;
+    background-color: branding.$blue-dark !important;
+    color: white;
 
     span,
     p,
@@ -43,10 +45,10 @@ table {
 
   td {
     // borde de las casillas de las tablas
-    border: 1px solid #ccc;
+    border: 1px solid branding.$gray-light;
 
     &.p-selection-column {
-      // Prime React - centrar campos chequeables: checkbox, radio button, etc
+      // Prime NG - centrar campos chequeables: checkbox, radio button, etc
       text-align: center;
       vertical-align: middle;
     }
