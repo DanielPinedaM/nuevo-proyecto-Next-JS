@@ -13,8 +13,11 @@ const replaceAmPm = (date: Date | string | any): string | any => {
 };
 
 /**
-formato de hora con a.m y p.m */
-export const formatHour = (date: Date | string | Nullable<Date> | any): string | any => {
+formato de hora */
+export const formatHour = (
+  date: Date | string | Nullable<Date> | any,
+  format: string = 'hh:mm:ss a'
+): string | any => {
   let dateTime: DateTime;
 
   if (date instanceof Date) {
@@ -27,14 +30,17 @@ export const formatHour = (date: Date | string | Nullable<Date> | any): string |
 
   if (!dateTime.isValid) return date;
 
-  const finalDate: string = dateTime.setLocale("es").toFormat("hh:mm:ss a");
+  const finalDate: string = dateTime.setLocale("es").toFormat(format);
 
   return replaceAmPm(finalDate);
 };
 
 /**
 formato de fecha */
-export const formatDate = (date: Date | string | Nullable<Date>): string | any => {
+export const formatDate = (
+    date: Date | string | Nullable<Date> | DateTime,
+    format: string = 'd-LLL-yyyy'
+): string | any => {
   let dateTime: DateTime;
 
   if (date instanceof Date) {
@@ -47,7 +53,9 @@ export const formatDate = (date: Date | string | Nullable<Date>): string | any =
 
   if (!dateTime.isValid) return date;
 
-  return dateTime.setLocale("es").toFormat("d-LLL-yyyy");
+  const finalDate: string = dateTime.setLocale('es').toFormat(format);
+
+  return replaceAmPm(finalDate);
 };
 
 /**
