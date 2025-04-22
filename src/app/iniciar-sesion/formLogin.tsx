@@ -8,6 +8,7 @@ import { globalTailwindStyle } from '@/types/constant/const-layout';
 import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
+import { encrypt } from '@/utils/func/cryptoService';
 import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -74,16 +75,31 @@ export default function FormLogin() {
     });
   };
 
-  const onSubmit = async (body: IFormLogin): Promise<void> => {
+  const onSubmit = async (formData: IFormLogin): Promise<void> => {
     //des-comentar lo q esta comentado a continuacion para hacer peticion http de iniciar sesion
+
+    const { user, password } = formData;
+
+    const body: IFormLogin = {
+      user: user.trim(),
+      password: await encrypt(password!.trim()),
+    }
+    console.log("🚀 ~ onSubmit ~ body:", body)
 
     //const { success, message, data }: IResponse = await login(body);
 
     //if (success) {
+    // este codigo se tiene q borrar porq queme los datos
     iterateUserData({
       expiresIn: 7200,
       accessToken: 'aqui va el token',
     });
+
+    /* este es el codigo correcto q se tiene q des-comentar
+    iterateUserData(data);
+     */
+    
+
     router.push('/inicio/administrador');
     //} else {
     //deleteStorageAndCookies();
