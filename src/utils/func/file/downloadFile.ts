@@ -61,7 +61,8 @@ export const viewBlob = (blob: Blob | IResponse): void => {
 
     setTimeout(() => URL.revokeObjectURL(fileURL), 5000);
   } else {
-    console.error('❌ error al obtener el archivo ', blob);
+    errorNotification("Al ver archivo");
+    console.error('❌ error, para poder ver el archivo, tiene q ser tipo blob\n', blob);
   }
 };
 
