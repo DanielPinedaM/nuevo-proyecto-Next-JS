@@ -78,17 +78,16 @@ export default function FormLogin() {
   const onSubmit = async (formData: IFormLogin): Promise<void> => {
     //des-comentar lo q esta comentado a continuacion para hacer peticion http de iniciar sesion
 
-    const { user, password } = formData;
+    /* const { user, password } = formData;
 
     const body: IFormLogin = {
       user: user.trim(),
       password: await encrypt(password!.trim()),
     }
-    console.log("🚀 ~ onSubmit ~ body:", body)
 
-    //const { success, message, data }: IResponse = await login(body);
+    const { success, message, data }: IResponse = await login(body);
 
-    //if (success) {
+    if (success) { */
     // este codigo se tiene q borrar porq queme los datos
     iterateUserData({
       expiresIn: 7200,
@@ -96,9 +95,7 @@ export default function FormLogin() {
     });
 
     /* este es el codigo correcto q se tiene q des-comentar
-    iterateUserData(data);
-     */
-    
+    iterateUserData(data); */
 
     router.push('/inicio/administrador');
     //} else {
