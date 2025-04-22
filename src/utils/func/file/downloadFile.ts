@@ -147,8 +147,6 @@ export const downloadExcel = async (
       errorNotification(message);
     })
     .finally(() => {
-
-      console.log("loaderStore ", loaderStore)
       loaderStore.hideLoader();
     });
 };

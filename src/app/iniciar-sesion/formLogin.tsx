@@ -8,7 +8,6 @@ import { globalTailwindStyle } from '@/types/constant/const-layout';
 import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
-import { downloadExcel } from '@/utils/func/file/downloadFile';
 import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
