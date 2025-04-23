@@ -14,6 +14,7 @@ import {
   Method,
 } from "@/services/generalService/types/requestDataTypes";
 import { ILoaderState } from "@/store/loaderStore";
+import errorNotification from "@/components/dialog/notification/errorNotification";
 
 /**
 funcion general para llamar a API */
@@ -53,6 +54,28 @@ export async function httpRequest<T = any>(
     });
 
     return { success: false, status: 400, message, data: [] };
+  }
+
+  if (!window.navigator.onLine) {
+    const message: string = "Conéctese a internet para que la página web pueda funcionar";
+
+    if (isUseClient()) {
+      errorNotification(message);
+    }
+
+    errorLogs({
+      message,
+      method,
+      url,
+      options,
+    });
+
+    return {
+      success: false,
+      status: 503,
+      message,
+      data: [],
+    };
   }
 
   // loader global q se muestra y oculta en componentes cliente 'use client'
