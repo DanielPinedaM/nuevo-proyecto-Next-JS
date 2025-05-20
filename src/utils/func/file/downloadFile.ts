@@ -30,8 +30,14 @@ export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefine
     return;
   }
 
+  if (!fileName) {
+    errorNotification(message);
+    console.error('❌ el nombre del archivo fileName NO puede ser falsy\n', fileName);
+    return;
+  }
+
   const extension: string | undefined = fileName?.split('.')?.at(-1);
-  if (!fileName || !fileName?.includes('.') || !extension) {
+  if (!fileName?.includes('.') || !extension) {
     console.error(
       '❌ error, no se puede descargar archivo ',
       fileName,
