@@ -79,16 +79,40 @@ export const downloadExcel = async (
 
   const message: string = 'Ocurrió un error al descargar Excel';
 
-  if (!nonNestedArrayOfObjects || nonNestedArrayOfObjects?.length === 0) {
+  if (!nonNestedArrayOfObjects) {
     errorNotification(message);
     console.error(
-      '❌ el array de objetos NO puede estar vacio, NI puede ser falsy\n',
+      '❌ el array de objetos NO puede ser falsy\n',
       nonNestedArrayOfObjects
     );
     return;
   }
 
-  if (!String(fileName)?.includes('.xlsx')) {
+  if (!(Array.isArray(nonNestedArrayOfObjects))) {
+    errorNotification(message);
+    console.error(
+      '❌ el parametro nonNestedArrayOfObjects tiene q ser un array de objetos NO anidado\n',
+      nonNestedArrayOfObjects
+    );
+    return;
+  }
+
+  if (nonNestedArrayOfObjects.length === 0) {
+    errorNotification(message);
+    console.error(
+      '❌ la longitud del array de objetos NO puede ser cero\n',
+      nonNestedArrayOfObjects
+    );
+    return;
+  }
+
+  if (!fileName) {
+    errorNotification(message);
+    console.error('❌ el nombre del archivo fileName NO puede ser falsy\n', fileName);
+    return;
+  }
+
+  if (!(String(fileName)?.includes('.xlsx'))) {
     errorNotification(message);
     console.error('❌ fileName tiene q contener la extension .xlsx\n', fileName);
     return;
