@@ -1,7 +1,5 @@
 "use client";
 import { constPath } from "@/types/constant/const-path";
-import visibleRows from "@/types/constant/tables/const-visible-rows";
-import { ITableDataNombreTabla } from "@/types/interface/administrador/tablas/DTO/interface-nombre-tabla";
 import { rowsPerPageOptions, titleCase, truncateString } from "@/utils/func/general";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -10,12 +8,14 @@ import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import StatusReactIcon from "@/components/reactIcons/StatusIcon";
 import { formatDate } from "@/utils/func/luxon";
-import columns from "@/types/constant/tables/columns/administrador/tablas/const-columns-nombre-tabla";
 import { IResponse } from "@/services/generalService/types/requestDataTypes";
 import errorNotification from "@/components/dialog/notification/errorNotification";
 import successNotification from "@/components/dialog/notification/successNotification";
-import { acceptValidation } from "@/services/administrador/tables/nombre-tabla/table-name";
 import infoNotification from "@/components/dialog/notification/infoNotification";
+import visibleRows from "@/types/constant/const-visible-rows";
+import { ITableDataNombreTabla } from "@/types/interface/interface-nombre-tabla";
+import columns from "@/types/constant/const-columns-nombre-tabla";
+import { acceptValidation } from "@/services/table-name";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));
@@ -48,7 +48,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   }, []);
 
   useEffect(() => {
-   console.info("fial actual a la q se le dio click ", tableData[currentRowIndex])
+   console.info("fila actual a la q se le dio click ", tableData[currentRowIndex])
   }, [tableData, currentRowIndex]);
 
 

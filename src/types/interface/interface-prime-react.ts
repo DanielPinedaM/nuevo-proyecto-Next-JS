@@ -58,3 +58,24 @@ export interface IQuestionNotification extends IDialogProps {
   onClickCancel?: () => void; // función que se ejecutará cuando se haga clic en "No"
 }
 
+/**
+columnas visibles en el detalle de la tabla
+field:  nombre de la key q contiene la data de la tabla
+header: titulo <th> de la columna   */
+export interface IColumns {
+  field: string;
+  header: string;
+}
+
+/**
+ * Prime React - datos de las tablas q se muestran con mayusculas iniciales y con formato de fecha */
+export interface IColumnData {
+  [key: string]: any;
+}
+
+/**
+ * Prime React - ventana modal para ver los detalles de las filas de las tablas */
+export interface ITableDataDetailsDialog extends IDialogProps, ITitles {
+  tableData: any[];
+  columns: IColumns[];
+}
