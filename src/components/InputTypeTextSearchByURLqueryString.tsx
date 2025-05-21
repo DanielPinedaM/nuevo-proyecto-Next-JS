@@ -1,9 +1,6 @@
 "use client";
 import { globalTailwindStyle } from "@/types/constant/const-layout";
-import {
-  IInputTypeTextSearchByURLqueryString,
-  ISearchTable,
-} from "@/types/interface/administrador/tablas/interface-home-tables";
+import { IInputTypeTextSearchByURLqueryString, ISearchTable } from "@/types/interface/interface-home-tables";
 import debounce from "just-debounce-it";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { InputText } from "primereact/inputtext";
