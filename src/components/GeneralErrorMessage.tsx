@@ -6,8 +6,10 @@ const generateUniqueKey = (): string =>  Math.random().toString(36).slice(2, 11)
 
 /**
 Componente que muestra los mensajes de error
-asociados a un campo de un formulario de React Hook Form */
+de los campos (input) de formulario de React Hook Form */
 export default function GeneralErrorMessage({ errors, name }: IGeneralErrorMessage) {
+  if (!errors || !name) return null;
+
   return (
     <ErrorMessage
       errors={errors}
@@ -17,8 +19,9 @@ export default function GeneralErrorMessage({ errors, name }: IGeneralErrorMessa
         Object.entries(messages).map(([type, message], i) => (
           <>
             {message && (
-              <p className="text-red-600" key={`${type}-${i}-${generateUniqueKey()}`}>
-                {message}
+              <p className="text-red-600" 
+                 key={`${type}-${i}-${generateUniqueKey()}`}>
+               {message}
               </p>
             )}
           </>
