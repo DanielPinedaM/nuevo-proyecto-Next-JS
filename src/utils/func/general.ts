@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import errorNotification from "@/components/dialog/notification/errorNotification";
+import successNotification from "@/components/dialog/notification/successNotification";
 import specialWords from "@/types/constant/const-special-words";
 
 /**
@@ -111,3 +113,33 @@ export const isUseClient = (): boolean => {
     return false;
   }
 };
+
+/**
+copiar texto en portapapeles */
+export const copyText = async (text: string): Promise<void> => {
+  const errorMessage: string = "No se pudo copiar el texto";
+
+  if (!isUseClient()) {
+    console.error("❌ error, solamente se puede copiar texto en componente cliente 'use client'");
+    return;
+  }
+
+  if (!text) {
+    console.error("❌ error, el texto a copiar NO puede ser falsy \n", text);
+    return;
+  }
+
+  if (!navigator?.clipboard?.writeText) {
+    errorNotification(errorMessage);
+    console.error(errorMessage, " porque el navegador no es compatible con navigator?.clipboard?.writeText");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    successNotification("Texto copiado");
+  } catch (e) {
+    errorNotification(errorMessage);
+    console.error(errorMessage, "\n", e);
+  }
+}
