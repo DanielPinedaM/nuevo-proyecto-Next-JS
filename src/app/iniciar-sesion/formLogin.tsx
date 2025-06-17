@@ -9,6 +9,7 @@ import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
 import { encrypt } from '@/utils/func/cryptoService';
+import { convertToStringify, isLiteralObject, literalObjectLength } from '@/utils/func/dataType';
 import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -48,10 +49,11 @@ export default function FormLogin() {
   };
 
   const iterateUserData = (data: any): void => {
-    const errorMessage: string =
-      '❌ error, NO se puede setear las cookies porque la api NO ha respondido con los datos q se guardan en las cookies ';
+    const errorMessage: string = '❌ error, NO se puede setear las cookies porque la api NO ha respondido con los datos q se guardan en las cookies ';
 
-    if (!data || Object?.keys(data)?.length === 0) {
+    if (!data 
+        || !(isLiteralObject(data))
+        || literalObjectLength(data) <= 0) {
       console.error(errorMessage, '\n', data);
       return;
     }
@@ -67,11 +69,11 @@ export default function FormLogin() {
     Object.entries(data).forEach((entry) => {
       const [key, value] = entry;
       if (!key || !value) {
-        console.error(errorMessage, '\n', key, value);
+        console.error(errorMessage, '\nkey', key, '\nvalue', value);
         return;
       }
 
-      setCookie(key, value, cookieOptionsInLogin({ maxAge }));
+      setCookie(key, convertToStringify(value), cookieOptionsInLogin({ maxAge }));
     });
   };
 

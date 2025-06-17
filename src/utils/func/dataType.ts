@@ -141,18 +141,18 @@ export function isFile(variable: Blob | any): boolean {
 }
 
 /**
-longitud de un objeto literal */
-export const literalObjectLength = (literalObject: any): number | null => {
-  if (
-    Object.getPrototypeOf(literalObject) === Object.prototype ||
-    Object.prototype.toString.call(literalObject) === "[object Object]"
-  ) {
+longitud de un objeto literal
+
+>= 0 cuando SI es objeto literal
+-1   cuando NO es objeto literal */
+export const literalObjectLength = (literalObject: any): number => {
+  if (isLiteralObject(literalObject)) {
     const length: number =
       Object.keys(literalObject).length + Object.getOwnPropertySymbols(literalObject).length;
     return length;
   }
 
-  return null;
+  return -1;
 };
 
 /**
@@ -178,4 +178,24 @@ export const convertFlatObjectValues = (obj: Record<string, any>): Record<string
 
     return newObject;
   }, {} as Record<string, any>);
+};
+
+/**
+¿la variable es un objeto literal? */
+export const isLiteralObject = (literalObject: any): boolean => (
+      Object.getPrototypeOf(literalObject) === Object.prototype ||
+      Object.prototype.toString.call(literalObject) === '[object Object]'
+)
+
+/**
+convertir a JSON.stringify() SI ES POSIBLE */
+export const convertToStringify = (value: any | string): any | string => {
+    // solamente se puede hacer JSON.stringify() de un
+    // 1) array []
+    if (Array.isArray(value)) return JSON.stringify(value);
+  
+    // 2) objeto literal {}
+    if (isLiteralObject(value)) return JSON.stringify(value);
+
+    return value;
 };

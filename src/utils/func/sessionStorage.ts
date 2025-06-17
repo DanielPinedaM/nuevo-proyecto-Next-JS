@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { isValidJSONparse } from "@/utils/func/dataType";
+import { convertToStringify, isValidJSONparse } from "@/utils/func/dataType";
 
 /*
  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -32,18 +32,7 @@ import { isValidJSONparse } from "@/utils/func/dataType";
     return true;
   };
 
-  const convertToString = (value: TSessionStorageValue): TSessionStorageValue => {
-    // solamente se puede hacer JSON.stringify() de un
-    // 1) array []
-    if (Array.isArray(value)) return JSON.stringify(value);
-  
-    // 2) objeto literal {}
-    if (Object.prototype.toString.call(value) === '[object Object]' && typeof value === 'object') {
-      return JSON.stringify(value);
-    }
-  
-    return value;
-  };
+
 
   /* sessionStorage - listar todas las propiedad: valor en un objeto literal {} */
   export const sessionStorageListAll = (): ISessionStorageObject | null => {
@@ -136,7 +125,7 @@ import { isValidJSONparse } from "@/utils/func/dataType";
 
     if (search) return false;
 
-    const stringValue: TSessionStorageValue = convertToString(value);
+    const stringValue: TSessionStorageValue = convertToStringify(value);
     // NO convertir el token a Base 64
     if (property === "token"
       || property === "accessToken") {
@@ -160,7 +149,7 @@ import { isValidJSONparse } from "@/utils/func/dataType";
     // NO se puede actualizar el valor de una propiedad q no existe
     if (!search) return false;
     
-    const stringValue: TSessionStorageValue = convertToString(value);
+    const stringValue: TSessionStorageValue = convertToStringify(value);
     // NO convertir el token a Base 64 
     if (property === "token"
       || property === "accessToken") {
@@ -185,7 +174,7 @@ import { isValidJSONparse } from "@/utils/func/dataType";
       return false;
     }
   
-    const stringValue: TSessionStorageValue = convertToString(value);
+    const stringValue: TSessionStorageValue = convertToStringify(value);
   
     // NO convertir el token a Base 64 
     if (property === "token"
