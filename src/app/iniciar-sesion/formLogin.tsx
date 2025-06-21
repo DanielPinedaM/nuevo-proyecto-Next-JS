@@ -3,6 +3,7 @@
 import errorNotification from '@/components/dialog/notification/errorNotification';
 import GeneralErrorMessage from '@/components/GeneralErrorMessage';
 import { login } from '@/services/auth/auth';
+import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
 import { cookieOptionsInLogin } from '@/types/constant/const-cookie-storage';
 import { globalTailwindStyle } from '@/types/constant/const-layout';
 import { constRegex } from '@/types/constant/const-regex';
@@ -19,6 +20,8 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 export default function FormLogin() {
+  const { showLoaderNavigation } = useNavigationLoaderStore();
+
   const {
     formState: { errors },
     handleSubmit,
@@ -99,6 +102,7 @@ export default function FormLogin() {
     /* este es el codigo correcto q se tiene q des-comentar
     iterateUserData(data); */
 
+    showLoaderNavigation();
     router.push('/inicio/administrador');
     //} else {
     //deleteStorageAndCookies();

@@ -48,7 +48,7 @@ export default function ListDynamicTable({ tableDataDynamic }: { tableDataDynami
 
   return (
     <>
-      {Array.isArray(tableDataDynamic) && tableDataDynamic?.length ? (
+      {Array.isArray(tableDataDynamic) && tableDataDynamic?.length > 0 ? (
         <Table />
       ) : (
         <p className="text-center">No hay datos</p>

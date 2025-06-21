@@ -35,6 +35,7 @@ export default function InputTypeTextSearchByURLqueryString({
         router.push(`${pathname}?${createQueryString("search", newInputSearch)}`);
       } else {
         // limpiar la URL cuando el input está vacío
+        
         router.push(pathname);
       }
     }, 300),

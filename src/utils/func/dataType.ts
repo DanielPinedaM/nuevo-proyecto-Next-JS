@@ -112,7 +112,7 @@ cuando NO es posible devuleve null */
 export const convertToBoolean = (variable: boolean | string | any): boolean | null => {
   const normalized: string = String(variable)?.trim()?.toLowerCase();
 
-  if (normalized === "true" || normalized === "1" || normalizeStr(variable) === "si") {
+  if (normalized === "true" || normalized === "1" || normalizeStr(variable) === "si" || normalizeStr(variable) === "yes") {
     return true;
   } else if (normalized === "false" || normalized === "0" || normalizeStr(variable) === "no") {
     return false;

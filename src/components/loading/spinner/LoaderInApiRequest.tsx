@@ -1,8 +1,8 @@
 "use client";
-import { useLoaderStore } from "@/store/loaderStore";
+import { useLoaderStore } from "@/store/loader/loaderStore";
 import { useShallow } from "zustand/shallow";
 import { useEffect } from "react";
-import LoaderIcon from "./LoaderIcon";
+import LoaderIcon from "@/components/loading/spinner/LoaderIcon";
 
 export default function LoaderInApiRequest() {
   const { isLoading } = useLoaderStore(

@@ -13,7 +13,7 @@ import {
   IResponse,
   Method,
 } from "@/services/generalService/types/requestDataTypes";
-import { ILoaderState } from "@/store/loaderStore";
+import { ILoaderState } from "@/store/loader/loaderStore";
 import errorNotification from "@/components/dialog/notification/errorNotification";
 
 /**
@@ -83,7 +83,7 @@ export async function httpRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient()) {
-    const { useLoaderStore } = await import("@/store/loaderStore");
+    const { useLoaderStore } = await import("@/store/loader/loaderStore");
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }

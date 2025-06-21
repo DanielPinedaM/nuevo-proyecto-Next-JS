@@ -7,7 +7,7 @@ import { isUseClient, titleCase } from '@/utils/func/general';
 import successNotification from '@/components/dialog/notification/successNotification';
 import { IResponse } from '@/services/generalService/types/requestDataTypes';
 import * as ExcelJS from 'exceljs';
-import { ILoaderState } from '@/store/loaderStore';
+import { ILoaderState } from '@/store/loader/loaderStore';
 
 /**
 Funcion para descargar archivo */
@@ -128,7 +128,7 @@ export const downloadExcel = async (
   let loaderStore: ILoaderState | null = null;
 
   // acceder al valor booleano del loader
-  const { useLoaderStore } = await import('@/store/loaderStore');
+  const { useLoaderStore } = await import('@/store/loader/loaderStore');
   loaderStore = useLoaderStore.getState();
   loaderStore.showLoader();
 

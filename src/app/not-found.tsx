@@ -1,8 +1,10 @@
 'use client';
+import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
 import { constPath } from '@/types/constant/const-path';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function NotFound() {
+  const { showLoaderNavigation } = useNavigationLoaderStore();
   const pathname: string = usePathname();
   const router = useRouter();
 
@@ -10,6 +12,7 @@ export default function NotFound() {
     if (window.history.length > 1) {
         router.back();
     } else {
+        showLoaderNavigation();
         router.push("/" + constPath.login);
     }
   };

@@ -16,6 +16,7 @@ import visibleRows from "@/types/constant/const-visible-rows";
 import { ITableDataNombreTabla } from "@/types/interface/interface-nombre-tabla";
 import columns from "@/types/constant/const-columns-nombre-tabla";
 import { acceptValidation } from "@/services/table-name";
+import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));
@@ -31,6 +32,7 @@ const QuestionNotification = dynamic(
 type TNameDialog = "tableDataDetailsDialog" | "question";
 
 export default function ListTable({ tableData }: { tableData: ITableDataNombreTabla[] }) {
+  const { showLoaderNavigation } = useNavigationLoaderStore();
   const router = useRouter();
 
   const [visible, setVisible] = useState({
@@ -43,6 +45,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
 
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
+      showLoaderNavigation();
       router.push(`/${constPath.login}`);
     }
   }, []);
