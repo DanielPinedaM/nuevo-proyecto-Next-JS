@@ -1,10 +1,10 @@
 "use client";
-import { RiLoader4Fill } from "react-icons/ri";
 import { useLoaderStore } from "@/store/loaderStore";
 import { useShallow } from "zustand/shallow";
 import { useEffect } from "react";
+import LoaderIcon from "./LoaderIcon";
 
-export default function Loader() {
+export default function LoaderInApiRequest() {
   const { isLoading } = useLoaderStore(
     useShallow((state) => ({
       isLoading: state.isLoading,
@@ -30,9 +30,7 @@ export default function Loader() {
     <>
     {
       isLoading && (
-        <div className="bg-opaque-white w-full h-full flex justify-center items-center fixed z-[999999] cursor-wait">
-          <RiLoader4Fill className="animate-spin text-blue-500 text-7xl" />
-        </div>
+        <LoaderIcon/>
       )
     }
     </>
