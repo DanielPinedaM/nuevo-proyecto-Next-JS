@@ -3,9 +3,12 @@
 export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 /**
-parametros de funcion httpRequest para llamar a la API */
-export type IResponseType = 'json' | 'text' | 'blob';
+Tipos de datos (formatos) de respuesta en fecth
+https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods */
+export type IResponseType = 'json' | 'text' | 'blob' | "arrayBuffer" | "formData";
 
+/**
+parametros de funcion httpRequest para llamar a la API */
 export interface IRequestOptions {
   isASecurityEndpoint?: boolean;
   body?: any;

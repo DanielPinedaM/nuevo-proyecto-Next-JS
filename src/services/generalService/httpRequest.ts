@@ -186,12 +186,15 @@ export async function httpRequest<T = any>(
       } else {
         result = (await response.blob()) as T;
       }
+    } else if (responseType === "arrayBuffer") {
+      result = (await response.arrayBuffer()) as T;
+    } else if (responseType === "formData") {
+      result = (await response.formData()) as T;
     } else {
       result = response;
 
-      console.error("❌ responseType ", responseType);
       errorLogs({
-        message: "formato de respuesta responseType no valido",
+        message: `formato de respuesta responseType ${responseType} no valido`,
         method,
         url,
         options,

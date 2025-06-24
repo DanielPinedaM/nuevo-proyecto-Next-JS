@@ -308,7 +308,12 @@ export function validateApiResponse({
   };
 
   // retorna el archivo o texto plano recibido del backend
-  if (isFile(result) || responseType === 'blob' || responseType === 'text') return result;
+  if (isFile(result) 
+      || responseType === 'text'
+      || responseType === 'blob'
+      || responseType === 'arrayBuffer'
+      || responseType === 'formData'
+     ) return result;
 
   // a partir de aqui la respuesta de la api tiene q ser un responseType === "json"
   // validar q exista la respuesta de la API del backend
