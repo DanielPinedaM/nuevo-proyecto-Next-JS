@@ -30,10 +30,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-      --background: #0a0a0a;
-      --foreground: #ededed;
-    }
+  html,
+  body {
+    background-color: branding.$white-smoke;
+  }
 }
 
 /*
@@ -64,6 +64,10 @@ body {
   background-color: branding.$white-smoke;
   line-height: 1.1;
   font-family: branding.$inter !important;
+
+  // suavizar texto
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*
@@ -72,20 +76,20 @@ body {
 ******************** */
 
 :root {
-    // Utopia Fluid - Texto Responsive - https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s
-    --step--1: clamp(0.89rem, calc(0.87rem + 0.07vw), 0.94rem);
-    --step-0: clamp(1.06rem, calc(1.01rem + 0.25vw), 1.25rem);
-    --step-1: clamp(1.28rem, calc(1.17rem + 0.53vw), 1.67rem);
-    --step-2: clamp(1.53rem, calc(1.34rem + 0.94vw), 2.22rem);
-    --step-3: clamp(1.84rem, calc(1.53rem + 1.52vw), 2.96rem);
-    --step-4: clamp(2.2rem, calc(1.73rem + 2.36vw), 3.95rem);
-    --step-5: clamp(2.64rem, calc(1.93rem + 3.55vw), 5.26rem);
-    --step-6: clamp(3.17rem, calc(2.13rem + 5.21vw), 7.01rem);
-    --step-7: clamp(3.81rem, calc(2.3rem + 7.51vw), 9.35rem);
-    --step-8: clamp(4.57rem, calc(2.43rem + 10.7vw), 12.46rem);
-  
-    --background: #ffffff;
-    --foreground: #171717;
+  // Utopia Fluid - Texto Responsive - https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s
+  --step--1: clamp(0.89rem, calc(0.87rem + 0.07vw), 0.94rem);
+  --step-0: clamp(1.06rem, calc(1.01rem + 0.25vw), 1.25rem);
+  --step-1: clamp(1.28rem, calc(1.17rem + 0.53vw), 1.67rem);
+  --step-2: clamp(1.53rem, calc(1.34rem + 0.94vw), 2.22rem);
+  --step-3: clamp(1.84rem, calc(1.53rem + 1.52vw), 2.96rem);
+  --step-4: clamp(2.2rem, calc(1.73rem + 2.36vw), 3.95rem);
+  --step-5: clamp(2.64rem, calc(1.93rem + 3.55vw), 5.26rem);
+  --step-6: clamp(3.17rem, calc(2.13rem + 5.21vw), 7.01rem);
+  --step-7: clamp(3.81rem, calc(2.3rem + 7.51vw), 9.35rem);
+  --step-8: clamp(4.57rem, calc(2.43rem + 10.7vw), 12.46rem);
+
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 p:not([class*='text-[']),
@@ -129,19 +133,12 @@ h1:not([class*='text-[']) {
   font-family: branding.$monospace !important;
 }
 
-/*
-*****************
-* Sweet Alert 2 *
-***************** */
-
-div.swal2-container {
-  * {
-    font-family: branding.$inter !important;
-  }
-}
-
 a {
   text-decoration-line: none;
+
+  // Eliminar color de fondo azul cuando se hace click en los enlaces <a>
+  // https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 h2,
@@ -200,16 +197,6 @@ tr,
 th,
 td {
   font-variant-numeric: tabular-nums !important;
-}
-
-/*
-*********************************************************************************************************************************
-* Eliminar color de fondo azul cuando se hace click en los enlaces <a>                                                          *
-* https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic *
-********************************************************************************************************************************* */
-
-a {
-    -webkit-tap-highlight-color: transparent !important;
 }
 
 /*

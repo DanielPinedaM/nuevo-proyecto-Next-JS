@@ -6,6 +6,8 @@
 *************** */
 
 div.swal2-container {
+  font-family: branding.$inter !important;
+
   div.swal2-popup {
     border-radius: 10px !important;
     background-color: branding.$white-smoke;
