@@ -177,7 +177,7 @@ export default function FormLogin() {
         </div>
 
         <div className='flex justify-end'>
-          <button type='submit' className={`${globalTailwindStyle.button} uppercase`}>
+          <button type='submit' className='button-primary'>
             ingresar
           </button>
         </div>

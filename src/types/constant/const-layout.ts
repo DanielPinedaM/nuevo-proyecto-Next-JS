@@ -24,21 +24,12 @@ export const breakpoint: IBreakpoint = {
 };
 
 export const globalTailwindStyle: IGlobalTailwindStyle = {
-  button: {
-    darkBlue: "bg-blue-700 font-medium text-white rounded-xl py-1 px-5 hover:opacity-75 hover:relative hover:bottom-[1px] hover:font-semibold",
-    lightBlue: "bg-blue-200 font-medium text-white rounded-xl py-1 px-5 hover:opacity-75 hover:relative hover:bottom-[1px] hover:font-semibold",
-    green: "bg-green-600 font-medium text-white rounded-xl py-1 px-5 hover:opacity-75 hover:relative hover:bottom-[1px] hover:font-semibold",
-    red: "bg-red-600 font-medium text-white rounded-xl py-1 px-5 hover:opacity-75 hover:relative hover:bottom-[1px] hover:font-semibold",
-  },
   input: {
     // estilo general para TODOS los input
     general: "border-2 rounded-md",
   },
   dialog: {
     container: {
-      // <Dialog> contenedor de TODA la modal, borde externo q delinea la modal
-      contour: "relative bg-white p-3 rounded-lg w-full",
-
       // <section> con el contenido principal de la modal
       content: "py-2",
     },

@@ -177,7 +177,7 @@ export default function UploadSingleFile({
         footer={<Footer onSubmit={onSubmit} onHide={onHide} isDragActive={isDragActive} />}
         visible={visible}
         draggable={false}
-        className={`${globalTailwindStyle.dialog.container.contour} max-w-xl`}
+        className="max-w-xl"
         onHide={() => onHide()}
       >
         <section className={`${globalTailwindStyle.dialog.container.content}`}>

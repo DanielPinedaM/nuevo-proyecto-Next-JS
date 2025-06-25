@@ -30,7 +30,7 @@ export default function QuestionNotification({
           onClickAccept?.();
           onHide?.();
         }}
-        className={`${globalTailwindStyle.button.darkBlue}`}
+        className="button-primary"
       >
         Sí
       </button>
@@ -40,7 +40,7 @@ export default function QuestionNotification({
           onClickCancel?.();
           onHide?.();
         }}
-        className={`${globalTailwindStyle.button.lightBlue}`}
+        className="button-secondary"
       >
         No
       </button>
@@ -53,7 +53,7 @@ export default function QuestionNotification({
       footer={Footer}
       visible={visible}
       draggable={false}
-      className={`${globalTailwindStyle.dialog.container.contour} max-w-md`}
+      className="max-w-md"
       onHide={() => onHide?.()}
     >
       <section className={`${globalTailwindStyle.dialog.container.content}`}>

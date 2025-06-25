@@ -22,18 +22,11 @@ export interface IBreakpoint {
 }
 
 export interface IGlobalTailwindStyle {
-  button: {
-    darkBlue: string;
-    lightBlue: string;
-    green: string;
-    red: string;
-  };
   input: {
     general: string;
   };
   dialog: {
     container: {
-      contour: string;
       content: string;
     };
   };

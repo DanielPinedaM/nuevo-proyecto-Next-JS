@@ -208,7 +208,7 @@ export default function UploadMultipleFiles({
         footer={<Footer onSubmit={onSubmit} onHide={onHide} isDragActive={isDragActive} />}
         visible={visible}
         draggable={false}
-        className={`${globalTailwindStyle.dialog.container.contour} max-w-xl`}
+        className="max-w-xl"
         onHide={() => onHide()}
       >
         <section className={`${globalTailwindStyle.dialog.container.content}`}>
@@ -226,9 +226,9 @@ export default function UploadMultipleFiles({
 
           {acceptedFiles && acceptedFiles?.length > 0 && (
             <div className="flex justify-end mt-2">
-              <button onClick={onClickDeleteAllFiles} className="flex items-center gap-x-1">
-                <p>Eliminar todos los archivos</p>
-                <MdDeleteSweep className="text-red-600" />
+              <button onClick={onClickDeleteAllFiles} className="button-with-icon">
+                <MdDeleteSweep />
+                <span>Eliminar todos los archivos</span>
               </button>
             </div>
           )}

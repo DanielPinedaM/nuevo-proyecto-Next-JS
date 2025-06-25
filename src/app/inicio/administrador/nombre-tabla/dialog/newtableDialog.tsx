@@ -50,12 +50,12 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
 
   const Footer = () => (
     <div className="flex justify-center gap-x-2 col-span-full">
-    <button form="form-new-dialog" type="submit" className={`${globalTailwindStyle.button.darkBlue} uppercase`}>
+    <button form="form-new-dialog" type="submit" className="button-primary">
       aceptar
     </button>
 
     <button
-      className={`${globalTailwindStyle.button.darkBlue} uppercase`}
+      className="button-secondary"
       onClick={() => onHide()}
     >
       cancelar
@@ -69,7 +69,7 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
       footer={<Footer />}
       visible={visible}
       draggable={false}
-      className={`${globalTailwindStyle.dialog.container.contour} max-w-2xl`}
+      className="max-w-2xl"
       onHide={() => onHide()}
     >
       <form id="form-new-dialog" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>

@@ -44,7 +44,7 @@ export default function TableDataDetailsDialog({
           onClick={() => {
             onHide();
           }}
-          className={`${globalTailwindStyle.button.darkBlue}`}
+          className="button-secondary"
         >
           Cerrar
         </button>
@@ -100,7 +100,7 @@ export default function TableDataDetailsDialog({
       visible={visible}
       draggable={false}
       style={{ width: "auto" }}
-      className={`${globalTailwindStyle.dialog.container.contour} min-w-[540px] max-w-[95vw]`}
+      className="min-w-[540px] max-w-[95vw]`}
       onHide={onHide}
     >
       <section className={`${globalTailwindStyle.dialog.container.content}`}>

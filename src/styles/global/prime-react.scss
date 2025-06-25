@@ -3,9 +3,38 @@
 * Prime React - ventanas modales (dialog) *
 ******************************************* */
 
+// contenedor de ventana modal
+.p-dialog {
+  width: 100%;
+  margin-inline: 20px;
+  max-height: 98vh !important;
+  max-height: 98dvh !important;
+
+  position: relative !important;
+  background-color: white !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+}
+
+div.p-dialog-content,
+div.p-dialog-header,
+div.p-dialog-footer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+div.p-dialog-header-icons {
+  button.p-dialog-header-close {
+    // situar el boton para cerrar ventana modal en la esquina superior derecha
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+  }
+}
+
 // fondo negro semi-transparente al contenido q NO es de la ventana modal
 .p-dialog-mask {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: branding.$semi-transparent !important;
 }
 
 // hacer q input de type password ocupe todo el ancho de su contenedor padre
