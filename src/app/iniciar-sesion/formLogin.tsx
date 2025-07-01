@@ -18,7 +18,6 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AiFillAlert } from "react-icons/ai";
 
 
 export default function FormLogin() {
@@ -187,12 +186,6 @@ export default function FormLogin() {
         <div className='flex justify-end'>
           <button type='submit' className='button-primary'>
             ingresar
-          </button>
-
-            <button type='submit' className='button-with-icon'>
-              <AiFillAlert />
-
-            <span>ingresar</span>
           </button>
         </div>
       </form>
