@@ -59,7 +59,7 @@ export async function httpRequest<T = any>(
   }
 
   // validar q tenga conexion a internet
-  if (!window.navigator.onLine) {
+  if (isUseClient() && !(window?.navigator?.onLine)) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
     if (isUseClient()) {
