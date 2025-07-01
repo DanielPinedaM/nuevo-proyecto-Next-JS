@@ -20,10 +20,14 @@ https://tailwindcss.com/docs/theme  */
   ************ */
 
   /* azul */
-  --color-blue-dark: #3465cc;
-  --color-blue-primary: #2196f3;
-  --color-sky-blue: #61aaec;
-  --color-soft-blue: #9bcdec;
+  --color-blue-midnight: rgba(10, 15, 28, 1);    /* #0A0F1C */
+  --color-blue-lightning: rgba(4, 86, 244, 1);   /* #0456f4 */
+  --color-blue-azure: rgba(1, 145, 238, 1);      /* #0191ee */
+  --color-blue-ocean: rgba(0, 201, 233, 1);      /* #00c9e9 */
+  --color-blue-carbon: rgba(24, 60, 84, 1);      /* #183c54 */
+  --color-blue-deep: rgba(5, 79, 133, 1),        /* #054f85 */
+  --color-blue-abys: rgba(16, 52, 84, 1);        /* #103454 */
+  --color-blue-opacity: rgba(4, 201, 233, 0.25); /* #04c9e940 */
 
   /* gris */
   --color-gray-blue: #585b76;
@@ -43,7 +47,7 @@ https://tailwindcss.com/docs/theme  */
   /* semi-transparente */
   --color-navy-blue-25: rgba(38, 49, 79, 0.25);
   --color-blue-light: rgba(33, 150, 243, 0.25);
-  --color-misty-rose: rgba(242, 237, 237, 0.5);
+  --color-semi-transparent: rgba(255, 255, 255, 0.30);
 
   /*
   *******************************************************************************

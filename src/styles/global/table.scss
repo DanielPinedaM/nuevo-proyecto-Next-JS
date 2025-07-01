@@ -1,4 +1,4 @@
-@use "./branding";
+@use './variable.scss' as variable;
 
 /*
 *******************
@@ -11,7 +11,7 @@ table {
   border-spacing: 0;
 
   // borde redondeado de tabla
-  border: 1px solid branding.$gray-light;
+  border: 1px solid variable.$gray-light;
   border-style: hidden;
   border-radius: 15px;
   overflow: hidden;
@@ -28,7 +28,7 @@ table {
   thead,
   tfoot,
   th {
-    background-color: branding.$blue-dark !important;
+    background-color: variable.$blue-ocean !important;
     color: white;
 
     span,
@@ -45,7 +45,7 @@ table {
 
   td {
     // borde de las casillas de las tablas
-    border: 1px solid branding.$gray-light;
+    border: 1px solid variable.$gray-light;
 
     &.p-selection-column {
       // Prime NG - centrar campos chequeables: checkbox, radio button, etc

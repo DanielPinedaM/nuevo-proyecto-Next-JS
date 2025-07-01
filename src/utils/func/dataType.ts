@@ -32,24 +32,20 @@ export const isNumber = (variable: number | any): boolean => {
 };
 
 /**
-Borrar:
-- caracteres especiales
-- espacio en blanco al principio y final
-- convertir a minuscula
-
+Normalizar string
 Ejemplo:
 ' COMunicaciÓN    ' devuelve  'comunicacion'
 [1, 2, 3]           devuelve   [1, 2, 3] */
 export const normalizeStr = (string: string | any): string | any => {
-  if (isString(string)) {
-    return string
-      .trim()
-      .toLowerCase()
-      .normalize("NFD")
-      .replaceAll(/[\u0300-\u036f]/g, "");
-  }
+  if (!(isString(string))) return string;
+  if (String(string).trim() === "") return "";
 
-  return string;
+  return string.trim()                              // borrar espacio en blanco al principio y final
+                .toLowerCase()                      // convertir a minuscula
+                .normalize("NFD")
+                .replaceAll(/ñ/g, 'n')              // reemplazar ñ minúscula por n
+                .replaceAll(/[\u0300-\u036f]/g, "") // borrar acentos (tildes)
+                .replaceAll(/\s+/g, ' ')            // reemplazar múltiples espacios en blanco por un solo espacio en blanco
 };
 
 /**
@@ -150,8 +146,7 @@ longitud de un objeto literal
 -1   cuando NO es objeto literal */
 export const literalObjectLength = (literalObject: any): number => {
   if (isLiteralObject(literalObject)) {
-    const length: number =
-      Object.keys(literalObject).length + Object.getOwnPropertySymbols(literalObject).length;
+    const length: number = Object.keys(literalObject).length + Object.getOwnPropertySymbols(literalObject).length;
     return length;
   }
 
@@ -186,8 +181,12 @@ export const convertFlatObjectValues = (obj: Record<string, any>): Record<string
 /**
 ¿la variable es un objeto literal? */
 export const isLiteralObject = (literalObject: any): boolean => (
-      Object.getPrototypeOf(literalObject) === Object.prototype ||
-      Object.prototype.toString.call(literalObject) === '[object Object]'
+        typeof literalObject === "object"
+        && literalObject !== null
+        && (
+        Object.getPrototypeOf(literalObject) === Object.prototype ||
+        Object.prototype.toString.call(literalObject) === '[object Object]'
+     )
 )
 
 /**
@@ -201,4 +200,18 @@ export const convertToStringify = (value: any | string): any | string => {
     if (isLiteralObject(value)) return JSON.stringify(value);
 
     return value;
+};
+
+/**
+convertir a JSON.stringify() SI ES POSIBLE,
+sino, convierte a string */
+export const forceConvertToString = (value: any | string): string => {
+  // solamente se puede hacer JSON.stringify() de un
+  // 1) array []
+  if (Array.isArray(value)) return JSON.stringify(value);
+
+  // 2) objeto literal {}
+  if (isLiteralObject(value)) return JSON.stringify(value);
+
+  return String(value).trim();
 };

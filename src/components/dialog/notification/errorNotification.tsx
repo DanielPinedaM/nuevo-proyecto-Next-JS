@@ -3,10 +3,21 @@ import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
 const FaTimesCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTimesCircle));
 import { isUseClient } from '@/utils/func/general';
+import { isString } from "@/utils/func/dataType";
 
 export default function errorNotification(message: string): void {
   if (!isUseClient()) {
-    console.error("❌ error, react-hot-toast se tiene q usar en componente cliente 'use client'")
+    console.error("❌ error - errorNotification - react-hot-toast se tiene q usar en componente cliente 'use client'");
+    return;
+  }
+
+  if (!isString(message)) {
+    console.error("❌ error - errorNotification - react-hot-toast necesita el mensaje tipo string");
+    return;
+  }
+
+  if (String(message).trim() === "") {
+    console.error("❌ error - errorNotification - react-hot-toast - el mensaje no puede ser un string vacio ''");
     return;
   }
 

@@ -1,3 +1,5 @@
+@use './variable.scss' as variable;
+
 /*
 ********************************************
 * Prime React - ventanas modales (dialog) *
@@ -34,7 +36,7 @@ div.p-dialog-header-icons {
 
 // fondo negro semi-transparente al contenido q NO es de la ventana modal
 .p-dialog-mask {
-  background-color: branding.$semi-transparent !important;
+  background-color: variable.$semi-transparent !important;
 }
 
 // hacer q input de type password ocupe todo el ancho de su contenedor padre
@@ -85,6 +87,7 @@ div.p-dialog-header-icons {
 ******************************* */
 
 .p-dialog {
+  max-height: 98vh !important;
   max-height: 98dvh !important;
 }
 

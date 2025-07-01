@@ -1,4 +1,4 @@
-@use "./branding";
+@use './variable.scss' as variable;
 
 /*
 ***************
@@ -6,16 +6,16 @@
 *************** */
 
 div.swal2-container {
-  font-family: branding.$inter !important;
+  font-family: variable.$inter !important;
 
   div.swal2-popup {
     border-radius: 10px !important;
-    background-color: branding.$white-smoke;
+    background-color: variable.$white-smoke;
   }
 
   button.swal2-confirm,
   button.swal2-cancel {
-    color: branding.$white-smoke !important;
+    color: variable.$white-smoke !important;
     padding: 0.375rem 1.25rem !important;
     border-radius: 0.75rem !important;
     font-weight: 500 !important;
@@ -25,18 +25,18 @@ div.swal2-container {
   }
 
   button.swal2-confirm {
-    background-color: branding.$blue-dark !important;
+    background-color: variable.$blue-ocean !important;
   }
 
   button.swal2-cancel {
-    background-color: branding.$sky-blue !important;
+    background-color: variable.$blue-azure !important;
   }
 
   button.swal2-close {
-    color: branding.$gray-dark !important;
+    color: variable.$gray-dark !important;
     font-weight: 300 !important;
     &:hover {
-      color: branding.$gray-dark !important;
+      color: variable.$gray-dark !important;
     }
   }
 }

@@ -17,10 +17,14 @@ $monospace: "Lucida Console", monospace, "Courier New", Consolas, Courier, Conso
 ******************* */
 
 // azul
-$blue-dark: #3465cc;
-$blue-primary: #2196f3;
-$sky-blue: #61aaec;
-$soft-blue: #9bcdec;
+$blue-midnight: rgba(10, 15, 28, 1);    // #0A0F1C
+$blue-lightning: rgba(4, 86, 244, 1);   // #0456f4
+$blue-azure: rgba(1, 145, 238, 1);      // #0191ee
+$blue-ocean: rgba(0, 201, 233, 1);      // #00c9e9
+$blue-carbon: rgba(24, 60, 84, 1);      // #183c54
+$blue-deep: rgba(5, 79, 133, 1);        // #054f85
+$blue-abys: rgba(16, 52, 84, 1);        // #103454
+$blue-opacity: rgba(4, 201, 233, 0.25); // #04c9e940
 
 // gris
 $gray-blue: #585b76;
@@ -40,16 +44,17 @@ $yellow: #f4d745;
 // semi-transparente
 $navy-blue-25: rgba(38, 49, 79, 0.25);
 $blue-light: rgba(33, 150, 243, 0.25);
-$misty-rose: rgba(242,237,237,0.5);
-
+$semi-transparent: "rgba(255, 255, 255, 0.30)";
 
 /*
 ***********
 * Botones *
 *********** */
 
-$rounded-button: 5px;
+$rounded-button: 8px;
 $font-size-button: 14px;
+$padding-button: 10px;
+$font-weight-button: 500;
 
 /*
 **************************************************

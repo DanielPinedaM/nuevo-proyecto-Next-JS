@@ -10,7 +10,7 @@ import { constRegex } from '@/types/constant/const-regex';
 import IFormLogin from '@/types/interface/interface-login';
 import { IResponse } from '@/types/interface/interface-response';
 import { encrypt } from '@/utils/func/cryptoService';
-import { convertToStringify, isLiteralObject, literalObjectLength } from '@/utils/func/dataType';
+import { forceConvertToString, isLiteralObject, literalObjectLength } from '@/utils/func/dataType';
 import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -18,6 +18,8 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { AiFillAlert } from "react-icons/ai";
+
 
 export default function FormLogin() {
   const { showLoaderNavigation } = useNavigationLoaderStore();
@@ -52,12 +54,18 @@ export default function FormLogin() {
   };
 
   const iterateUserData = (data: any): void => {
-    const errorMessage: string = '❌ error, NO se puede setear las cookies porque la api NO ha respondido con los datos q se guardan en las cookies ';
+    if (!data) {
+      console.error('❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n', data);
+      return;
+    }
 
-    if (!data 
-        || !(isLiteralObject(data))
-        || literalObjectLength(data) <= 0) {
-      console.error(errorMessage, '\n', data);
+    if (!(isLiteralObject(data))) {
+      console.error('❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n', data);
+      return;
+    }
+
+     if (literalObjectLength(data) <= 0) {
+      console.error('❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n', data);
       return;
     }
 
@@ -65,18 +73,18 @@ export default function FormLogin() {
     const maxAge: number = data?.expiresIn;
 
     if (!maxAge) {
-      console.error(errorMessage, '\n', maxAge);
+       console.error('❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n', maxAge);
       return;
     }
 
     Object.entries(data).forEach((entry) => {
       const [key, value] = entry;
       if (!key || !value) {
-        console.error(errorMessage, '\nkey', key, '\nvalue', value);
+        console.error('❌ error, NO se puede setear las cookies porque una key ó value es falsy', '\nkey ', key, '\nvalue ', value);
         return;
       }
 
-      setCookie(key, convertToStringify(value), cookieOptionsInLogin({ maxAge }));
+      setCookie(key, forceConvertToString(value), cookieOptionsInLogin({ maxAge }));
     });
   };
 
@@ -179,6 +187,12 @@ export default function FormLogin() {
         <div className='flex justify-end'>
           <button type='submit' className='button-primary'>
             ingresar
+          </button>
+
+            <button type='submit' className='button-with-icon'>
+              <AiFillAlert />
+
+            <span>ingresar</span>
           </button>
         </div>
       </form>

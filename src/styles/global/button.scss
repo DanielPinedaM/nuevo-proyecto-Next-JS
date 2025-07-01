@@ -1,28 +1,47 @@
-@use "./branding.scss" as branding;
+@use './variable.scss' as variable;
 
 /*
 *************************************
 * Estilos globales para los botones *
 ************************************* */
 
+%base-btn-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+%base-btn-primary-secondary {
+  padding: variable.$padding-button;
+  border-radius: variable.$rounded-button;
+  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  text-transform: capitalize;
+  font-size: variable.$font-size-button;
+}
+
+%flex-full-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
   // boton q contiene icono
   &.button-with-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 5px;
+    @extend %flex-full-center;
 
+    column-gap: 5px;
     padding: 7px;
-    border-radius: branding.$rounded-button;
-    border: 1px solid branding.$navy-blue-25;
+
     background-color: white;
+
     transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+    border-radius: variable.$rounded-button;
+    border: 1px solid variable.$blue-ocean;
 
     svg {
       flex: none;
       font-size: 15px;
-      color: branding.$light-blue;
+      color: variable.$blue-lightning;
       transition: color 0.3s ease 0.05s, background-color 0.3s ease;
     }
 
@@ -31,17 +50,20 @@ button {
       text-transform: capitalize;
       line-height: 16px;
       transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-      font-size: branding.$font-size-button;
+      font-size: variable.$font-size-button;
+    }
+
+    &:enabled {
+      cursor: pointer;
     }
 
     &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+      @extend %base-btn-disabled;
     }
 
     &:hover {
-      background-color: branding.$dark-blue;
-      font-weight: 600;
+      background-color: variable.$blue-ocean;
+      font-weight: variable.$font-weight-button;
 
       svg,
       span {
@@ -52,45 +74,44 @@ button {
 
   // boton primario para "aceptar" - "si"
   &.button-primary {
-    padding: 2px 10px;
-    border-radius: branding.$rounded-button;
+    @extend %base-btn-primary-secondary;
+
+    background-color: variable.$blue-carbon;
     color: white;
-    background-color: branding.$overlay-blue;
-    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-    text-transform: capitalize;
-    font-size: branding.$font-size-button;
+
+    &:enabled {
+      cursor: pointer;
+    }
 
     &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+      @extend %base-btn-disabled;
     }
 
     &:hover {
-      background-color: branding.$deep-blue;
-      font-weight: 600;
+      background-color: variable.$blue-deep;
+      font-weight: variable.$font-weight-button;
     }
   }
 
   // boton secundario para "cancelar" - "no"
   &.button-secondary {
-    padding: 2px 10px;
-    border-radius: branding.$rounded-button;
-    color: branding.$deep-blue;
-    background-color: white;
-    border: 1px solid branding.$navy-blue-25;
-    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-    text-transform: capitalize;
-    font-size: branding.$font-size-button;
+    @extend %base-btn-primary-secondary;
+
+    border: 1px solid variable.$blue-ocean;
+    color: variable.$blue-midnight;
+
+    &:enabled {
+      cursor: pointer;
+    }
 
     &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+      @extend %base-btn-disabled;
     }
 
     &:hover {
       color: white;
-      background-color: branding.$deep-blue;
-      font-weight: 600;
+      background-color: variable.$blue-abys;
+      font-weight: variable.$font-weight-button;
     }
   }
 }

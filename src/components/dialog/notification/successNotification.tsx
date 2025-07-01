@@ -1,4 +1,5 @@
 "use client";
+import { isString } from "@/utils/func/dataType";
 import { isUseClient } from "@/utils/func/general";
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
@@ -6,7 +7,17 @@ const FaCheckCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.F
 
 export default function successNotification(message: string): void {
   if (!isUseClient()) {
-    console.error("❌ error, react-hot-toast se tiene q usar en componente cliente 'use client'")
+    console.error("❌ error - successNotification - react-hot-toast se tiene q usar en componente cliente 'use client'");
+    return;
+  }
+
+  if (!isString(message)) {
+    console.error("❌ error - successNotification - react-hot-toast necesita el mensaje tipo string");
+    return;
+  }
+
+  if (String(message).trim() === "") {
+    console.error("❌ error - successNotification - react-hot-toast - el mensaje no puede ser un string vacio ''");
     return;
   }
 

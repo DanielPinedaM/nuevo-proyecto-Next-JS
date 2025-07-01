@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isUseClient } from "@/utils/func/general";
-import { isFile } from "@/utils/func/dataType";
+import { forceConvertToString, isFile, isString, literalObjectLength } from "@/utils/func/dataType";
 import {
   errorHandling,
   errorLogs,
@@ -23,6 +23,7 @@ export async function httpRequest<T = any>(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | Blob | FormData | any> {
+  // validar env en los q NO se incluye en token
   if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
     const message: string = "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''";
 
@@ -36,13 +37,14 @@ export async function httpRequest<T = any>(
     return { success: false, status: 401, message, data: [] };
   }
 
+  // validar URL q llama al endpoint
   if (
-    !url ||
-    String(url)?.trim() === '' ||
-    String(url)?.includes("undefined") ||
-    String(url)?.includes("null") ||
-    String(url)?.includes("NaN") ||
-    !(String(url)?.includes("http"))
+      !(isString(url))
+      || String(url).trim() === ''
+      || String(url).includes("undefined")
+      || String(url).includes("null")
+      || String(url).includes("NaN")
+      || !(String(url).startsWith("http"))
   ) {
     const message: string = "URL invalida";
 
@@ -56,6 +58,7 @@ export async function httpRequest<T = any>(
     return { success: false, status: 400, message, data: [] };
   }
 
+  // validar q tenga conexion a internet
   if (!window.navigator.onLine) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
@@ -78,16 +81,6 @@ export async function httpRequest<T = any>(
     };
   }
 
-  // loader global q se muestra y oculta en componentes cliente 'use client'
-  let loaderStore: ILoaderState | null = null;
-
-  // acceder al valor booleano del loader
-  if (isUseClient()) {
-    const { useLoaderStore } = await import("@/store/loader/loaderStore");
-    loaderStore = useLoaderStore.getState();
-    loaderStore.showLoader();
-  }
-
   const {
     // enviar token en TODOS los endpoint, EXCEPTO al iniciar sesion
     isASecurityEndpoint = url !== process.env.NEXT_PUBLIC_AUTH_LOGIN,
@@ -96,12 +89,45 @@ export async function httpRequest<T = any>(
     queryParams,
     headers = {},
     responseType = "json",
+    showLoader = true,
   } = options;
 
+  if (body && method === "GET") {
+   const message: string =  `❌ el metodo GET NO puede tener body ${JSON.stringify(body)}`;
+
+   errorLogs({
+     message,
+     method,
+     url,
+     options,
+   });
+
+   return { success: false, status: 400, message, data: [] };
+  }
+
+  // loader global q se muestra y oculta en componentes cliente 'use client'
+  let loaderStore: ILoaderState | null = null;
+
+  // acceder al valor booleano del loader
+  if (isUseClient() && showLoader) {
+    const { useLoaderStore } = await import("@/store/loader/loaderStore");
+    loaderStore = useLoaderStore.getState();
+    loaderStore.showLoader();
+  }
+
   // Construir encabezados
-  const finalHeaders: HeadersInit = Object.fromEntries(
-    Object.entries(headers).map(([key, value]) => [key, String(value)])
-  );
+  let finalHeaders: HeadersInit = {};
+
+  if (literalObjectLength(headers) > 0) {
+    finalHeaders = Object.fromEntries(
+      Object.entries(headers).map(([key, value]) => [key, String(forceConvertToString(value))])
+    );
+  }
+
+  // No establecer 'Content-Type' si el body es un FormData (archivo)
+  if (!isFile(body)) {
+    finalHeaders["Content-Type"] = "application/json";
+  }
 
   // Agregar token si el endpoint lo necesita
   if (isASecurityEndpoint) {
@@ -122,14 +148,15 @@ export async function httpRequest<T = any>(
         options,
       });
 
+      if (showLoader) {
+        loaderStore?.hideLoader();
+      }
+
       return { success: false, status: 401, message, data: [] };
     }
   }
 
-  // No establecer 'Content-Type' si el body es un FormData (archivo)
-  if (!isFile(body)) {
-    finalHeaders["Content-Type"] = "application/json";
-  }
+
 
   // Convertir queryParams si el endpoint es por query
   const queryString = queryParams
@@ -241,7 +268,7 @@ export async function httpRequest<T = any>(
     errorHandling(status, url);
   } finally {
     // ocultar loader en componente cliente 'use cliente'
-    if (isUseClient()) {
+    if (isUseClient() && showLoader) {
       if (loaderStore) {
         loaderStore.hideLoader();
       } else {

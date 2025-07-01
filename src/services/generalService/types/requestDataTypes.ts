@@ -15,6 +15,7 @@ export interface IRequestOptions {
   queryParams?: Record<string, string | number | boolean | (string | number | boolean)[]>;
   headers?: Record<string, string | number>;
   responseType?: IResponseType;
+  showLoader?: boolean;
 }
 
 /**
