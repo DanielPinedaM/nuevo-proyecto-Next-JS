@@ -10,7 +10,7 @@ interface ISkeletonCards {
 }
 
 export default function SkeletonCards({ length, gridCols, showReactIcon = true }: ISkeletonCards) {
-  const skeletonLength: number = isNumber(length) ? Number(length) : 8;
+  const skeletonLength: number = isNumber(length) && length && length >= 1 ? Number(length) : 8;
   const items: unknown[] = Array.from({ length: skeletonLength });
 
   return (
