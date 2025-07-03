@@ -5,7 +5,7 @@ interface ISkeletonTable {
 }
 
 export default function SkeletonTable({ length }: ISkeletonTable) {
-  const skeletonLength: number = isNumber(length) ? Number(length) : 6;
+  const skeletonLength: number = isNumber(length) && length && length >= 1 ? Number(length) : 6;
   const items: unknown[] = Array.from({ length: skeletonLength });
 
   return (
