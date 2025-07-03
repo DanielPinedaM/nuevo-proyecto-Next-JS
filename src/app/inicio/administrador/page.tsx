@@ -1,4 +1,4 @@
-import SkeletonCards from '@/components/loading/skeleton/skeletonCards';
+import SkeletonCards from '@/components/loading/skeleton/SkeletonCards';
 import { Suspense } from 'react';
 import FetchData from './fetch/fetchData';
 

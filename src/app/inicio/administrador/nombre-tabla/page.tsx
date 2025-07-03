@@ -1,5 +1,5 @@
 import InputTypeTextSearchByURLqueryString from "@/components/InputTypeTextSearchByURLqueryString";
-import SkeletonTable from "@/components/loading/skeleton/skeletonTable";
+import SkeletonTable from "@/components/loading/skeleton/SkeletonTable";
 import IParams from "@/types/interface/interface-params";
 import { Suspense } from "react";
 import ButtonsOpenDialogNombreTabla from "./dialog/buttonsOpenDialogNombreTabla";
