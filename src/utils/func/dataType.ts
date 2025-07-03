@@ -8,7 +8,7 @@
 /**
 admite cualquier string */
 export const isString = (variable: string | any): boolean => {
-  return typeof variable === "string" || variable instanceof String;
+  return typeof variable === 'string' || variable instanceof String;
 };
 
 /**
@@ -16,36 +16,69 @@ string q contiene numero,
 admite numero decimal, comas, numero entero, positivo y negativo.
 Ejemplo: "-1,2.1", "-2", "3" */
 export const isStringNumber = (variable: string | any): boolean => {
-  return typeof variable === "string" && /^(-?\d{0,}(\,|\.)?){0,}$/.test(variable.trim());
+  return typeof variable === 'string' && /^(-?\d{0,}(\,|\.)?){0,}$/.test(variable.trim());
 };
 
 /**
 true cuando el texto contiene cualquier tipo de letra */
 export const isLetter = (variable: string | any): boolean => {
-  return typeof variable === "string" && /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ\s]+$/.test(variable.trim());
+  return typeof variable === 'string' && /^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ\s]+$/.test(variable.trim());
 };
 
 /**
 solamente tipo NUMERO, NO admite NaN */
 export const isNumber = (variable: number | any): boolean => {
-  return typeof variable === "number" && Number.isNaN(variable) === false;
+  return typeof variable === 'number' && Number.isNaN(variable) === false;
 };
 
 /**
-Normalizar string
-Ejemplo:
-' COMunicaciÓN    ' devuelve  'comunicacion'
-[1, 2, 3]           devuelve   [1, 2, 3] */
-export const normalizeStr = (string: string | any): string | any => {
-  if (!(isString(string))) return string;
-  if (String(string).trim() === "") return "";
+* Normalizar string
+* Ejemplo:
+* ' COMunicaciÓN    ' devuelve  'comunicacion'
+* [1, 2, 3]           devuelve   [1, 2, 3]
+* 
+* @param {string|any} string — valor a normalizar. Si no es string o está vacío, se devuelve tal cual
+* @param {Object} [options] — opciones de normalización
+* @param {boolean} [options.clearSpecialCharacters] — true = BORRAR caracteres especiales,  false = CONSERVAR caracteres especiales
+* @param {boolean} [options.enyeWithN] — true = REEMPLAZAR "ñ" y "Ñ" por "n", false = CONSERVAR letra "ñ"
+* @param {boolean} [options.clearNumbers] — true = BORRAR numeros, false = CONSERVAR numeros
+* @returns {string|any} — la cadena normalizada o el valor original si no es string */
+export const normalizeStr = (
+  string: string | any,
+  options?: { clearSpecialCharacters?: boolean; enyeWithN?: boolean; clearNumbers?: boolean }
+): string | any => {
+  if (!isString(string)) return string;
+  if (String(string).trim() === '') return '';
 
-  return string.trim()                              // borrar espacio en blanco al principio y final
-                .toLowerCase()                      // convertir a minuscula
-                .normalize("NFD")
-                .replaceAll(/ñ/g, 'n')              // reemplazar ñ minúscula por n
-                .replaceAll(/[\u0300-\u036f]/g, "") // borrar acentos (tildes)
-                .replaceAll(/\s+/g, ' ')            // reemplazar múltiples espacios en blanco por un solo espacio en blanco
+     const {
+        clearSpecialCharacters = false,
+        enyeWithN = false,
+        clearNumbers = false,
+     } = options ?? {};
+
+     let newString: string = string.toLowerCase()                                    // convertir a minuscula
+                                   .normalize("NFD")                                 // hacer q funcionen las expresiones regulares
+                                   .replaceAll(/[\u0300-\u0302\u0304-\u036f]/g, "")  // eliminar acentos (todos menos U+0303)
+                                   .normalize("NFC")                                 // conservar la "ñ" "Ñ"
+                                   
+
+      if (enyeWithN) {
+        newString = newString.replaceAll(/ñ/g, 'n');                                 // reemplazar ñ minúscula por n
+      }
+
+      if (clearSpecialCharacters) {
+        newString = newString.replaceAll(/[^a-zA-Z0-9 ñÑ]/g, '');                    // borrar caracteres especiales
+      }
+
+      if (clearNumbers) {
+       newString = newString.replaceAll(/\d+/g, '');                                 // borrar todos los numeros 0123456789
+      }
+      
+      // esto TIENE q estar al final de la funcion
+      newString = newString.trim()                                                   // borrar espacio en blanco al principio y final
+                           .replaceAll(/\s+/g, ' ')                                  // reemplazar múltiples espacios en blanco '   ' por un solo espacio en blanco ' ';
+      
+      return newString;
 };
 
 /**
@@ -55,11 +88,11 @@ export const convertToNumber = (number: number | any): number | null => {
   if (isNumber(number)) return number as number;
 
   if (isStringNumber(number)) {
-    const removeCommas: string = number.trim().replaceAll(",", ".");
+    const removeCommas: string = number.trim().replaceAll(',', '.');
     return Number(removeCommas);
   }
 
-  if (isString(number) && String(number)?.trim() !== "") return number;
+  if (isString(number) && String(number)?.trim() !== '') return number;
 
   return null;
 };
@@ -71,7 +104,7 @@ SI es posible
 
 cuando NO es posible devuleve null */
 export const convertToStringAndLowerCase = (string: string | any): string | null | any => {
-  if (String(string).trim() === "" || !string) {
+  if (String(string).trim() === '' || !string) {
     return null;
   }
 
@@ -87,13 +120,14 @@ export const isBoolean = (variable: boolean | string | any): boolean => {
 
   if (
     // true
-    normalized === "true" ||
-    normalized === "1" ||
-    normalizeStr(variable) === "si" ||
+    normalized === 'true' ||
+    normalized === '1' ||
+    normalizeStr(variable) === 'si' ||
+    normalizeStr(variable) === 'yes' ||
     // false
-    normalized === "false" ||
-    normalized === "0" ||
-    normalizeStr(variable) === "no"
+    normalized === 'false' ||
+    normalized === '0' ||
+    normalizeStr(variable) === 'no'
   ) {
     return true;
   }
@@ -108,9 +142,14 @@ cuando NO es posible devuleve null */
 export const convertToBoolean = (variable: boolean | string | any): boolean | null => {
   const normalized: string = String(variable)?.trim()?.toLowerCase();
 
-  if (normalized === "true" || normalized === "1" || normalizeStr(variable) === "si" || normalizeStr(variable) === "yes") {
+  if (
+    normalized === 'true' ||
+    normalized === '1' ||
+    normalizeStr(variable) === 'si' ||
+    normalizeStr(variable) === 'yes'
+  ) {
     return true;
-  } else if (normalized === "false" || normalized === "0" || normalizeStr(variable) === "no") {
+  } else if (normalized === 'false' || normalized === '0' || normalizeStr(variable) === 'no') {
     return false;
   } else {
     return null;
@@ -120,7 +159,7 @@ export const convertToBoolean = (variable: boolean | string | any): boolean | nu
 /**
 saber si puedo o no convertir de string a array u objeto con JSON.parse() */
 export const isValidJSONparse = (string: string): boolean => {
-  if (typeof string !== "string") return false;
+  if (typeof string !== 'string') return false;
 
   try {
     JSON.parse(string);
@@ -133,10 +172,12 @@ export const isValidJSONparse = (string: string): boolean => {
 /**
 ¿se esta subiendo archivo(s)? */
 export function isFile(variable: Blob | any): boolean {
-  return variable instanceof FormData 
-         || variable instanceof Blob
-         || variable instanceof File
-         || variable instanceof ArrayBuffer
+  return (
+    variable instanceof FormData ||
+    variable instanceof Blob ||
+    variable instanceof File ||
+    variable instanceof ArrayBuffer
+  );
 }
 
 /**
@@ -146,7 +187,8 @@ longitud de un objeto literal
 -1   cuando NO es objeto literal */
 export const literalObjectLength = (literalObject: any): number => {
   if (isLiteralObject(literalObject)) {
-    const length: number = Object.keys(literalObject).length + Object.getOwnPropertySymbols(literalObject).length;
+    const length: number =
+      Object.keys(literalObject).length + Object.getOwnPropertySymbols(literalObject).length;
     return length;
   }
 
@@ -160,11 +202,11 @@ export const convertFlatObjectValues = (obj: Record<string, any>): Record<string
   return Object.entries(obj).reduce((newObject, [key, value]) => {
     const normalized: string = String(key)?.trim()?.toLowerCase();
 
-    if (normalized === "undefined") {
+    if (normalized === 'undefined') {
       newObject[key] = undefined;
-    } else if (normalized === "null") {
+    } else if (normalized === 'null') {
       newObject[key] = null;
-    } else if (Number.isNaN(key) || normalized === "nan") {
+    } else if (Number.isNaN(key) || normalized === 'nan') {
       newObject[key] = NaN;
     } else if (isNumber(value) || isStringNumber(value)) {
       newObject[key] = convertToNumber(value);
@@ -180,26 +222,23 @@ export const convertFlatObjectValues = (obj: Record<string, any>): Record<string
 
 /**
 ¿la variable es un objeto literal? */
-export const isLiteralObject = (literalObject: any): boolean => (
-        typeof literalObject === "object"
-        && literalObject !== null
-        && (
-        Object.getPrototypeOf(literalObject) === Object.prototype ||
-        Object.prototype.toString.call(literalObject) === '[object Object]'
-     )
-)
+export const isLiteralObject = (literalObject: any): boolean =>
+  typeof literalObject === 'object' &&
+  literalObject !== null &&
+  (Object.getPrototypeOf(literalObject) === Object.prototype ||
+    Object.prototype.toString.call(literalObject) === '[object Object]');
 
 /**
 convertir a JSON.stringify() SI ES POSIBLE */
 export const convertToStringify = (value: any | string): any | string => {
-    // solamente se puede hacer JSON.stringify() de un
-    // 1) array []
-    if (Array.isArray(value)) return JSON.stringify(value);
-  
-    // 2) objeto literal {}
-    if (isLiteralObject(value)) return JSON.stringify(value);
+  // solamente se puede hacer JSON.stringify() de un
+  // 1) array []
+  if (Array.isArray(value)) return JSON.stringify(value);
 
-    return value;
+  // 2) objeto literal {}
+  if (isLiteralObject(value)) return JSON.stringify(value);
+
+  return value;
 };
 
 /**
