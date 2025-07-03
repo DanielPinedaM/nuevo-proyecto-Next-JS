@@ -24,7 +24,7 @@ export default function infoNotification(message: string): void {
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-light-blue text-white p-4 rounded-xl">
       <FaInfoCircle  className="opacity-0 scale-50 animate-icon-enter text-2xl" />
-      <p>Aviso: {message.replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
+      <p>Aviso: {message.trim().replaceAll(/\s+/g, ' ').replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
     </section>,
     {
       duration: 4000,

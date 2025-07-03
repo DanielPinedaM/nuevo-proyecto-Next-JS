@@ -24,7 +24,7 @@ export default function successNotification(message: string): void {
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-green-500 text-white p-4 rounded-xl">
       <FaCheckCircle className="opacity-0 scale-50 animate-icon-enter text-2xl" />
-      <p>Exito: {message.replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
+      <p>Exito: {message.trim().replaceAll(/\s+/g, ' ').replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
     </section>,
     {
       duration: 4000,
