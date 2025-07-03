@@ -24,7 +24,7 @@ export default function errorNotification(message: string): void {
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-red-500 text-white p-4 rounded-xl">
       <FaTimesCircle className="opacity-0 scale-50 animate-icon-enter text-2xl" />
-      <p>Error: {message}</p>
+      <p>Error: {message.replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
     </section>,
     {
       duration: 4000,
