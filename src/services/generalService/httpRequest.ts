@@ -62,10 +62,8 @@ export async function httpRequest<T = any>(
   if (isUseClient() && !(window?.navigator?.onLine)) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
-    if (isUseClient()) {
-      errorNotification(message);
-    }
-
+    errorNotification(message);
+    
     errorLogs({
       message,
       method,
