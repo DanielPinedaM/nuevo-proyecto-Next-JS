@@ -137,12 +137,6 @@ export default function FormLogin() {
 
   return (
     <>
-      <InputSearchParams
-        label={'Buscar'}
-        placeholder={'Código, nombre...'}
-        keySearchParams={'proyecto'}
-      />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <div className='mb-2'>
           <label>
