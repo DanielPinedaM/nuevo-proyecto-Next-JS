@@ -2,6 +2,7 @@
 'use client';
 import errorNotification from '@/components/dialog/notification/errorNotification';
 import GeneralErrorMessage from '@/components/GeneralErrorMessage';
+import InputSearchParams from '@/components/InputSearchParams';
 import { login } from '@/services/auth/auth';
 import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
 import { cookieOptionsInLogin } from '@/types/constant/const-cookie-storage';
@@ -18,7 +19,6 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
 
 export default function FormLogin() {
   const { showLoaderNavigation } = useNavigationLoaderStore();
@@ -54,17 +54,26 @@ export default function FormLogin() {
 
   const iterateUserData = (data: any): void => {
     if (!data) {
-      console.error('❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n', data);
+      console.error(
+        '❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n',
+        data
+      );
       return;
     }
 
-    if (!(isLiteralObject(data))) {
-      console.error('❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n', data);
+    if (!isLiteralObject(data)) {
+      console.error(
+        '❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n',
+        data
+      );
       return;
     }
 
-     if (literalObjectLength(data) <= 0) {
-      console.error('❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n', data);
+    if (literalObjectLength(data) <= 0) {
+      console.error(
+        '❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n',
+        data
+      );
       return;
     }
 
@@ -72,14 +81,23 @@ export default function FormLogin() {
     const maxAge: number = data?.expiresIn;
 
     if (!maxAge) {
-       console.error('❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n', maxAge);
+      console.error(
+        '❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n',
+        maxAge
+      );
       return;
     }
 
     Object.entries(data).forEach((entry) => {
       const [key, value] = entry;
       if (!key || !value) {
-        console.error('❌ error, NO se puede setear las cookies porque una key ó value es falsy', '\nkey ', key, '\nvalue ', value);
+        console.error(
+          '❌ error, NO se puede setear las cookies porque una key ó value es falsy',
+          '\nkey ',
+          key,
+          '\nvalue ',
+          value
+        );
         return;
       }
 
@@ -118,6 +136,13 @@ export default function FormLogin() {
   };
 
   return (
+    <>
+      <InputSearchParams
+        label={'Buscar'}
+        placeholder={'Código, nombre...'}
+        keySearchParams={'proyecto'}
+      />
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <div className='mb-2'>
           <label>
@@ -189,5 +214,6 @@ export default function FormLogin() {
           </button>
         </div>
       </form>
+    </>
   );
 }
