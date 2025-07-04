@@ -19,7 +19,7 @@ export const useQueryParams = () => {
   /**
    * Custom hook para setear (actualizar) query params
    * En vez de usar params.set(), es mejor usar este custom hook setQueryParams()
-   * 
+   *
    * @param {Object} [paramsObj] — objeto literal con query params a actualizar
    * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params
    * @param {boolean} [options.showLoader] — true = MOSTRAR icono de cargando, false = OCULTAR icono de cargando */
@@ -30,13 +30,15 @@ export const useQueryParams = () => {
       const { replaceAll = false, showLoader = true } = options ?? {};
 
       // url ANTES de actualizar query params
-      const oldUrl: string = searchParams.toString()
-        ? `${pathname}?${searchParams.toString()}`
+      const currentParams = new URLSearchParams(window.location.search);
+
+      const oldUrl: string = currentParams.toString()
+        ? `${pathname}?${currentParams.toString()}`
         : pathname;
 
       const params: URLSearchParams = replaceAll
         ? new URLSearchParams() // se parte de cero, sin query actual
-        : new URLSearchParams(searchParams.toString()); // se parte del query actual
+        : new URLSearchParams(currentParams.toString()); // se parte del query actual
 
       Object.entries(paramsObj).forEach(([key, value]) => {
         params.set(String(key), forceConvertToString(value));
@@ -46,9 +48,6 @@ export const useQueryParams = () => {
       const newUrl: string = `${pathname}?${params.toString()}`;
 
       // NO actualizar la URL cuando los query params no han cambiado
-      console.log("oldUrl ", oldUrl)
-      console.log("newUrl ", newUrl)
-      //console.log("window.location.search ", window.location.search)
       if (oldUrl !== newUrl) {
         if (showLoader) {
           showLoaderNavigation();
