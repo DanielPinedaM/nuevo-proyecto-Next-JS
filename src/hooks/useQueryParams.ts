@@ -19,6 +19,7 @@ export const useQueryParams = () => {
   /**
    * Custom hook para setear (actualizar) query params
    * En vez de usar params.set(), es mejor usar este custom hook setQueryParams()
+   * http://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams
    *
    * @param {Object} [paramsObj] — objeto literal con query params a actualizar
    * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params
@@ -29,9 +30,10 @@ export const useQueryParams = () => {
 
       const { replaceAll = false, showLoader = true } = options ?? {};
 
-      // url ANTES de actualizar query params
+      // uso window.location.search porque useSearchParams() NO actualiza la variable oldUrl con el ultimo query params
       const currentParams = new URLSearchParams(window.location.search);
 
+      // url ANTES de actualizar query params
       const oldUrl: string = currentParams.toString()
         ? `${pathname}?${currentParams.toString()}`
         : pathname;
