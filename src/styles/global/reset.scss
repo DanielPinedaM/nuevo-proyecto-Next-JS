@@ -21,19 +21,24 @@
 * forzar tema blanco en navegadores configurados con tema oscuro *
 ****************************************************************** */
 
-* {
-  color-scheme: only light !important;
+html, body {
+  background-color: branding.$white-smoke;
 }
 
-:root {
+*, :root, html, body {
   color-scheme: only light !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  html,
-  body {
-    background-color: variable.$white-smoke;
-  }
+   html, body {
+      background-color: branding.$white-smoke;
+   }
+}
+
+@media (prefers-color-scheme: light) {
+   html, body {
+      background-color: branding.$white-smoke;
+   }
 }
 
 /*
@@ -61,7 +66,6 @@ body {
 
 html,
 body {
-  background-color: variable.$white-smoke;
   line-height: 1.1;
   font-family: variable.$inter !important;
 
