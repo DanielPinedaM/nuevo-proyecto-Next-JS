@@ -31,7 +31,7 @@ export const useQueryParams = () => {
       const { replaceAll = false, showLoader = true } = options ?? {};
 
       // uso window.location.search porque useSearchParams() NO actualiza la variable oldUrl con el ultimo query params
-      const currentParams = new URLSearchParams(window.location.search);
+      const currentParams: URLSearchParams = new URLSearchParams(window.location.search);
 
       // url ANTES de actualizar query params
       const oldUrl: string = currentParams.toString()

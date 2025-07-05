@@ -57,8 +57,15 @@ export default function InputSearchParams({
           { replaceAll: true, showLoader: false }
         );
       } else {
-        // limpiar la URL cuando el input está vacío
-        router.push(pathname);
+        // cuando el input está vacío en la URL borrar el query params keySearchParams para buscar
+        const params: URLSearchParams = new URLSearchParams(window.location.search);
+
+        params.delete(keySearchParams);
+
+        const queryString: string = params.toString();
+        const newUrl: string = queryString ? `${pathname}?${queryString}` : pathname;
+
+        router.push(newUrl);
       }
     }, 300),
     []
