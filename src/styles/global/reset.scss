@@ -22,7 +22,7 @@
 ****************************************************************** */
 
 html, body {
-  background-color: branding.$white-smoke;
+  background-color: variable.$white-smoke;
 }
 
 *, :root, html, body {
@@ -31,13 +31,13 @@ html, body {
 
 @media (prefers-color-scheme: dark) {
    html, body {
-      background-color: branding.$white-smoke;
+      background-color: variable.$white-smoke;
    }
 }
 
 @media (prefers-color-scheme: light) {
    html, body {
-      background-color: branding.$white-smoke;
+      background-color: variable.$white-smoke;
    }
 }
 
