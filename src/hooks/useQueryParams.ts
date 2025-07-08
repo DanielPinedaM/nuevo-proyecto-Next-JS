@@ -1,8 +1,9 @@
-"use client";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useCallback } from "react";
-import { useNavigationLoaderStore } from "@/config/stores/loaderStore";
-import { forceConvertToString, literalObjectLength } from "@/utils/func/data-type.utils";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useCallback } from 'react';
+import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
+import { forceConvertToString, literalObjectLength } from '@/utils/func/dataType';
 
 interface IOptionsSetQueryParams {
   replaceAll?: boolean;
@@ -36,10 +37,12 @@ export const useQueryParams = () => {
       } = options ?? {};
 
       // uso window.location.search porque useSearchParams() NO actualiza la variable oldUrl con el ultimo query params
-      const currentParams = new URLSearchParams(window.location.search);
+      const currentParams: URLSearchParams = new URLSearchParams(window.location.search);
 
       // url ANTES de actualizar query params
-      const oldUrl: string = currentParams.toString() ? `${pathname}?${currentParams.toString()}` : pathname;
+      const oldUrl: string = currentParams.toString() 
+                                ? `${pathname}?${currentParams.toString()}` 
+                                   : pathname;
 
       const params: URLSearchParams = replaceAll
         ? new URLSearchParams() // se parte de cero, sin query actual
