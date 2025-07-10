@@ -6,7 +6,7 @@
     "start:dev": "env-cmd -f ./environments/.env.development next dev --turbopack -p 4100",
     "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack -p 4100",
     "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack -p 4100",
-    "build": "next build ",
+    "build": "next build",
     "build:test": "env-cmd -f ./environments/.env.test next build",
     "build:prod": "env-cmd -f ./environments/.env.production next build",
     "start": "next start",

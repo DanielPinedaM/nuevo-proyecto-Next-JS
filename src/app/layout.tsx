@@ -1,12 +1,12 @@
+import '../styles/index.scss';
+
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
-import '../styles/index.scss';
 import LoaderInApiRequest from '@/components/loading/spinner/LoaderInApiRequest';
 import { Suspense } from 'react';
 import NavigationLoader from '@/components/loading/spinner/navigation-spinner/NavigationLoader';
-import { RiLoader4Fill } from 'react-icons/ri';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 
   other: {
     // forzar tema claro en navegadores configurados con tema oscuro
-    "color-scheme": "only light",
-  }
+    'color-scheme': 'only light',
+  },
 };
 
 export default function RootLayout({

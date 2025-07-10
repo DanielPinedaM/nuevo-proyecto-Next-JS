@@ -1,6 +1,8 @@
-"use client";
-import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
-import { usePathname, useRouter } from "next/navigation";
+'use client';
+import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
+import clsx from 'clsx';
+import { usePathname, useRouter } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
 interface ICustomLink {
   onClick?: () => void;
@@ -34,8 +36,14 @@ export default function CustomLink({ onClick, href, className, children }: ICust
   };
 
   return (
-      <button onClick={handleClick} className={className ?? ""}>
-        {children}
-      </button>
+    <button
+      onClick={handleClick}
+      className={twMerge(
+        clsx(className),
+        'disabled:cursor-not-allowed enabled:cursor-pointer'
+      )}
+    >
+      {children}
+    </button>
   );
 }

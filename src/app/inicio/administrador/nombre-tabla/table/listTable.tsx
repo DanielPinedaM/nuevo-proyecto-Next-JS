@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
-import StatusReactIcon from "@/components/reactIcons/StatusIcon";
+import StatusReactIcon from "@/components/StatusIcon";
 import { formatDate } from "@/utils/func/luxon";
 import { IResponse } from "@/services/generalService/types/requestDataTypes";
 import errorNotification from "@/components/dialog/notification/errorNotification";

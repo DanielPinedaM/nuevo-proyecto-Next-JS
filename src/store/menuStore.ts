@@ -1,0 +1,15 @@
+"use client";
+import { create } from 'zustand';
+
+interface IMenuState {
+  showMenu: boolean;
+  handleMenu: () => void;
+}
+
+export const useMenuStore = create<IMenuState>((set) => ({
+  showMenu: false,
+  handleMenu: () =>
+    set((state) => ({
+      showMenu: !state.showMenu,
+    })),
+}));

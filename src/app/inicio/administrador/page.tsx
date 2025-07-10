@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
       <h1>
-        <a href='https://www.youtube.com/watch?v=_SPoSMmN3ZU&t=3701s' target='_blank'>
+        <a href='https://www.youtube.com/watch?v=_SPoSMmN3ZU&t=3701s' target='_blank' className='text-nowrap'>
           Ejemplo: la data se carga en componente servidor con fetch SSR y hay un componente cliente
           q tiene un alert
         </a>
