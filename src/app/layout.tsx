@@ -6,6 +6,7 @@ import '../styles/index.scss';
 import LoaderInApiRequest from '@/components/loading/spinner/LoaderInApiRequest';
 import { Suspense } from 'react';
 import NavigationLoader from '@/components/loading/spinner/navigation-spinner/NavigationLoader';
+import { RiLoader4Fill } from 'react-icons/ri';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -34,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='es-ES'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LoaderInApiRequest />
         <Suspense fallback={null}>

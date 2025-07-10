@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { httpRequest } from "@/services/generalService/httpRequest";
 import { IResponse } from "@/services/generalService/types/requestDataTypes";
-import {
-  IFormCreateTable,
-} from "@/types/interface/administrador/tablas/DTO/interface-nombre-tabla";
+import { IFormCreateTable } from "@/types/interface/interface-nombre-tabla";
 
 /**
 listar y buscar data de tabla llamada "nombre-tabla" */

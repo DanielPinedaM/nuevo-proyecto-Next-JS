@@ -16,6 +16,7 @@ export interface IRequestOptions {
   headers?: Record<string, string | number>;
   responseType?: IResponseType;
   showLoader?: boolean;
+  validateResponse?: boolean;
 }
 
 /**

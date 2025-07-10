@@ -14,7 +14,7 @@ export default function Page() {
       </h1>
 
       {/*  <FetchData /> es componente servidor */}
-      <Suspense fallback={<SkeletonCards/>}>
+      <Suspense fallback={<SkeletonCards />}>
         <FetchData />
       </Suspense>
     </>

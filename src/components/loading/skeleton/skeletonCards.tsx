@@ -31,7 +31,7 @@ export default function SkeletonCards({ length, gridCols, showReactIcon = true }
           className='flex flex-col gap-4 p-4 border border-gray-400 rounded-md bg-gray-300'
         >
           <div className='animate-pulse flex justify-center items-center w-full h-20 bg-gray-400 rounded'>
-            {showReactIcon && <FaImage className='block w-full h-full' />}
+            {showReactIcon && <FaImage className='animate-pulse block w-1/5 h-auto object-contain' />}
           </div>
 
           <div className='animate-pulse w-3/4 h-4 bg-gray-400 rounded' />
