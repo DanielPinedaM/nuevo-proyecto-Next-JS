@@ -44,7 +44,9 @@ export default function RootLayout({
 
         <Toaster position='top-right' reverseOrder={true} />
 
-        <PrimeReactProvider>{children}</PrimeReactProvider>
+        <div className='mx-auto max-w-[1920px]'>
+          <PrimeReactProvider>{children}</PrimeReactProvider>
+        </div>
       </body>
     </html>
   );

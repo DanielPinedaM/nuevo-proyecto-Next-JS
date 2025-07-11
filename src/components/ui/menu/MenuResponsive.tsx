@@ -22,14 +22,44 @@ interface IUrl {
   url: string;
 }
 
+const apiResponse: IUrl[] = [
+  {
+    id: 1,
+    url: '/inicio/administrador',
+    text: 'Administrador',
+  },
+  {
+    id: 2,
+    url: '/inicio/usuario',
+    text: 'Usuario',
+  },
+];
+
 export default function MenuResponsive() {
   const pathname = usePathname();
 
-  const { showMenu } = useMenuStore();
+  const { showMenu, hiddenMenu } = useMenuStore();
 
   const [url, setUrl] = useState<IUrl[] | undefined>(undefined);
 
+  /*
+  Para q menu funcione
+  1) borrar el siguiente useEffect
+  2) borrar la constante apiResponse
+  3) descomentar el codigo q esta comentado
+  4) cambiar el parametro URL de la funcion listUrl q esta en src/services/auth.ts por la URL q tiene en endpoint para listar menu
+  5) la API tiene q responder asi 
+  interface IResponse {
+    success: boolean;
+    status: number;
+    message: string;
+    data: IUrl[];
+  } */
   useEffect(() => {
+    setUrl(apiResponse);
+  }, []);
+
+  /* useEffect(() => {
     if (sessionStorageSearch('menu')) {
       setUrl(sessionStorageListValue('menu'));
     } else {
@@ -61,34 +91,37 @@ export default function MenuResponsive() {
       console.error('❌ error en la llamada al endpoint q lista las opciones del menu');
       errorNotification('Al mostrar el menu');
     }
-  };
-
-  if (!showMenu) return null;
+  }; */
 
   const RenderMenu = () => (
-    <menu className='h-full gap-y-1 flex flex-col'>
+    <>
       {url?.map((item: IUrl) => (
         <li key={item.id} className='transition duration-300 hover:text-blue-ocean'>
           <CustomLink
             href={item.url}
+            onClick={hiddenMenu}
             className={twMerge(
               clsx({
                 'bg-amber-300 text-amber-800 font-semibold': pathname.includes(item.url),
               }),
-              'border-2 border-blue-600 rounded-md'
+              'border-2 border-blue-600 rounded-md p-2'
             )}
           >
             {titleCase(item.text)}
           </CustomLink>
         </li>
       ))}
-    </menu>
+    </>
   );
 
   return (
     <>
-      {url === undefined && <SkeletonMenu />}
-      {url && url?.length > 0 && <RenderMenu />}
+      {showMenu && (
+        <menu className='h-full gap-y-1 flex flex-col py-4 px-2 fixed left-0 top-0 xl:static bg-blue-600/50 rounded-tr-2xl rounded-tb-2xl'>
+          {url === undefined && <SkeletonMenu />}
+          {url && url?.length > 0 && <RenderMenu />}
+        </menu>
+      )}
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='max-w-[1920px] mx-auto flex h-dvh'>
+    <div className='flex h-dvh'>
       <MenuResponsive />
 
       <div className='flex flex-col flex-1 min-w-0'>

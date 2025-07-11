@@ -23,13 +23,13 @@ export default function CustomLink({ onClick, href, className, children }: ICust
   const router = useRouter();
 
   const handleClick = (): void => {
-    onClick?.();
-
     // NO mostrar loader cuando se da click al mismo enlace del menu
     if (pathname === href) {
       hideLoaderNavigation();
       return;
     }
+
+    if (onClick) onClick();
 
     showLoaderNavigation();
     router.push(href);
@@ -38,10 +38,7 @@ export default function CustomLink({ onClick, href, className, children }: ICust
   return (
     <button
       onClick={handleClick}
-      className={twMerge(
-        clsx(className),
-        'disabled:cursor-not-allowed enabled:cursor-pointer'
-      )}
+      className={twMerge(clsx(className), 'disabled:cursor-not-allowed enabled:cursor-pointer')}
     >
       {children}
     </button>

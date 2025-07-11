@@ -37,7 +37,7 @@ interface IData {
 }
 
 /**
-asi es como responde la api de NestJS */
+asi es como responde la API */
 export interface IResponse {
   success: boolean;
   status: number;
