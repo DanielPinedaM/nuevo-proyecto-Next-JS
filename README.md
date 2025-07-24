@@ -1,13 +1,13 @@
-# Next JS 15 + React 19
+# Next JS 15 + React 19 + Tailwind 4
 
 #### Instalar paquetes
 
 ```console
-nvm install 22.12.0
+nvm install 22.17.1
 ```
 
 ```console
-nvm use 22.12.0
+nvm use 22.17.1
 ```
 
 ```console
@@ -17,7 +17,7 @@ npm i
 #### Ejecutar proyecto
 
 ```console
-nvm use 22.12.0
+nvm use 22.17.1
 ```
 
 comando | apunta a... | ruta archivo
@@ -29,7 +29,7 @@ node --run start:prod | producción | environments/.env.production
 #### Generar build (dist) para desplegar
 
 ```console
-nvm use 22.12.0
+nvm use 22.17.1
 ```
 
 comando | apunta a... | ruta archivo
