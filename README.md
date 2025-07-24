@@ -1,4 +1,4 @@
-# Next JS 15 + React 19 + Tailwind 4
+# Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
 
 #### Instalar paquetes
 
