@@ -146,3 +146,26 @@ export const copyText = async (text: string): Promise<void> => {
     console.error(errorMessage, '\n', e);
   }
 };
+
+/**
+obtener elemento de un array de forma aleatoria */
+export const getRandomItem = <T>(array: T[]): T | null => {
+  if (!Array.isArray(array)) {
+    console.error("❌ error - getRandomItem - se requiere q sea tipo \narray ", array, "\n¿es array? ", Array.isArray(array));
+    return null;
+  }
+
+  const max: number = array.length;
+
+  if (max === 0) {
+    console.error("❌ error - getRandomItem - el array ", array, "no puede estar vacío \nmax", max);
+    return null;
+  }
+
+  const randomArray: Uint32Array = new Uint32Array(1);
+  crypto.getRandomValues(randomArray);
+
+  const index: number = randomArray[0] % max;
+
+  return array[index];
+};

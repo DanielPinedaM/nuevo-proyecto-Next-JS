@@ -25,7 +25,7 @@ interface IChartOptions {
 
 export const chartTypes: string[] = ["bar", "line", "polarArea", "radar", "pie"];
 
-interface IChartComponentProps {
+interface IChartProps {
   type?: "bar" | "line" | "polarArea" | "radar" | "pie";
   className?: string;
   data: IChartData;
@@ -34,13 +34,13 @@ interface IChartComponentProps {
 }
 
 // de forma dinamica, muestra grafica de Prime React
-export default function ChartComponent({
+export default function Chart({
   type = "bar",
   className = "w-full md:w-15rem",
   data,
   options,
   title = ""
-}: IChartComponentProps) {
+}: IChartProps) {
   return (
     <>
       {data ? (
