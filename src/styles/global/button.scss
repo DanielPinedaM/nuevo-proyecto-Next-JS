@@ -61,13 +61,29 @@ button {
       @extend %base-btn-disabled;
     }
 
-    &:hover {
-      background-color: variable.$blue-ocean;
-      font-weight: variable.$font-weight-button;
+    // dispositivos con mouse
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: variable.$blue-ocean;
+        font-weight: variable.$font-weight-button;
 
-      svg,
-      span {
-        color: white;
+        svg,
+        span {
+          color: white;
+        }
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        background-color: variable.$blue-ocean;
+        font-weight: variable.$font-weight-button;
+
+        svg,
+        span {
+          color: white;
+        }
       }
     }
   }
@@ -87,9 +103,20 @@ button {
       @extend %base-btn-disabled;
     }
 
-    &:hover {
-      background-color: variable.$blue-deep;
-      font-weight: variable.$font-weight-button;
+    // dispositivos con mouse
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: variable.$blue-deep;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        background-color: variable.$blue-deep;
+        font-weight: variable.$font-weight-button;
+      }
     }
   }
 
@@ -108,10 +135,22 @@ button {
       @extend %base-btn-disabled;
     }
 
-    &:hover {
-      color: white;
-      background-color: variable.$blue-abys;
-      font-weight: variable.$font-weight-button;
+    // dispositivos con mouse
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: white;
+        background-color: variable.$blue-abys;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        color: white;
+        background-color: variable.$blue-abys;
+        font-weight: variable.$font-weight-button;
+      }
     }
   }
 }
