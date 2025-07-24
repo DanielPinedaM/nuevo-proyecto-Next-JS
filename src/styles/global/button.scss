@@ -26,7 +26,48 @@
 
 button {
   // boton q contiene icono
-  &.button-with-icon {
+  &.button-icon {
+    @extend %flex-full-center;
+
+    width: fit-content;
+    height: fit-content;
+    column-gap: 0.3125rem;
+    padding: 0.4375rem;
+    border-radius: 0.5rem;
+    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+
+    svg {
+      flex: none;
+      font-size: 0.9375rem;
+      transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+      color: variable.$blue-midnight;
+    }
+
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    // dispositivos con mouse
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: variable.$blue-deep;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        background-color: variable.$blue-deep;
+      }
+    }
+  }
+
+  // boton q contiene icono
+  &.button-icon-and-text {
     @extend %flex-full-center;
 
     column-gap: 5px;

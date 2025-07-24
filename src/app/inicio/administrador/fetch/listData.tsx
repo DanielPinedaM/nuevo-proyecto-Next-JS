@@ -21,7 +21,7 @@ export default function ListData({ post }) {
       </p>
 
       <button
-        className='button-with-icon'
+        className='button-icon-and-text'
         onClick={() => onClickViewAlert(userId)}
       >
         <GrView />

@@ -45,7 +45,7 @@ export default function ButtonsOpenDialogNombreTabla() {
     <div className="flex gap-x-2">
       {/* guardar nueva fila en la tabla */}
       <button
-        className="button-with-icon"
+        className="button-icon-and-text"
         onClick={() => onClickOpenDialog("newTableDialog")}
       >
         <IoAdd />
