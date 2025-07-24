@@ -1,5 +1,5 @@
 "use client";
-import { listFormat } from "@/utils/func/general";
+import { listFormat } from "@/utils/func/general.utils";
 import dynamic from "next/dynamic";
 const MdOutlineFileUpload = dynamic(() =>
   import("react-icons/md").then((mod) => mod.MdOutlineFileUpload)

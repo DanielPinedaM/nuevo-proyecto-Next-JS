@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IResponse } from "@/services/generalService/types/requestDataTypes"
+import { IResponse } from "@/services/generalService/types/request-data.types"
 import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
-import { decodeTokenInServer } from "@/services/auth/auth";
+import { decodeTokenInServer } from "@/services/auth/auth.services";
 import { constPath } from "@/models/constants/path.constants";
 
 export async function middleware(request: NextRequest) {

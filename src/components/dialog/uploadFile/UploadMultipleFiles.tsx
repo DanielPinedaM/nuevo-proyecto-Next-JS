@@ -9,13 +9,13 @@ import ListFiles from "@/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/components/dialog/uploadFile/textAndButtons/uploadFile";
 import { globalTailwindStyle } from "@/models/constants/layout.constants";
 import { IUploadFile } from "@/models/interfaces/upload-file.interfaces";
-import { IResponse } from "@/services/generalService/types/requestDataTypes";
+import { IResponse } from "@/services/generalService/types/request-data.types";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,
   uploadOneOrMoreFilesWithoutId,
-} from "@/services/uploadFile";
-import { validateId, validateMultipleFiles } from "@/utils/func/file/fileValidations";
+} from "@/services/upload-file.service";
+import { validateId, validateMultipleFiles } from "@/utils/func/file/fileValidations.utils";
 import { clsx } from "clsx";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,7 @@
 import { FaImage } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
-import { isNumber, isString } from '@/utils/func/dataType';
+import { isNumber, isString } from '@/utils/func/dataType.utils';
 
 interface ISkeletonCards {
   length?: number;

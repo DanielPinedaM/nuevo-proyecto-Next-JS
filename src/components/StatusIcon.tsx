@@ -1,4 +1,4 @@
-import { convertToBoolean } from "@/utils/func/dataType";
+import { convertToBoolean } from "@/utils/func/dataType.utils";
 import dynamic from "next/dynamic";
 const IoFaCheckCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaCheckCircle));
 const FaTimesCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTimesCircle));

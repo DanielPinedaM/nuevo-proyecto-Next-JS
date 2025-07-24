@@ -7,9 +7,9 @@ import {
   IObjectLogs,
   IResponse,
   IValidateApiResponse,
-} from '@/services/generalService/types/requestDataTypes';
-import { isFile, literalObjectLength } from '@/utils/func/dataType';
-import { isUseClient } from '@/utils/func/general';
+} from '@/services/generalService/types/request-data.types';
+import { isFile, isString, literalObjectLength } from '@/utils/func/dataType.utils';
+import { isUseClient } from '@/utils/func/general.utils';
 import { getCookie } from 'cookies-next';
 import { redirect } from 'next/navigation';
 
@@ -308,12 +308,14 @@ export function validateApiResponse({
   };
 
   // retorna el archivo o texto plano recibido del backend
-  if (isFile(result) 
-      || responseType === 'text'
-      || responseType === 'blob'
-      || responseType === 'arrayBuffer'
-      || responseType === 'formData'
-     ) return result;
+  if (
+    isFile(result) ||
+    responseType === 'text' ||
+    responseType === 'blob' ||
+    responseType === 'arrayBuffer' ||
+    responseType === 'formData'
+  )
+    return result;
 
   // a partir de aqui la respuesta de la api tiene q ser un responseType === "json"
   // validar q exista la respuesta de la API del backend
@@ -346,4 +348,23 @@ export function validateApiResponse({
     message: searchMessage,
     data: searchData,
   };
+}
+
+/**
+validar env en los q por defecto NO se incluye el token */
+export function defaultSecurityEndpoint(url: string): boolean {
+  // aqui agregar nuevos env a los q NO se les envia el token al hacer peticion http
+  const unprotectedURLs = [process.env.NEXT_PUBLIC_AUTH_LOGIN] as string[];
+
+  for (const item of unprotectedURLs) {
+    if (!isString(item)) {
+      console.error(
+        `❌ ERROR CRÍTICO\n verifica q el env ${item} este agregado a las variables de entorno \n unprotectedURLs`,
+        unprotectedURLs
+      );
+      return false;
+    }
+  }
+
+  return !unprotectedURLs.some((item: string) => url === item);
 }

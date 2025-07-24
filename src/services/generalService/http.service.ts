@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isUseClient } from '@/utils/func/general';
-import { forceConvertToString, isFile, isString, literalObjectLength } from '@/utils/func/dataType';
+import { isUseClient } from '@/utils/func/general.utils';
+import { forceConvertToString, isFile, isString, literalObjectLength } from '@/utils/func/dataType.utils';
 import {
+  defaultSecurityEndpoint,
   errorHandling,
   errorLogs,
   getToken,
   successLogs,
   validateApiResponse,
-} from '@/services/generalService/func/requestFunctions';
+} from '@/services/generalService/utils/request-functions.utils';
 import {
   IRequestOptions,
   IResponse,
   Method,
-} from '@/services/generalService/types/requestDataTypes';
+} from '@/services/generalService/types/request-data.types';
 import { ILoaderState } from '@/store/loader/loaderStore';
 import errorNotification from '@/components/dialog/notification/errorNotification';
 
@@ -40,6 +41,7 @@ export async function httpRequest<T = any>(
 
   // validar URL q llama al endpoint
   if (
+    !url ||
     !isString(url) ||
     String(url).trim() === '' ||
     String(url).includes('undefined') ||
@@ -82,8 +84,7 @@ export async function httpRequest<T = any>(
 
   const {
     // enviar token en TODOS los endpoint, EXCEPTO al iniciar sesion
-    isASecurityEndpoint = url !== process.env.NEXT_PUBLIC_AUTH_LOGIN,
-
+    isASecurityEndpoint = defaultSecurityEndpoint(url),
     body,
     queryParams,
     headers = {},

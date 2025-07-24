@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { saveAs } from 'file-saver';
-import { currentDateAndTime } from '@/utils/func/luxon';
+import { currentDateAndTime } from '@/utils/func/luxon.utils';
 import errorNotification from '@/components/dialog/notification/errorNotification';
-import { isUseClient, titleCase } from '@/utils/func/general';
+import { isUseClient, titleCase } from '@/utils/func/general.utils';
 import successNotification from '@/components/dialog/notification/successNotification';
-import { IResponse } from '@/services/generalService/types/requestDataTypes';
+import { IResponse } from '@/services/generalService/types/request-data.types';
 import * as ExcelJS from 'exceljs';
 import { ILoaderState } from '@/store/loader/loaderStore';
 

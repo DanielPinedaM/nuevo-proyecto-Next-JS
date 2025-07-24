@@ -8,7 +8,7 @@ import { constIsStandardGEL, constIsStandardMSPS } from "@/models/constants/nomb
 import { constRegex } from "@/models/constants/regex.constants";
 import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
 import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
-import { createTable } from "@/services/table-name";
+import { createTable } from "@/services/table-name.service";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { Dialog } from "primereact/dialog";

@@ -2,8 +2,8 @@
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
 const FaTimesCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTimesCircle));
-import { isUseClient } from '@/utils/func/general';
-import { isString } from "@/utils/func/dataType";
+import { isUseClient } from '@/utils/func/general.utils';
+import { isString } from "@/utils/func/dataType.utils";
 
 export default function errorNotification(message: string): void {
   if (!isUseClient()) {

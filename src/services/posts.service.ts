@@ -1,4 +1,4 @@
-import { httpRequest } from './generalService/httpRequest';
+import { httpRequest } from './generalService/http.service';
 
 export async function loadPost() {
   const response = await httpRequest(

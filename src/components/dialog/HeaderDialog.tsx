@@ -1,5 +1,5 @@
 import { ITitles } from '@/models/interfaces/prime-react.interfaces';
-import { titleCase } from '@/utils/func/general';
+import { titleCase } from '@/utils/func/general.utils';
 
 /**
 titulo <h1> y sub-titulo <h2> de TODAS las ventanas modales */

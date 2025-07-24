@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
-import { httpRequest } from "@/services/generalService/httpRequest";
-import { IResponse } from "@/services/generalService/types/requestDataTypes";
+import { httpRequest } from "@/services/generalService/http.service";
+import { IResponse } from "@/services/generalService/types/request-data.types";
 
 
 /**

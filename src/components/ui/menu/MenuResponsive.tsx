@@ -2,15 +2,15 @@
 import errorNotification from '@/components/dialog/notification/errorNotification';
 import SkeletonMenu from '@/components/loading/skeleton/SkeletonMenu';
 import CustomLink from '@/components/loading/spinner/navigation-spinner/CustomLinkInMenu';
-import { listUrl } from '@/services/auth/auth';
+import { listUrl } from '@/services/auth/auth.services';
 import { useMenuStore } from '@/store/menuStore';
-import { titleCase } from '@/utils/func/general';
+import { titleCase } from '@/utils/func/general.utils';
 import {
   sessionStorageDeleteSpecific,
   sessionStorageListValue,
   sessionStorageSaveAndUpdate,
   sessionStorageSearch,
-} from '@/utils/func/sessionStorage';
+} from '@/utils/func/sessionStorage.utils';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';

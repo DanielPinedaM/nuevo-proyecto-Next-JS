@@ -1,4 +1,4 @@
-import { isNumber } from '@/utils/func/dataType';
+import { isNumber } from '@/utils/func/dataType.utils';
 
 interface ISkeletonMenu {
   length?: number;

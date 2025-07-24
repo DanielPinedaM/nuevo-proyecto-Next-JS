@@ -1,11 +1,14 @@
 import { Suspense } from 'react';
 import FetchData from './fetch/fetchData';
 import SkeletonCards from '@/components/loading/skeleton/skeletonCards';
+import SkeletonTable from '@/components/loading/skeleton/skeletonTable';
 
 /* Page() crea la ruta  http://localhost:3000/fetch-ssr */
 export default function Page() {
   return (
     <>
+    
+      <SkeletonTable/>
       <h1>
         <a
           href='https://www.youtube.com/watch?v=_SPoSMmN3ZU&t=3701s'
@@ -21,6 +24,7 @@ export default function Page() {
       <Suspense fallback={<SkeletonCards />}>
         <FetchData />
       </Suspense>
+
     </>
   );
 }

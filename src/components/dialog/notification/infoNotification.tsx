@@ -1,6 +1,6 @@
 "use client";
-import { isString } from "@/utils/func/dataType";
-import { isUseClient } from "@/utils/func/general";
+import { isString } from "@/utils/func/dataType.utils";
+import { isUseClient } from "@/utils/func/general.utils";
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
 const FaInfoCircle  = dynamic(() => import("react-icons/fa").then((mod) => mod.FaInfoCircle ));

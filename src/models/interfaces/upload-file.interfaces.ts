@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Method } from "@/services/generalService/types/requestDataTypes";
+import { Method } from "@/services/generalService/types/request-data.types";
 import { FileWithPath } from "react-dropzone";
 
 export interface IUrl {

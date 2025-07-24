@@ -1,7 +1,7 @@
 import { IUrl } from "@/models/interfaces/upload-file.interfaces";
-import { httpRequest } from "@/services/generalService/httpRequest";
-import { IResponse } from "@/services/generalService/types/requestDataTypes";
-import { isFile } from "@/utils/func/dataType";
+import { httpRequest } from "@/services/generalService/http.service";
+import { IResponse } from "@/services/generalService/types/request-data.types";
+import { isFile } from "@/utils/func/dataType.utils";
 
 /* ********************************************
  * endpoints para subir UN SOLO Ó MAS archivos *

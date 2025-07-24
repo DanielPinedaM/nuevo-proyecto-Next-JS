@@ -6,13 +6,13 @@ import DragAndDrop from "@/components/dialog/uploadFile/textAndButtons/dragAndDr
 import Footer from "@/components/dialog/uploadFile/textAndButtons/footer";
 import ListFiles from "@/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/components/dialog/uploadFile/textAndButtons/uploadFile";
-import { IResponse } from "@/services/generalService/types/requestDataTypes";
+import { IResponse } from "@/services/generalService/types/request-data.types";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,
   uploadOneOrMoreFilesWithoutId,
-} from "@/services/uploadFile";
-import { validateId, validateSingleFile } from "@/utils/func/file/fileValidations";
+} from "@/services/upload-file.service";
+import { validateId, validateSingleFile } from "@/utils/func/file/fileValidations.utils";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
 import { Dialog } from "primereact/dialog";

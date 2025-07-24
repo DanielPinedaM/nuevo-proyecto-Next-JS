@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dialog } from 'primereact/dialog';
 import HeaderDialog from '../HeaderDialog';
-import { rowsPerPageOptions } from '@/utils/func/general';
+import { rowsPerPageOptions } from '@/utils/func/general.utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import columnBodyMap from './columnBodyMap';

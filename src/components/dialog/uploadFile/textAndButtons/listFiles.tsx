@@ -1,6 +1,6 @@
 "use client";
 import { IListFiles } from "@/models/interfaces/upload-file.interfaces";
-import { truncateString } from "@/utils/func/general";
+import { truncateString } from "@/utils/func/general.utils";
 import dynamic from "next/dynamic";
 const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));
 const FaRegFileExcel = dynamic(() => import("react-icons/fa").then((mod) => mod.FaRegFileExcel));

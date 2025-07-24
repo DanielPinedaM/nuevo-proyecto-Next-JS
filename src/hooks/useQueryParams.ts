@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
 import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
-import { forceConvertToString, literalObjectLength } from '@/utils/func/dataType';
+import { forceConvertToString, literalObjectLength } from '@/utils/func/dataType.utils';
 
 interface IOptionsSetQueryParams {
   replaceAll?: boolean;
