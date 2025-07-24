@@ -1,6 +1,6 @@
 'use client';
 import { useQueryParams } from '@/hooks/useQueryParams';
-import { globalTailwindStyle } from '@/types/constant/const-layout';
+import { globalTailwindStyle } from '@/models/constants/layout.constants';
 import debounce from 'just-debounce-it';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';

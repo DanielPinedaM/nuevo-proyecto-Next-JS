@@ -1,4 +1,4 @@
-import { IBreakpoint, IGlobalTailwindStyle } from "@/types/interface/interface-layout";
+import { IBreakpoint, IGlobalTailwindStyle } from "@/models/interfaces/layout.interfaces";
 
 export const breakpoint: IBreakpoint = {
   // => @media (min-width: 480px) { ... }

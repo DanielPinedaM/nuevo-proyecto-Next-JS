@@ -1,5 +1,5 @@
 "use client";
-import { IListFiles } from "@/types/interface/interface-upload-file";
+import { IListFiles } from "@/models/interfaces/upload-file.interfaces";
 import { truncateString } from "@/utils/func/general";
 import dynamic from "next/dynamic";
 const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));

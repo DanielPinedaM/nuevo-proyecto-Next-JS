@@ -1,6 +1,6 @@
 'use client';
+import { constPath } from '@/models/constants/path.constants';
 import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
-import { constPath } from '@/types/constant/const-path';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function NotFound() {

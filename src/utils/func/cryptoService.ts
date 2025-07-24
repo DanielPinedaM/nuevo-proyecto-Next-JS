@@ -1,4 +1,4 @@
-import { IVAuth, secretKeyAuthentication } from '@/types/constant/const-auth';
+import { secretKeyAuthentication, IVAuth } from '@/models/constants/auth.constants';
 import { enc, mode, pad, AES } from 'crypto-js';
 
 /**

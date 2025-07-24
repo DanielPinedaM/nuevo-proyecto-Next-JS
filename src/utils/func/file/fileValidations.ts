@@ -1,7 +1,7 @@
 "use client";
 import errorNotification from "@/components/dialog/notification/errorNotification";
-import { ISendId } from "@/types/interface/interface-upload-file";
-import { IValidateMultipleFiles, IValidateSingleFile } from "@/types/interface/interface-validate-file";
+import { ISendId } from "@/models/interfaces/upload-file.interfaces";
+import { IValidateMultipleFiles, IValidateSingleFile } from "@/models/interfaces/validate-file.interfaces";
 import { listFormat } from "@/utils/func/general";
 import { FileWithPath } from "react-dropzone";
 

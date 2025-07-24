@@ -1,9 +1,6 @@
-import ListTable from "@/app/inicio/administrador/tablas/nombre-tabla/table/listTable";
-import {
-  IGetTableNombreTabla,
-  ITableDataNombreTabla,
-} from "@/types/interface/administrador/tablas/DTO/interface-nombre-tabla";
-import { listTableData } from "@/services/administrador/tables/nombre-tabla/table-name";
+import ListTable from "@/app/inicio/administrador/nombre-tabla/table/listTable";
+import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
+import { listTableData } from "@/services/table-name";
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {
   //const { data } = await listTableData(search);

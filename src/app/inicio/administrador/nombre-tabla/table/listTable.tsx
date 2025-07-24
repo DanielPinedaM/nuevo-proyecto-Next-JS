@@ -1,5 +1,4 @@
 "use client";
-import { constPath } from "@/types/constant/const-path";
 import { rowsPerPageOptions, titleCase, truncateString } from "@/utils/func/general";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -12,11 +11,13 @@ import { IResponse } from "@/services/generalService/types/requestDataTypes";
 import errorNotification from "@/components/dialog/notification/errorNotification";
 import successNotification from "@/components/dialog/notification/successNotification";
 import infoNotification from "@/components/dialog/notification/infoNotification";
-import visibleRows from "@/types/constant/const-visible-rows";
-import { ITableDataNombreTabla } from "@/types/interface/interface-nombre-tabla";
-import columns from "@/types/constant/const-columns-nombre-tabla";
 import { acceptValidation } from "@/services/table-name";
 import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
+import { constPath } from "@/models/constants/path.constants";
+import visibleRows from "@/models/constants/visible-rows.constants";
+import { ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
+import { columns } from "@/models/constants/nombre-tabla.constans";
+
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));

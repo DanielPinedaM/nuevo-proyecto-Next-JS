@@ -12,8 +12,6 @@ import {
   uploadOneOrMoreFilesByParams,
   uploadOneOrMoreFilesWithoutId,
 } from "@/services/uploadFile";
-import { globalTailwindStyle } from "@/types/constant/const-layout";
-import { IUploadFile } from "@/types/interface/interface-upload-file";
 import { validateId, validateSingleFile } from "@/utils/func/file/fileValidations";
 import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
@@ -21,6 +19,8 @@ import { Dialog } from "primereact/dialog";
 import { useCallback, useEffect, useState } from "react";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import errorNotification from "../notification/errorNotification";
+import { globalTailwindStyle } from "@/models/constants/layout.constants";
+import { IUploadFile } from "@/models/interfaces/upload-file.interfaces";
 
 /**
 componente con ventana modal para subir UN SOLO archivo */

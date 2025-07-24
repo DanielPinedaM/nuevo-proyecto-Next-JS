@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { globalTailwindStyle } from "@/types/constant/const-layout";
-import { IColumns, ITableDataDetailsDialog } from "@/types/interface/interface-prime-react";
-import { Dialog } from "primereact/dialog";
-import HeaderDialog from "../HeaderDialog";
-import { rowsPerPageOptions } from "@/utils/func/general";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import columnBodyMap from "./columnBodyMap";
-import visibleRows from "@/types/constant/const-visible-rows";
+import { Dialog } from 'primereact/dialog';
+import HeaderDialog from '../HeaderDialog';
+import { rowsPerPageOptions } from '@/utils/func/general';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import columnBodyMap from './columnBodyMap';
+import { globalTailwindStyle } from '@/models/constants/layout.constants';
+import { IColumns, ITableDataDetailsDialog } from '@/models/interfaces/prime-react.interfaces';
+import visibleRows from '@/models/constants/visible-rows.constants';
 
 type TCell = string | boolean | null | undefined | Date | number | object | any[];
 
@@ -22,14 +22,14 @@ export default function TableDataDetailsDialog({
   setVisible,
   tableData = [],
   columns = [],
-  title = "",
-  subtitle = "",
+  title = '',
+  subtitle = '',
 }: ITableDataDetailsDialog) {
   const clearParameters = (): void => {
     tableData = [];
     columns = [];
-    title = "";
-    subtitle = "";
+    title = '';
+    subtitle = '';
   };
 
   const onHide = (): void => {
@@ -39,12 +39,12 @@ export default function TableDataDetailsDialog({
 
   const Footer = () => {
     return (
-      <div className="flex justify-center">
+      <div className='flex justify-center'>
         <button
           onClick={() => {
             onHide();
           }}
-          className="button-secondary"
+          className='button-secondary'
         >
           Cerrar
         </button>
@@ -60,11 +60,11 @@ export default function TableDataDetailsDialog({
       const stringCell: string = String(cell)?.trim();
 
       return (
-        stringCell !== "" &&
+        stringCell !== '' &&
         cell !== null &&
-        stringCell !== "null" &&
-        typeof cell !== "undefined" &&
-        stringCell !== "undefined"
+        stringCell !== 'null' &&
+        typeof cell !== 'undefined' &&
+        stringCell !== 'undefined'
       );
     });
 
@@ -77,7 +77,7 @@ export default function TableDataDetailsDialog({
       rowsPerPageOptions={rowsPerPageOptions(tableData.length, visibleRows)}
     >
       {columns
-        .toSorted((a: IColumns, b: IColumns) => a.header.localeCompare(b.header, "es-ES"))
+        .toSorted((a: IColumns, b: IColumns) => a.header.localeCompare(b.header, 'es-ES'))
         .map(({ field, header }, i: number) => {
           return allTruthy(field) ? (
             <Column
@@ -99,15 +99,15 @@ export default function TableDataDetailsDialog({
       footer={Footer}
       visible={visible}
       draggable={false}
-      style={{ width: "auto" }}
-      className="min-w-[540px] max-w-[95vw]`}
+      style={{ width: 'auto' }}
+      className='min-w-[540px] max-w-[95vw]'
       onHide={onHide}
     >
       <section className={`${globalTailwindStyle.dialog.container.content}`}>
         {tableData && tableData?.length > 0 ? (
           <Table />
         ) : (
-          <p className="text-center">No hay datos</p>
+          <p className='text-center'>No hay datos</p>
         )}
       </section>
     </Dialog>

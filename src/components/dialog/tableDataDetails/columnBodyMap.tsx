@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const StatusReactIcon = dynamic(() => import("@/components/StatusIcon"));
-import { IColumnData } from "@/types/interface/interface-prime-react";
+import { IColumnData } from "@/models/interfaces/prime-react.interfaces";
 import dynamic from "next/dynamic";
 
 /**

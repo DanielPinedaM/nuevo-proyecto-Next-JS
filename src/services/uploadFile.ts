@@ -1,6 +1,6 @@
+import { IUrl } from "@/models/interfaces/upload-file.interfaces";
 import { httpRequest } from "@/services/generalService/httpRequest";
 import { IResponse } from "@/services/generalService/types/requestDataTypes";
-import { IUrl } from "@/types/interface/interface-upload-file";
 import { isFile } from "@/utils/func/dataType";
 
 /* ********************************************

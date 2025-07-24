@@ -1,4 +1,4 @@
-import IPath from '../interface/interface-path';
+import IPath from "@/models/interfaces/path.interfaces";
 
 export const constPath: IPath = {
   login: 'iniciar-sesion',

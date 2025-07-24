@@ -3,16 +3,12 @@ import HeaderDialog from "@/components/dialog/HeaderDialog";
 import errorNotification from "@/components/dialog/notification/errorNotification";
 import successNotification from "@/components/dialog/notification/successNotification";
 import GeneralErrorMessage from "@/components/GeneralErrorMessage";
-import { createTable } from "@/services/administrador/tables/nombre-tabla/table-name";
-import { globalTailwindStyle } from "@/types/constant/const-layout";
-import { constRegex } from "@/types/constant/const-regex";
-import {
-  constIsStandardGEL,
-  constIsStandardMSPS,
-  tables,
-} from "@/types/constant/tables/const-nombre-tabla";
-import { IFormCreateTable } from "@/types/interface/administrador/tablas/DTO/interface-nombre-tabla";
-import { IDialogProps, IDropdown } from "@/types/interface/interface-prime-react";
+import { globalTailwindStyle } from "@/models/constants/layout.constants";
+import { constIsStandardGEL, constIsStandardMSPS } from "@/models/constants/nombre-tabla.constans";
+import { constRegex } from "@/models/constants/regex.constants";
+import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
+import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
+import { createTable } from "@/services/table-name";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { Dialog } from "primereact/dialog";

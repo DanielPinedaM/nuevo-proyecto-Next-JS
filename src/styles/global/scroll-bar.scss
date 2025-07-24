@@ -31,3 +31,12 @@ $scrollbarColor: #bdbdbd;
   background: transparent;
   margin-top: 1.25rem;
 }
+
+// ocultar barra de scroll, pero hacer q siga funcionando la barra de scroll
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

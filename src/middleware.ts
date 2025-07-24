@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decodeTokenInServer } from "./services/auth/auth";
-import { IResponse } from "./services/generalService/types/requestDataTypes";
-import { nameCookieKey } from "./types/constant/const-cookie-storage";
-import { constPath } from "./types/constant/const-path";
-import { routeHomeByUserType } from "./utils/func/auth";
+import { IResponse } from "@/services/generalService/types/requestDataTypes"
+import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
+import { decodeTokenInServer } from "@/services/auth/auth";
+import { constPath } from "@/models/constants/path.constants";
 
 export async function middleware(request: NextRequest) {
   const {

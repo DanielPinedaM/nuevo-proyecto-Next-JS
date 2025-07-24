@@ -1,4 +1,5 @@
-import { IPrimeReactTooltip } from "@/types/interface/interface-prime-react";
+
+import { IPrimeReactTooltip } from "@/models/interfaces/prime-react.interfaces";
 import { Tooltip } from "primereact/tooltip";
 
 export default function PrimeReactTooltip({

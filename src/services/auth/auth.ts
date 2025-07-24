@@ -1,6 +1,6 @@
+import IFormLogin from '@/models/interfaces/login.interfaces';
 import { httpRequest } from '@/services/generalService/httpRequest';
 import { IResponse } from '@/services/generalService/types/requestDataTypes';
-import IFormLogin from '@/types/interface/interface-login';
 
 /**
 iniciar sesion */

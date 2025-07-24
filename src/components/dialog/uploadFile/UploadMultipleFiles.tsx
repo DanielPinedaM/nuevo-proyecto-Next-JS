@@ -7,14 +7,14 @@ import DragAndDrop from "@/components/dialog/uploadFile/textAndButtons/dragAndDr
 import Footer from "@/components/dialog/uploadFile/textAndButtons/footer";
 import ListFiles from "@/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/components/dialog/uploadFile/textAndButtons/uploadFile";
+import { globalTailwindStyle } from "@/models/constants/layout.constants";
+import { IUploadFile } from "@/models/interfaces/upload-file.interfaces";
 import { IResponse } from "@/services/generalService/types/requestDataTypes";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,
   uploadOneOrMoreFilesWithoutId,
 } from "@/services/uploadFile";
-import { globalTailwindStyle } from "@/types/constant/const-layout";
-import { IUploadFile } from "@/types/interface/interface-upload-file";
 import { validateId, validateMultipleFiles } from "@/utils/func/file/fileValidations";
 import { clsx } from "clsx";
 import dynamic from "next/dynamic";

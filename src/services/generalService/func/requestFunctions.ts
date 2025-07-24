@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 import errorNotification from '@/components/dialog/notification/errorNotification';
+import { nameCookieKey } from '@/models/constants/cookie-storage.constants';
+import { constPath } from '@/models/constants/path.constants';
 import {
   IObjectLogs,
   IResponse,
   IValidateApiResponse,
 } from '@/services/generalService/types/requestDataTypes';
-import { nameCookieKey } from '@/types/constant/const-cookie-storage';
-import { constPath } from '@/types/constant/const-path';
 import { isFile, literalObjectLength } from '@/utils/func/dataType';
 import { isUseClient } from '@/utils/func/general';
 import { getCookie } from 'cookies-next';

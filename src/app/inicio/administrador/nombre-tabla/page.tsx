@@ -1,9 +1,10 @@
-import SkeletonTable from '@/components/loading/skeleton/SkeletonTable';
-import IParams from '@/types/interface/interface-params';
+
 import { Suspense } from 'react';
 import ButtonsOpenDialogNombreTabla from './dialog/buttonsOpenDialogNombreTabla';
 import GetTable from './table/getTable';
 import InputSearchParams from '@/components/InputSearchParams';
+import IParams from '@/models/interfaces/params.interfaces';
+import SkeletonTable from '@/components/loading/skeleton/skeletonTable';
 
 export default async function Page({ searchParams }: IParams) {
   const { search } = await searchParams;

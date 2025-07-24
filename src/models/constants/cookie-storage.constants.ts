@@ -1,4 +1,4 @@
-import { INameCookieKey, IObjStorage } from '../interface/interface-cookie-storage';
+import { INameCookieKey, IObjStorage } from '../interfaces/cookie-storage.interfaces';
 
 /* ********
  * cookies *
