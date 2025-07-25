@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isUseClient } from '@/utils/func/general.utils';
-import { forceConvertToString, isFile, isString, literalObjectLength } from '@/utils/func/dataType.utils';
+import {
+  forceConvertToString,
+  isFile,
+  isString,
+  literalObjectLength,
+} from '@/utils/func/dataType.utils';
 import {
   defaultSecurityEndpoint,
   errorHandling,
@@ -200,7 +205,7 @@ export async function httpRequest<T = any>(
         result = (await response.json()) as T;
 
         errorLogs({
-          message: 'error al descargar archivo(s)',
+          message: 'error al descargar archivo(s) blob',
           method,
           url,
           options,
@@ -213,9 +218,43 @@ export async function httpRequest<T = any>(
         result = (await response.blob()) as T;
       }
     } else if (responseType === 'arrayBuffer') {
-      result = (await response.arrayBuffer()) as T;
+      const contentType: string = response?.headers?.get('content-type') ?? '';
+
+      if (contentType && contentType?.includes('application/json')) {
+        result = (await response.json()) as T;
+
+        errorLogs({
+          message: 'error al descargar archivo(s) arrayBuffer',
+          method,
+          url,
+          options,
+          result,
+          response,
+        });
+
+        throw new Error(JSON.stringify(result));
+      } else {
+        result = (await response.arrayBuffer()) as T;
+      }
     } else if (responseType === 'formData') {
-      result = (await response.formData()) as T;
+      const contentType: string = response?.headers?.get('content-type') ?? '';
+
+      if (contentType && contentType?.includes('application/json')) {
+        result = (await response.json()) as T;
+
+        errorLogs({
+          message: 'error al descargar archivo(s) formData',
+          method,
+          url,
+          options,
+          result,
+          response,
+        });
+
+        throw new Error(JSON.stringify(result));
+      } else {
+        result = (await response.formData()) as T;
+      }
     } else {
       result = response;
 
