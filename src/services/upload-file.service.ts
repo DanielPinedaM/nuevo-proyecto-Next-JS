@@ -1,5 +1,5 @@
 import { IUrl } from "@/models/interfaces/upload-file.interfaces";
-import { httpRequest } from "@/services/generalService/http.service";
+import { httpService } from "@/services/generalService/http.service";
 import { IResponse } from "@/services/generalService/types/request-data.types";
 import { isFile } from "@/utils/func/dataType.utils";
 
@@ -31,7 +31,7 @@ export async function uploadOneOrMoreFilesByBody({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpRequest(method, `${env}${route}`, {
+  const response: IResponse = await httpService(method, `${env}${route}`, {
     body: file,
   });
 
@@ -51,7 +51,7 @@ export async function uploadOneOrMoreFilesWithoutId({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpRequest(method, `${env}${route}`, {
+  const response: IResponse = await httpService(method, `${env}${route}`, {
     body: file,
   });
 
@@ -77,7 +77,7 @@ export async function uploadOneOrMoreFilesByParams({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpRequest(method, `${env}${route}/${paramsId}`, {
+  const response: IResponse = await httpService(method, `${env}${route}/${paramsId}`, {
     body: file,
   });
 

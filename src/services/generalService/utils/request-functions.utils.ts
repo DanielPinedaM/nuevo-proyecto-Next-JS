@@ -5,10 +5,20 @@ import { nameCookieKey } from '@/models/constants/cookie-storage.constants';
 import { constPath } from '@/models/constants/path.constants';
 import {
   IObjectLogs,
+  IParamsValidateOptions,
+  IRequestOptions,
   IResponse,
+  IIsValidOptions,
   IValidateApiResponse,
+  Method,
 } from '@/services/generalService/types/request-data.types';
-import { isFile, isString, literalObjectLength } from '@/utils/func/dataType.utils';
+import {
+  isFile,
+  isLiteralObject,
+  isNumber,
+  isString,
+  literalObjectLength,
+} from '@/utils/func/dataType.utils';
 import { isUseClient } from '@/utils/func/general.utils';
 import { getCookie } from 'cookies-next';
 import { redirect } from 'next/navigation';
@@ -40,6 +50,92 @@ function redirectToLoginInUseClient(): void {
   if (!pathnameIsLogin()) {
     window.location.href = login;
   }
+}
+
+/**
+validar URL q llama al endpoint */
+export function isValidUrl({
+  url,
+  method,
+  options,
+}: IParamsValidateOptions): IIsValidOptions | IResponse {
+  const isInvalid: boolean =
+    !url || !isString(url) || String(url).trim() === '' || !String(url).startsWith('http');
+
+  if (isInvalid) {
+    const message: string = 'URL invalida';
+
+    errorLogs({
+      message,
+      method,
+      url,
+      options,
+    });
+
+    return { success: false, status: 400, message, data: [] };
+  }
+
+  return { valid: true };
+}
+
+/**
+Validar que el método GET NO tenga body */
+export function validateBodyWithGetMethod({
+  url,
+  method,
+  options,
+}: IParamsValidateOptions): IIsValidOptions | IResponse {
+  const body: any = options?.body;
+
+  const isInvalid: boolean = Boolean(body) && method === 'GET';
+
+  if (isInvalid) {
+    const message: string = `❌ error el método GET NO puede tener body ${JSON.stringify(body)}`;
+
+    errorLogs({
+      message,
+      method,
+      url,
+      options,
+    });
+
+    return { success: false, status: 400, message, data: [] };
+  }
+
+  return { valid: true };
+}
+
+/**
+validar q tenga conexion a internet,
+window?.navigator?.onLine no siempre funciona */
+export function internetConnection({
+  url,
+  method,
+  options,
+}: IParamsValidateOptions): IIsValidOptions | IResponse {
+  const isInvalid: boolean = isUseClient() && !window?.navigator?.onLine;
+
+  if (isInvalid) {
+    const message: string = 'Conéctese a internet para que la página web pueda funcionar';
+
+    errorNotification(message);
+
+    errorLogs({
+      message,
+      method,
+      url,
+      options,
+    });
+
+    return {
+      success: false,
+      status: 503,
+      message,
+      data: [],
+    };
+  }
+
+  return { valid: true };
 }
 
 /**
@@ -124,16 +220,14 @@ export function errorLogs(objectLogs: IObjectLogs): void {
   if (message) console.error('❌ error ', message);
   if (method) console.error('metodo HTTP', method);
   if (url) console.error('url ', url);
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT)
+  if (process?.env?.NEXT_PUBLIC_ENVIRONMENT)
     console.error(
       `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`
     );
 
-  if (result || response) {
-    console.error('respuesta de la API');
-  }
+  if (result || response) console.error('❌ respuesta de la API');
 
-  // imprimir respuesta de la api de NestJS
+  // imprimir respuesta de la API
   if (result) console.error(result);
 
   // imprimir respuesta de fetch
@@ -232,7 +326,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
   ) {
     console.error(
-      '❌ httpRequest.ts - Error 401: unauthenticated',
+      '❌ http.service.ts - Error 401: unauthenticated',
       '\nDetalle: El usuario no está autenticado o la sesión ha expirado',
       '\nAcción: Re-dirigir al usuario a la página de inicio de sesión',
       '\nURL solicitada: ',
@@ -247,7 +341,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     }
   } else if (status === 403) {
     console.error(
-      '❌ httpRequest.ts - Error 403: Forbidden',
+      '❌ http.service.ts - Error 403: Forbidden',
       '\nDetalle: El usuario está autenticado pero no tiene permisos para acceder al recurso',
       "\nAcción: Mostrar un mensaje de 'acceso denegado' o re-dirigir y re-dirigir a la pagina web anterior en el historial del navegador",
       '\nURL solicitada:',
@@ -262,7 +356,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     }
   } else if (status === 404) {
     console.error(
-      `❌ httpRequest.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
+      `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
     );
 
     if (isUseClient()) {
@@ -271,7 +365,7 @@ export function errorHandling(status: number | undefined, url: string): void {
       );
     }
   } else if (status >= 500) {
-    console.error(`❌ httpRequest.ts - error en el servidor en la URL ${url}`);
+    console.error(`❌ http.service.ts - error en el servidor en la URL ${url}`);
 
     if (isUseClient()) {
       errorNotification(
@@ -287,17 +381,21 @@ para NO detener la ejecucion del front
 cuando la API (backend) esta caida */
 export function validateApiResponse({
   result,
+  response,
   responseType,
   method,
   url,
   options,
-  response,
 }: IValidateApiResponse): IResponse | Blob | FormData {
   const errorMessage: string =
     '❌ Error 503 Service Unavailable - Posibles causas: \n' +
     '1) La API del backend podría estar caída. \n' +
     '2) El backend no está respondiendo con el tipo esperado (IResponse). \n' +
-    '3) Si está intentando descargar un archivo, asegúrese de que el backend responda con un tipo FormData o Blob.';
+    '3) Si está intentando descargar un archivo, asegúrese de que el backend responda con el tipo json | text | blob | arrayBuffer | formData';
+
+  /* -------- ❌ respuesta ERRONEA -------- */
+  const safeResult: IResponse | any = result ?? {};
+  const { success, status, message, data, ...rest }: IResponse | any = safeResult;
 
   // objeto q se devuelve en caso de q NO funcione la respuesta de la API del back
   const finalResponse: IResponse = {
@@ -305,21 +403,23 @@ export function validateApiResponse({
     status: 503,
     message: errorMessage,
     data: [],
+
+    // agregar cualquier key q venga de la API y q sea DIFERENTE de success, status, message y data
+    ...rest,
   };
 
   // retorna el archivo o texto plano recibido del backend
-  if (
-    isFile(result) ||
-    responseType === 'text' ||
-    responseType === 'blob' ||
-    responseType === 'arrayBuffer' ||
-    responseType === 'formData'
-  )
+  if (isFile(result) || ['text', 'blob', 'arrayBuffer', 'formData'].includes(responseType))
     return result;
 
   // a partir de aqui la respuesta de la api tiene q ser un responseType === "json"
   // validar q exista la respuesta de la API del backend
-  if (!result || typeof result?.success !== 'boolean' || typeof result?.status !== 'number') {
+  if (
+    !result ||
+    !isLiteralObject(result) ||
+    typeof result?.success !== 'boolean' ||
+    !isNumber(result?.status)
+  ) {
     errorLogs({
       message: errorMessage,
       method,
@@ -332,6 +432,7 @@ export function validateApiResponse({
     return finalResponse;
   }
 
+  /* -------- ✅ respuesta EXITOSA -------- */
   // siempre extraer `data` en un solo nivel, eliminando `data.data`
   let searchData: any = result?.data;
   while (typeof searchData === 'object' && 'data' in searchData) {
@@ -339,12 +440,10 @@ export function validateApiResponse({
   }
 
   const searchMessage: string =
-    typeof result?.message === 'string' || typeof result?.message === 'number'
-      ? result.message
-      : '';
+    isString(result?.message) || isNumber(result?.message) ? result.message : '';
 
   return {
-    ...result,
+    ...(result ?? {}),
     message: searchMessage,
     data: searchData,
   };
@@ -354,7 +453,7 @@ export function validateApiResponse({
 validar env en los q por defecto NO se incluye el token */
 export function defaultSecurityEndpoint(url: string): boolean {
   // aqui agregar nuevos env a los q NO se les envia el token al hacer peticion http
-  const unprotectedURLs = [process.env.NEXT_PUBLIC_AUTH_LOGIN] as string[];
+  const unprotectedURLs: string[] = [process.env.NEXT_PUBLIC_AUTH_LOGIN] as string[];
 
   for (const item of unprotectedURLs) {
     if (!isString(item)) {
@@ -366,5 +465,41 @@ export function defaultSecurityEndpoint(url: string): boolean {
     }
   }
 
+  // validar env en los q NO se incluye en token
   return !unprotectedURLs.some((item: string) => url === item);
+}
+
+/**
+la API respondio con un tipo archivo */
+export async function responseFile<T>(
+  response: Response,
+  responseType: 'blob' | 'arrayBuffer' | 'formData',
+  method: Method,
+  url: string,
+  options: IRequestOptions,
+  message: string
+): Promise<T> {
+  // capturar respuesta de error de la API cuando falla la descarga del archivo
+  const contentType: string = response?.headers?.get('content-type') ?? '';
+
+  if (contentType && contentType?.includes('application/json')) {
+    const result = await response.json();
+
+    errorLogs({
+      message,
+      method,
+      url,
+      options,
+      result,
+      response,
+    });
+
+    throw new Error(JSON.stringify(result));
+  }
+
+  if (responseType === 'blob') return (await response.blob()) as T;
+  if (responseType === 'arrayBuffer') return (await response.arrayBuffer()) as T;
+  if (responseType === 'formData') return (await response.formData()) as T;
+
+  throw new Error(`formato de respuesta responseType ${responseType} no valido en responseFile`);
 }

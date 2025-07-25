@@ -1,115 +1,66 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isUseClient } from '@/utils/func/general.utils';
-import {
-  forceConvertToString,
-  isFile,
-  isString,
-  literalObjectLength,
-} from '@/utils/func/dataType.utils';
+import { forceConvertToString, isFile, literalObjectLength } from '@/utils/func/dataType.utils';
 import {
   defaultSecurityEndpoint,
   errorHandling,
   errorLogs,
   getToken,
+  internetConnection,
+  isValidUrl,
+  responseFile,
   successLogs,
   validateApiResponse,
+  validateBodyWithGetMethod,
 } from '@/services/generalService/utils/request-functions.utils';
 import {
   IRequestOptions,
   IResponse,
+  IIsValidOptions,
   Method,
 } from '@/services/generalService/types/request-data.types';
 import { ILoaderState } from '@/store/loader/loaderStore';
-import errorNotification from '@/components/dialog/notification/errorNotification';
 
 /**
 funcion general para llamar a API */
-export async function httpRequest<T = any>(
+export async function httpService<T = any>(
   method: Method,
   url: string = '',
   options: IRequestOptions = {}
-): Promise<IResponse | Blob | FormData | any> {
-  // validar env en los q NO se incluye en token
-  if (!process.env.NEXT_PUBLIC_AUTH_LOGIN) {
-    const message: string =
-      "la VARIABLE DE ENTORNO PARA EL LOGIN tiene que ser tipo string y NO puede estar vacia ''";
-
-    errorLogs({
-      message,
-      method,
-      url,
-      options,
-    });
-
-    return { success: false, status: 401, message, data: [] };
-  }
-
+): Promise<IResponse | any> {
   // validar URL q llama al endpoint
-  if (
-    !url ||
-    !isString(url) ||
-    String(url).trim() === '' ||
-    String(url).includes('undefined') ||
-    String(url).includes('null') ||
-    String(url).includes('NaN') ||
-    !String(url).startsWith('http')
-  ) {
-    const message: string = 'URL invalida';
-
-    errorLogs({
-      message,
-      method,
-      url,
-      options,
-    });
-
-    return { success: false, status: 400, message, data: [] };
-  }
+  const _isValidUrl: IIsValidOptions | IResponse = isValidUrl({ url, method, options });
+  if ((_isValidUrl as any)?.valid !== true) return _isValidUrl;
 
   // validar q tenga conexion a internet
-  if (isUseClient() && !window?.navigator?.onLine) {
-    const message: string = 'Conéctese a internet para que la página web pueda funcionar';
-
-    errorNotification(message);
-
-    errorLogs({
-      message,
-      method,
-      url,
-      options,
-    });
-
-    return {
-      success: false,
-      status: 503,
-      message,
-      data: [],
-    };
-  }
+  // window?.navigator?.onLine no siempre funciona
+  const _internetConnection: IIsValidOptions | IResponse = internetConnection({
+    url,
+    method,
+    options,
+  });
+  if ((_internetConnection as any)?.valid !== true) return _internetConnection;
 
   const {
-    // enviar token en TODOS los endpoint, EXCEPTO al iniciar sesion
-    isASecurityEndpoint = defaultSecurityEndpoint(url),
     body,
     queryParams,
     headers = {},
     responseType = 'json',
     showLoader = true,
     validateResponse = true,
+
+    // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
+    isASecurityEndpoint = defaultSecurityEndpoint(url),
+    credentials = 'same-origin',
   } = options;
 
-  if (body && method === 'GET') {
-    const message: string = `❌ el metodo GET NO puede tener body ${JSON.stringify(body)}`;
-
-    errorLogs({
-      message,
-      method,
-      url,
-      options,
-    });
-
-    return { success: false, status: 400, message, data: [] };
-  }
+  // Validar que el método GET NO tenga body
+  const _validateBodyWithGetMethod: IIsValidOptions | IResponse = validateBodyWithGetMethod({
+    url,
+    method,
+    options,
+  });
+  if ((_validateBodyWithGetMethod as any)?.valid !== true) return _validateBodyWithGetMethod;
 
   // loader global q se muestra y oculta en componentes cliente 'use client'
   let loaderStore: ILoaderState | null = null;
@@ -130,7 +81,7 @@ export async function httpRequest<T = any>(
     );
   }
 
-  // No establecer 'Content-Type' si el body es un FormData (archivo)
+  // No establecer 'Content-Type' si el body es un archivo
   if (!isFile(body)) {
     finalHeaders['Content-Type'] = 'application/json';
   }
@@ -143,9 +94,10 @@ export async function httpRequest<T = any>(
       finalHeaders['Authorization'] = `Bearer ${token}`;
     } else {
       const message: string =
-        'NO se pudo obtener token en el ' + isUseClient()
-          ? "CLIENTE 'use client'"
-          : "SERVIDOR 'use server'" + ' \ntoken ' + token;
+        'NO se pudo obtener token en el ' +
+        (isUseClient() ? "CLIENTE 'use client'" : "SERVIDOR 'use server'") +
+        ' \ntoken ' +
+        token;
 
       errorLogs({
         message,
@@ -172,6 +124,7 @@ export async function httpRequest<T = any>(
   const fetchOptions: RequestInit = {
     method,
     headers: finalHeaders,
+    credentials,
   };
 
   if (body) {
@@ -187,7 +140,8 @@ export async function httpRequest<T = any>(
   // variable q usa fetch para llamar a la API
   let response: Response | null | any = null;
 
-  // intenta convertir la respuesta de la API a json, text o blob y guarda la respuesta de la API
+  // intenta convertir la respuesta de la API a 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'
+  // y guarda la respuesta de la API
   let result: null | any = null;
 
   try {
@@ -197,69 +151,20 @@ export async function httpRequest<T = any>(
       result = (await response.json()) as T;
     } else if (responseType === 'text') {
       result = (await response.text()) as T;
-    } else if (responseType === 'blob') {
-      // capturar respuesta de error de la API cuando falla la descarga del archivo
-      const contentType: string = response?.headers?.get('content-type') ?? '';
-
-      if (contentType && contentType?.includes('application/json')) {
-        result = (await response.json()) as T;
-
-        errorLogs({
-          message: 'error al descargar archivo(s) blob',
-          method,
-          url,
-          options,
-          result,
-          response,
-        });
-
-        throw new Error(JSON.stringify(result));
-      } else {
-        result = (await response.blob()) as T;
-      }
-    } else if (responseType === 'arrayBuffer') {
-      const contentType: string = response?.headers?.get('content-type') ?? '';
-
-      if (contentType && contentType?.includes('application/json')) {
-        result = (await response.json()) as T;
-
-        errorLogs({
-          message: 'error al descargar archivo(s) arrayBuffer',
-          method,
-          url,
-          options,
-          result,
-          response,
-        });
-
-        throw new Error(JSON.stringify(result));
-      } else {
-        result = (await response.arrayBuffer()) as T;
-      }
-    } else if (responseType === 'formData') {
-      const contentType: string = response?.headers?.get('content-type') ?? '';
-
-      if (contentType && contentType?.includes('application/json')) {
-        result = (await response.json()) as T;
-
-        errorLogs({
-          message: 'error al descargar archivo(s) formData',
-          method,
-          url,
-          options,
-          result,
-          response,
-        });
-
-        throw new Error(JSON.stringify(result));
-      } else {
-        result = (await response.formData()) as T;
-      }
+    } else if (['blob', 'arrayBuffer', 'formData'].includes(responseType)) {
+      result = (await responseFile(
+        response,
+        responseType,
+        method,
+        url,
+        options,
+        `error la API respondió con tipo JSON y se espera un tipo responseType ${responseType}`
+      )) as T;
     } else {
       result = response;
 
       errorLogs({
-        message: `formato de respuesta responseType ${responseType} no valido`,
+        message: `formato de respuesta responseType ${responseType} no valido en http.service.ts`,
         method,
         url,
         options,
@@ -297,7 +202,7 @@ export async function httpRequest<T = any>(
         parsedError = JSON?.parse(error.message);
       }
     } catch {
-      console.error('no se pudo capturar error de la API \n', error);
+      console.error('❌ no se pudo capturar error de la API \n', error);
     }
 
     const { status } = parsedError ?? {};
@@ -322,8 +227,8 @@ export async function httpRequest<T = any>(
 
   // retornar respuesta de la API sin importar si fue exitosa o no
   if (validateResponse) {
-    // obligar a q la API responda con el tipo IResponse ó con un archivo
-    return validateApiResponse({ result, responseType, method, url, options, response });
+    // forzar a q la API responda con el tipo IResponse ó con un archivo
+    return validateApiResponse({ result, response, responseType, method, url, options });
   } else {
     // la API puede responder con lo q sea
     return result;
