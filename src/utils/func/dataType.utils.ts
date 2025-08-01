@@ -191,11 +191,13 @@ export const isValidJSONparse = (string: string): boolean => {
 /**
 ¿El parametro variable es un archivo? */
 export function isFile(variable: any): boolean {
+  if (!variable) return false;
+
   return (
-    variable instanceof FormData ||
-    variable instanceof Blob ||
-    variable instanceof File ||
-    variable instanceof ArrayBuffer
+      variable instanceof FormData ||
+      variable instanceof Blob ||
+      variable instanceof File ||
+      variable instanceof ArrayBuffer
   );
 }
 
