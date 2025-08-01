@@ -90,17 +90,30 @@ export const normalizeStr = (
 /**
 SI es posible convierte a NUMERO,
 cuando NO es posible devuleve null */
-export const convertToNumber = (number: number | any): number | null => {
-  if (isNumber(number)) return number as number;
+export const convertToNumber = (value: number | any): number | null => {
+  const stringValue: string = String(value).trim();
 
-  if (isStringNumber(number)) {
-    const removeCommas: string = number.trim().replaceAll(',', '.');
-    return Number(removeCommas);
+  if (
+      stringValue === ""
+
+      || value === null
+      || stringValue === "null"
+
+      || value === undefined
+      || stringValue === "undefined"
+
+      || typeof value === "boolean"
+      || typeof value === "function"
+      || typeof value === "object"
+      || typeof value === "symbol"
+
+      || Array.isArray(value)
+  ) {
+    return null;
   }
 
-  if (isString(number) && String(number)?.trim() !== '') return number;
-
-  return null;
+  const number: number = Number(value);
+  return isNaN(number) ? null : number;
 };
 
 /**
