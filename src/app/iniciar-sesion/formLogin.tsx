@@ -202,7 +202,7 @@ export default function FormLogin() {
         </div>
 
         <div className='flex justify-end'>
-          <button type='submit' className='button-primary'>
+          <button type='submit' className='btn-primary'>
             ingresar
           </button>
         </div>

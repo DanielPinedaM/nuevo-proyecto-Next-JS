@@ -32,7 +32,7 @@ export default function NotFound() {
             Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra página
           </p>
 
-          <button onClick={() => onClickReturnToPreviousPage()} className='button-primary'>
+          <button onClick={() => onClickReturnToPreviousPage()} className='btn-primary'>
             Volver
           </button>
         </div>

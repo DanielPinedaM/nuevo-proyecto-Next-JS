@@ -44,7 +44,7 @@ export default function TableDataDetailsDialog({
           onClick={() => {
             onHide();
           }}
-          className='button-secondary'
+          className='btn-secondary-with-border'
         >
           Cerrar
         </button>
