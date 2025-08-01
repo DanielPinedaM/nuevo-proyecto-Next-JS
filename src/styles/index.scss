@@ -5,7 +5,7 @@
 
 @use './global/reset.scss' as reset;
 @use './global/table.scss' as table;
-@use "./global/sweet-alert-2" as sweetAlert;
+@use "./global/library/sweet-alert-2" as sweetAlert;
 @use './global/scroll-bar.scss' as scrollBar;
 @use './global/button.scss' as button;
 
