@@ -1,9 +1,9 @@
-@use './variable.scss' as variable;
-
 /*
 *************************************
 * Estilos globales para los botones *
 ************************************* */
+
+@use './variable.scss' as variable;
 
 %base-btn-disabled {
   cursor: not-allowed;
@@ -11,6 +11,8 @@
 }
 
 %base-btn-primary-secondary {
+  width: fit-content;
+  height: fit-content;
   padding: variable.$padding-button;
   border-radius: variable.$rounded-button;
   transition: color 0.3s ease 0.05s, background-color 0.3s ease;
@@ -18,29 +20,47 @@
   font-size: variable.$font-size-button;
 }
 
-%flex-full-center {
+%base-flex-full-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-button {
-  // boton q contiene icono
-  &.button-icon {
-    @extend %flex-full-center;
+%base-btn-icon {
+  width: fit-content;
+  height: fit-content;
+  column-gap: variable.$column-gap-button;
+  padding: 0.4375rem;
+  border-radius: variable.$rounded-button;
+  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+}
 
-    width: fit-content;
-    height: fit-content;
-    column-gap: 0.3125rem;
-    padding: 0.4375rem;
-    border-radius: 0.5rem;
-    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+%base-btn-icon-svg {
+  flex: none;
+  font-size: 35px;
+  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+}
+
+%base-btn-icon-span {
+  text-align: left;
+  text-transform: capitalize;
+  line-height: 1rem;
+  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  font-size: variable.$font-size-button;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+
+  // boton q contiene icono
+  &.btn-icon-no-border {
+    @extend %base-flex-full-center;
+    @extend %base-btn-icon;
 
     svg {
-      flex: none;
-      font-size: 0.9375rem;
-      transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-      color: variable.$blue-midnight;
+      @extend %base-btn-icon-svg;
+      color: variable.$blue-lightning;
     }
 
     &:enabled {
@@ -55,6 +75,10 @@ button {
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-deep;
+
+        svg {
+          color: white;
+        }
       }
     }
 
@@ -62,36 +86,24 @@ button {
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         background-color: variable.$blue-deep;
+
+        svg {
+          color: white;
+        }
       }
     }
   }
 
-  // boton q contiene icono
-  &.button-icon-and-text {
-    @extend %flex-full-center;
-
-    column-gap: 5px;
-    padding: 7px;
-
-    background-color: white;
-
+  &.btn-icon-with-border {
+    @extend %base-flex-full-center;
     transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-    border-radius: variable.$rounded-button;
-    border: 1px solid variable.$blue-ocean;
+    padding: 0.125rem;
+    border: 0.0625rem solid variable.$blue-deep;
+    border-radius: 100%;
 
     svg {
-      flex: none;
-      font-size: 15px;
-      color: variable.$blue-lightning;
-      transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-    }
-
-    span {
-      color: black;
-      text-transform: capitalize;
-      line-height: 16px;
-      transition: color 0.3s ease 0.05s, background-color 0.3s ease;
-      font-size: variable.$font-size-button;
+      @extend %base-btn-icon-svg;
+      color: variable.$blue-deep;
     }
 
     &:enabled {
@@ -105,7 +117,56 @@ button {
     // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: variable.$blue-ocean;
+        background-color: variable.$blue-azure;
+        border: 1px solid white;
+
+        svg {
+          color: white;
+        }
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        background-color: variable.$blue-azure;
+        border: 1px solid white;
+
+        svg {
+          color: white;
+        }
+      }
+    }
+  }
+
+  // boton q contiene icono y texto
+  &.btn-with-icon-text-background {
+    @extend %base-flex-full-center;
+    @extend %base-btn-icon;
+
+    background-color: variable.$blue-azure;
+
+    svg {
+      @extend %base-btn-icon-svg;
+      color: white;
+    }
+
+    span {
+      @extend %base-btn-icon-span;
+      color: white;
+    }
+
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: variable.$blue-carbon;
         font-weight: variable.$font-weight-button;
 
         svg,
@@ -115,10 +176,110 @@ button {
       }
     }
 
-    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
-        background-color: variable.$blue-ocean;
+        background-color: variable.$blue-carbon;
+        font-weight: variable.$font-weight-button;
+
+        svg,
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &.btn-with-icon-text-border {
+    @extend %base-flex-full-center;
+    @extend %base-btn-icon;
+    border: 0.0625rem solid variable.$blue-carbon;
+    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+
+    svg {
+      @extend %base-btn-icon-svg;
+      color: variable.$blue-carbon;
+    }
+
+    span {
+      @extend %base-btn-icon-span;
+      color: variable.$blue-carbon;
+    }
+
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        border: 0;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+
+        svg,
+        span {
+          color: white;
+        }
+      }
+    }
+
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        border: 0;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+
+        svg,
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &.btn-with-icon-text-no-border {
+    @extend %base-flex-full-center;
+    @extend %base-btn-icon;
+    @extend %base-btn-primary-secondary;
+
+    svg {
+      @extend %base-btn-icon-svg;
+      color: variable.$blue-carbon;
+    }
+
+    span {
+      @extend %base-btn-icon-span;
+      color: variable.$blue-carbon;
+    }
+
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        border: 0;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+
+        svg,
+        span {
+          color: white;
+        }
+      }
+    }
+
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        border: 0;
+        background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
 
         svg,
@@ -130,10 +291,10 @@ button {
   }
 
   // boton primario para "aceptar" - "si"
-  &.button-primary {
+  &.btn-primary {
     @extend %base-btn-primary-secondary;
 
-    background-color: variable.$blue-carbon;
+    background-color: variable.$blue-lightning;
     color: white;
 
     &:enabled {
@@ -144,29 +305,27 @@ button {
       @extend %base-btn-disabled;
     }
 
-    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
-        background-color: variable.$blue-deep;
+        background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
       }
     }
 
-    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
-        background-color: variable.$blue-deep;
+        background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
       }
     }
   }
 
   // boton secundario para "cancelar" - "no"
-  &.button-secondary {
+  &.btn-secondary-with-border {
     @extend %base-btn-primary-secondary;
 
-    border: 1px solid variable.$blue-ocean;
-    color: variable.$blue-midnight;
+    border: 0.0625rem solid variable.$blue-lightning;
+    color: variable.$blue-azure;
 
     &:enabled {
       cursor: pointer;
@@ -176,20 +335,49 @@ button {
       @extend %base-btn-disabled;
     }
 
-    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         color: white;
-        background-color: variable.$blue-abys;
+        background-color: variable.$blue-azure;
+        border: 0;
         font-weight: variable.$font-weight-button;
       }
     }
 
-    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         color: white;
-        background-color: variable.$blue-abys;
+        background-color: variable.$blue-azure;
+        border: 0;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+  }
+
+  &.btn-secondary-no-border {
+    @extend %base-btn-primary-secondary;
+    color: variable.$blue-carbon;
+
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: white;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        color: white;
+        background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
       }
     }
