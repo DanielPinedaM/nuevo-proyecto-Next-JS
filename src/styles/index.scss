@@ -21,11 +21,11 @@
 @use '../../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
 
 // sobrescribir escribir estilos generales de Prime React
-@use './global/prime-react.scss';
+@use './global/library/prime-react.scss';
 
 /*
 **************
 * Tailwind 4 *
 ************** */
 
-@use './global/tailwind.css' as tailwind;
+@use './global/library/tailwind.css' as tailwind;
