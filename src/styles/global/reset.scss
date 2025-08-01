@@ -13,7 +13,15 @@
   box-sizing: border-box;
 }
 
-*:not([class="swal"]):not([class*='p-']):not([class*="button-"]):not([class*="m-"]):not([class*="mx-"]):not([class*="my-"]):not([class*="ms-"]):not([class*="me-"]):not([class*="mt-"]):not([class*="mr-"]):not([class*="mb-"]):not([class*="ml-"]):not([class*="space-"]):not([class*="p-"]):not([class*="px-"]):not([class*="py-"]):not([class*="ps-"]):not([class*="pe-"]):not([class*="pt-"]):not([class*="pr-"]):not([class*="pb-"]):not([class*="pl-"]) {
+*:not([class='swal']):not([class*='p-']):not([class*='button-']):not([class*='m-']):not(
+    [class*='mx-']
+  ):not([class*='my-']):not([class*='ms-']):not([class*='me-']):not([class*='mt-']):not(
+    [class*='mr-']
+  ):not([class*='mb-']):not([class*='ml-']):not([class*='space-']):not([class*='p-']):not(
+    [class*='px-']
+  ):not([class*='py-']):not([class*='ps-']):not([class*='pe-']):not([class*='pt-']):not(
+    [class*='pr-']
+  ):not([class*='pb-']):not([class*='pl-']) {
   margin: 0;
   padding: 0;
 }
@@ -23,24 +31,20 @@
 * forzar tema claro en navegadores configurados con tema oscuro *
 ****************************************************************** */
 
-html, body {
+html,
+body {
   background-color: variable.$white-smoke;
+
+  @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
+    background-color: variable.$white-smoke;
+  }
 }
 
-*, :root, html, body {
+*,
+:root,
+html,
+body {
   color-scheme: only light !important;
-}
-
-@media (prefers-color-scheme: dark) {
-   html, body {
-      background-color: variable.$white-smoke;
-   }
-}
-
-@media (prefers-color-scheme: light) {
-   html, body {
-      background-color: variable.$white-smoke;
-   }
 }
 
 /*
@@ -74,88 +78,6 @@ body {
   // suavizar texto
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/*
-********************
-* Texto Responsive *
-******************** */
-
-:root {
-  // Utopia Fluid - Texto Responsive - https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s
-  --step--1: clamp(0.89rem, calc(0.87rem + 0.07vw), 0.94rem);
-  --step-0: clamp(1.06rem, calc(1.01rem + 0.25vw), 1.25rem);
-  --step-1: clamp(1.28rem, calc(1.17rem + 0.53vw), 1.67rem);
-  --step-2: clamp(1.53rem, calc(1.34rem + 0.94vw), 2.22rem);
-  --step-3: clamp(1.84rem, calc(1.53rem + 1.52vw), 2.96rem);
-  --step-4: clamp(2.2rem, calc(1.73rem + 2.36vw), 3.95rem);
-  --step-5: clamp(2.64rem, calc(1.93rem + 3.55vw), 5.26rem);
-  --step-6: clamp(3.17rem, calc(2.13rem + 5.21vw), 7.01rem);
-  --step-7: clamp(3.81rem, calc(2.3rem + 7.51vw), 9.35rem);
-  --step-8: clamp(4.57rem, calc(2.43rem + 10.7vw), 12.46rem);
-
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-p:not([class*='text-[']),
-h5:not([class*='text-[']),
-h6:not([class*='text-[']),
-button:not([class*='text-[']),
-select:not([class*='text-[']),
-textarea:not([class*='text-[']),
-input:not([class*='text-[']),
-table:not([class*='text-[']),
-th:not([class*='text-[']),
-td:not([class*='text-[']),
-thead:not([class*='text-[']),
-tbody,
-a:not([class*='text-[']),
-label:not([class*='text-[']) {
-  font-size: var(--step--1);
-}
-
-p:not([class*='text-[']) {
-  span:not([class*='text-[']) {
-    font-size: var(--step--1);
-  }
-}
-
-h1:not([class*='text-[']) {
-  font-size: var(--step-0) !important;
-  font-weight: 500 !important;
-
-  span:not([class*='text-[']) {
-    font-size: var(--step-0);
-  }
-}
-
-/*
-**************
-* Tipografia *
-**************/
-
-.font-monospace {
-  font-family: variable.$monospace !important;
-}
-
-a {
-  // color de texto
-  color: black;
-
-  text-decoration-line: none;
-
-  // Eliminar color de fondo azul cuando se hace click en los enlaces <a>
-  // https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500 !important;
 }
 
 /*
@@ -265,4 +187,93 @@ picture {
 img,
 video {
   object-fit: cover;
+}
+
+/*
+**************
+* Tipografia *
+**************/
+
+.font-monospace {
+  font-family: variable.$monospace !important;
+}
+
+a {
+  // color de texto
+  color: black;
+
+  text-decoration-line: none;
+
+  // Eliminar color de fondo azul cuando se hace click en los enlaces <a>
+  // https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500 !important;
+}
+
+/*
+*******************************************************
+* Utopia Fluid - Texto Responsive                      *
+* https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s * 
+******************************************************** */
+
+:root {
+  --step--1: clamp(0.89rem, calc(0.87rem + 0.07vw), 0.94rem);
+  --step-0: clamp(1.06rem, calc(1.01rem + 0.25vw), 1.25rem);
+  --step-1: clamp(1.28rem, calc(1.17rem + 0.53vw), 1.67rem);
+  --step-2: clamp(1.53rem, calc(1.34rem + 0.94vw), 2.22rem);
+  --step-3: clamp(1.84rem, calc(1.53rem + 1.52vw), 2.96rem);
+  --step-4: clamp(2.2rem, calc(1.73rem + 2.36vw), 3.95rem);
+  --step-5: clamp(2.64rem, calc(1.93rem + 3.55vw), 5.26rem);
+  --step-6: clamp(3.17rem, calc(2.13rem + 5.21vw), 7.01rem);
+  --step-7: clamp(3.81rem, calc(2.3rem + 7.51vw), 9.35rem);
+  --step-8: clamp(4.57rem, calc(2.43rem + 10.7vw), 12.46rem);
+}
+
+p:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+h5:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+h6:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+button:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+select:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+textarea:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+input:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+table:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+th:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+td:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+thead:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+tbody:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+a:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']),
+label:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+  font-size: var(--step--1);
+}
+
+p:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+  span:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+    font-size: var(--step--1);
+  }
+}
+
+h1:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+  font-size: var(--step-0) !important;
+  font-weight: 500 !important;
+
+  span:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+    font-size: var(--step-0);
+  }
+}
+
+h2:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']), 
+h3:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']), 
+h4:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']), 
+h5:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']), 
+h6:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-['])  {
+    span:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']) :not([class*='text-7xl']) :not([class*='text-8xl']) :not([class*='text-9xl']) :not([class*='text-[']) :not([class*='text-[']) {
+    font-size: var(--step-0);
+  }
 }
