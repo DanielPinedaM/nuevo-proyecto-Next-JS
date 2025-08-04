@@ -19,10 +19,7 @@ export default async function FetchData() {
             ))}
           </>
         }
-        empty={{
-          message: 'No hay datos',
-          className: 'text-center',
-        }}
+        EmptyComponent={<p className='text-center'>No hay datos</p>}
       />
     </>
   );

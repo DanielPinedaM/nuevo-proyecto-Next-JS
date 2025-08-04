@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { isBoolean, isLiteralObject, literalObjectLength } from "@/utils/func/dataType.utils";
 import { ReactNode } from "react";
 
@@ -7,10 +7,7 @@ interface IDataRender {
   SkeletonComponent?: ReactNode;
   RenderComponent: ReactNode;
   loading?: boolean | null;
-  empty?: {
-    message?: string;
-    className?: string;
-  }
+  EmptyComponent?: ReactNode;
 }
 
 /**
@@ -20,7 +17,7 @@ export default function DataRender({
   SkeletonComponent,
   RenderComponent,
   loading = null,
-  empty,
+  EmptyComponent,
 }: IDataRender) {
 
   if (SkeletonComponent) {
@@ -31,12 +28,7 @@ export default function DataRender({
 
   if (isLiteralObject(data) && literalObjectLength(data) > 0) return <>{RenderComponent}</>;
 
-  const {message, className} = empty ?? {}
-  if (message) {
-    return className
-      ? <p className={className}>{message}</p>
-      : <p>{message}</p>;
-  }
+  if (EmptyComponent) return <>{EmptyComponent}</>
 
   return null;
 }

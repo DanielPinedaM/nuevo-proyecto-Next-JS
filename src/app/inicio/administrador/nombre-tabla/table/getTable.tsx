@@ -40,10 +40,7 @@ export default async function GetTable({ search }: IGetTableNombreTabla) {
     <DataRender
       data={data}
       RenderComponent={<ListTable tableData={data} />}
-      empty={{
-        message: 'No hay datos',
-        className: 'text-center',
-      }}
+      EmptyComponent={<p className='text-center'>No hay datos</p>}
     />
     </>
   );

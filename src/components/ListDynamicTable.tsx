@@ -57,10 +57,7 @@ export default function ListDynamicTable({
     <DataRender
       data={tableDataDynamic}
       RenderComponent={<Table />}
-      empty={{
-        message: 'No hay datos',
-        className: 'text-center',
-      }}
+      EmptyComponent={<p className='text-center'>No hay datos</p>}
     />
   );
 }
