@@ -10,6 +10,11 @@
   opacity: 0.5;
 }
 
+%base-btn-active {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
 %base-btn-primary-secondary {
   width: fit-content;
   height: fit-content;
@@ -92,6 +97,10 @@ button {
         }
       }
     }
+
+    &:active {
+      @extend %base-btn-active;
+    }
   }
 
   &.btn-icon-with-border {
@@ -137,6 +146,10 @@ button {
         }
       }
     }
+
+    &:active {
+      @extend %base-btn-active;
+    }
   }
 
   // boton q contiene icono y texto
@@ -164,6 +177,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-carbon;
@@ -176,6 +190,7 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         background-color: variable.$blue-carbon;
@@ -186,6 +201,10 @@ button {
           color: white;
         }
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 
@@ -213,6 +232,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         border: 0;
@@ -226,6 +246,7 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         border: 0;
@@ -237,6 +258,10 @@ button {
           color: white;
         }
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 
@@ -263,6 +288,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         border: 0;
@@ -276,6 +302,7 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         border: 0;
@@ -287,6 +314,10 @@ button {
           color: white;
         }
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 
@@ -305,6 +336,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-azure;
@@ -312,11 +344,16 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 
@@ -335,6 +372,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         color: white;
@@ -344,6 +382,7 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         color: white;
@@ -351,6 +390,10 @@ button {
         border: 0;
         font-weight: variable.$font-weight-button;
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 
@@ -366,6 +409,7 @@ button {
       @extend %base-btn-disabled;
     }
 
+    // dispositivos con mouse
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         color: white;
@@ -374,12 +418,17 @@ button {
       }
     }
 
+    // dispositivos con pantalla tactil
     @media screen and (pointer: coarse), (pointer: none), (hover: none) {
       &:active {
         color: white;
         background-color: variable.$blue-azure;
         font-weight: variable.$font-weight-button;
       }
+    }
+
+    &:active {
+      @extend %base-btn-active;
     }
   }
 }
