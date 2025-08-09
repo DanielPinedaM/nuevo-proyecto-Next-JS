@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isUseClient } from '@/utils/func/general.utils';
-import { forceConvertToString, isFile, literalObjectLength } from '@/utils/func/dataType.utils';
+import { isUseClient } from "@/utils/func/general.utils";
+import { forceConvertToString, isFile, literalObjectLength } from "@/utils/func/dataType.utils";
 import {
   defaultSecurityEndpoint,
   errorHandling,
@@ -12,20 +12,20 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from '@/services/generalService/utils/request-functions.utils';
+} from "@/services/generalService/utils/request-functions.utils";
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
   Method,
-} from '@/services/generalService/types/request-data.types';
-import { ILoaderState } from '@/store/loader/loaderStore';
+} from "@/services/generalService/types/request-data.types";
+import { ILoaderState } from "@/store/loader/loaderStore";
 
 /**
 funcion general para llamar a API */
 export async function httpService<T = any>(
   method: Method,
-  url: string = '',
+  url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
   // validar URL q llama al endpoint
@@ -45,13 +45,13 @@ export async function httpService<T = any>(
     body,
     queryParams,
     headers = {},
-    responseType = 'json',
+    responseType = "json",
     showLoader = true,
     validateResponse = true,
 
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
     isASecurityEndpoint = defaultSecurityEndpoint(url),
-    credentials = 'same-origin',
+    credentials = "same-origin",
   } = options;
 
   // Validar que el método GET NO tenga body
@@ -67,7 +67,7 @@ export async function httpService<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient() && showLoader) {
-    const { useLoaderStore } = await import('@/store/loader/loaderStore');
+    const { useLoaderStore } = await import("@/store/loader/loaderStore");
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }
@@ -83,7 +83,7 @@ export async function httpService<T = any>(
 
   // No establecer 'Content-Type' si el body es un archivo
   if (!isFile(body)) {
-    finalHeaders['Content-Type'] = 'application/json';
+    finalHeaders["Content-Type"] = "application/json";
   }
 
   // Agregar token si el endpoint lo necesita
@@ -91,12 +91,12 @@ export async function httpService<T = any>(
     const token = await getToken();
 
     if (token) {
-      finalHeaders['Authorization'] = `Bearer ${token}`;
+      finalHeaders["Authorization"] = `Bearer ${token}`;
     } else {
       const message: string =
-        'NO se pudo obtener token en el ' +
+        "NO se pudo obtener token en el " +
         (isUseClient() ? "CLIENTE 'use client'" : "SERVIDOR 'use server'") +
-        ' \ntoken ' +
+        " \ntoken " +
         token;
 
       errorLogs({
@@ -117,7 +117,7 @@ export async function httpService<T = any>(
   // Convertir queryParams si el endpoint es por query
   const queryString = queryParams
     ? `?${new URLSearchParams(queryParams as Record<string, string>).toString()}`
-    : '';
+    : "";
   const requestUrl: string = `${url}${queryString}`;
 
   // Configurar opciones de fetch
@@ -147,11 +147,11 @@ export async function httpService<T = any>(
   try {
     response = await fetch(requestUrl, fetchOptions);
 
-    if (responseType === 'json') {
+    if (responseType === "json") {
       result = (await response.json()) as T;
-    } else if (responseType === 'text') {
+    } else if (responseType === "text") {
       result = (await response.text()) as T;
-    } else if (['blob', 'arrayBuffer', 'formData'].includes(responseType)) {
+    } else if (["blob", "arrayBuffer", "formData"].includes(responseType)) {
       result = (await responseFile(
         response,
         responseType,
@@ -173,19 +173,46 @@ export async function httpService<T = any>(
       });
     }
 
-    // forzar a q fetch salte al catch cuando la peticion sea erronea response.status >= 400
-    if (!response 
-        || response.ok === false
-        || response.status >= 400
+    // true   -> API responde con JSON:           array, objeto literal, etc.
+    // false  -> API responde con tipo archivo:   FormData, Blob, etc.
+    const responseTypeIsJson = Boolean(responseType === "json");
 
-        || !result 
-        || validateResponse && (
-          result?.success === false
-          || result?.status  >= 400
-        )
-      ) {
+    // error: el http status de fetch response.status es diferente al de la respuesta de la API result.status
+    if (validateResponse && responseTypeIsJson && response.status !== result?.status) {
+      const message = `el error esta en el backend: código HTTP de fetch ${response.status} y la API ${result?.status} no coinciden`;
+
       errorLogs({
-        message: 'al ejecutar peticion HTTP',
+        message,
+        method,
+        url,
+        options,
+        result,
+        response,
+      });
+
+      const objectError: IResponse = {
+        success: false,
+        status: response.status,
+        message,
+        data: [],
+      };
+
+      throw new Error(JSON.stringify(objectError));
+    }
+
+    // forzar a q fetch salte al catch cuando la peticion sea erronea response.status >= 400
+    const noFetchResponse = !response;
+    const fetchError: boolean = response?.ok === false || response?.status >= 400;
+
+    const noApiResult = !result;
+    const apiError: boolean =
+      validateResponse &&
+      responseTypeIsJson &&
+      (result?.success === false || result?.status >= 400);
+
+    if (noFetchResponse || fetchError || noApiResult || apiError) {
+      errorLogs({
+        message: "al ejecutar peticion HTTP",
         method,
         url,
         options,
@@ -212,7 +239,7 @@ export async function httpService<T = any>(
         parsedError = JSON?.parse(error.message);
       }
     } catch {
-      console.error('❌ no se pudo capturar error de la API \n', error);
+      console.error("❌ no se pudo capturar error de la API \n", error);
     }
 
     const { status } = parsedError ?? {};
