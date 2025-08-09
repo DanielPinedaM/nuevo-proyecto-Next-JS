@@ -138,7 +138,7 @@ export async function httpService<T = any>(
   }
 
   // variable q usa fetch para llamar a la API
-  let response: Response | null | any = null;
+  let response: Response | null = null;
 
   // intenta convertir la respuesta de la API a 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'
   // y guarda la respuesta de la API
@@ -173,7 +173,17 @@ export async function httpService<T = any>(
       });
     }
 
-    if (!response || response?.ok === false || !result || result?.success === false) {
+    // forzar a q fetch salte al catch cuando la peticion sea erronea response.status >= 400
+    if (!response 
+        || response.ok === false
+        || response.status >= 400
+
+        || !result 
+        || validateResponse && (
+          result?.success === false
+          || result?.status  >= 400
+        )
+      ) {
       errorLogs({
         message: 'al ejecutar peticion HTTP',
         method,
@@ -183,7 +193,7 @@ export async function httpService<T = any>(
         response,
       });
 
-      // saltar al catch y capturar el error dependiendo del status de la respuesta
+      // capturar el error en el catch
       throw new Error(JSON.stringify(result));
     } else {
       successLogs({

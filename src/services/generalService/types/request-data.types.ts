@@ -46,7 +46,7 @@ export interface IObjectLogs {
   url?: string;
   options?: IRequestOptions;
   result?: IResponse;
-  response?: Response;
+  response?: Response | null ;
 }
 
 interface IData {
@@ -72,5 +72,5 @@ export interface IValidateApiResponse {
   method: Method;
   url: string;
   options: IRequestOptions;
-  response: Response;
+  response: Response | null ;
 }
