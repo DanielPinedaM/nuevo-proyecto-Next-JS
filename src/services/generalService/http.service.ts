@@ -190,14 +190,12 @@ export async function httpService<T = any>(
         response,
       });
 
-      const objectError: IResponse = {
+      return {
         success: false,
         status: response.status,
         message,
         data: [],
       };
-
-      throw new Error(JSON.stringify(objectError));
     }
 
     // forzar a q fetch salte al catch cuando la peticion sea erronea response.status >= 400
