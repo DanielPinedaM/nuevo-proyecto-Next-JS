@@ -160,6 +160,19 @@ textarea:read-only {
 } */
 
 /*
+********************
+* <input> - Campos *
+******************** */
+
+input {
+  &:disabled {
+    &::placeholder {
+      color: variable.$gray-dark !important;
+    }
+  }
+}
+
+/*
 *******************************************************
 * Multimedia Responsive                               *
 * https://www.youtube.com/watch?v=udGrXWeJp1Y&t=4090s *
