@@ -230,17 +230,26 @@ export async function httpService<T = any>(
       });
     }
   } catch (error: any) {
-    let parsedError: IResponse | null = null;
+    let parsedError: IResponse | null | any = null;
 
-    try {
-      if (error?.message) {
-        parsedError = JSON?.parse(error.message);
-      }
-    } catch {
-      console.error("❌ no se pudo capturar error de la API \n", error);
+    if (validateResponse && typeof error?.message === "string") {
+      parsedError = JSON.parse(error.message);
+    } else {
+      parsedError = error;
     }
 
-    const { status } = parsedError ?? {};
+    console.error("❌ error de la API \n", parsedError);
+
+    // obtener http status real de fetch si existe, sino obtener el de la API
+    let status: number = 0;
+    if (typeof response?.status === "number") {
+      status = response.status;
+    } else if (validateResponse && typeof result?.status === "number") {
+      status = result.status;
+    } else {
+      console.error("❌ error: no se pudo obtener el http status de la respuesta de la API \n");
+      status = 0;
+    }
 
     errorHandling(status, url);
   } finally {
