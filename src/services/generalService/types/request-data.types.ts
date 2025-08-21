@@ -29,20 +29,31 @@ type TPrimitive = string | number | boolean | null | undefined | symbol | bigint
 
 // objetos genericos
 type TKeyRecord = string | number | symbol;
+type TRecursive = TPrimitive | TRecursiveObject | TAnyArray;
+type TRecursiveObject =
+  | { [key: string]: TRecursive }
+  | { [key: number]: TRecursive }
+  | { [key: symbol]: TRecursive };
 type TObject = object | Record<TKeyRecord, unknown>;
 
 // arrays
 type TAnyArray = Array<TPrimitive | TObject | TAnyArray>;
 
 // archivos
-export type TFileTypes =
+export type TFiles =
   | Blob
   | File
-  | FileList
   | ArrayBuffer
   | ArrayBufferView
-  | SharedArrayBuffer
-  | DataView;
+  | DataView
+  | Uint8Array
+  | Uint16Array
+  | Uint32Array
+  | Int8Array
+  | Int16Array
+  | Int32Array
+  | Float32Array
+  | Float64Array;
 
 // formularios
 export type TFormTypes = FormData | URLSearchParams;
@@ -51,7 +62,14 @@ export type TFormTypes = FormData | URLSearchParams;
 type TStreamTypes = ReadableStream<any> | NodeJS.ReadableStream;
 
 // tipo body
-type TBody = TPrimitive | TObject | TAnyArray | TFileTypes | TFormTypes | TStreamTypes;
+type TBody =
+  | TPrimitive
+  | TObject
+  | TRecursiveObject
+  | TAnyArray
+  | TFiles
+  | TFormTypes
+  | TStreamTypes;
 
 /**
 parametros de funcion httpService para llamar a la API */
