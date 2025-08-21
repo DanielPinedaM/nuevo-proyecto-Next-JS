@@ -21,47 +21,10 @@ type TQueryParams = Record<string, string | number | boolean | (string | number 
 type de headers */
 type THeaders = Record<string, string | number>;
 
-// primitivos
-type TPrimitive = string | number | boolean | null | undefined | symbol | bigint;
-
-// objetos genericos
-type TKeyRecord = string | number | symbol;
-type TRecursive = TPrimitive | TRecursiveObject | TAnyArray;
-type TRecursiveObject =
-  | { [key: string]: TRecursive }
-  | { [key: number]: TRecursive }
-  | { [key: symbol]: TRecursive };
-type TObject = object | Record<TKeyRecord, unknown>;
-
-// arrays
-type TAnyArray = Array<TPrimitive | TObject | TAnyArray>;
-
-// archivos
-type TFiles =
-  | Blob
-  | File
-  | ArrayBuffer
-  | ArrayBufferView
-  | DataView
-  | Uint8Array
-  | Uint16Array
-  | Uint32Array
-  | Int8Array
-  | Int16Array
-  | Int32Array
-  | Float32Array
-  | Float64Array;
-
-// formularios
-type TFormTypes = FormData | URLSearchParams;
-
-// tipo body
-type TBody = TPrimitive | TObject | TRecursiveObject | TAnyArray | TFiles | TFormTypes;
-
 /**
 parametros de funcion httpService para llamar a la API */
-export interface IRequestOptions {
-  body?: TBody;
+export interface IRequestOptions<T = any> {
+  body?: T;
   queryParams?: TQueryParams;
   headers?: THeaders;
   responseType?: TResponseType;
