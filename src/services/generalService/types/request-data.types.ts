@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 /**
 Tipos de datos (formatos) de respuesta en fecth
 https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods */
-export type IResponseType = "json" | "text" | "blob" | "arrayBuffer" | "formData";
+type TResponseType = "json" | "text" | "blob" | "arrayBuffer" | "formData";
 
 /**
 ¿incluir cookies?
@@ -67,7 +66,7 @@ export interface IRequestOptions {
   body?: TBody;
   queryParams?: Record<string, string | number | boolean | (string | number | boolean)[]>;
   headers?: Record<string, string | number>;
-  responseType?: IResponseType;
+  responseType?: TResponseType;
   showLoader?: boolean;
   validateResponse?: boolean;
 
@@ -105,7 +104,7 @@ export interface IResponse {
 validar respuesta del backend */
 export interface IValidateApiResponse {
   result: IResponse | any;
-  responseType: IResponseType;
+  responseType: TResponseType;
   method: Method;
   url: string;
   options: IRequestOptions;
