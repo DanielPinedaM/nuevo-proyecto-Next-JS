@@ -1,11 +1,12 @@
 "use client";
+import { IOptionsReactHotToast } from "@/models/interfaces/general.interfaces";
 import { isString } from "@/utils/func/dataType.utils";
 import { isUseClient } from "@/utils/func/general.utils";
 import dynamic from "next/dynamic";
 import toast from "react-hot-toast";
 const FaInfoCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaInfoCircle));
 
-export default function infoNotification(message: string): void {
+export default function infoNotification(message: string, options?: IOptionsReactHotToast): void {
   if (!isUseClient()) {
     console.error(
       "❌ error - infoNotification - react-hot-toast se tiene q usar en componente cliente 'use client'"
@@ -25,6 +26,8 @@ export default function infoNotification(message: string): void {
     return;
   }
 
+  const { duration = 3000, position = "top-right" } = options ?? {};
+
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-blue-ocean  p-4 rounded-xl">
       <FaInfoCircle className="text-white animate-icon-enter text-2xl" />
@@ -36,8 +39,8 @@ export default function infoNotification(message: string): void {
       </p>
     </section>,
     {
-      duration: 4000,
-      position: "top-right",
+      duration,
+      position,
     }
   );
 }

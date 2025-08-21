@@ -3,9 +3,13 @@ import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
 import { isString } from "@/utils/func/dataType.utils";
 import { isUseClient } from "@/utils/func/general.utils";
+import { IOptionsReactHotToast } from "@/models/interfaces/general.interfaces";
 const IoIosWarning = dynamic(() => import("react-icons/io").then((mod) => mod.IoIosWarning));
 
-export default function warningNotification(message: string): void {
+export default function warningNotification(
+  message: string,
+  options?: IOptionsReactHotToast
+): void {
   if (!isUseClient()) {
     console.error(
       "❌ error - warningNotification - react-hot-toast se tiene q usar en componente cliente 'use client'"
@@ -27,6 +31,8 @@ export default function warningNotification(message: string): void {
     return;
   }
 
+  const { duration = 3000, position = "top-right" } = options ?? {};
+
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-yellow-500 p-4 rounded-xl">
       <IoIosWarning className="text-white animate-icon-enter text-2xl" />
@@ -38,8 +44,8 @@ export default function warningNotification(message: string): void {
       </p>
     </section>,
     {
-      duration: 2000,
-      position: "top-right",
+      duration,
+      position,
     }
   );
 }

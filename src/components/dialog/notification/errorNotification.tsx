@@ -4,8 +4,9 @@ import toast from "react-hot-toast";
 const FaTimesCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTimesCircle));
 import { isUseClient } from "@/utils/func/general.utils";
 import { isString } from "@/utils/func/dataType.utils";
+import { IOptionsReactHotToast } from "@/models/interfaces/general.interfaces";
 
-export default function errorNotification(message: string): void {
+export default function errorNotification(message: string, options?: IOptionsReactHotToast): void {
   if (!isUseClient()) {
     console.error(
       "❌ error - errorNotification - react-hot-toast se tiene q usar en componente cliente 'use client'"
@@ -25,6 +26,8 @@ export default function errorNotification(message: string): void {
     return;
   }
 
+  const { duration = 3000, position = "top-right" } = options ?? {};
+
   toast.custom(
     <section className="flex justify-center items-center gap-x-2 bg-red-500 p-4 rounded-xl">
       <FaTimesCircle className="text-white animate-icon-enter text-2xl" />
@@ -36,8 +39,8 @@ export default function errorNotification(message: string): void {
       </p>
     </section>,
     {
-      duration: 4000,
-      position: "top-right",
+      duration,
+      position,
     }
   );
 }
