@@ -58,18 +58,8 @@ export type TFiles =
 // formularios
 export type TFormTypes = FormData | URLSearchParams;
 
-// streams
-type TStreamTypes = ReadableStream<any> | NodeJS.ReadableStream;
-
 // tipo body
-type TBody =
-  | TPrimitive
-  | TObject
-  | TRecursiveObject
-  | TAnyArray
-  | TFiles
-  | TFormTypes
-  | TStreamTypes;
+type TBody = TPrimitive | TObject | TRecursiveObject | TAnyArray | TFiles | TFormTypes;
 
 /**
 parametros de funcion httpService para llamar a la API */
