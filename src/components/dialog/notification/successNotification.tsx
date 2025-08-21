@@ -7,24 +7,35 @@ const FaCheckCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.F
 
 export default function successNotification(message: string): void {
   if (!isUseClient()) {
-    console.error("❌ error - successNotification - react-hot-toast se tiene q usar en componente cliente 'use client'");
+    console.error(
+      "❌ error - successNotification - react-hot-toast se tiene q usar en componente cliente 'use client'"
+    );
     return;
   }
 
   if (!isString(message)) {
-    console.error("❌ error - successNotification - react-hot-toast necesita el mensaje tipo string");
+    console.error(
+      "❌ error - successNotification - react-hot-toast necesita el mensaje tipo string"
+    );
     return;
   }
 
   if (String(message).trim() === "") {
-    console.error("❌ error - successNotification - react-hot-toast - el mensaje no puede ser un string vacio ''");
+    console.error(
+      "❌ error - successNotification - react-hot-toast - el mensaje no puede ser un string vacio ''"
+    );
     return;
   }
 
   toast.custom(
-    <section className="flex justify-center items-center gap-x-2 bg-green-500 text-white p-4 rounded-xl">
-      <FaCheckCircle className="opacity-0 scale-50 animate-icon-enter text-2xl" />
-      <p>Exito: {message.trim().replaceAll(/\s+/g, ' ').replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}</p>
+    <section className="flex justify-center items-center gap-x-2 bg-green-500 p-4 rounded-xl">
+      <FaCheckCircle className="text-white animate-icon-enter text-2xl" />
+      <p>
+        <span className="text-white">Exito: </span>
+        <span className="text-white">
+          {message.replaceAll("undefined", "").replaceAll("null", "").replaceAll("NaN", "")}
+        </span>
+      </p>
     </section>,
     {
       duration: 4000,
