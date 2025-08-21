@@ -130,7 +130,7 @@ export async function httpService<T = any>(
   if (body) {
     // enviar body directamente cuando el body contiene un archivo (FormData)
     if (isFile(body)) {
-      fetchOptions.body = body;
+      fetchOptions.body = body as BodyInit;
     } else {
       // cuando se envia un JSON y NO se hace JSON.stringify el backend de NestJS da error
       fetchOptions.body = JSON.stringify(body);

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 /**
 Tipos de datos (formatos) de respuesta en fecth
 https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods */
-export type IResponseType = 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData';
+export type IResponseType = "json" | "text" | "blob" | "arrayBuffer" | "formData";
 
 /**
 ¿incluir cookies?
 https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials */
-type TCookiesCredentials = 'omit' | 'same-origin' | 'include';
+type TCookiesCredentials = "omit" | "same-origin" | "include";
 
 /**
 validar:
@@ -24,10 +24,39 @@ export interface IIsValidOptions {
   valid: boolean;
 }
 
+// primitivos
+type TPrimitive = string | number | boolean | null | undefined | symbol | bigint;
+
+// objetos genericos
+type TKeyRecord = string | number | symbol;
+type TObject = object | Record<TKeyRecord, unknown>;
+
+// arrays
+type TAnyArray = Array<TPrimitive | TObject | TAnyArray>;
+
+// archivos
+export type TFileTypes =
+  | Blob
+  | File
+  | FileList
+  | ArrayBuffer
+  | ArrayBufferView
+  | SharedArrayBuffer
+  | DataView;
+
+// formularios
+export type TFormTypes = FormData | URLSearchParams;
+
+// streams
+type TStreamTypes = ReadableStream<any> | NodeJS.ReadableStream;
+
+// tipo body
+type TBody = TPrimitive | TObject | TAnyArray | TFileTypes | TFormTypes | TStreamTypes;
+
 /**
 parametros de funcion httpService para llamar a la API */
 export interface IRequestOptions {
-  body?: any;
+  body?: TBody;
   queryParams?: Record<string, string | number | boolean | (string | number | boolean)[]>;
   headers?: Record<string, string | number>;
   responseType?: IResponseType;
@@ -46,7 +75,7 @@ export interface IObjectLogs {
   url?: string;
   options?: IRequestOptions;
   result?: IResponse;
-  response?: Response | null ;
+  response?: Response | null;
 }
 
 interface IData {
@@ -72,5 +101,5 @@ export interface IValidateApiResponse {
   method: Method;
   url: string;
   options: IRequestOptions;
-  response: Response | null ;
+  response: Response | null;
 }
