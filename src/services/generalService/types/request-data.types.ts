@@ -1,3 +1,6 @@
+/**
+metodos HTTP
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods */
 export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 /**
@@ -11,17 +14,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including
 type TCookiesCredentials = "omit" | "same-origin" | "include";
 
 /**
-validar:
-- URL q llama al endpoint
-- q tenga conexion a internet */
-export interface IParamsValidateOptions {
-  url: string;
-  method: Method;
-  options?: IRequestOptions;
-}
-export interface IIsValidOptions {
-  valid: boolean;
-}
+type de query params */
+type TQueryParams = Record<string, string | number | boolean | (string | number | boolean)[]>;
+
+/**
+type de headers */
+type THeaders = Record<string, string | number>;
 
 // primitivos
 type TPrimitive = string | number | boolean | null | undefined | symbol | bigint;
@@ -39,7 +37,7 @@ type TObject = object | Record<TKeyRecord, unknown>;
 type TAnyArray = Array<TPrimitive | TObject | TAnyArray>;
 
 // archivos
-export type TFiles =
+type TFiles =
   | Blob
   | File
   | ArrayBuffer
@@ -55,7 +53,7 @@ export type TFiles =
   | Float64Array;
 
 // formularios
-export type TFormTypes = FormData | URLSearchParams;
+type TFormTypes = FormData | URLSearchParams;
 
 // tipo body
 type TBody = TPrimitive | TObject | TRecursiveObject | TAnyArray | TFiles | TFormTypes;
@@ -64,8 +62,8 @@ type TBody = TPrimitive | TObject | TRecursiveObject | TAnyArray | TFiles | TFor
 parametros de funcion httpService para llamar a la API */
 export interface IRequestOptions {
   body?: TBody;
-  queryParams?: Record<string, string | number | boolean | (string | number | boolean)[]>;
-  headers?: Record<string, string | number>;
+  queryParams?: TQueryParams;
+  headers?: THeaders;
   responseType?: TResponseType;
   showLoader?: boolean;
   validateResponse?: boolean;
@@ -93,20 +91,33 @@ interface IData {
 
 /**
 asi es como responde la API */
-export interface IResponse {
+export interface IResponse<T = any> {
   success: boolean;
   status: number;
   message: string;
-  data: IData | any;
+  data: IData | T;
 }
 
 /**
 validar respuesta del backend */
-export interface IValidateApiResponse {
-  result: IResponse | any;
+export interface IValidateApiResponse<T = any> {
+  result: IResponse | T;
   responseType: TResponseType;
   method: Method;
   url: string;
   options: IRequestOptions;
   response: Response | null;
+}
+
+/**
+validar:
+- URL q llama al endpoint
+- q tenga conexion a internet */
+export interface IParamsValidateOptions {
+  url: string;
+  method: Method;
+  options?: IRequestOptions;
+}
+export interface IIsValidOptions {
+  valid: boolean;
 }
