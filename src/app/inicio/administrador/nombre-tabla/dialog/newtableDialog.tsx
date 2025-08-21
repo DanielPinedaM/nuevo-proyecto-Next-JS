@@ -4,10 +4,15 @@ import errorNotification from "@/components/dialog/notification/errorNotificatio
 import successNotification from "@/components/dialog/notification/successNotification";
 import GeneralErrorMessage from "@/components/GeneralErrorMessage";
 import { globalTailwindStyle } from "@/models/constants/layout.constants";
-import { constIsStandardGEL, constIsStandardMSPS } from "@/models/constants/nombre-tabla.constans";
+import {
+  constIsStandardGEL,
+  constIsStandardMSPS,
+  tables,
+} from "@/models/constants/nombre-tabla.constans";
 import { constRegex } from "@/models/constants/regex.constants";
 import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
 import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
+import { IRequestOptions } from "@/services/generalService/types/request-data.types";
 import { createTable } from "@/services/table-name.service";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
@@ -31,7 +36,11 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
   });
 
   const onSubmit = async (body: IFormCreateTable): Promise<void> => {
-    const { success, message } = await createTable(body);
+    const optionsApi: IRequestOptions = {
+      body,
+    };
+
+    const { success, message } = await createTable(optionsApi);
 
     if (success) {
       router.refresh();
@@ -46,17 +55,14 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
 
   const Footer = () => (
     <div className="flex justify-center gap-x-2 col-span-full">
-    <button form="form-new-dialog" type="submit" className="btn-primary">
-      aceptar
-    </button>
+      <button form="form-new-dialog" type="submit" className="btn-primary">
+        aceptar
+      </button>
 
-    <button
-      className="btn-secondary-with-border"
-      onClick={() => onHide()}
-    >
-      cancelar
-    </button>
-  </div>
+      <button className="btn-secondary-with-border" onClick={() => onHide()}>
+        cancelar
+      </button>
+    </div>
   );
 
   return (
@@ -98,7 +104,7 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
                     {...field}
                     id={name}
                     value={value}
-                    onChange={(e) => onChange((e.target.value).trimStart().toLowerCase())}
+                    onChange={(e) => onChange(e.target.value.trimStart().toLowerCase())}
                     onBlur={onBlur}
                     placeholder="Nombre"
                     className={`${globalTailwindStyle.input.general} block w-full`}
@@ -156,7 +162,9 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
                     value={value}
                     onChange={(e) => onChange(e.value)}
                     onBlur={onBlur}
-                    options={tables.toSorted((a: IDropdown, b: IDropdown) => a.label.localeCompare(b.label, "es-ES"))}
+                    options={tables.toSorted((a: IDropdown, b: IDropdown) =>
+                      a.label.localeCompare(b.label, "es-ES")
+                    )}
                     placeholder="Seleccionar tabla"
                     className={`${globalTailwindStyle.input.general} w-full`}
                   />
@@ -217,7 +225,9 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
                     value={value}
                     onChange={(e) => onChange(e.value)}
                     onBlur={onBlur}
-                    options={constIsStandardGEL.toSorted((a: IDropdown, b: IDropdown) => a.label.localeCompare(b.label, "es-ES"))}
+                    options={constIsStandardGEL.toSorted((a: IDropdown, b: IDropdown) =>
+                      a.label.localeCompare(b.label, "es-ES")
+                    )}
                     placeholder="Seleccionar isStandardGEL"
                     className={`${globalTailwindStyle.input.general} w-full`}
                   />
@@ -249,7 +259,7 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
                     {...field}
                     id={name}
                     value={value}
-                    onChange={(e) => onChange((e.target.value).trimStart().toLowerCase())}
+                    onChange={(e) => onChange(e.target.value.trimStart().toLowerCase())}
                     onBlur={onBlur}
                     placeholder="Nombre"
                     className={`${globalTailwindStyle.input.general} block w-full`}
@@ -276,7 +286,9 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
                     value={value}
                     onChange={(e) => onChange(e.value)}
                     onBlur={onBlur}
-                    options={constIsStandardMSPS.toSorted((a: IDropdown, b: IDropdown) => a.label.localeCompare(b.label, "es-ES"))}
+                    options={constIsStandardMSPS.toSorted((a: IDropdown, b: IDropdown) =>
+                      a.label.localeCompare(b.label, "es-ES")
+                    )}
                     placeholder="Seleccionar isStandardMSPS"
                     className={`${globalTailwindStyle.input.general} w-full`}
                   />

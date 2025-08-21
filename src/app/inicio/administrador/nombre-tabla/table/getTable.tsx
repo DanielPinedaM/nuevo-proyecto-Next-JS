@@ -1,7 +1,8 @@
 import ListTable from "@/app/inicio/administrador/nombre-tabla/table/listTable";
 import DataRender from "@/components/DataRender";
 import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
-import { listTableData } from "@/services/table-name";
+import { listTableData } from "@/services/table-name.service";
+
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {
   //const { data } = await listTableData(search);

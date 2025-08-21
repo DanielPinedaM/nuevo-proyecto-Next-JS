@@ -1,13 +1,14 @@
-import IFormLogin from '@/models/interfaces/login.interfaces';
-import { httpService } from '@/services/generalService/http.service';
-import { IResponse } from '@/services/generalService/types/request-data.types';
+import { httpService } from "@/services/generalService/http.service";
+import { IRequestOptions, IResponse } from "@/services/generalService/types/request-data.types";
 
 /**
 iniciar sesion */
-export async function login(body: IFormLogin): Promise<IResponse> {
-  const response: IResponse = await httpService('POST', process.env.NEXT_PUBLIC_AUTH_LOGIN, {
-    body,
-  });
+export async function login(optionsApi: IRequestOptions): Promise<IResponse> {
+  const response: IResponse = await httpService(
+    "POST",
+    process.env.NEXT_PUBLIC_AUTH_LOGIN,
+    optionsApi
+  );
 
   return response;
 }
@@ -16,7 +17,7 @@ export async function login(body: IFormLogin): Promise<IResponse> {
 de-codificar el token EN EL SERVIDOR 'use server' */
 export async function decodeTokenInServer(): Promise<IResponse> {
   const response: IResponse = await httpService(
-    'POST',
+    "POST",
     `${process.env.NEXT_PUBLIC_API}auth/profile`
   );
 
@@ -27,7 +28,7 @@ export async function decodeTokenInServer(): Promise<IResponse> {
 listar las URL del menu */
 export async function listUrl(): Promise<IResponse> {
   const response: IResponse = await httpService(
-    'POST',
+    "POST",
     `${process.env.NEXT_PUBLIC_API}auth/list-url`
   );
 

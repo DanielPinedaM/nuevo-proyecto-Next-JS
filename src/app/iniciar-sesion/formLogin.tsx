@@ -1,23 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
-import errorNotification from '@/components/dialog/notification/errorNotification';
-import GeneralErrorMessage from '@/components/GeneralErrorMessage';
-import { cookieOptionsInLogin } from '@/models/constants/cookie-storage.constants';
-import { globalTailwindStyle } from '@/models/constants/layout.constants';
-import { constRegex } from '@/models/constants/regex.constants';
-import IFormLogin from '@/models/interfaces/login.interfaces';
-import { IResponse } from '@/models/interfaces/response.interfaces';
-import { login } from '@/services/auth/auth.services';
-import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
-import { encrypt } from '@/utils/func/cryptoService.utils';
-import { forceConvertToString, isLiteralObject, literalObjectLength } from '@/utils/func/dataType.utils';
-import { sessionStorageDeleteAll } from '@/utils/func/sessionStorage.utils';
-import { deleteCookie, getCookies, setCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
-import { InputText } from 'primereact/inputtext';
-import { Password } from 'primereact/password';
-import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+"use client";
+import errorNotification from "@/components/dialog/notification/errorNotification";
+import GeneralErrorMessage from "@/components/GeneralErrorMessage";
+import { cookieOptionsInLogin } from "@/models/constants/cookie-storage.constants";
+import { globalTailwindStyle } from "@/models/constants/layout.constants";
+import { constRegex } from "@/models/constants/regex.constants";
+import IFormLogin from "@/models/interfaces/login.interfaces";
+import { IResponse } from "@/models/interfaces/response.interfaces";
+import { login } from "@/services/auth/auth.services";
+import { IRequestOptions } from "@/services/generalService/types/request-data.types";
+import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
+import { encrypt } from "@/utils/func/cryptoService.utils";
+import {
+  forceConvertToString,
+  isLiteralObject,
+  literalObjectLength,
+} from "@/utils/func/dataType.utils";
+import { sessionStorageDeleteAll } from "@/utils/func/sessionStorage.utils";
+import { deleteCookie, getCookies, setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import { InputText } from "primereact/inputtext";
+import { Password } from "primereact/password";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 export default function FormLogin() {
   const { showLoaderNavigation } = useNavigationLoaderStore();
@@ -27,7 +32,7 @@ export default function FormLogin() {
     handleSubmit,
     control,
   } = useForm<IFormLogin>({
-    criteriaMode: 'all',
+    criteriaMode: "all",
   });
 
   const router = useRouter();
@@ -54,7 +59,7 @@ export default function FormLogin() {
   const iterateUserData = (data: any): void => {
     if (!data) {
       console.error(
-        '❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n',
+        "❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n",
         data
       );
       return;
@@ -62,7 +67,7 @@ export default function FormLogin() {
 
     if (!isLiteralObject(data)) {
       console.error(
-        '❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n',
+        "❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n",
         data
       );
       return;
@@ -70,7 +75,7 @@ export default function FormLogin() {
 
     if (literalObjectLength(data) <= 0) {
       console.error(
-        '❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n',
+        "❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n",
         data
       );
       return;
@@ -81,7 +86,7 @@ export default function FormLogin() {
 
     if (!maxAge) {
       console.error(
-        '❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n',
+        "❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n",
         maxAge
       );
       return;
@@ -91,10 +96,10 @@ export default function FormLogin() {
       const [key, value] = entry;
       if (!key || !value) {
         console.error(
-          '❌ error, NO se puede setear las cookies porque una key ó value es falsy',
-          '\nkey ',
+          "❌ error, NO se puede setear las cookies porque una key ó value es falsy",
+          "\nkey ",
           key,
-          '\nvalue ',
+          "\nvalue ",
           value
         );
         return;
@@ -109,25 +114,27 @@ export default function FormLogin() {
 
     /* const { user, password } = formData;
 
-    const body: IFormLogin = {
-      user: user.trim(),
+     const optionsApi: IRequestOptions = {
+      body: {
+    user: user.trim(),
       password: await encrypt(password!.trim()),
+      }
     }
 
-    const { success, message, data }: IResponse = await login(body);
+    const { success, message, data }: IResponse = await login(optionsApi);
 
     if (success) { */
     // este codigo se tiene q borrar porq queme los datos
     iterateUserData({
       expiresIn: 7200,
-      accessToken: 'aqui va el token',
+      accessToken: "aqui va el token",
     });
 
     /* este es el codigo correcto q se tiene q des-comentar
     iterateUserData(data); */
 
     showLoaderNavigation();
-    router.push('/inicio/administrador');
+    router.push("/inicio/administrador");
     //} else {
     //deleteStorageAndCookies();
     //errorNotification(message);
@@ -136,73 +143,73 @@ export default function FormLogin() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-        <div className='mb-2'>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <div className="mb-2">
           <label>
-            <span className='cursor-pointer'>Correo electrónico</span>
+            <span className="cursor-pointer">Correo electrónico</span>
             <Controller
-              name='user'
+              name="user"
               control={control}
               rules={{
-                required: 'Digite correo electrónico',
+                required: "Digite correo electrónico",
                 pattern: {
                   value: constRegex.text.email,
-                  message: 'Correo electrónico invalido',
+                  message: "Correo electrónico invalido",
                 },
                 minLength: {
                   value: 2,
-                  message: 'Mínimo 2 caracteres',
+                  message: "Mínimo 2 caracteres",
                 },
                 maxLength: {
                   value: 30,
-                  message: 'Máximo 30 caracteres',
+                  message: "Máximo 30 caracteres",
                 },
               }}
-              render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+              render={({ field, field: { name, value = "", onChange, onBlur } }) => (
                 <InputText
                   {...field}
                   id={name}
                   value={value}
                   onChange={(e) => onChange(e.target.value)}
                   onBlur={onBlur}
-                  placeholder='nombre@correo.com'
+                  placeholder="nombre@correo.com"
                   className={`${globalTailwindStyle.input.general} block w-full`}
                 />
               )}
             />
           </label>
-          <GeneralErrorMessage errors={errors} name='user' />
+          <GeneralErrorMessage errors={errors} name="user" />
         </div>
 
-        <div className='mb-2'>
+        <div className="mb-2">
           <label>
-            <span className='cursor-pointer'>Contraseña</span>
+            <span className="cursor-pointer">Contraseña</span>
             <Controller
-              name='password'
+              name="password"
               control={control}
               rules={{
-                required: 'Digite contraseña',
+                required: "Digite contraseña",
               }}
-              render={({ field, field: { name, value = '', onChange, onBlur } }) => (
+              render={({ field, field: { name, value = "", onChange, onBlur } }) => (
                 <Password
                   {...field}
                   id={name}
                   value={value}
                   onChange={(e) => onChange(e.target.value)}
                   onBlur={onBlur}
-                  variant='filled'
+                  variant="filled"
                   feedback={false}
-                  placeholder='Contraseña'
+                  placeholder="Contraseña"
                   className={`${globalTailwindStyle.input.general}`}
                 />
               )}
             />
           </label>
-          <GeneralErrorMessage errors={errors} name='password' />
+          <GeneralErrorMessage errors={errors} name="password" />
         </div>
 
-        <div className='flex justify-end'>
-          <button type='submit' className='btn-primary'>
+        <div className="flex justify-end">
+          <button type="submit" className="btn-primary">
             ingresar
           </button>
         </div>
