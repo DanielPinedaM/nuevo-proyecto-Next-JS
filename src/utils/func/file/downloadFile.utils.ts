@@ -118,7 +118,7 @@ export const downloadExcel = async (
     return;
   }
 
-  if (!(String(fileName)?.includes('.xlsx'))) {
+  if (!(String(fileName).includes('.xlsx'))) {
     errorNotification(message);
     console.error('❌ fileName tiene q contener la extension .xlsx\n', fileName);
     return;
