@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='es-ES'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <LoaderInApiRequest />
         <Suspense fallback={null}>
           <NavigationLoader />

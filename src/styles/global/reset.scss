@@ -26,8 +26,13 @@
 html,
 body {
   background-color: variable.$white-smoke;
+  background-color: light-dark(variable.$white-smoke, variable.$white-smoke);
 
-  @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
+  @media (prefers-color-scheme: dark) {
+    background-color: variable.$white-smoke;
+  }
+
+  @media (prefers-color-scheme: light) {
     background-color: variable.$white-smoke;
   }
 }
@@ -95,12 +100,16 @@ h6 {
 h1, h2, h3, h4, h5, h6,
 p,
 span,
-b,
+b, 
+strong,
+code,
+pre,
 
 // campos con datos de entrada
 input,
 textarea,
 select,
+label,
 
 // contenedor padre de tabla
 table,
