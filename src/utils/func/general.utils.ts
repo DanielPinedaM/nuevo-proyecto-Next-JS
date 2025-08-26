@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import errorNotification from '@/components/dialog/notification/errorNotification';
-import successNotification from '@/components/dialog/notification/successNotification';
-import specialWords from '@/models/constants/special-words.constants';
+import errorNotification from "@/components/dialog/notification/errorNotification";
+import successNotification from "@/components/dialog/notification/successNotification";
+import { Options, titleCase as titleCaseNpm } from "title-case";
+import { isString } from "@/utils/func/dataType.utils";
+import { titleCaseOptions } from "@/models/constants/title-case.constants";
 
 /**
 prime NG - calcular paginador y numero de filas q se muestran en <table>
 el algoritmo funciona mejor si rows es multiplo de 3, pero puede ser cualquier numero */
 export const rowsPerPageOptions = (length: number = 0, rows: number = 0): number[] => {
-  if (typeof length !== 'number') {
+  if (typeof length !== "number") {
     console.error(
-      'para calcular el numero de filas del paginador de prime NG la el parametro de la longitud length del array debe ser tipo number',
+      "para calcular el numero de filas del paginador de prime NG la el parametro de la longitud length del array debe ser tipo number",
       typeof length
     );
     return [];
@@ -55,14 +57,14 @@ Separar array por comas
 Ejemplo: [1, 2, 3] devuelve 1, 2 y 3 */
 export const listFormat = (array: any[]): string => {
   const arrayString: string[] = array.map((item) => String(item));
-  return new Intl.ListFormat('es').format(arrayString);
+  return new Intl.ListFormat("es").format(arrayString);
 };
 
 /**
 recortar un string a un tamaño de caracteres máximo, agregando "..." si excede la longitud especificada */
 export const truncateString = (string: string | any, maxLength: number): string | any => {
-  if (typeof string === 'string' && string.length > maxLength) {
-    return string.slice(0, maxLength) + '...';
+  if (typeof string === "string" && string.length > maxLength) {
+    return string.slice(0, maxLength) + "...";
   }
 
   return string;
@@ -70,23 +72,13 @@ export const truncateString = (string: string | any, maxLength: number): string 
 
 /**
 hacer q los string tengan mayuscula inicial */
-export const titleCase = (string: string | any): string | any => {
-  if (typeof string !== 'string') return string;
-  if (string.trim() === '') return string;
+export const titleCase = (string: string, options?: Partial<Options>): string | any => {
+  if (!isString(string)) return string;
+  if (String(string).trim() === "") return "";
 
-  return string
-    .replaceAll('-', ' ')
-    .replace(/\w\S*/g, (word: string): string => {
-      const lowerCase = word.trim().toLocaleLowerCase();
+  const finalOptions: Options = { ...titleCaseOptions, ...options };
 
-      if (specialWords[lowerCase]) return specialWords[lowerCase];
-
-      if (word.length <= 3) return word.toLowerCase();
-
-      // agrear esto aqui .replaceAll("-", " ") y  conservar el title case
-      return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
-    })
-    .trim();
+  return titleCaseNpm(string, finalOptions);
 };
 
 /**
@@ -95,7 +87,7 @@ Ejemplo:
 ["esteban", "", "bolaños", "gomes"] devuelve "Esteban Bolaños Gomes" */
 export const concatenateArrayString = (arrayString: (string | null)[]): string | any => {
   if (Array.isArray(arrayString)) {
-    const concatenatedString = arrayString.filter(Boolean).join(' ');
+    const concatenatedString = arrayString.filter(Boolean).join(" ");
     return titleCase(concatenatedString);
   }
 
@@ -106,7 +98,7 @@ export const concatenateArrayString = (arrayString: (string | null)[]): string |
 el codigo se ejecuta en el servidor o cliente */
 export const isUseClient = (): boolean => {
   // 'use client' - cliente - CSR - frontend
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     return true;
   } else {
     // 'use server' - servidor - SSR - backend
@@ -117,7 +109,7 @@ export const isUseClient = (): boolean => {
 /**
 copiar texto en portapapeles */
 export const copyText = async (text: string): Promise<void> => {
-  const errorMessage: string = 'No se pudo copiar el texto';
+  const errorMessage: string = "No se pudo copiar el texto";
 
   if (!isUseClient()) {
     console.error("❌ error, solamente se puede copiar texto en componente cliente 'use client'");
@@ -125,7 +117,7 @@ export const copyText = async (text: string): Promise<void> => {
   }
 
   if (!text) {
-    console.error('❌ error, el texto a copiar NO puede ser falsy \n', text);
+    console.error("❌ error, el texto a copiar NO puede ser falsy \n", text);
     return;
   }
 
@@ -133,17 +125,17 @@ export const copyText = async (text: string): Promise<void> => {
     errorNotification(errorMessage);
     console.error(
       errorMessage,
-      ' porque el navegador no es compatible con navigator?.clipboard?.writeText'
+      " porque el navegador no es compatible con navigator?.clipboard?.writeText"
     );
     return;
   }
 
   try {
     await navigator.clipboard.writeText(text);
-    successNotification('Texto copiado');
+    successNotification("Texto copiado");
   } catch (e) {
     errorNotification(errorMessage);
-    console.error(errorMessage, '\n', e);
+    console.error(errorMessage, "\n", e);
   }
 };
 
@@ -151,7 +143,12 @@ export const copyText = async (text: string): Promise<void> => {
 obtener elemento de un array de forma aleatoria */
 export const getRandomItem = <T>(array: T[]): T | null => {
   if (!Array.isArray(array)) {
-    console.error("❌ error - getRandomItem - se requiere q sea tipo \narray ", array, "\n¿es array? ", Array.isArray(array));
+    console.error(
+      "❌ error - getRandomItem - se requiere q sea tipo \narray ",
+      array,
+      "\n¿es array? ",
+      Array.isArray(array)
+    );
     return null;
   }
 
