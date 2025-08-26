@@ -51,7 +51,7 @@ export async function httpService<T = any>(
 
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
     isASecurityEndpoint = defaultSecurityEndpoint(url),
-    credentials = "same-origin",
+    credentials = defaultSecurityEndpoint(url) ? "include" : "same-origin",
   } = options;
 
   // Validar que el método GET NO tenga body
@@ -87,6 +87,8 @@ export async function httpService<T = any>(
   }
 
   // Agregar token si el endpoint lo necesita
+  /*
+  des-comentar para enviar token por Bearer headers HTTP Authorization
   if (isASecurityEndpoint) {
     const token = await getToken();
 
@@ -112,7 +114,7 @@ export async function httpService<T = any>(
 
       return { success: false, status: 401, message, data: [] };
     }
-  }
+  } */
 
   // Convertir queryParams si el endpoint es por query
   const queryString = queryParams
