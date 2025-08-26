@@ -46,19 +46,13 @@ export interface IObjectLogs {
   response?: Response | null;
 }
 
-interface IData {
-  timestamp: string;
-  path: string;
-  error: string | null;
-}
-
 /**
 asi es como responde la API */
 export interface IResponse<T = any> {
   success: boolean;
   status: number;
   message: string;
-  data: IData | T;
+  data: T;
 }
 
 /**
