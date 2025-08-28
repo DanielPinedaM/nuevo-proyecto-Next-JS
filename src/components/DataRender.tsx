@@ -1,5 +1,5 @@
 
-import { isBoolean, isLiteralObject, literalObjectLength } from "@/utils/func/dataType.utils";
+import { isLiteralObject, literalObjectLength } from "@/utils/func/dataType.utils";
 import { ReactNode } from "react";
 
 interface IDataRender {
@@ -21,7 +21,7 @@ export default function DataRender({
 }: IDataRender) {
 
   if (SkeletonComponent) {
-    if (data === undefined || (isBoolean(loading) && loading))  return <>{SkeletonComponent}</>
+    if (data === undefined ||  (typeof loading === "boolean" && loading))  return <>{SkeletonComponent}</>
   }
 
   if (Array.isArray(data) && data?.length > 0) return <>{RenderComponent}</>;

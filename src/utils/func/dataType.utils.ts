@@ -166,10 +166,11 @@ export const convertToStringAndLowerCase = (string: string | any): string | null
   return null;
 };
 
-export const isBoolean = (variable: boolean | string | any): boolean => {
+export const isValidBoolean = (variable: boolean | string | any): boolean => {
   const normalized: string = String(variable)?.trim()?.toLowerCase();
 
   if (
+    typeof variable === "boolean" ||
     // true
     normalized === 'true' ||
     normalized === '1' ||
@@ -263,7 +264,7 @@ export const convertFlatObjectValues = (obj: Record<string, any>): Record<string
       newObject[key] = NaN;
     } else if (isNumber(value) || isStringNumber(value)) {
       newObject[key] = convertToNumber(value);
-    } else if (isBoolean(value)) {
+    } else if (isValidBoolean(value)) {
       newObject[key] = convertToBoolean(value);
     } else {
       newObject[key] = value;
