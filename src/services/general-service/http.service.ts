@@ -244,7 +244,8 @@ async function httpService<T = any>(
 
     if (noFetchResponse || fetchError || noApiResult || apiError) {
       errorLogs({
-        message: "al ejecutar peticion HTTP",
+        message:
+          validateResponse && result?.message ? result.message : "error al ejecutar peticion HTTP",
         method,
         url,
         options,
@@ -266,6 +267,7 @@ async function httpService<T = any>(
       });
     }
   } catch (error: any) {
+    console.error("❌ error en http.service.ts \n", error);
   } finally {
     // ocultar loader en componente cliente 'use cliente'
     if (isUseClient() && showLoader) {

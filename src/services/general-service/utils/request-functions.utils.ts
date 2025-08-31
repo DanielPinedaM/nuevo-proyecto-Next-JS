@@ -135,7 +135,7 @@ export function internetConnection({
   if (isInvalid) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
-    errorNotification(message);
+    if (isUseClient()) errorNotification(message);
 
     errorLogs({
       message,
@@ -233,8 +233,8 @@ export function errorLogs(objectLogs: IObjectLogs): void {
   const objError: any = {};
 
   const componentType: string = isUseClient()
-    ? "❌ error en el CLIENTE 'use client'"
-    : "❌ error en el SERVIDOR 'use server'";
+    ? "componente CLIENTE 'use client'"
+    : "componente SERVIDOR 'use server'";
 
   objError.componentType = componentType;
 
@@ -253,14 +253,14 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 
   objError.timestamp = currentDateAndTime();
 
-  if (options) objError.options = options;
+  if (literalObjectLength(options) > 0) objError.options = options;
 
   objError.isJsonResponse =
     response?.headers?.get("content-type")?.includes("application/json") ?? false;
 
   objError.apiResponse = result ? result : response;
 
-  console.error("❌ error en peticion HTTP, informacion del error\n ", objError);
+  console.error("❌ error en peticion HTTP, informacion del error:\n", objError);
 }
 
 /**
@@ -365,7 +365,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
     handleUnauthorized();
 
-    if (!pathnameIsLogin()) errorNotification("Inicie sesión para continuar");
+    if (!pathnameIsLogin() && isUseClient()) errorNotification("Inicie sesión para continuar");
   } else if (status === 403) {
     console.error(
       "❌ http.service.ts - Error 403: Forbidden",
@@ -378,21 +378,24 @@ export function errorHandling(status: number | undefined, url: string): void {
     // devolverme a la web anterior en el historial cuando el status de la respuesta de la api sea 403
     returnToBrowserHistory();
 
-    errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
+    if (isUseClient())
+      errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
   } else if (status === 404) {
     console.error(
       `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
     );
 
-    errorNotification(
-      "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
-    );
+    if (isUseClient())
+      errorNotification(
+        "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
+      );
   } else if (status >= 500) {
     console.error(`❌ http.service.ts - error en el servidor en la URL ${url}`);
 
-    errorNotification(
-      "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
-    );
+    if (isUseClient())
+      errorNotification(
+        "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
+      );
   }
 }
 
