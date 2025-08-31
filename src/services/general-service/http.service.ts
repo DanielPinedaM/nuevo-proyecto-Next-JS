@@ -242,6 +242,7 @@ async function httpService<T = any>(
         options,
         result,
         response,
+        validateResponse,
         showLogger,
       });
     }

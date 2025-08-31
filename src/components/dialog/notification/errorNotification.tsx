@@ -7,12 +7,7 @@ import { isString } from "@/utils/func/dataType.utils";
 import { IOptionsReactHotToast } from "@/models/interfaces/general.interfaces";
 
 export default function errorNotification(message: string, options?: IOptionsReactHotToast): void {
-  if (!isUseClient()) {
-    console.error(
-      "❌ error - errorNotification - react-hot-toast se tiene q usar en componente cliente 'use client'"
-    );
-    return;
-  }
+  if (!isUseClient()) return;
 
   if (!isString(message)) {
     console.error("❌ error - errorNotification - react-hot-toast necesita el mensaje tipo string");

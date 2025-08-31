@@ -246,7 +246,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
 
-  const { method, url, options, result, showLogger } = objectLogs;
+  const { method, url, options, result, validateResponse, showLogger } = objectLogs;
 
   if (!showLogger) return;
 
@@ -309,10 +309,13 @@ export function successLogs(objectLogs: IObjectLogs): void {
       console.info("componente SERVIDOR 'use server'");
     }
 
-    console.info(
-      `respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`,
-      objectSuccesResponse
-    );
+    console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
+
+    if (validateResponse) {
+      console.info(objectSuccesResponse);
+    } else {
+      console.info(result);
+    }
   }
 
   console.info("\n");
@@ -340,7 +343,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
     handleUnauthorized();
 
-    if (isUseClient() && !pathnameIsLogin()) {
+    if (!pathnameIsLogin()) {
       errorNotification("Inicie sesión para continuar");
     }
   } else if (status === 403) {
@@ -363,19 +366,15 @@ export function errorHandling(status: number | undefined, url: string): void {
       `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
     );
 
-    if (isUseClient()) {
-      errorNotification(
-        "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
-      );
-    }
+    errorNotification(
+      "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
+    );
   } else if (status >= 500) {
     console.error(`❌ http.service.ts - error en el servidor en la URL ${url}`);
 
-    if (isUseClient()) {
-      errorNotification(
-        "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
-      );
-    }
+    errorNotification(
+      "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
+    );
   }
 }
 

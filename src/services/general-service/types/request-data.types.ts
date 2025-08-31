@@ -45,6 +45,7 @@ export interface IObjectLogs {
   options?: IRequestOptions;
   result?: IResponse;
   response?: Response | null;
+  validateResponse?: boolean;
   showLogger?: boolean;
 }
 
