@@ -276,40 +276,42 @@ export function successLogs(objectLogs: IObjectLogs): void {
     console.info("body ", options?.body);
   }
 
+  if (validateResponse) {
+  } else {
+  }
+
   if (isNoContentStatus(response?.status as number)) {
+    
     return;
   }
 
-  if (!result) return;
-
-  let { success, message, data } = result;
+  let { success: successApi, status: statusApi, message: messageApi, data: dataApi } = result ?? {};
 
   let dataMessage: string = "";
 
-  if (data) {
-    if (Array.isArray(data)) {
-      if (data.length === 0) {
+  const newData = validateResponse ? dataApi : result;
+
+  if (newData) {
+    if (Array.isArray(newData)) {
+      if (newData?.length === 0) {
         dataMessage = "array vacío ➡️ (0) []";
       } else {
         // data es un array de objetos [{}]
-        const areAllObjects: boolean = data?.every(
+        const areAllObjects: boolean = newData?.every(
           (item) => typeof item === "object" && item && item !== null
         );
         if (areAllObjects) {
-          dataMessage = `array de objetos con ${data.length} elemento ➡️ (${data.length}) [{}]`;
+          dataMessage = `array de objetos con ${newData.length} elemento ➡️ (${newData.length}) [{}]`;
         } else {
           // data es un array []
-          dataMessage = `array de ${data.length} elementos ➡️ (${data.length}) []`;
+          dataMessage = `array de ${newData.length} elementos ➡️ (${newData.length}) []`;
         }
       }
     }
 
     // data es un objeto literal {}
-    else if (
-      Object.getPrototypeOf(data) === Object.prototype ||
-      Object.prototype.toString.call(data) === "[object Object]"
-    ) {
-      const length: number | null = literalObjectLength(data);
+    else if (isLiteralObject(newData)) {
+      const length: number | null = literalObjectLength(newData);
 
       if (length === 0) {
         dataMessage = "objeto literal vacío ➡️ (0) {}";
@@ -319,28 +321,24 @@ export function successLogs(objectLogs: IObjectLogs): void {
     }
   }
 
-  const objectSuccesResponse: IResponse = {
-    success,
-    status: response?.status as number,
-    message,
-    data: dataMessage,
-  };
-
   if (isUseClient()) {
     console.info("componente CLIENTE 'use client'");
   } else {
     console.info("componente SERVIDOR 'use server'");
   }
 
-  console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
+  const objectSuccesResponse: IResponse = {
+    success: (validateResponse ? successApi : response?.ok) as boolean,
+    status: (validateResponse ? statusApi : response?.status) as number,
+    message: (validateResponse ? messageApi : response?.statusText) as string,
+    data: dataMessage,
+  };
 
-  if (validateResponse) {
-    console.info(objectSuccesResponse);
-  } else {
-    console.info(result);
-  }
-
-  console.info("\n");
+  console.info(
+    `respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`,
+    objectSuccesResponse,
+    "\n"
+  );
 }
 
 /**
