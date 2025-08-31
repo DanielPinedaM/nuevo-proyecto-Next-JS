@@ -71,15 +71,11 @@ export function isNoContentStatus(status: number): boolean {
 
 /**
 validar URL q llama al endpoint */
-export function isValidUrl({
-  url,
-  method,
-  options,
-}: IParamsValidateOptions): IIsValidOptions | IResponse {
-  const isInvalid: boolean =
+export function isValidUrl({ url, method, options }: IParamsValidateOptions): IIsValidOptions {
+  const invalidUrl: boolean =
     !url || !isString(url) || String(url).trim() === "" || !String(url).startsWith("http");
 
-  if (isInvalid) {
+  if (invalidUrl) {
     const message: string = "URL invalida";
 
     errorLogs({
@@ -89,7 +85,7 @@ export function isValidUrl({
       options,
     });
 
-    return { success: false, status: 400, message, data: [] };
+    return { valid: false };
   }
 
   return { valid: true };
@@ -101,13 +97,15 @@ export function validateBodyWithGetMethod({
   url,
   method,
   options,
-}: IParamsValidateOptions): IIsValidOptions | IResponse {
+}: IParamsValidateOptions): IIsValidOptions {
   const body: any = options?.body;
 
   const isInvalid: boolean = Boolean(body) && method === "GET";
 
   if (isInvalid) {
-    const message: string = `❌ error el método GET NO puede tener body ${JSON.stringify(body)}`;
+    const message: string = `❌ error el método HTTP GET NO puede tener body ${JSON.stringify(
+      body
+    )}`;
 
     errorLogs({
       message,
@@ -116,7 +114,7 @@ export function validateBodyWithGetMethod({
       options,
     });
 
-    return { success: false, status: 400, message, data: [] };
+    return { valid: false };
   }
 
   return { valid: true };
@@ -129,10 +127,10 @@ export function internetConnection({
   url,
   method,
   options,
-}: IParamsValidateOptions): IIsValidOptions | IResponse {
-  const isInvalid: boolean = isUseClient() && !window?.navigator?.onLine;
+}: IParamsValidateOptions): IIsValidOptions {
+  const withoutInternet: boolean = isUseClient() && !window?.navigator?.onLine;
 
-  if (isInvalid) {
+  if (withoutInternet) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
     if (isUseClient()) errorNotification(message);
@@ -144,12 +142,7 @@ export function internetConnection({
       options,
     });
 
-    return {
-      success: false,
-      status: 503,
-      message,
-      data: [],
-    };
+    return { valid: false };
   }
 
   return { valid: true };

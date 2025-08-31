@@ -31,19 +31,6 @@ async function httpService<T = any>(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  // validar URL q llama al endpoint
-  const _isValidUrl: IIsValidOptions | IResponse = isValidUrl({ url, method, options });
-  if ((_isValidUrl as any)?.valid !== true) return _isValidUrl;
-
-  // validar q tenga conexion a internet
-  // window?.navigator?.onLine no siempre funciona
-  const _internetConnection: IIsValidOptions | IResponse = internetConnection({
-    url,
-    method,
-    options,
-  });
-  if ((_internetConnection as any)?.valid !== true) return _internetConnection;
-
   const {
     body,
     queryParams,
@@ -64,13 +51,59 @@ async function httpService<T = any>(
     cookieHttpOnly = defaultSecurityEndpoint(url) ? "include" : "same-origin",
   } = options;
 
-  // Validar que el método GET NO tenga body
-  const _validateBodyWithGetMethod: IIsValidOptions | IResponse = validateBodyWithGetMethod({
+  // validar URL q llama al endpoint
+  const _isValidUrl: IIsValidOptions = isValidUrl({ url, method, options });
+  if (!_isValidUrl.valid) {
+    if (validateResponse) {
+      return {
+        success: false,
+        status: 400,
+        message: "URL invalida",
+        data: [],
+      };
+    } else {
+      return [];
+    }
+  }
+
+  // validar q tenga conexion a internet
+  // window?.navigator?.onLine no siempre funciona
+  const _internetConnection: IIsValidOptions = internetConnection({
     url,
     method,
     options,
   });
-  if ((_validateBodyWithGetMethod as any)?.valid !== true) return _validateBodyWithGetMethod;
+  if (!_internetConnection.valid) {
+    if (validateResponse) {
+      return {
+        success: false,
+        status: 503,
+        message: "conéctese a internet para que la página web pueda funcionar",
+        data: [],
+      };
+    } else {
+      return [];
+    }
+  }
+
+  // Validar que el método GET NO tenga body
+  const _validateBodyWithGetMethod: IIsValidOptions = validateBodyWithGetMethod({
+    url,
+    method,
+    options,
+  });
+  if (!_validateBodyWithGetMethod.valid) {
+    if (validateResponse) {
+      return {
+        success: false,
+        status: 503,
+        message: `error el método HTTP GET NO puede tener body ${JSON.stringify(body)}`,
+        data: [],
+      };
+    } else {
+      return [];
+    }
+  }
 
   // loader global q se muestra y oculta en componentes cliente 'use client'
   let loaderStore: ILoaderState | null = null;
@@ -155,7 +188,12 @@ async function httpService<T = any>(
 
   // intenta convertir la respuesta de la API a 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'
   // y guarda la respuesta de la API
-  let result: null | any = null;
+  let result: IResponse | any = {
+    success: false,
+    status: 500,
+    message: "Sin procesar",
+    data: [],
+  };
 
   try {
     response = await fetch(requestUrl, fetchOptions);
@@ -193,10 +231,21 @@ async function httpService<T = any>(
         `error la API respondió con tipo JSON y se espera un tipo responseType ${responseType}`
       )) as T;
     } else {
-      result = response;
+      const message = `formato de respuesta responseType ${responseType} no valido en http.service.ts`;
+
+      if (validateResponse) {
+        result = {
+          success: false,
+          status: 400,
+          message,
+          data: [],
+        };
+      } else {
+        result = response;
+      }
 
       errorLogs({
-        message: `formato de respuesta responseType ${responseType} no valido en http.service.ts`,
+        message,
         method,
         url,
         options,
