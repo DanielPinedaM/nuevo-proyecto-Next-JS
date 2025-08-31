@@ -40,11 +40,11 @@ async function httpService<T = any>(
     // ¿mostrar icono de cargando?
     showLoader = true,
 
-    // ¿la API responde con el tipo IResponse?
-    validateResponse = true,
-
     // ¿mostrar logs en consola?
     showLogger = true,
+
+    // ¿la API responde con el tipo IResponse?
+    validateResponse = true,
 
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
     //tokenInHeaders = defaultSecurityEndpoint(url),
