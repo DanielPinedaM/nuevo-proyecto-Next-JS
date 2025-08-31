@@ -253,8 +253,7 @@ async function httpService<T = any>(
         showLogger,
       });
 
-      // capturar el error en el catch
-      throw new Error(JSON.stringify(result));
+      errorHandling(response?.status, url);
     } else {
       successLogs({
         method,
@@ -267,26 +266,6 @@ async function httpService<T = any>(
       });
     }
   } catch (error: any) {
-    let parsedError: IResponse | null | any = null;
-
-    if (validateResponse && typeof error?.message === "string") {
-      parsedError = JSON.parse(error.message);
-    } else {
-      parsedError = error;
-    }
-
-    // obtener http status real de fetch si existe, sino obtener el de la API
-    let status: number = 0;
-    if (typeof response?.status === "number") {
-      status = response.status;
-    } else if (validateResponse && typeof result?.status === "number") {
-      status = result.status;
-    } else {
-      console.error("❌ error: no se pudo obtener el http status de la respuesta de la API \n");
-      status = 0;
-    }
-
-    errorHandling(status, url);
   } finally {
     // ocultar loader en componente cliente 'use cliente'
     if (isUseClient() && showLoader) {
@@ -303,15 +282,15 @@ async function httpService<T = any>(
         });
       }
     }
-  }
 
-  // retornar respuesta de la API sin importar si fue exitosa o no
-  if (validateResponse) {
-    // forzar a q la API responda con el tipo IResponse ó con un archivo
-    return validateApiResponse({ result, response, responseType, method, url, options });
-  } else {
-    // la API puede responder con lo q sea
-    return result;
+    // retornar respuesta de la API sin importar si fue exitosa o no
+    if (validateResponse) {
+      // forzar a q la API responda con el tipo IResponse ó con un archivo
+      return validateApiResponse({ result, response, responseType, method, url, options });
+    } else {
+      // la API puede responder con lo q sea
+      return result;
+    }
   }
 }
 

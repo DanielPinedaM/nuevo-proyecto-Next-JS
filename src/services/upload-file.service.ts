@@ -9,6 +9,13 @@ import { isFile } from "@/utils/func/dataType.utils";
 
 const message: string = "❌ error NO se esta enviando un formData para subir archivo(s) ";
 
+const ERROR_FILE_OBJECT: IResponse = {
+  success: false,
+  status: 400,
+  message: "se requiere archivo",
+  data: [],
+};
+
 /**
 interface que sirve para
 - enviar ID por BODY
@@ -26,7 +33,8 @@ export async function uploadOneOrMoreFilesByBody({
 }: IUploadOneOrMoreFiles): Promise<IResponse> {
   if (!isFile(file)) {
     console.error("uploadOneOrMoreFilesByBody ", message, "\nfile ", file);
-    throw new Error("");
+
+    return ERROR_FILE_OBJECT;
   }
 
   const { env, route, method } = url;
@@ -66,7 +74,7 @@ export async function uploadOneOrMoreFilesWithoutId({
 }: IUploadOneOrMoreFiles): Promise<IResponse> {
   if (!isFile(file)) {
     console.error("uploadOneOrMoreFilesWithoutId ", message, "\nfile ", file);
-    throw new Error("");
+    return ERROR_FILE_OBJECT;
   }
 
   const { env, route, method } = url;
@@ -112,7 +120,7 @@ export async function uploadOneOrMoreFilesByParams({
 }: IUploadOneOrMoreFilesByParams): Promise<IResponse> {
   if (!isFile(file)) {
     console.error("uploadOneOrMoreFilesByParams ", message, "\nfile ", file);
-    throw new Error("");
+    return ERROR_FILE_OBJECT;
   }
 
   const { env, route, method } = url;

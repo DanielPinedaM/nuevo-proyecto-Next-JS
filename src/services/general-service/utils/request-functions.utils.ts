@@ -343,7 +343,10 @@ export function successLogs(objectLogs: IObjectLogs): void {
 /**
 manejar mensajes de error q vienen del servidor (API) */
 export function errorHandling(status: number | undefined, url: string): void {
-  if (!status) return;
+  if (typeof status !== "number") {
+    console.error("❌ error: no se pudo obtener el HTTP status de la respuesta de la API ");
+    return;
+  }
 
   if (
     status === 401 &&
@@ -362,9 +365,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
     handleUnauthorized();
 
-    if (!pathnameIsLogin()) {
-      errorNotification("Inicie sesión para continuar");
-    }
+    if (!pathnameIsLogin()) errorNotification("Inicie sesión para continuar");
   } else if (status === 403) {
     console.error(
       "❌ http.service.ts - Error 403: Forbidden",
@@ -377,9 +378,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     // devolverme a la web anterior en el historial cuando el status de la respuesta de la api sea 403
     returnToBrowserHistory();
 
-    if (isUseClient()) {
-      errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
-    }
+    errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
   } else if (status === 404) {
     console.error(
       `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
@@ -516,12 +515,17 @@ export async function responseFile<T>(
       response,
     });
 
-    throw new Error(JSON.stringify(result));
+    return result;
   }
 
   if (responseType === "blob") return (await response.blob()) as T;
   if (responseType === "arrayBuffer") return (await response.arrayBuffer()) as T;
   if (responseType === "formData") return (await response.formData()) as T;
 
-  throw new Error(`formato de respuesta responseType ${responseType} no valido en responseFile`);
+  return {
+    success: false,
+    status: 400,
+    message: `formato de respuesta responseType ${responseType} no valido en responseFile`,
+    data: [],
+  } as T;
 }

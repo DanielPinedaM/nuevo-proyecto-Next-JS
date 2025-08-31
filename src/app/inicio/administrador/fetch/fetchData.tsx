@@ -1,6 +1,6 @@
-import { loadPost } from '@/services/posts.service';
-import ListData from './listData';
-import DataRender from '@/components/DataRender';
+import { loadPost } from "@/services/posts.service";
+import ListData from "./listData";
+import DataRender from "@/components/DataRender";
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */
@@ -14,12 +14,12 @@ export default async function FetchData() {
         data={posts}
         RenderComponent={
           <>
-            {posts.map((post) => (
-              <ListData post={post} key={post.id} />
+            {[posts ?? []]?.map((post, i) => (
+              <ListData post={post ?? []} key={post?.id ?? i} />
             ))}
           </>
         }
-        EmptyComponent={<p className='text-center'>No hay datos</p>}
+        EmptyComponent={<p className="text-center">No hay datos</p>}
       />
     </>
   );
