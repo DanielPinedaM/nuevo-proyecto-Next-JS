@@ -6,9 +6,9 @@ import { cookieOptionsInLogin } from "@/models/constants/cookie-storage.constant
 import { globalTailwindStyle } from "@/models/constants/layout.constants";
 import { constRegex } from "@/models/constants/regex.constants";
 import IFormLogin from "@/models/interfaces/login.interfaces";
-import { IResponse } from "@/services/generalService/types/request-data.types";
+import { IResponse } from "@/services/general-service/types/request-data.types";
 import { login } from "@/services/auth/auth.services";
-import { IRequestOptions } from "@/services/generalService/types/request-data.types";
+import { IRequestOptions } from "@/services/general-service/types/request-data.types";
 import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
 import { encrypt } from "@/utils/func/cryptoService.utils";
 import {

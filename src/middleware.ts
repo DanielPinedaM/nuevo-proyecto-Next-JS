@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IResponse } from "@/services/generalService/types/request-data.types"
+import { IResponse } from "@/services/general-service/types/request-data.types"
 import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
 import { decodeTokenInServer } from "@/services/auth/auth.services";
 import { constPath } from "@/models/constants/path.constants";

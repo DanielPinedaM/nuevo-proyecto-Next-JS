@@ -9,7 +9,7 @@ import ListFiles from "@/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/components/dialog/uploadFile/textAndButtons/uploadFile";
 import { globalTailwindStyle } from "@/models/constants/layout.constants";
 import { IUploadFile } from "@/models/interfaces/upload-file.interfaces";
-import { IResponse } from "@/services/generalService/types/request-data.types";
+import { IResponse } from "@/services/general-service/types/request-data.types";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,

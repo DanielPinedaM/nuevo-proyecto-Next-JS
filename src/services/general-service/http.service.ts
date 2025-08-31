@@ -12,18 +12,20 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from "@/services/generalService/utils/request-functions.utils";
+} from "@/services/general-service/utils/request-functions.utils";
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
   Method,
-} from "@/services/generalService/types/request-data.types";
+} from "@/services/general-service/types/request-data.types";
 import { ILoaderState } from "@/store/loader/loaderStore";
 
-/**
-funcion general para llamar a API */
-export async function httpService<T = any>(
+/*
+ ***************************
+ * validar peticiones HTTP *
+ *************************** */
+async function httpService<T = any>(
   method: Method,
   url: string = "",
   options: IRequestOptions = {}
@@ -46,12 +48,19 @@ export async function httpService<T = any>(
     queryParams,
     headers = {},
     responseType = "json",
+
+    // ¿mostrar icono de cargando?
     showLoader = true,
+
+    // ¿la API responde con el tipo IResponse?
     validateResponse = true,
 
+    // ¿mostrar logs en consola?
+    showLogger = true,
+
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
-    isASecurityEndpoint = defaultSecurityEndpoint(url),
-    credentials = defaultSecurityEndpoint(url) ? "include" : "same-origin",
+    //tokenInHeaders = defaultSecurityEndpoint(url),
+    cookieHttpOnly = defaultSecurityEndpoint(url) ? "include" : "same-origin",
   } = options;
 
   // Validar que el método GET NO tenga body
@@ -88,8 +97,8 @@ export async function httpService<T = any>(
 
   // Agregar token si el endpoint lo necesita
   /*
-  des-comentar para enviar token por Bearer headers HTTP Authorization
-  if (isASecurityEndpoint) {
+  des-comentar para enviar token por headers authorization Bearer. ⚠️ Esto se puede hackear con ataque XSS 🚨
+  if (tokenInHeaders) {
     const token = await getToken();
 
     if (token) {
@@ -106,6 +115,7 @@ export async function httpService<T = any>(
         method,
         url,
         options,
+        showLogger
       });
 
       if (showLoader) {
@@ -126,7 +136,7 @@ export async function httpService<T = any>(
   const fetchOptions: RequestInit = {
     method,
     headers: finalHeaders,
-    credentials,
+    credentials: cookieHttpOnly,
   };
 
   if (body) {
@@ -172,6 +182,7 @@ export async function httpService<T = any>(
         options,
         result,
         response,
+        showLogger,
       });
     }
 
@@ -190,6 +201,7 @@ export async function httpService<T = any>(
         options,
         result,
         response,
+        showLogger,
       });
 
       return {
@@ -218,6 +230,7 @@ export async function httpService<T = any>(
         options,
         result,
         response,
+        showLogger,
       });
 
       // capturar el error en el catch
@@ -229,6 +242,7 @@ export async function httpService<T = any>(
         options,
         result,
         response,
+        showLogger,
       });
     }
   } catch (error: any) {
@@ -266,6 +280,7 @@ export async function httpService<T = any>(
           url,
           options,
           result,
+          showLogger,
         });
       }
     }
@@ -279,4 +294,44 @@ export async function httpService<T = any>(
     // la API puede responder con lo q sea
     return result;
   }
+}
+
+/*
+ *********************************************************
+ * funciones con metodos HTTP para llamar endpoint (API) *
+ ********************************************************* */
+
+export async function GET(
+  url: string = "",
+  options: IRequestOptions = {}
+): Promise<IResponse | any> {
+  return httpService("GET", url, options);
+}
+
+export async function POST(
+  url: string = "",
+  options: IRequestOptions = {}
+): Promise<IResponse | any> {
+  return httpService("POST", url, options);
+}
+
+export async function PUT(
+  url: string = "",
+  options: IRequestOptions = {}
+): Promise<IResponse | any> {
+  return httpService("PUT", url, options);
+}
+
+export async function PATCH(
+  url: string = "",
+  options: IRequestOptions = {}
+): Promise<IResponse | any> {
+  return httpService("PATCH", url, options);
+}
+
+export async function DELETE(
+  url: string = "",
+  options: IRequestOptions = {}
+): Promise<IResponse | any> {
+  return httpService("DELETE", url, options);
 }

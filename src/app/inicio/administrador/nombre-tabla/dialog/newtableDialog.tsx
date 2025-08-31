@@ -12,7 +12,7 @@ import {
 import { constRegex } from "@/models/constants/regex.constants";
 import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
 import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
-import { IRequestOptions } from "@/services/generalService/types/request-data.types";
+import { IRequestOptions } from "@/services/general-service/types/request-data.types";
 import { createTable } from "@/services/table-name.service";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";

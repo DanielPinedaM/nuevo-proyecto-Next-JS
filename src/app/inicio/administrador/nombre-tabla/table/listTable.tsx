@@ -7,7 +7,7 @@ import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import StatusReactIcon from "@/components/StatusIcon";
 import { formatDate } from "@/utils/func/luxon.utils";
-import { IResponse } from "@/services/generalService/types/request-data.types";
+import { IResponse } from "@/services/general-service/types/request-data.types";
 import errorNotification from "@/components/dialog/notification/errorNotification";
 import successNotification from "@/components/dialog/notification/successNotification";
 import infoNotification from "@/components/dialog/notification/infoNotification";

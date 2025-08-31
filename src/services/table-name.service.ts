@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
-import { httpService } from "@/services/generalService/http.service";
-import { IRequestOptions, IResponse } from "@/services/generalService/types/request-data.types";
+import { POST } from "@/services/general-service/http.service";
+import { IRequestOptions, IResponse } from "@/services/general-service/types/request-data.types";
 
 /**
 listar y buscar data de tabla llamada "nombre-tabla" */
 export async function listTableData(search: string): Promise<IResponse> {
-  const response: IResponse = await httpService(
-    "POST",
+  const response: IResponse = await POST(
     `${process.env.NEXT_PUBLIC_}${search ? "/" + search : ""}`
   );
 
@@ -17,7 +15,7 @@ export async function listTableData(search: string): Promise<IResponse> {
 /**
 peticion de ventana modal para guardar nueva tabla */
 export async function createTable(optionsApi: IRequestOptions): Promise<IResponse> {
-  const response: IResponse = await httpService("POST", `${process.env.NEXT_PUBLIC_}`, optionsApi);
+  const response: IResponse = await POST(`${process.env.NEXT_PUBLIC_}`, optionsApi);
 
   return response;
 }
@@ -25,7 +23,7 @@ export async function createTable(optionsApi: IRequestOptions): Promise<IRespons
 /**
 peticion de ventana modal q hace una pregunta */
 export async function acceptValidation(): Promise<IResponse> {
-  const response: IResponse = await httpService("POST", `${process.env.NEXT_PUBLIC_}`);
+  const response: IResponse = await POST(`${process.env.NEXT_PUBLIC_}`);
 
   return response;
 }

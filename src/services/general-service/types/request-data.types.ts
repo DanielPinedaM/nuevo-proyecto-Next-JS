@@ -30,9 +30,10 @@ export interface IRequestOptions<T = any> {
   responseType?: TResponseType;
   showLoader?: boolean;
   validateResponse?: boolean;
+  showLogger?: boolean;
 
-  isASecurityEndpoint?: boolean;
-  credentials?: TCookiesCredentials;
+  //tokenInHeaders?: boolean;
+  cookieHttpOnly?: TCookiesCredentials;
 }
 
 /**
@@ -44,6 +45,7 @@ export interface IObjectLogs {
   options?: IRequestOptions;
   result?: IResponse;
   response?: Response | null;
+  showLogger?: boolean;
 }
 
 /**

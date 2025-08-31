@@ -1,6 +1,6 @@
 import { IUrl } from "@/models/interfaces/upload-file.interfaces";
-import { httpService } from "@/services/generalService/http.service";
-import { IResponse } from "@/services/generalService/types/request-data.types";
+import { GET, POST, PUT, PATCH, DELETE } from "@/services/general-service/http.service";
+import { IResponse } from "@/services/general-service/types/request-data.types";
 import { isFile } from "@/utils/func/dataType.utils";
 
 /* ********************************************
@@ -31,9 +31,29 @@ export async function uploadOneOrMoreFilesByBody({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpService(method, `${env}${route}`, {
-    body: file,
-  });
+  let response: IResponse | any = null;
+
+  if (method === "GET") {
+    response = await GET(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "POST") {
+    response = await POST(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "PUT") {
+    response = await PUT(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "PATCH") {
+    response = await PATCH(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "DELETE") {
+    response = await DELETE(`${env}${route}`, {
+      body: file,
+    });
+  }
 
   return response;
 }
@@ -51,9 +71,29 @@ export async function uploadOneOrMoreFilesWithoutId({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpService(method, `${env}${route}`, {
-    body: file,
-  });
+  let response: IResponse | any = null;
+
+  if (method === "GET") {
+    response = await GET(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "POST") {
+    response = await POST(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "PUT") {
+    response = await PUT(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "PATCH") {
+    response = await PATCH(`${env}${route}`, {
+      body: file,
+    });
+  } else if (method === "DELETE") {
+    response = await DELETE(`${env}${route}`, {
+      body: file,
+    });
+  }
 
   return response;
 }
@@ -77,9 +117,29 @@ export async function uploadOneOrMoreFilesByParams({
 
   const { env, route, method } = url;
 
-  const response: IResponse = await httpService(method, `${env}${route}/${paramsId}`, {
-    body: file,
-  });
+  let response: IResponse | any = null;
+
+  if (method === "GET") {
+    response = await GET(`${env}${route}/${paramsId}`, {
+      body: file,
+    });
+  } else if (method === "POST") {
+    response = await POST(`${env}${route}/${paramsId}`, {
+      body: file,
+    });
+  } else if (method === "PUT") {
+    response = await PUT(`${env}${route}/${paramsId}`, {
+      body: file,
+    });
+  } else if (method === "PATCH") {
+    response = await PATCH(`${env}${route}/${paramsId}`, {
+      body: file,
+    });
+  } else if (method === "DELETE") {
+    response = await DELETE(`${env}${route}/${paramsId}`, {
+      body: file,
+    });
+  }
 
   return response;
 }
