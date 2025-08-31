@@ -26,7 +26,7 @@ import { ILoaderState } from "@/store/loader/loaderStore";
  ***************************
  * validar peticiones HTTP *
  *************************** */
-async function httpService<T = any>(
+async function executeRequest<T = any>(
   method: Method,
   url: string = "",
   options: IRequestOptions = {}
@@ -366,33 +366,33 @@ export async function GET(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  return httpService("GET", url, options);
+  return executeRequest("GET", url, options);
 }
 
 export async function POST(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  return httpService("POST", url, options);
+  return executeRequest("POST", url, options);
 }
 
 export async function PUT(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  return httpService("PUT", url, options);
+  return executeRequest("PUT", url, options);
 }
 
 export async function PATCH(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  return httpService("PATCH", url, options);
+  return executeRequest("PATCH", url, options);
 }
 
 export async function DELETE(
   url: string = "",
   options: IRequestOptions = {}
 ): Promise<IResponse | any> {
-  return httpService("DELETE", url, options);
+  return executeRequest("DELETE", url, options);
 }
