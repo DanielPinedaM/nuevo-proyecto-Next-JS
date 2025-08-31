@@ -7,6 +7,7 @@ import {
   errorLogs,
   getToken,
   internetConnection,
+  isNoContentStatus,
   isValidUrl,
   responseFile,
   successLogs,
@@ -158,6 +159,25 @@ async function httpService<T = any>(
 
   try {
     response = await fetch(requestUrl, fetchOptions);
+
+    // Validar HTTP status que NO tienen contenido (Content-Length 0), por lo que no se debe llamar a await response.json()
+    if (isNoContentStatus(response?.status)) {
+      successLogs({
+        method,
+        url,
+        options,
+        response,
+        validateResponse,
+        showLogger,
+      });
+
+      return {
+        success: true,
+        status: response.status,
+        message: response?.statusText ?? "sin contenido",
+        data: [],
+      };
+    }
 
     if (responseType === "json") {
       result = (await response.json()) as T;

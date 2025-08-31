@@ -53,6 +53,22 @@ function redirectToLoginInUseClient(): void {
 }
 
 /**
+http status sin contenido Content-Length 0 */
+export function isNoContentStatus(status: number): boolean {
+  if (typeof status !== "number") {
+    console.error(
+      "❌ error: el HTTP status NO es un numero\n status",
+      status,
+      "\ntypeof status ",
+      typeof status
+    );
+    return false;
+  }
+
+  return (status >= 100 && status < 200) || [204, 205, 304].includes(status);
+}
+
+/**
 validar URL q llama al endpoint */
 export function isValidUrl({
   url,
@@ -246,7 +262,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
 
-  const { method, url, options, result, validateResponse, showLogger } = objectLogs;
+  const { method, url, options, response, result, validateResponse, showLogger } = objectLogs;
 
   if (!showLogger) return;
 
@@ -260,62 +276,68 @@ export function successLogs(objectLogs: IObjectLogs): void {
     console.info("body ", options?.body);
   }
 
-  if (result) {
-    let { success, status, message, data } = result;
+  if (isNoContentStatus(response?.status as number)) {
+    return;
+  }
 
-    if (data) {
-      if (Array.isArray(data)) {
-        if (data.length === 0) {
-          data = "array vacío ➡️ (0) []";
+  if (!result) return;
+
+  let { success, message, data } = result;
+
+  let dataMessage: string = "";
+
+  if (data) {
+    if (Array.isArray(data)) {
+      if (data.length === 0) {
+        dataMessage = "array vacío ➡️ (0) []";
+      } else {
+        // data es un array de objetos [{}]
+        const areAllObjects: boolean = data?.every(
+          (item) => typeof item === "object" && item && item !== null
+        );
+        if (areAllObjects) {
+          dataMessage = `array de objetos con ${data.length} elemento ➡️ (${data.length}) [{}]`;
         } else {
-          // data es un array de objetos [{}]
-          const areAllObjects: boolean = data?.every(
-            (item) => typeof item === "object" && item && item !== null
-          );
-          if (areAllObjects) {
-            data = `array de objetos con ${data.length} elemento ➡️ (${data.length}) [{}]`;
-          } else {
-            // data es un array []
-            data = `array de ${data.length} elementos ➡️ (${data.length}) []`;
-          }
-        }
-      }
-
-      // data es un objeto literal {}
-      else if (
-        Object.getPrototypeOf(data) === Object.prototype ||
-        Object.prototype.toString.call(data) === "[object Object]"
-      ) {
-        const length: number | null = literalObjectLength(data);
-
-        if (length === 0) {
-          data = "objeto literal vacío ➡️ (0) {}";
-        } else {
-          data = `objeto literal con ${length} keys ➡️ (${length}) {}`;
+          // data es un array []
+          dataMessage = `array de ${data.length} elementos ➡️ (${data.length}) []`;
         }
       }
     }
 
-    const objectSuccesResponse: IResponse = {
-      success,
-      status,
-      message,
-      data,
-    };
+    // data es un objeto literal {}
+    else if (
+      Object.getPrototypeOf(data) === Object.prototype ||
+      Object.prototype.toString.call(data) === "[object Object]"
+    ) {
+      const length: number | null = literalObjectLength(data);
 
-    if (isUseClient()) {
-      console.info("componente CLIENTE 'use client'");
-    } else {
-      console.info("componente SERVIDOR 'use server'");
+      if (length === 0) {
+        dataMessage = "objeto literal vacío ➡️ (0) {}";
+      } else {
+        dataMessage = `objeto literal con ${length} keys ➡️ (${length}) {}`;
+      }
     }
+  }
 
-    console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
+  const objectSuccesResponse: IResponse = {
+    success,
+    status: response?.status as number,
+    message,
+    data: dataMessage,
+  };
 
-    if (validateResponse) {
-      console.info(objectSuccesResponse);
-    } else {
-      console.info(result);
-    }
+  if (isUseClient()) {
+    console.info("componente CLIENTE 'use client'");
+  } else {
+    console.info("componente SERVIDOR 'use server'");
+  }
+
+  console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
+
+  if (validateResponse) {
+    console.info(objectSuccesResponse);
+  } else {
+    console.info(result);
   }
 
   console.info("\n");
