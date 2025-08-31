@@ -20,6 +20,7 @@ import {
   literalObjectLength,
 } from "@/utils/func/dataType.utils";
 import { isUseClient } from "@/utils/func/general.utils";
+import { currentDateAndTime } from "@/utils/func/luxon.utils";
 import { getCookie } from "cookies-next";
 import { redirect } from "next/navigation";
 
@@ -229,34 +230,37 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 
   if (!showLogger) return;
 
+  const objError: any = {};
+
   const componentType: string = isUseClient()
     ? "❌ error en el CLIENTE 'use client'"
     : "❌ error en el SERVIDOR 'use server'";
 
-  console.error(componentType);
+  objError.componentType = componentType;
 
-  if (message) console.error("❌ message ", message);
-  if (response?.status) console.error("HTTP status ", response.status);
-  if (method) console.error("metodo HTTP ", method);
-  if (response?.statusText) console.error("statusText ", response.statusText);
-  if (url) console.error("url ", url);
+  if (message) objError.message = message;
+
+  if (response?.status) objError.status = response.status;
+
+  if (response?.statusText) objError.statusText = response.statusText;
+
+  if (method) objError.method = method;
+
+  if (url) objError.url = url;
 
   if (process?.env?.NEXT_PUBLIC_ENVIRONMENT)
-    console.error(
-      `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`
-    );
+    objError.environment = `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`;
 
-  if (result || response) console.error("❌ respuesta de la API");
+  objError.timestamp = currentDateAndTime();
 
-  // imprimir respuesta de la API
-  if (result) console.error(result);
+  if (options) objError.options = options;
 
-  // imprimir respuesta de fetch
-  //if (response) console.error(response);
+  objError.isJsonResponse =
+    response?.headers?.get("content-type")?.includes("application/json") ?? false;
 
-  if (options) console.error("options ", options);
+  objError.apiResponse = result ? result : response;
 
-  console.info("\n");
+  console.error("❌ error en peticion HTTP, informacion del error\n ", objError);
 }
 
 /**
