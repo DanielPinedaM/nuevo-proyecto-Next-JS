@@ -188,12 +188,14 @@ async function httpService<T = any>(
 
   // intenta convertir la respuesta de la API a 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'
   // y guarda la respuesta de la API
-  let result: IResponse | any = {
-    success: false,
-    status: 500,
-    message: "Sin procesar",
-    data: [],
-  };
+  let result: IResponse | any = validateResponse
+    ? {
+        success: false,
+        status: 500,
+        message: "sin procesar",
+        data: [],
+      }
+    : [];
 
   try {
     response = await fetch(requestUrl, fetchOptions);
@@ -209,12 +211,16 @@ async function httpService<T = any>(
         showLogger,
       });
 
-      return {
-        success: true,
-        status: response.status,
-        message: response?.statusText ?? "sin contenido",
-        data: [],
-      };
+      if (validateResponse) {
+        return {
+          success: true,
+          status: response.status,
+          message: response?.statusText ?? "sin contenido",
+          data: [],
+        };
+      } else {
+        return [];
+      }
     }
 
     if (responseType === "json") {
@@ -260,7 +266,13 @@ async function httpService<T = any>(
     const responseTypeIsJson = Boolean(responseType === "json");
 
     // error: el http status de fetch response.status es diferente al de la respuesta de la API result.status
-    if (validateResponse && responseTypeIsJson && response.status !== result?.status) {
+    if (
+      validateResponse &&
+      responseTypeIsJson &&
+      response?.status &&
+      result?.status &&
+      response?.status !== result?.status
+    ) {
       const message = `el error esta en el backend: código HTTP de fetch ${response.status} y la API ${result?.status} no coinciden`;
 
       errorLogs({
