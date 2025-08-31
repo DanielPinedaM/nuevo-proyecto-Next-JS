@@ -159,6 +159,7 @@ async function httpService<T = any>(
 
   try {
     response = await fetch(requestUrl, fetchOptions);
+    console.log("🚀 ~ httpService ~ response:", response)
 
     // Validar HTTP status que NO tienen contenido (Content-Length 0), por lo que no se debe llamar a await response.json()
     if (isNoContentStatus(response?.status)) {

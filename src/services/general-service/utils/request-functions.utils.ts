@@ -220,7 +220,7 @@ export function returnToBrowserHistory(): void {
 }
 
 /**
-imprimir por consola los errores */
+logs de peticiones HTTP erroneas ❌ */
 export function errorLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
@@ -229,15 +229,18 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 
   if (!showLogger) return;
 
-  if (isUseClient()) {
-    console.error("\n❌ error en el CLIENTE 'use client'");
-  } else {
-    console.error("\n❌ error en el SERVIDOR 'use server'");
-  }
+  const componentType: string = isUseClient()
+    ? "❌ error en el CLIENTE 'use client'"
+    : "❌ error en el SERVIDOR 'use server'";
 
-  if (message) console.error("❌ error ", message);
-  if (method) console.error("metodo HTTP", method);
+  console.error(componentType);
+
+  if (message) console.error("❌ message ", message);
+  if (response?.status) console.error("HTTP status ", response.status);
+  if (method) console.error("metodo HTTP ", method);
+  if (response?.statusText) console.error("statusText ", response.statusText);
   if (url) console.error("url ", url);
+
   if (process?.env?.NEXT_PUBLIC_ENVIRONMENT)
     console.error(
       `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`
@@ -257,7 +260,7 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 }
 
 /**
-imprimir por consola las solicitudes HTTP que se realizan con éxito en el servidor 'use server' */
+logs de peticiones HTTP exitosas ✅ */
 export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
@@ -268,28 +271,35 @@ export function successLogs(objectLogs: IObjectLogs): void {
 
   console.info("\n", "✅ ", "[", method, "]", url);
 
-  if (isFile(options?.body)) {
-    console.info("✅ archivo(s) subido(s)");
-  }
+  if (isFile(options?.body)) console.info("✅ archivo(s) subido(s)");
 
-  if (options?.body) {
-    console.info("body ", options?.body);
-  }
+  if (options?.body) console.info("body ", options?.body);
 
-  if (validateResponse) {
-  } else {
-  }
+  const componentType: string = isUseClient()
+    ? "componente CLIENTE 'use client'"
+    : "componente SERVIDOR 'use server'";
 
-  if (isNoContentStatus(response?.status as number)) {
-    
-    return;
-  }
+  console.info(componentType);
+
+  console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
 
   let { success: successApi, status: statusApi, message: messageApi, data: dataApi } = result ?? {};
 
+  const objectSuccesResponse: IResponse = {
+    success: (validateResponse ? successApi : response?.ok) as boolean,
+    status: (validateResponse ? statusApi : response?.status) as number,
+    message: (validateResponse ? messageApi : response?.statusText) as string,
+    data: [],
+  };
+
+  if (isNoContentStatus(response?.status as number)) {
+    console.info(objectSuccesResponse, "\n");
+    return;
+  }
+
   let dataMessage: string = "";
 
-  const newData = validateResponse ? dataApi : result;
+  const newData: any = validateResponse ? dataApi : result;
 
   if (newData) {
     if (Array.isArray(newData)) {
@@ -321,24 +331,9 @@ export function successLogs(objectLogs: IObjectLogs): void {
     }
   }
 
-  if (isUseClient()) {
-    console.info("componente CLIENTE 'use client'");
-  } else {
-    console.info("componente SERVIDOR 'use server'");
-  }
+  objectSuccesResponse.data = dataMessage;
 
-  const objectSuccesResponse: IResponse = {
-    success: (validateResponse ? successApi : response?.ok) as boolean,
-    status: (validateResponse ? statusApi : response?.status) as number,
-    message: (validateResponse ? messageApi : response?.statusText) as string,
-    data: dataMessage,
-  };
-
-  console.info(
-    `respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`,
-    objectSuccesResponse,
-    "\n"
-  );
+  console.info(objectSuccesResponse, "\n");
 }
 
 /**
