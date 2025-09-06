@@ -54,16 +54,12 @@ async function executeRequest<T = any>(
   // validar URL q llama al endpoint
   const _isValidUrl: IIsValidOptions = isValidUrl({ url, method, options });
   if (!_isValidUrl.valid) {
-    if (validateResponse) {
-      return {
-        success: false,
-        status: 400,
-        message: "URL invalida",
-        data: [],
-      };
-    } else {
-      return [];
-    }
+    return {
+      success: false,
+      status: 400,
+      message: "URL invalida",
+      data: [],
+    };
   }
 
   // validar q tenga conexion a internet
@@ -74,16 +70,12 @@ async function executeRequest<T = any>(
     options,
   });
   if (!_internetConnection.valid) {
-    if (validateResponse) {
-      return {
-        success: false,
-        status: 503,
-        message: "conéctese a internet para que la página web pueda funcionar",
-        data: [],
-      };
-    } else {
-      return [];
-    }
+    return {
+      success: false,
+      status: 503,
+      message: "conéctese a internet para que la página web pueda funcionar",
+      data: [],
+    };
   }
 
   // Validar que el método GET NO tenga body
@@ -93,16 +85,12 @@ async function executeRequest<T = any>(
     options,
   });
   if (!_validateBodyWithGetMethod.valid) {
-    if (validateResponse) {
-      return {
-        success: false,
-        status: 503,
-        message: `error el método HTTP GET NO puede tener body ${JSON.stringify(body)}`,
-        data: [],
-      };
-    } else {
-      return [];
-    }
+    return {
+      success: false,
+      status: 503,
+      message: `error el método HTTP GET NO puede tener body ${JSON.stringify(body)}`,
+      data: [],
+    };
   }
 
   // loader global q se muestra y oculta en componentes cliente 'use client'
@@ -188,14 +176,12 @@ async function executeRequest<T = any>(
 
   // intenta convertir la respuesta de la API a 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData'
   // y guarda la respuesta de la API
-  let result: IResponse | any = validateResponse
-    ? {
-        success: false,
-        status: 500,
-        message: "sin procesar",
-        data: [],
-      }
-    : [];
+  let result: IResponse | any = {
+    success: false,
+    status: 500,
+    message: "sin procesar",
+    data: [],
+  };
 
   try {
     response = await fetch(requestUrl, fetchOptions);
@@ -211,16 +197,12 @@ async function executeRequest<T = any>(
         showLogger,
       });
 
-      if (validateResponse) {
-        return {
-          success: true,
-          status: response.status,
-          message: response?.statusText ?? "sin contenido",
-          data: [],
-        };
-      } else {
-        return [];
-      }
+      return {
+        success: true,
+        status: response.status,
+        message: response?.statusText ?? "sin contenido",
+        data: [],
+      };
     }
 
     if (responseType === "json") {
@@ -352,7 +334,16 @@ async function executeRequest<T = any>(
       return validateApiResponse({ result, response, responseType, method, url, options });
     } else {
       // la API puede responder con lo q sea
-      return result;
+      if (isFile(result) || ["text", "blob", "arrayBuffer", "formData"].includes(responseType)) {
+        return result;
+      } else {
+        return {
+          success: response?.ok ?? false,
+          status: response?.status ?? 500,
+          message: response?.statusText ?? "Error al ejecutar la petición HTTP",
+          data: result,
+        };
+      }
     }
   }
 }
