@@ -219,18 +219,7 @@ async function executeRequest<T = any>(
         `error la API respondió con tipo JSON y se espera un tipo responseType ${responseType}`
       )) as T;
     } else {
-      const message = `formato de respuesta responseType ${responseType} no valido en http.service.ts`;
-
-      if (validateResponse) {
-        result = {
-          success: false,
-          status: 400,
-          message,
-          data: [],
-        };
-      } else {
-        result = response;
-      }
+      const message = `al http.service.ts se le ha enviado parametro con formato de respuesta responseType ${responseType} no valido`;
 
       errorLogs({
         message,
@@ -241,6 +230,13 @@ async function executeRequest<T = any>(
         response,
         showLogger,
       });
+
+      return {
+        success: false,
+        status: 400,
+        message,
+        data: [],
+      };
     }
 
     // true   -> API responde con JSON:           array, objeto literal, etc.
