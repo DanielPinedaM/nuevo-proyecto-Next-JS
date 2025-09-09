@@ -17,6 +17,7 @@ import { constPath } from "@/models/constants/path.constants";
 import visibleRows from "@/models/constants/visible-rows.constants";
 import { ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
 import { columns } from "@/models/constants/nombre-tabla.constans";
+import { POST } from "@/services/general-service/http.service";
 
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
@@ -73,7 +74,8 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   const onClickAccept = async (): Promise<void> => {
     infoNotification("aceptar");
 
-    const { success }: IResponse = await acceptValidation();
+    // peticion de ventana modal q hace una pregunta
+    const { success }: IResponse = await POST(`${process.env.NEXT_PUBLIC_}`);
 
     if (success) {
       successNotification("Diste click en boton aceptar");

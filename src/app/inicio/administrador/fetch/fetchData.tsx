@@ -1,10 +1,18 @@
-import { loadPost } from "@/services/posts.service";
 import ListData from "./listData";
 import DataRender from "@/components/DataRender";
+import { GET } from "@/services/general-service/http.service";
+import { IRequestOptions } from "@/services/general-service/types/request-data.types";
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */
-  const { success, data } = await loadPost();
+  const optionsApi: IRequestOptions = {
+    validateResponse: false,
+  };
+
+  const { success, data } = await GET(
+    `${process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER}/todos`,
+    optionsApi
+  );
 
   let posts = [];
   if (success) {

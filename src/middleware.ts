@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
   /* 
   el siguiente codigo funciona, esta bueno, lo comente porque no existe el endpoint que llama la funcion decodeTokenInServer()
 
-  const { success, message, status, data }: IResponse = await decodeTokenInServer();
+  const { success, message, status, data }: IResponse = await GET(`${process.env.NEXT_PUBLIC_API}`);
   const { email, role } = data;
 
   if (status >= 500) {

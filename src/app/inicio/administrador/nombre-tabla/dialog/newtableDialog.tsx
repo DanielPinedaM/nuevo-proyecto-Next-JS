@@ -12,6 +12,7 @@ import {
 import { constRegex } from "@/models/constants/regex.constants";
 import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
 import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
+import { POST } from "@/services/general-service/http.service";
 import { IRequestOptions } from "@/services/general-service/types/request-data.types";
 import { createTable } from "@/services/table-name.service";
 import clsx from "clsx";
@@ -40,7 +41,8 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
       body,
     };
 
-    const { success, message } = await createTable(optionsApi);
+    // peticion de ventana modal para guardar nueva tabla
+    const { success, message } = await POST(`${process.env.NEXT_PUBLIC_}`, optionsApi);
 
     if (success) {
       router.refresh();

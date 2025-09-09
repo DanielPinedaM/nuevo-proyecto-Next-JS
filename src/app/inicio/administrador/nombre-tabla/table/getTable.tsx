@@ -1,11 +1,10 @@
 import ListTable from "@/app/inicio/administrador/nombre-tabla/table/listTable";
 import DataRender from "@/components/DataRender";
 import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
-import { listTableData } from "@/services/table-name.service";
-
+import { POST } from "@/services/general-service/http.service";
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {
-  //const { data } = await listTableData(search);
+  //const { data } = await POST(`${process.env.NEXT_PUBLIC_}${search ? "/" + search : ""}`)
 
   const data: ITableDataNombreTabla[] = [
     { id: 1, table: "IPS Cod Habilitacion", code: "123", name: "SANTIAGO MONSALVE", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat1", enabled: true, createdAt: "2024-02-13T10:00:00Z", updatedAt: "2024-02-13T12:00:00Z", category: "Salud", type: "Hospital", city: "Medellín", country: "Colombia", email: "santiago.monsalve@example.com", phone: "+57 123 456 7890", tag1: "Atención primaria", tag2: "Urgencias" },
