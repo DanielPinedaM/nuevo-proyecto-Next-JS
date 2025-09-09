@@ -72,8 +72,9 @@ export function isNoContentStatus(status: number): boolean {
 /**
 validar URL q llama al endpoint */
 export function isValidUrl({ url, method, options }: IParamsValidateOptions): IIsValidOptions {
-  const invalidUrl: boolean =
-    !url || !isString(url) || String(url).trim() === "" || !String(url).startsWith("http");
+  const urlString: string = String(url);
+
+  const invalidUrl: boolean = !urlString.startsWith("http") || urlString === process.env.NEXT_PUBLIC_API;
 
   if (invalidUrl) {
     const message: string = "URL invalida";
