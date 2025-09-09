@@ -6,11 +6,8 @@ import { cookieOptionsInLogin } from "@/models/constants/cookie-storage.constant
 import { globalTailwindStyle } from "@/models/constants/layout.constants";
 import { constRegex } from "@/models/constants/regex.constants";
 import IFormLogin from "@/models/interfaces/login.interfaces";
-import { IResponse } from "@/services/general-service/types/request-data.types";
-import { login } from "@/services/auth/auth.services";
 import { IRequestOptions } from "@/services/general-service/types/request-data.types";
 import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
-import { encrypt } from "@/utils/func/cryptoService.utils";
 import {
   forceConvertToString,
   isLiteralObject,
@@ -23,6 +20,13 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { encrypt } from "@/utils/func/cryptoService.utils";
+import { POST } from "@/services/general-service/http.service";
+
+interface IBodyLogin {
+  email: string;
+  password: string;
+}
 
 export default function FormLogin() {
   const { showLoaderNavigation } = useNavigationLoaderStore();
@@ -109,25 +113,40 @@ export default function FormLogin() {
     });
   };
 
+  const encryptCredentials = async (
+    decryptedEmail: string,
+    decryptedPassword: string
+  ): Promise<{ encryptedEmail: string; encryptedPassword: string }> => {
+    const [encryptedEmail, encryptedPassword] = await Promise.all([
+      await encrypt(decryptedEmail),
+      await encrypt(decryptedPassword),
+    ]);
+
+    return { encryptedEmail, encryptedPassword };
+  };
+
   const onSubmit = async (formData: IFormLogin): Promise<void> => {
     //des-comentar lo q esta comentado a continuacion para hacer peticion http de iniciar sesion
+    const { user, password } = formData;
 
-    /* const { user, password } = formData;
+    const { encryptedEmail, encryptedPassword } = await encryptCredentials(
+      user!.trim(),
+      password!.trim()
+    );
 
-     const optionsApi: IRequestOptions = {
+    const optionsApi: IRequestOptions<IBodyLogin> = {
       body: {
-    user: user.trim(),
-      password: await encrypt(password!.trim()),
-      }
-    }
+        email: encryptedEmail,
+        password: encryptedPassword,
+      },
+    };
 
-    const { success, message, data }: IResponse = await login(optionsApi);
+    //const { success, message, data }: IResponse = await POST(process.env.NEXT_PUBLIC_AUTH_LOGIN, optionsApi);
 
-    if (success) { */
+    //if (success) {
     // este codigo se tiene q borrar porq queme los datos
     iterateUserData({
       expiresIn: 7200,
-      accessToken: "aqui va el token",
     });
 
     /* este es el codigo correcto q se tiene q des-comentar
