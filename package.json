@@ -6,11 +6,13 @@
     "build": "next build",
     "build:prod": "env-cmd -f ./environments/.env.production next build",
     "build:test": "env-cmd -f ./environments/.env.test next build",
-    "lint": "next lint",
-    "start": "next start",
-    "start:dev": "env-cmd -f ./environments/.env.development next dev --turbopack -p 4100",
+
+    "start:localhost": "env-cmd -f ./environments/.env.localhost next dev --turbopack -p 4100",
     "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack -p 4100",
-    "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack -p 4100"
+    "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack -p 4100",
+
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
