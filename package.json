@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "build:prod": "env-cmd -f ./environments/.env.production next build",
-    "build:test": "env-cmd -f ./environments/.env.test next build",
+    "build:prod": "env-cmd -f ./environments/.env.production node --max_old_space_size=100000 ./node_modules/next/dist/bin/next build",
+    "build:test": "env-cmd -f ./environments/.env.test node --max_old_space_size=100000 ./node_modules/next/dist/bin/next build",
 
     "start:local": "env-cmd -f ./environments/.env.localhost next dev --turbopack -p 4100",
     "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack -p 4100",

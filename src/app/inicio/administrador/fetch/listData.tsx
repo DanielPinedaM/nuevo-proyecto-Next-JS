@@ -1,7 +1,7 @@
 "use client";
 import { GrView } from "react-icons/gr";
 
-export default function ListData({ post }) {
+export default function ListData({ post }: any) {
   const { id, userId, title, completed } = post;
 
   const onClickViewAlert = (userId: number): void => {

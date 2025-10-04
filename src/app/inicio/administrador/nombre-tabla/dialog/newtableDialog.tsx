@@ -14,7 +14,6 @@ import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
 import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
 import { POST } from "@/services/general-service/http.service";
 import { IRequestOptions } from "@/services/general-service/types/request-data.types";
-import { createTable } from "@/services/table-name.service";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { Dialog } from "primereact/dialog";

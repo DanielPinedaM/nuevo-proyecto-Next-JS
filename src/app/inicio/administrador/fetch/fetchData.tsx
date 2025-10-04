@@ -29,7 +29,7 @@ export default async function FetchData() {
         data={posts}
         RenderComponent={
           <>
-            {posts.map((post, i) => (
+            {posts.map((post: any, i: number) => (
               <ListData post={post} key={post.id ?? i} />
             ))}
           </>
