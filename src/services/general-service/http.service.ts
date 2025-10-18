@@ -41,7 +41,10 @@ async function executeRequest<T = any>(
     showLoader = true,
 
     // ¿mostrar logs en consola?
-    showLogger = true,
+    showLogger = Boolean(
+      process.env.NEXT_PUBLIC_ENVIRONMENT === "localhost" ||
+        process.env.NEXT_PUBLIC_ENVIRONMENT === "test"
+    ),
 
     // ¿la API responde con el tipo IResponse?
     validateResponse = true,
