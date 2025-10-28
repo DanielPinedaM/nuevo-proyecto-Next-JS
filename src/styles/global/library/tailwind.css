@@ -8,7 +8,7 @@ https://medium.com/@daniel.codrea/setting-up-a-primeng-v19-and-tailwindcss-v4-pr
 @layer tailwind, primeng;
 
 @layer tailwind {
-  @import 'tailwindcss';
+  @import "tailwindcss" important;
 }
 
 /* Variables de Tailwind 4
