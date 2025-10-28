@@ -304,3 +304,17 @@ h6:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([c
     font-size: var(--step-0);
   }
 }
+
+/*
+**************************
+* negrilla - font-weight *
+************************** */
+
+h1:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]),
+h2:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]),
+h3:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]),
+h4:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]),
+h5:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]),
+h6:not([class*="font-thin"]):not([class*="font-extralight"]):not([class*="font-light"]):not([class*="font-normal"]):not([class*="font-medium"]):not([class*="font-semibold"]):not([class*="font-bold"]):not([class*="font-extrabold"]):not([class*="font-black"]) {
+  font-weight: 500;
+}
