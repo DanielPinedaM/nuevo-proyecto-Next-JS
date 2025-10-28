@@ -267,6 +267,10 @@ tbody:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not
 a:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']):not([class*='text-7xl']):not([class*='text-8xl']):not([class*='text-9xl']),
 label:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']):not([class*='text-7xl']):not([class*='text-8xl']):not([class*='text-9xl']) {
   font-size: var(--step--1);
+
+  span:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']):not([class*='text-7xl']):not([class*='text-8xl']):not([class*='text-9xl']) {
+    font-size: var(--step--1);
+  }
 }
 
 p:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not([class*='text-base']):not([class*='text-lg']):not([class*='text-xl']):not([class*='text-2xl']):not([class*='text-3xl']):not([class*='text-4xl']):not([class*='text-5xl']):not([class*='text-6xl']):not([class*='text-7xl']):not([class*='text-8xl']):not([class*='text-9xl']) {
