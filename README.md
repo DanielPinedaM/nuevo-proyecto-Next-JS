@@ -1,6 +1,6 @@
 # Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
 
-#### Instalar paquetes
+## 📦 Instalar paquetes
 
 ```console
 nvm install 22.17.1
@@ -14,7 +14,7 @@ nvm use 22.17.1
 npm i
 ```
 
-#### Ejecutar proyecto
+## ▶️ Ejecutar proyecto
 
 ```console
 nvm use 22.17.1
@@ -26,7 +26,7 @@ node --run start:local | localhost | environments/.env.localhost
 node --run start:test | pruebas | environments/.env.test
 node --run start:prod | producción | environments/.env.production
 
-#### Generar build (dist) para desplegar
+## 🚀 Generar build (dist) para desplegar
 
 ```console
 nvm use 22.17.1
@@ -37,7 +37,7 @@ comando | apunta a... | ruta archivo
 node --run build:test | pruebas | environments/.env.test
 node --run build:prod | producción | environments/.env.production
 
-#### Tecnologías
+## 💻 Tecnologías
 
 * **NextJS:** usa la sintaxis de React y las peticiones son server side rendering
 
@@ -55,14 +55,14 @@ node --run build:prod | producción | environments/.env.production
 
 * **react icons:** Iconos de React
 
-#### Maquetación
+## 💅 Maquetación
 * Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
 
 * Mezclar Sass con Tailwind es mala práctica porque Sass sobrescribe los estilos de Tailwind porque Sass tiene más especificidad que Tailwind.
 
 * Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
 
-#### Estructura de carpetas
+## 📁  Estructura de carpetas
 * **/environments**: Variables de entorno .env para desarrollo (local host), produccion y pruebas
 
 * **src/app/**: Enrutado de Next JS
