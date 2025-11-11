@@ -22,7 +22,7 @@ nvm use 22.17.1
 
 comando | apunta a... | ruta archivo
 ------------ | ------------- | -------------
-node --run start:local | localhost | environments/.env.localhost
+node --run start:local | local host | environments/.env.localhost
 node --run start:test | pruebas | environments/.env.test
 node --run start:prod | producción | environments/.env.production
 
