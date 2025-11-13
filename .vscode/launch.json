@@ -7,7 +7,8 @@
             "request": "launch",
             "name": "Iniciar Chrome para localhost",
             "url": "http://localhost:4100",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true
         }
     ]
 }
