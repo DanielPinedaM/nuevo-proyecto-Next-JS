@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { useCallback } from 'react';
+"use client";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useCallback } from "react";
 import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
 import { forceConvertToString, literalObjectLength } from '@/utils/func/dataType.utils';
 
@@ -14,7 +13,6 @@ interface IOptionsSetQueryParams {
 export const useQueryParams = () => {
   const { showLoaderNavigation } = useNavigationLoaderStore();
   const router = useRouter();
-  const pathname: string = usePathname();
   const searchParams = useSearchParams();
 
   /**
@@ -27,33 +25,34 @@ export const useQueryParams = () => {
    * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params
    * @param {boolean} [options.showLoader] — true = MOSTRAR icono de cargando, false = OCULTAR icono de cargando */
   const setQueryParams = useCallback(
-    (paramsObj: Record<string, any>, options?: IOptionsSetQueryParams): void => {
-      if (literalObjectLength(paramsObj) <= 0) return;
-
+    (paramsObj: Record<string, any> = {}, options?: IOptionsSetQueryParams): void => {
       const {
         replaceAll = false,
         showLoader = true,
         customPathname = null,
       } = options ?? {};
 
+      // uso window.location.pathname porque usePathname() NO actualiza la ruta actual
+      const pathname: string = window.location.pathname;
+
       // uso window.location.search porque useSearchParams() NO actualiza la variable oldUrl con el ultimo query params
-      const currentParams: URLSearchParams = new URLSearchParams(window.location.search);
+      const currentParams = new URLSearchParams(window.location.search);
 
       // url ANTES de actualizar query params
-      const oldUrl: string = currentParams.toString() 
-                                ? `${pathname}?${currentParams.toString()}` 
-                                   : pathname;
+      const oldUrl: string = currentParams.toString() ? `${pathname}?${currentParams.toString()}` : pathname;
 
       const params: URLSearchParams = replaceAll
         ? new URLSearchParams() // se parte de cero, sin query actual
         : new URLSearchParams(currentParams.toString()); // se parte del query actual
 
-      Object.entries(paramsObj).forEach(([key, value]) => {
-        params.set(String(key), forceConvertToString(value));
-      });
+      if (literalObjectLength(paramsObj) > 0) {
+        Object.entries(paramsObj).forEach(([key, value]) => {
+          params.set(String(key), forceConvertToString(value));
+        });
+      }
 
       // url DESPUES de actualizar query params
-      const newUrl: string = `${customPathname ?? pathname}?${params.toString()}`;
+      const newUrl: string = `${customPathname ?? pathname}${params ? `?${params.toString()}`  : "" }`;
 
       // NO actualizar la URL cuando los query params no han cambiado
       if (oldUrl !== newUrl) {
@@ -64,7 +63,7 @@ export const useQueryParams = () => {
         router.push(newUrl);
       }
     },
-    [router, searchParams, pathname]
+    [router, searchParams]
   );
 
   return { setQueryParams };
