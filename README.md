@@ -20,11 +20,11 @@ npm i
 nvm use 22.17.1
 ```
 
-comando | apunta a... | ruta archivo
------------- | ------------- | -------------
-node --run start:local | local host | environments/.env.localhost
-node --run start:test | pruebas | environments/.env.test
-node --run start:prod | producción | environments/.env.production
+comando                | apunta a...   | ruta archivo
+---------------------- | ------------- | -------------
+node --run start:local | local host    | environments/.env.localhost
+node --run start:test  | pruebas       | environments/.env.test
+node --run start:prod  | producción    | environments/.env.production
 
 ## 🚀 Generar build (dist) para desplegar
 
@@ -32,10 +32,10 @@ node --run start:prod | producción | environments/.env.production
 nvm use 22.17.1
 ```
 
-comando | apunta a... | ruta archivo
------------- | ------------- | -------------
-node --run build:test | pruebas | environments/.env.test
-node --run build:prod | producción | environments/.env.production
+comando               | apunta a...   | ruta archivo
+--------------------- | ------------- | -------------
+node --run build:test | pruebas       | environments/.env.test
+node --run build:prod | producción    | environments/.env.production
 
 ## 💻 Tecnologías
 
