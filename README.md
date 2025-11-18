@@ -1,24 +1,14 @@
 # ⚛️ Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
 
+usar NodeJS 22.17.1
+
 ## 📦 Instalar paquetes
-
-```console
-nvm install 22.17.1
-```
-
-```console
-nvm use 22.17.1
-```
 
 ```console
 npm i
 ```
 
 ## ▶️ Ejecutar proyecto
-
-```console
-nvm use 22.17.1
-```
 
 comando                | apunta a...   | ruta archivo
 ---------------------- | ------------- | -------------
@@ -27,10 +17,6 @@ node --run start:test  | pruebas       | environments/.env.test
 node --run start:prod  | producción    | environments/.env.production
 
 ## 🚀 Generar build (dist) para desplegar
-
-```console
-nvm use 22.17.1
-```
 
 comando               | apunta a...   | ruta archivo
 --------------------- | ------------- | -------------
