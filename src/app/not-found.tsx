@@ -1,5 +1,4 @@
 'use client';
-import { constPath } from '@/models/constants/path.constants';
 import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -13,7 +12,7 @@ export default function NotFound() {
       router.back();
     } else {
       showLoaderNavigation();
-      router.push('/' + constPath.login);
+      router.push('/autenticacion/iniciar-sesion');
     }
   };
 

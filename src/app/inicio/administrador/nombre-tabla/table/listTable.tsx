@@ -12,7 +12,6 @@ import errorNotification from "@/components/dialog/notification/errorNotificatio
 import successNotification from "@/components/dialog/notification/successNotification";
 import infoNotification from "@/components/dialog/notification/infoNotification";
 import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
-import { constPath } from "@/models/constants/path.constants";
 import visibleRows from "@/models/constants/visible-rows.constants";
 import { ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
 import { columns } from "@/models/constants/nombre-tabla.constans";
@@ -47,7 +46,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
       showLoaderNavigation();
-      router.push(`/${constPath.login}`);
+      router.push("/autenticacion/iniciar-sesion");
     }
   }, []);
 

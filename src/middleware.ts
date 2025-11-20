@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IResponse } from "@/services/general-service/types/request-data.types"
 import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
-import { decodeTokenInServer } from "@/services/auth/auth.services";
-import { constPath } from "@/models/constants/path.constants";
 
 export async function middleware(request: NextRequest) {
   const {
@@ -15,7 +13,7 @@ export async function middleware(request: NextRequest) {
   const isRoot: boolean = url === new URL("/", url).href;
 
   // re-dirigir a /iniciar-sesion
-  const loginUrl: URL = new URL("/" + constPath.login, url);
+  const loginUrl: URL = new URL("/autenticacion/iniciar-sesion", url);
 
   // acceder a las cookiess
   const cookieAccessToken: string | undefined = cookies.get(nameCookieKey.accessToken)?.value;
@@ -75,7 +73,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const redirectToHome: string = routeHomeByUserType(role);
-  if (isRoot || pathname === "/" + constPath.home) {
+  if (isRoot || pathname === "/inicio") {
     return NextResponse.redirect(new URL(redirectToHome, url));
   }
 

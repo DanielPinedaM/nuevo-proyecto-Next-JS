@@ -2,7 +2,6 @@
 /* eslint-disable prefer-const */
 import errorNotification from "@/components/dialog/notification/errorNotification";
 import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
-import { constPath } from "@/models/constants/path.constants";
 import {
   IObjectLogs,
   IParamsValidateOptions,
@@ -26,14 +25,11 @@ import { redirect } from "next/navigation";
 
 function pathnameIsLogin(): boolean {
   if (!isUseClient()) {
-    console.error(
-      "❌ error, NO se puede determinar si la URL actual es iniciar sesion /",
-      constPath.login
-    );
+    console.error("❌ error, NO se puede determinar si la URL actual es iniciar sesion /");
     return false;
   }
 
-  const login: string = "/" + constPath.login;
+  const login: string = "/autenticacion/iniciar-sesion";
 
   const pathname: string = window.location.pathname;
 
@@ -42,11 +38,11 @@ function pathnameIsLogin(): boolean {
 
 function redirectToLoginInUseClient(): void {
   if (!isUseClient()) {
-    console.error("❌ error al re-dirigir a /", constPath.login);
+    console.error("❌ error al re-dirigir a /autenticacion/iniciar-sesion");
     return;
   }
 
-  const login: string = "/" + constPath.login;
+  const login: string = "/autenticacion/iniciar-sesion";
 
   if (!pathnameIsLogin()) {
     window.location.href = login;
@@ -74,7 +70,8 @@ validar URL q llama al endpoint */
 export function isValidUrl({ url, method, options }: IParamsValidateOptions): IIsValidOptions {
   const urlString: string = String(url);
 
-  const invalidUrl: boolean = !urlString.startsWith("http") || urlString === process.env.NEXT_PUBLIC_API;
+  const invalidUrl: boolean =
+    !urlString.startsWith("http") || urlString === process.env.NEXT_PUBLIC_API;
 
   if (invalidUrl) {
     const message: string = "URL invalida";
@@ -179,7 +176,7 @@ export async function getToken(): Promise<string | null> {
 /**
 funcion para cerrar sesion en 'use client' y 'use server', */
 export function handleUnauthorized(): void {
-  const login: string = "/" + constPath.login;
+  const login: string = "/autenticacion/iniciar-sesion";
 
   // 1) eliminar token
   // 2) re-dirigir a iniciar sesion
@@ -198,7 +195,7 @@ export function handleUnauthorized(): void {
 /**
 funcion para devolver a la pagina web anterior en 'use client' y 'use server', */
 export function returnToBrowserHistory(): void {
-  const login: string = "/" + constPath.login;
+  const login: string = "/autenticacion/iniciar-sesion";
 
   // 'use client'
   if (isUseClient()) {
