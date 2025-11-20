@@ -1,7 +1,7 @@
 'use client';
 import errorNotification from '@/components/dialog/notification/errorNotification';
 import SkeletonMenu from '@/components/loading/skeleton/SkeletonMenu';
-import CustomLink from '@/components/loading/spinner/navigation-spinner/CustomLinkInMenu';
+import CustomLink from '@/components/loading/spinner/navigation-spinner/CustomLink';
 import { useMenuStore } from '@/store/menuStore';
 import { titleCase } from '@/utils/func/general.utils';
 import {
