@@ -31,6 +31,7 @@ export interface IRequestOptions<T = any> {
   showLoader?: boolean;
   validateResponse?: boolean;
   showLogger?: boolean;
+  executeErrorHandling?: boolean;
 
   //tokenInHeaders?: boolean;
   cookieHttpOnly?: TCookiesCredentials;

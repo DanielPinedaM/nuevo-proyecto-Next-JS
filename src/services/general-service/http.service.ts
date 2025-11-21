@@ -42,12 +42,14 @@ async function executeRequest<T = any>(
 
     // ¿mostrar logs en consola?
     showLogger = Boolean(
-      process.env.NEXT_PUBLIC_ENVIRONMENT === "localhost" ||
-        process.env.NEXT_PUBLIC_ENVIRONMENT === "test"
+      process.env.NEXT_PUBLIC_ENVIRONMENT !== "production"
     ),
 
     // ¿la API responde con el tipo IResponse?
     validateResponse = true,
+
+    // ¿ejecutar funcion para manejo global de errores HTTP?
+    executeErrorHandling = true,
 
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
     //tokenInHeaders = defaultSecurityEndpoint(url),
@@ -296,7 +298,7 @@ async function executeRequest<T = any>(
         showLogger,
       });
 
-      errorHandling(response?.status, url);
+      if (executeErrorHandling) errorHandling(response?.status, url);
     } else {
       successLogs({
         method,
