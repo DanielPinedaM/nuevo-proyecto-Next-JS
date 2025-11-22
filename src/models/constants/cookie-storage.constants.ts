@@ -19,7 +19,7 @@ export const cookieOptionsInLogin = ({ maxAge }: { maxAge: number }) => ({
   httpOnly: false,
 
   // usar cookie solo en HTTPS y en producción
-  secure: process.env.NEXT_PUBLIC_ENVIRONMENT === "production",
+  secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
 
   // la cookie solamente esta disponible en el mismo dominio donde se genera
   sameSite: "strict" as const,

@@ -215,7 +215,7 @@ export function returnToBrowserHistory(): void {
 logs de peticiones HTTP erroneas ❌ */
 export function errorLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
+  if (process.env.NEXT_PUBLIC_NODE_ENV === "production") return;
 
   const { message, method, url, options, result, response, showLogger } = objectLogs;
 
@@ -239,8 +239,8 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 
   if (url) objError.url = url;
 
-  if (process?.env?.NEXT_PUBLIC_ENVIRONMENT)
-    objError.environment = `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️`;
+  if (process?.env?.NEXT_PUBLIC_NODE_ENV)
+    objError.environment = `las variables de entorno estan apuntando al ambiente de ➡️ ${process.env.NEXT_PUBLIC_NODE_ENV} ⬅️`;
 
   objError.timestamp = currentDateAndTime();
 
@@ -258,7 +258,7 @@ export function errorLogs(objectLogs: IObjectLogs): void {
 logs de peticiones HTTP exitosas ✅ */
 export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") return;
+  if (process.env.NEXT_PUBLIC_NODE_ENV === "production") return;
 
   const { method, url, options, response, result, validateResponse, showLogger } = objectLogs;
 
@@ -276,7 +276,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
 
   console.info(componentType);
 
-  console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_ENVIRONMENT} ⬅️ \n`);
+  console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_NODE_ENV} ⬅️ \n`);
 
   let { success: successApi, status: statusApi, message: messageApi, data: dataApi } = result ?? {};
 

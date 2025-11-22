@@ -44,7 +44,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   const [currentRowIndex, setCurrentRowIndex] = useState<number>(-1);
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_ENVIRONMENT === "production") {
+    if (process.env.NEXT_PUBLIC_NODE_ENV === "production") {
       showLoaderNavigation();
       router.push("/autenticacion/iniciar-sesion");
     }

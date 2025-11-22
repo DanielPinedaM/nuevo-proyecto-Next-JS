@@ -42,7 +42,7 @@ async function executeRequest<T = any>(
 
     // ¿mostrar logs en consola?
     showLogger = Boolean(
-      process.env.NEXT_PUBLIC_ENVIRONMENT !== "production"
+      process.env.NEXT_PUBLIC_NODE_ENV !== "production"
     ),
 
     // ¿la API responde con el tipo IResponse?
