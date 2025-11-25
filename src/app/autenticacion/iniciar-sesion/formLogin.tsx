@@ -1,30 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import errorNotification from "@/components/dialog/notification/errorNotification";
-import GeneralErrorMessage from "@/components/GeneralErrorMessage";
-import { cookieOptionsInLogin } from "@/models/constants/cookie-storage.constants";
-import { globalTailwindStyle } from "@/models/constants/layout.constants";
-import { constRegex } from "@/models/constants/regex.constants";
-import IFormLogin from "@/models/interfaces/login.interfaces";
-import { IRequestOptions } from "@/services/general-service/types/request-data.types";
-import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
-import {
-  forceConvertToString,
-  isLiteralObject,
-  literalObjectLength,
-} from "@/utils/func/dataType.utils";
-import { sessionStorageDeleteAll } from "@/utils/func/sessionStorage.utils";
+import errorNotification from "@/shared/components/dialog/notification/errorNotification";
+import GeneralErrorMessage from "@/shared/components/GeneralErrorMessage";
+import { cookieOptionsInLogin } from "@/shared/models/constants/cookie-storage.const";
 import { deleteCookie, getCookies, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { encrypt } from "@/utils/func/cryptoService.utils";
-import { POST } from "@/services/general-service/http.service";
+import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
+import { constRegex } from "@/shared/models/constants/regex.constants";
+import { IRequestOptions, IResponse } from "@/shared/services/general-service/types/request-data.types";
+import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
+import { forceConvertToString, isLiteralObject, literalObjectLength } from "@/shared/utils/func/dataType.utils";
+import { sessionStorageDeleteAll } from "@/shared/utils/func/sessionStorage.utils";
+import { encrypt } from "@/shared/utils/func/cryptoService.utils";
+import { POST } from "@/shared/services/general-service/http.service";
 
 interface IBodyLogin {
   email: string;
+  password: string;
+}
+
+interface IFormLogin {
+  user: string;
   password: string;
 }
 

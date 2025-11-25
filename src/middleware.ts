@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IResponse } from "@/services/general-service/types/request-data.types"
-import { nameCookieKey } from "@/models/constants/cookie-storage.constants";
+import { IResponse } from "@/shared/services/general-service/types/request-data.types";
+import { nameCookieKey } from "./shared/models/constants/cookie-storage.const";
 
 export async function middleware(request: NextRequest) {
   const {

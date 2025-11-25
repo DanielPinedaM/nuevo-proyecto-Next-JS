@@ -1,5 +1,5 @@
-import Header from '@/components/ui/Header';
-import MenuResponsive from '@/components/ui/menu/MenuResponsive';
+import Header from '@/shared/components/ui/Header';
+import MenuResponsive from '@/shared/components/ui/menu/MenuResponsive';
 
 export default function RootLayout({
   children,

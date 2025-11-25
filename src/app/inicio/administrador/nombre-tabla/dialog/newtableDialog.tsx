@@ -1,19 +1,8 @@
 "use client";
-import HeaderDialog from "@/components/dialog/HeaderDialog";
-import errorNotification from "@/components/dialog/notification/errorNotification";
-import successNotification from "@/components/dialog/notification/successNotification";
-import GeneralErrorMessage from "@/components/GeneralErrorMessage";
-import { globalTailwindStyle } from "@/models/constants/layout.constants";
-import {
-  constIsStandardGEL,
-  constIsStandardMSPS,
-  tables,
-} from "@/models/constants/nombre-tabla.constans";
-import { constRegex } from "@/models/constants/regex.constants";
-import { IFormCreateTable } from "@/models/interfaces/nombre-tabla.interfaces";
-import { IDialogProps, IDropdown } from "@/models/interfaces/prime-react.interfaces";
-import { POST } from "@/services/general-service/http.service";
-import { IRequestOptions } from "@/services/general-service/types/request-data.types";
+import HeaderDialog from "@/shared/components/dialog/HeaderDialog";
+import errorNotification from "@/shared/components/dialog/notification/errorNotification";
+import successNotification from "@/shared/components/dialog/notification/successNotification";
+import GeneralErrorMessage from "@/shared/components/GeneralErrorMessage";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { Dialog } from "primereact/dialog";
@@ -23,6 +12,16 @@ import { InputSwitch } from "primereact/inputswitch";
 import { InputText } from "primereact/inputtext";
 import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
+import {
+  constIsStandardGEL,
+  constIsStandardMSPS,
+} from "@/app/inicio/administrador/nombre-tabla/models/constants/nombre-tabla.const";
+import { constRegex } from "@/shared/models/constants/regex.constants";
+import { IFormCreateTable } from "@/app/inicio/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
+import { POST } from "@/shared/services/general-service/http.service";
+import { IDialogProps, IDropdown } from "@/shared/models/interfaces/prime-react.interfaces";
+import { IRequestOptions } from "@/shared/services/general-service/types/request-data.types";
 
 export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
   const router = useRouter();
@@ -36,7 +35,7 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
   });
 
   const onSubmit = async (body: IFormCreateTable): Promise<void> => {
-    const optionsApi: IRequestOptions = {
+    const optionsApi: IRequestOptions<IFormCreateTable> = {
       body,
     };
 

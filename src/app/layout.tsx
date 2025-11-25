@@ -1,12 +1,11 @@
 import '../styles/index.scss';
-
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
-import LoaderInApiRequest from '@/components/loading/spinner/LoaderInApiRequest';
+import LoaderInApiRequest from '@/shared/components/loading/spinner/LoaderInApiRequest';
 import { Suspense } from 'react';
-import NavigationLoader from '@/components/loading/spinner/navigation-spinner/NavigationLoader';
+import NavigationLoader from '@/shared/components/loading/spinner/navigation-spinner/NavigationLoader';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

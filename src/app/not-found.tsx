@@ -1,5 +1,5 @@
 'use client';
-import { useNavigationLoaderStore } from '@/store/loader/navigationLoaderStore';
+import { useNavigationLoaderStore } from '@/shared/store/loader/navigationLoaderStore';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function NotFound() {

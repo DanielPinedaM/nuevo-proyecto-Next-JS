@@ -1,7 +1,7 @@
-import ListData from "./listData";
-import DataRender from "@/components/DataRender";
-import { GET } from "@/services/general-service/http.service";
-import { IRequestOptions } from "@/services/general-service/types/request-data.types";
+import ListData from "@/app/inicio/administrador/fetch/listData";
+import DataRender from "@/shared/components/DataRender";
+import { GET } from "@/shared/services/general-service/http.service";
+import { IRequestOptions } from "@/shared/services/general-service/types/request-data.types";
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */

@@ -1,7 +1,7 @@
 import ListTable from "@/app/inicio/administrador/nombre-tabla/table/listTable";
-import DataRender from "@/components/DataRender";
-import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
-import { POST } from "@/services/general-service/http.service";
+import DataRender from "@/shared/components/DataRender";
+import { POST } from "@/shared/services/general-service/http.service";
+import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/app/inicio/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {
   //const { data } = await POST(`${process.env.NEXT_PUBLIC_}${search ? "/" + search : ""}`)

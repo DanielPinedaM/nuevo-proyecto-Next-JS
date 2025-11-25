@@ -1,31 +1,30 @@
 "use client";
-import { rowsPerPageOptions, titleCase, truncateString } from "@/utils/func/general.utils";
+import { rowsPerPageOptions, titleCase, truncateString } from "@/shared/utils/func/general.utils";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
-import StatusReactIcon from "@/components/StatusIcon";
-import { formatDate } from "@/utils/func/luxon.utils";
-import { IResponse } from "@/services/general-service/types/request-data.types";
-import errorNotification from "@/components/dialog/notification/errorNotification";
-import successNotification from "@/components/dialog/notification/successNotification";
-import infoNotification from "@/components/dialog/notification/infoNotification";
-import { useNavigationLoaderStore } from "@/store/loader/navigationLoaderStore";
-import visibleRows from "@/models/constants/visible-rows.constants";
-import { ITableDataNombreTabla } from "@/models/interfaces/nombre-tabla.interfaces";
-import { columns } from "@/models/constants/nombre-tabla.constans";
-import { POST } from "@/services/general-service/http.service";
-
+import StatusReactIcon from "@/shared/components/StatusIcon";
+import { formatDate } from "@/shared/utils/func/luxon.utils";
+import { IResponse } from "@/shared/services/general-service/types/request-data.types";
+import errorNotification from "@/shared/components/dialog/notification/errorNotification";
+import successNotification from "@/shared/components/dialog/notification/successNotification";
+import infoNotification from "@/shared/components/dialog/notification/infoNotification";
+import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
+import { POST } from "@/shared/services/general-service/http.service";
+import visibleRows from "@/shared/models/constants/visible-rows.const";
+import { columns } from "@/app/inicio/administrador/nombre-tabla/models/constants/nombre-tabla.const";
+import { ITableDataNombreTabla } from "@/app/inicio/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
-const PrimeReactTooltip = dynamic(() => import("@/components/PrimeReactTooltip"));
+const PrimeReactTooltip = dynamic(() => import("@/shared/components/PrimeReactTooltip"));
 const TableDataDetailsDialog = dynamic(
-  () => import("@/components/dialog/tableDataDetails/TableDataDetailsDialog"),
+  () => import("@/shared/components/dialog/tableDataDetails/TableDataDetailsDialog"),
   { ssr: false }
 );
 const QuestionNotification = dynamic(
-  () => import("@/components/dialog/notification/questionNotification"),
+  () => import("@/shared/components/dialog/notification/questionNotification"),
   { ssr: false }
 );
 
@@ -51,9 +50,8 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   }, []);
 
   useEffect(() => {
-   console.info("fila actual a la q se le dio click ", tableData[currentRowIndex])
+    console.info("fila actual a la q se le dio click ", tableData[currentRowIndex]);
   }, [tableData, currentRowIndex]);
-
 
   const onClickOpenDialog = (nameDialog: TNameDialog): void => {
     setVisible((prev) => ({
