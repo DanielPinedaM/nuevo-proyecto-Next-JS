@@ -50,9 +50,8 @@ export const convertToNumber = (value: number | any): number | null => {
     typeof value === "object" ||
     typeof value === "symbol" ||
     Array.isArray(value)
-  ) {
+  )
     return null;
-  }
 
   const number: number = Number(value);
   return isNaN(number) ? null : number;
