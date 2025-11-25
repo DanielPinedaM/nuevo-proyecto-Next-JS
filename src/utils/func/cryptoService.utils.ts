@@ -43,6 +43,8 @@ export const encryptJSON = async (data: Record<string, any>): Promise<string | n
   return await encrypt(text);
 };
 
+/**
+desencriptar JSON */
 export const decryptJSON = async (encryptedJSON: string): Promise<any | null> => {
   const decryptedJSON: string | null = await decrypt(encryptedJSON);
 
