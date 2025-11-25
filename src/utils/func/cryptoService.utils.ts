@@ -1,8 +1,9 @@
-import { secretKeyAuthentication, IVAuth } from '@/models/constants/auth.constants';
-import { enc, mode, pad, AES } from 'crypto-js';
+import { secretKeyAuthentication, IVAuth } from "@/models/constants/auth.constants";
+import { enc, mode, pad, AES } from "crypto-js";
+import { isValidJSONparse } from "@/utils/func/dataType.utils";
 
 /**
-Encriptar texto */
+encriptar texto */
 export const encrypt = async (text: string): Promise<string> => {
   const key = enc.Utf8.parse(secretKeyAuthentication); // número hexadecimal de 16 dígitos como clave
   const iv = enc.Utf8.parse(IVAuth); // Número hexadecimal como desplazamiento de clave
@@ -20,7 +21,7 @@ export const encrypt = async (text: string): Promise<string> => {
 };
 
 /**
-Desencriptar texto */
+desencriptar texto */
 export const decrypt = async (encryptedText: string): Promise<string> => {
   const key = enc.Utf8.parse(secretKeyAuthentication);
   const iv = enc.Utf8.parse(IVAuth);
@@ -33,4 +34,20 @@ export const decrypt = async (encryptedText: string): Promise<string> => {
   });
 
   return decrypted.toString(enc.Utf8);
+};
+
+/**
+encriptar JSON */
+export const encryptJSON = async (data: Record<string, any>): Promise<string | null> => {
+  const text: string = JSON.stringify(data);
+  return await encrypt(text);
+};
+
+export const decryptJSON = async (encryptedJSON: string): Promise<any | null> => {
+  const decryptedJSON: string | null = await decrypt(encryptedJSON);
+
+  if (isValidJSONparse(decryptedJSON as string)) return JSON.parse(decryptedJSON as string);
+
+  console.error("❌ [decryptJSON] error no es JSON valido ", decryptedJSON);
+  return null;
 };
