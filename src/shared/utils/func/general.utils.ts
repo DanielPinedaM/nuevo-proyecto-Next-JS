@@ -116,27 +116,31 @@ export const copyText = async (text: string): Promise<void> => {
     return;
   }
 
-  if (!text) {
-    console.error("❌ error, el texto a copiar NO puede ser falsy \n", text);
+  if (!isString(text)) {
+    errorNotification(errorMessage);
+    console.error("❌ error, text NO es tipo string\ntypeof text ", typeof text);
     return;
   }
 
-  if (!navigator?.clipboard?.writeText) {
+  if (text.trim() === "") {
     errorNotification(errorMessage);
-    console.error(
-      errorMessage,
-      " porque el navegador no es compatible con navigator?.clipboard?.writeText"
-    );
+    console.error("❌ error, text es un string vacio ''\ntext ", text);
     return;
   }
 
-  try {
-    await navigator.clipboard.writeText(text);
-    successNotification("Texto copiado");
-  } catch (e) {
-    errorNotification(errorMessage);
-    console.error(errorMessage, "\n", e);
-  }
+  const selBox: HTMLTextAreaElement = document.createElement("textarea");
+  selBox.style.position = "fixed";
+  selBox.style.left = "0";
+  selBox.style.top = "0";
+  selBox.style.opacity = "0";
+  selBox.value = text;
+  document.body.appendChild(selBox);
+  selBox.focus();
+  selBox.select();
+  document.execCommand("copy");
+  document.body.removeChild(selBox);
+
+  successNotification("Texto copiado");
 };
 
 /**
