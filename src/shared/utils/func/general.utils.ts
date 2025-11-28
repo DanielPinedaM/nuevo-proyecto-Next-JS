@@ -108,7 +108,7 @@ export const isUseClient = (): boolean => {
 
 /**
 copiar texto en portapapeles */
-export const copyText = async (text: string): Promise<void> => {
+export const copyText = (text: string): void => {
   const errorMessage: string = "No se pudo copiar el texto";
 
   if (!isUseClient()) {
