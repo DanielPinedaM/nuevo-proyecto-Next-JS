@@ -98,22 +98,21 @@ export const sessionStorageListValue = (property: string): string | any[] | any 
     return value;
   }
 
-  // devuelve null cuando NO existe la propiedad en sessionStorage
+  // key NO existe en sessionStorage -> devuelve null
   value = sessionStorage.getItem(btoa(property));
   if (value === null) return null;
 
   value = atob(sessionStorage.getItem(btoa(property))!);
 
-  // devuelve 'null' (tipo string) cuando el valor de la propiedad en sessionStorage
-  // - SI existe
-  // - es 'null' (tipo string)
-  if (value?.trim() === 'null') return 'null';
-
+  // key SI existe en sessionStorage y el value de la key es "null" tipo string -> devuelve null
+  if (value?.trim() === 'null') return null;
   if (value?.trim() === 'undefined') return undefined;
   if (value?.trim() === 'NaN') return NaN;
   if (value?.trim() === 'true') return true;
   if (value?.trim() === 'false') return false;
+  if (!isNaN(Number(value)) && value.trim() !== '') return Number(value);
   if (isValidJSONparse(value)) return JSON.parse(value);
+
   return value;
 };
 
