@@ -74,3 +74,49 @@ node --run build:prod | producción    | environments/.env.production
 * **src/store**: Estado global en Zustand para compartir estados entre componentes
 
 * **src/api/generalServiceHttp.ts**: Funcion general para hacer peticiones HTTP usando fetch, sirve para Server Side Rendering y "use client"
+
+## 📅 Fechas
+
+Usar la librería **Luxon** para el manejo de fechas. **NO** usar `new Date()` **NI** librerías como Moment.js.
+
+Esto se debe a que:
+
+* `new Date()` tiene comportamientos inconsistentes entre zonas horarias.
+
+* `new Date()` Es difícil de formatear y manipular de forma segura.
+
+* `new Date()` No maneja bien timezones ni conversiones complejas.
+
+* [Moment.js está en modo legacy/deprecado y ya no se recomienda para proyectos modernos.](https://momentjs.com/docs/#/-project-status/)
+
+* Luxon ofrece una API más clara, moderna y robusta para fechas, tiempos y zonas horarias.
+
+En `src\shared\utils\func\luxon.utils.ts` hay funciones para el manejo (formateo) de fechas usando Luxon.
+
+***❌ Incorrecto***
+
+```ts
+/* new Date() */
+
+const now = new Date();
+const formatted = now.toLocaleDateString();
+```
+
+```ts
+/* moment.js */
+
+import moment from 'moment';
+
+const today = moment().format('YYYY-MM-DD');
+```
+
+***✅ Correcto***
+
+```ts
+import { DateTime } from 'luxon';
+
+const now = DateTime.now();
+const formatted = now.toFormat('yyyy-MM-dd');
+```
+
+
