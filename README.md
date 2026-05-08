@@ -12,16 +12,16 @@ npm i
 
 comando                | apunta a...   | ruta archivo
 ---------------------- | ------------- | -------------
-node --run start:local | local host    | environments/.env.localhost
-node --run start:test  | pruebas       | environments/.env.test
-node --run start:prod  | producción    | environments/.env.production
+node --run start:local | local host    | `environments/.env.localhost`
+node --run start:test  | pruebas       | `environments/.env.test`
+node --run start:prod  | producción    | `environments/.env.production`
 
 ## 🚀 Generar build (dist) para desplegar
 
 comando               | apunta a...   | ruta archivo
 --------------------- | ------------- | -------------
-node --run build:test | pruebas       | environments/.env.test
-node --run build:prod | producción    | environments/.env.production
+node --run build:test | pruebas       | `environments/.env.test`
+node --run build:prod | producción    | `environments/.env.production`
 
 ## 💻 Tecnologías
 
@@ -40,13 +40,6 @@ node --run build:prod | producción    | environments/.env.production
 * **React hook form:** manejo de formularios
 
 * **react icons:** Iconos de React
-
-## 💅 Maquetación
-* Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
-
-* Mezclar Sass con Tailwind es mala práctica porque Sass sobrescribe los estilos de Tailwind porque Sass tiene más especificidad que Tailwind.
-
-* Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
 
 ## 📁  Estructura de carpetas
 * **/environments**: Variables de entorno .env para desarrollo (local host), produccion y pruebas
@@ -235,3 +228,10 @@ export default function MyComponent() {
   );
 }
 ```
+
+## 💅 Maquetación
+* Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
+
+* Mezclar Sass con Tailwind es mala práctica porque Sass sobrescribe los estilos de Tailwind porque Sass tiene más especificidad que Tailwind.
+
+* Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
