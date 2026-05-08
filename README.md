@@ -1,6 +1,6 @@
 # ⚛️ Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
 
-usar NodeJS 24.11.1
+usar NodeJS 24.15.0
 
 ## 📦 Instalar paquetes
 
