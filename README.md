@@ -229,6 +229,15 @@ export default function MyComponent() {
 }
 ```
 
+## 📝 Formularios
+
+INCOMPLETO- aqui me falta:
+* explicar y dar ejemplo incorrecto y correcto de cada uno, se tiene q usar react hook form SIEMPRE  NO usar para formularios 
+   * use state para los formulario controlado
+   * Formularios no controlados
+
+* usar watch de react hook form, NO usar on change (escribir ejemplo incorrecto y correcto de cada uno)
+
 ## 💅 Maquetación
 * Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
 
