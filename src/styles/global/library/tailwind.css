@@ -1,18 +1,9 @@
 /*
-************
-* Tailwind *
-************ */
+**************************************
+* Tailwind 4                         *
+* https://tailwindcss.com/docs/theme *
+************************************** */
 
-/* Importar Tailwind 4 y Prime React
-https://medium.com/@daniel.codrea/setting-up-a-primeng-v19-and-tailwindcss-v4-project-f1b550c8e2d0 */
-@layer tailwind, primeng;
-
-@layer tailwind {
-  @import "tailwindcss" important;
-}
-
-/* Variables de Tailwind 4
-https://tailwindcss.com/docs/theme  */
 @theme {
   /*
   ***********

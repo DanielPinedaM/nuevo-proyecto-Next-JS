@@ -20,7 +20,9 @@
   height: fit-content;
   padding: variable.$padding-button;
   border-radius: variable.$rounded-button;
-  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  transition:
+    color 0.3s ease 0.05s,
+    background-color 0.3s ease;
   text-transform: capitalize;
   font-size: variable.$font-size-button;
 }
@@ -37,28 +39,178 @@
   column-gap: variable.$column-gap-button;
   padding: 0.4375rem;
   border-radius: variable.$rounded-button;
-  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  transition:
+    color 0.3s ease 0.05s,
+    background-color 0.3s ease;
 }
 
 %base-btn-icon-svg {
   flex: none;
   font-size: 35px;
-  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  transition:
+    color 0.3s ease 0.05s,
+    background-color 0.3s ease;
 }
 
 %base-btn-icon-span {
   text-align: left;
   text-transform: capitalize;
   line-height: 1rem;
-  transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+  transition:
+    color 0.3s ease 0.05s,
+    background-color 0.3s ease;
   font-size: variable.$font-size-button;
 }
 
 button {
+  /* ***********************
+  * Reset CSS para botones *
+  ************************** */
+  background-color: transparent;
+
   margin: 0;
   padding: 0;
 
-  // boton q contiene icono
+  border: none;
+  outline: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  /* ******************************************************
+  * Estilos que son comunes en todos los tipos de botones *
+  ********************************************************* */
+  &.btn-icon-no-border,
+  &.btn-icon-with-border,
+  &.btn-with-icon-text-background,
+  &.btn-with-icon-text-border,
+  &.btn-with-icon-text-no-border,
+  &.btn-primary,
+  &.btn-secondary-with-border,
+  &.btn-secondary-no-border {
+    &:enabled {
+      cursor: pointer;
+    }
+
+    &:disabled {
+      @extend %base-btn-disabled;
+    }
+
+    &:active {
+      @extend %base-btn-active;
+    }
+  }
+
+  /* BOTON PRIMARIO PARA ACCIONES DE CONFIRMACION (GUARDAR, ACEPTAR, SI) 
+  ❌ icono
+  ✅ texto
+  ❌ borde
+  ✅ fondo
+
+  <button className="btn-primary">
+    Aceptar
+  </button> */
+  &.btn-primary {
+    @extend %base-btn-primary-secondary;
+
+    background-color: variable.$blue-lightning;
+    color: white;
+
+    // dispositivos con cursor
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+  }
+
+  /* BOTON SECUNDARIO CON BORDE PARA ACCIONES DE CANCELACIÓN (ELIMINAR, CANCELAR, NO)
+   ❌ icono
+   ✅ texto
+   ✅ borde
+   🖱️ fondo solo se muestra en hover
+
+   <button className="btn-secondary-with-border">
+       Cancelar
+   </button> */
+  &.btn-secondary-with-border {
+    @extend %base-btn-primary-secondary;
+
+    border: 0.0625rem solid variable.$blue-lightning;
+    color: variable.$blue-azure;
+
+    // dispositivos con cursor
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: white;
+        background-color: variable.$blue-azure;
+        border: 0;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        color: white;
+        background-color: variable.$blue-azure;
+        border: 0;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+  }
+
+  /* BOTON SECUNDARIO SIN BORDE PARA ACCIONES DE CANCELACIÓN (ELIMINAR, CANCELAR, NO)
+    ❌ icono
+    ✅ texto
+    ❌ borde
+    🖱️ fondo solo se muestra en hover
+
+    <button className="btn-secondary-no-border">
+      Cancelar
+    </button> */
+  &.btn-secondary-no-border {
+    @extend %base-btn-primary-secondary;
+    color: variable.$blue-carbon;
+
+    // dispositivos con cursor
+    @media screen and (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: white;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+
+    // dispositivos con pantalla tactil
+    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
+      &:active {
+        color: white;
+        background-color: variable.$blue-azure;
+        font-weight: variable.$font-weight-button;
+      }
+    }
+  }
+
+  /*
+  ✅ icono
+  ✅ texto
+  ❌ borde
+  🖱️ fondo solo se muestra en hover
+
+  <button className="btn-icon-no-border">
+    <IoIosHome />
+    <span>Boton</span>
+  </button> */
   &.btn-icon-no-border {
     @extend %base-flex-full-center;
     @extend %base-btn-icon;
@@ -68,15 +220,7 @@ button {
       color: variable.$blue-lightning;
     }
 
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
+    // dispositivos con cursor
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-deep;
@@ -97,15 +241,22 @@ button {
         }
       }
     }
-
-    &:active {
-      @extend %base-btn-active;
-    }
   }
 
+  /*
+  ✅ icono
+  ❌ texto
+  ✅ borde
+  🖱️ fondo solo se muestra en hover
+
+  <button className="btn-icon-with-border">
+     <IoIosHome />
+  </button> */
   &.btn-icon-with-border {
     @extend %base-flex-full-center;
-    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+    transition:
+      color 0.3s ease 0.05s,
+      background-color 0.3s ease;
     padding: 0.125rem;
     border: 0.0625rem solid variable.$blue-deep;
     border-radius: 100%;
@@ -115,15 +266,7 @@ button {
       color: variable.$blue-deep;
     }
 
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
+    // dispositivos con cursor
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-azure;
@@ -146,13 +289,18 @@ button {
         }
       }
     }
-
-    &:active {
-      @extend %base-btn-active;
-    }
   }
 
-  // boton q contiene icono y texto
+  /*
+  ✅ icono
+  ✅ texto
+  ❌ borde
+  ✅ fondo 
+
+  <button className="btn-with-icon-text-background">
+    <IoIosHome />
+    <span>Boton</span>
+  </button> */
   &.btn-with-icon-text-background {
     @extend %base-flex-full-center;
     @extend %base-btn-icon;
@@ -169,15 +317,7 @@ button {
       color: white;
     }
 
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
+    // dispositivos con cursor
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         background-color: variable.$blue-carbon;
@@ -202,17 +342,25 @@ button {
         }
       }
     }
-
-    &:active {
-      @extend %base-btn-active;
-    }
   }
 
+  /*
+  ✅ icono
+  ✅ texto
+  ✅ borde
+  🖱️ fondo solo se muestra en hover
+
+  <button className="btn-with-icon-text-border">
+    <IoIosHome />
+    <span>Boton</span>
+  </button> */
   &.btn-with-icon-text-border {
     @extend %base-flex-full-center;
     @extend %base-btn-icon;
     border: 0.0625rem solid variable.$blue-carbon;
-    transition: color 0.3s ease 0.05s, background-color 0.3s ease;
+    transition:
+      color 0.3s ease 0.05s,
+      background-color 0.3s ease;
 
     svg {
       @extend %base-btn-icon-svg;
@@ -224,15 +372,7 @@ button {
       color: variable.$blue-carbon;
     }
 
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
+    // dispositivos con cursor
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         border: 0;
@@ -259,12 +399,18 @@ button {
         }
       }
     }
-
-    &:active {
-      @extend %base-btn-active;
-    }
   }
 
+  /*
+   ✅ icono
+   ✅ texto
+   ❌ borde
+   🖱️ fondo solo se muestra en hover
+
+  <button className="btn-with-icon-text-no-border">
+    <IoIosHome />
+    <span>Boton</span>
+  </button>*/
   &.btn-with-icon-text-no-border {
     @extend %base-flex-full-center;
     @extend %base-btn-icon;
@@ -280,15 +426,7 @@ button {
       color: variable.$blue-carbon;
     }
 
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
+    // dispositivos con cursor
     @media screen and (hover: hover) and (pointer: fine) {
       &:hover {
         border: 0;
@@ -314,121 +452,6 @@ button {
           color: white;
         }
       }
-    }
-
-    &:active {
-      @extend %base-btn-active;
-    }
-  }
-
-  // boton primario para "aceptar" - "si"
-  &.btn-primary {
-    @extend %base-btn-primary-secondary;
-
-    background-color: variable.$blue-lightning;
-    color: white;
-
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
-    @media screen and (hover: hover) and (pointer: fine) {
-      &:hover {
-        background-color: variable.$blue-azure;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    // dispositivos con pantalla tactil
-    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
-      &:active {
-        background-color: variable.$blue-azure;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    &:active {
-      @extend %base-btn-active;
-    }
-  }
-
-  // boton secundario para "cancelar" - "no"
-  &.btn-secondary-with-border {
-    @extend %base-btn-primary-secondary;
-
-    border: 0.0625rem solid variable.$blue-lightning;
-    color: variable.$blue-azure;
-
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
-    @media screen and (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: white;
-        background-color: variable.$blue-azure;
-        border: 0;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    // dispositivos con pantalla tactil
-    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
-      &:active {
-        color: white;
-        background-color: variable.$blue-azure;
-        border: 0;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    &:active {
-      @extend %base-btn-active;
-    }
-  }
-
-  &.btn-secondary-no-border {
-    @extend %base-btn-primary-secondary;
-    color: variable.$blue-carbon;
-
-    &:enabled {
-      cursor: pointer;
-    }
-
-    &:disabled {
-      @extend %base-btn-disabled;
-    }
-
-    // dispositivos con mouse
-    @media screen and (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: white;
-        background-color: variable.$blue-azure;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    // dispositivos con pantalla tactil
-    @media screen and (pointer: coarse), (pointer: none), (hover: none) {
-      &:active {
-        color: white;
-        background-color: variable.$blue-azure;
-        font-weight: variable.$font-weight-button;
-      }
-    }
-
-    &:active {
-      @extend %base-btn-active;
     }
   }
 }

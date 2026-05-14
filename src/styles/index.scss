@@ -1,13 +1,19 @@
 /*
+**************
+* Reset CSS *
+************** */
+
+@use './global/reset.scss';
+
+/*
 **********
 * global *
 ********** */
 
-@use './global/reset.scss' as reset;
-@use './global/table.scss' as table;
-@use "./global/library/sweet-alert-2" as sweetAlert;
-@use './global/scroll-bar.scss' as scrollBar;
-@use './global/button.scss' as button;
+@use './global/table.scss';
+@use './global/library/sweet-alert-2';
+@use './global/scroll-bar.scss';
+@use './global/button.scss';
 
 /*
 ***************
@@ -17,10 +23,10 @@
 // iconos de Prime React
 @use '../../node_modules/primeicons/primeicons.css';
 
-// estilos generales de Prime React
+// estilos por defecto de Prime React
 @use '../../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
 
-// sobrescribir escribir estilos generales de Prime React
+// sobrescribir escribir estilos por defecto de Prime React
 @use './global/library/prime-react.scss';
 
 /*
@@ -28,4 +34,5 @@
 * Tailwind 4 *
 ************** */
 
-@use './global/library/tailwind.css' as tailwind;
+@use './global/library/tailwind.css';
+
