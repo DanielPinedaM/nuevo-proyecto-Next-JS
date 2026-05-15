@@ -42,6 +42,12 @@ node --run build:prod | producción    | `environments/.env.production`
 * **react icons:** Iconos de React
 
 ## 📁  Estructura de carpetas
+
+ESTO HAY Q CORREGIRLO:
+- ACTUALIZARLO POR LAS NUEVAS CARPETAS
+
+- USAR ARBOL JERARQUICO DE ARCHIVOS Y CARPETAS CON ├── Y └──
+
 * **/environments**: Variables de entorno .env para desarrollo (local host), produccion y pruebas
 
 * **src/app/**: Enrutado de Next JS
