@@ -13,13 +13,13 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from "@/shared/services/general-service/utils/request-functions.utils";
+} from "@/shared/API/general-API/utils/request-functions.utils";
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
   Method,
-} from "@/shared/services/general-service/types/request-data.types";
+} from "@/shared/API/general-API/types/request-data.types";
 import { ILoaderState } from "@/shared/store/loader/loaderStore";
 
 /*
@@ -103,7 +103,7 @@ async function executeRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient() && showLoader) {
-    const { useLoaderStore } = await import("@/store/loader/loaderStore");
+    const { useLoaderStore } = await import("@/shared/store/loader/loaderStore");
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }
@@ -350,9 +350,9 @@ async function executeRequest<T = any>(
 }
 
 /*
- *********************************************************
- * funciones con metodos HTTP para llamar endpoint (API) *
- ********************************************************* */
+ *********************************************************************
+ * funciones con metodos HTTP para llamar a cualquier endpoint (API) *
+ ********************************************************************* */
 
 export async function GET(
   url: string = "",

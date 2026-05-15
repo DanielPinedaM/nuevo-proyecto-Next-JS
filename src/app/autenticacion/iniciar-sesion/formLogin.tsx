@@ -11,12 +11,12 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
 import { constRegex } from "@/shared/models/constants/regex.constants";
-import { IRequestOptions, IResponse } from "@/shared/services/general-service/types/request-data.types";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
 import { forceConvertToString, isLiteralObject, literalObjectLength } from "@/shared/utils/func/dataType.utils";
 import { sessionStorageDeleteAll } from "@/shared/utils/func/sessionStorage.utils";
 import { encrypt } from "@/shared/utils/func/cryptoService.utils";
-import { POST } from "@/shared/services/general-service/http.service";
+import { IRequestOptions, IResponse } from "@/shared/API/general-API/types/request-data.types";
+import { POST } from "@/shared/API/general-API/http.api";
 
 interface IBodyLogin {
   email: string;

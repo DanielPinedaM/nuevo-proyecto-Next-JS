@@ -6,7 +6,7 @@ import DragAndDrop from "@/shared/components/dialog/uploadFile/textAndButtons/dr
 import Footer from "@/shared/components/dialog/uploadFile/textAndButtons/footer";
 import ListFiles from "@/shared/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/shared/components/dialog/uploadFile/textAndButtons/uploadFile";
-import { IResponse } from "@/shared/services/general-service/types/request-data.types";
+import { IResponse } from "@/shared/API/general-API/types/request-data.types";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,

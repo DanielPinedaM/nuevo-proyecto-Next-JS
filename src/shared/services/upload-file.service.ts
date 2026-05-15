@@ -1,5 +1,5 @@
-import { GET, POST, PUT, PATCH, DELETE } from "@/shared/services/general-service/http.service";
-import { IResponse } from "@/shared/services/general-service/types/request-data.types";
+import { GET, POST, PUT, PATCH, DELETE } from "@/shared/API/general-API/http.api";
+import { IResponse } from "@/shared/API/general-API/types/request-data.types";
 import { isFile } from "@/shared/utils/func/dataType.utils";
 import { IUrl } from "@/shared/components/dialog/uploadFile/models/interfaces/upload-file.interfaces";
 

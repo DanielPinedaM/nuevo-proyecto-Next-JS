@@ -9,7 +9,7 @@ import {
   IIsValidOptions,
   IValidateApiResponse,
   Method,
-} from "@/shared/services/general-service/types/request-data.types";
+} from "@/shared/API/general-API/types/request-data.types";
 import {
   isFile,
   isLiteralObject,

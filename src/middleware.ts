@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IResponse } from "@/shared/services/general-service/types/request-data.types";
+import { IResponse } from "@/shared/API/general-API/types/request-data.types";
 import { nameCookieKey } from "./shared/models/constants/cookie-storage.const";
 
 export async function middleware(request: NextRequest) {
