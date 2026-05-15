@@ -1,6 +1,6 @@
 import ListData from "@/app/inicio/administrador/fetch/listData";
 import DataRender from "@/shared/components/DataRender";
-import { GET } from "@/shared/API/general-API/http.api";
+import { GET } from "@/shared/API/general-API/http-gateway.api";
 import { IRequestOptions } from "@/shared/API/general-API/types/request-data.types";
 
 export default async function FetchData() {

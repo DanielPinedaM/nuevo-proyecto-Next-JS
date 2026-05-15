@@ -1,4 +1,4 @@
-import { GET, POST, PUT, PATCH, DELETE } from "@/shared/API/general-API/http.api";
+import { GET, POST, PUT, PATCH, DELETE } from "@/shared/API/general-API/http-gateway.api";
 import { IResponse } from "@/shared/API/general-API/types/request-data.types";
 import { isFile } from "@/shared/utils/func/dataType.utils";
 import { IUrl } from "@/shared/components/dialog/uploadFile/models/interfaces/upload-file.interfaces";

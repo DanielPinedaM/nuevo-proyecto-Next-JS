@@ -16,7 +16,7 @@ import { forceConvertToString, isLiteralObject, literalObjectLength } from "@/sh
 import { sessionStorageDeleteAll } from "@/shared/utils/func/sessionStorage.utils";
 import { encrypt } from "@/shared/utils/func/cryptoService.utils";
 import { IRequestOptions, IResponse } from "@/shared/API/general-API/types/request-data.types";
-import { POST } from "@/shared/API/general-API/http.api";
+import { POST } from "@/shared/API/general-API/http-gateway.api";
 
 interface IBodyLogin {
   email: string;

@@ -12,7 +12,7 @@ import errorNotification from "@/shared/components/dialog/notification/errorNoti
 import successNotification from "@/shared/components/dialog/notification/successNotification";
 import infoNotification from "@/shared/components/dialog/notification/infoNotification";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
-import { POST } from "@/shared/API/general-API/http.api";
+import { POST } from "@/shared/API/general-API/http-gateway.api";
 import visibleRows from "@/shared/models/constants/visible-rows.const";
 import { columns } from "@/app/inicio/administrador/nombre-tabla/models/constants/nombre-tabla.const";
 import { ITableDataNombreTabla } from "@/app/inicio/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
