@@ -128,7 +128,7 @@ export const downloadExcel = async (
   let loaderStore: ILoaderState | null = null;
 
   // acceder al valor booleano del loader
-  const { useLoaderStore } = await import('@/store/loader/loaderStore');
+  const { useLoaderStore } = await import('@/shared/store/loader/loaderStore');
   loaderStore = useLoaderStore.getState();
   loaderStore.showLoader();
 
