@@ -1,4 +1,4 @@
-import FormLogin from '@/app/autenticacion/iniciar-sesion/formLogin';
+import FormLogin from '@/app/(auth)/iniciar-sesion/formLogin';
 
 export default function Page() {
   return (
@@ -12,8 +12,8 @@ export default function Page() {
           className='flex flex-col items-center h-fit mx-2 basis-[460px] rounded-xl mt-3 xsm:mt-6 p-4'
         >
           <div className='xsm:w-[70%]'>
-            <h1 className='text-dark-blue text-center text-[25px] leading-6 font-medium mb-5'>
-              <span className='block'>Bienvenido a</span>
+            <h1 className='text-dark-blue text-center text-[25px] font-medium mb-5'>
+              <span className='block'>Bienvenido a </span>
               <span>tu plataforma web</span>
             </h1>
 

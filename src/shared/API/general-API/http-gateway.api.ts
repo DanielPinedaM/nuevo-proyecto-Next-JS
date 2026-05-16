@@ -13,13 +13,13 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from "@/shared/API/general-API/utils/request-functions.utils";
+} from "@/shared/api/general-API/utils/request-functions.utils";
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
   Method,
-} from "@/shared/API/general-API/types/request-data.types";
+} from "@/shared/api/general-API/types/request-data.types";
 import { ILoaderState } from "@/shared/store/loader/loaderStore";
 
 /*

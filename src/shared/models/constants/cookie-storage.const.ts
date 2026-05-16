@@ -1,16 +1,5 @@
-import { INameCookieKey, IObjStorage } from '@/shared/models/interfaces/cookie-storage.interfaces';
+import { IObjStorage } from '@/shared/models/interfaces/cookie-storage.interfaces';
 
-/* ********
- * cookies *
- * ********* */
-
-// nombres de las propiedades q se guardan en las COOKIES
-export const nameCookieKey: INameCookieKey = {
-  accessToken: 'accessToken',
-  userType: 'userType',
-  role: 'role',
-  email: 'email',
-};
 
 /**
 lista de opciones de configuracion de las cookies al loguearse */

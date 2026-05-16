@@ -9,7 +9,7 @@ import {
   IIsValidOptions,
   IValidateApiResponse,
   Method,
-} from "@/shared/API/general-API/types/request-data.types";
+} from "@/shared/api/general-API/types/request-data.types";
 import {
   isFile,
   isLiteralObject,
@@ -21,7 +21,6 @@ import { isUseClient } from "@/shared/utils/func/general.utils";
 import { currentDateAndTime } from "@/shared/utils/func/luxon.utils";
 import { getCookie } from "cookies-next";
 import { redirect } from "next/navigation";
-import { nameCookieKey } from "@/shared/models/constants/cookie-storage.const";
 
 function pathnameIsLogin(): boolean {
   if (!isUseClient()) {
@@ -29,7 +28,7 @@ function pathnameIsLogin(): boolean {
     return false;
   }
 
-  const login: string = "/autenticacion/iniciar-sesion";
+  const login: string = "/iniciar-sesion";
 
   const pathname: string = window.location.pathname;
 
@@ -38,11 +37,11 @@ function pathnameIsLogin(): boolean {
 
 function redirectToLoginInUseClient(): void {
   if (!isUseClient()) {
-    console.error("❌ error al re-dirigir a /autenticacion/iniciar-sesion");
+    console.error("❌ error al re-dirigir a /iniciar-sesion");
     return;
   }
 
-  const login: string = "/autenticacion/iniciar-sesion";
+  const login: string = "/iniciar-sesion";
 
   if (!pathnameIsLogin()) {
     window.location.href = login;
@@ -153,13 +152,13 @@ export async function getToken(): Promise<string | null> {
 
   // 'use client'
   if (isUseClient()) {
-    token = (await getCookie(nameCookieKey.accessToken)) ?? null;
+    token = (await getCookie("token")) ?? null;
   } else {
     // 'use server'
     try {
       const headers = await import("next/headers");
       const cookieStore = await headers.cookies();
-      token = cookieStore.get(nameCookieKey.accessToken)?.value ?? null;
+      token = cookieStore.get("token")?.value ?? null;
     } catch (error) {
       console.error(
         "❌ error en dynamic import de import { headers } from 'next/headers', NO se puedo obtener el token en componente servidor 'use server'",
@@ -176,7 +175,7 @@ export async function getToken(): Promise<string | null> {
 /**
 funcion para cerrar sesion en 'use client' y 'use server', */
 export function handleUnauthorized(): void {
-  const login: string = "/autenticacion/iniciar-sesion";
+  const login: string = "/iniciar-sesion";
 
   // 1) eliminar token
   // 2) re-dirigir a iniciar sesion
@@ -195,7 +194,7 @@ export function handleUnauthorized(): void {
 /**
 funcion para devolver a la pagina web anterior en 'use client' y 'use server', */
 export function returnToBrowserHistory(): void {
-  const login: string = "/autenticacion/iniciar-sesion";
+  const login: string = "/iniciar-sesion";
 
   // 'use client'
   if (isUseClient()) {

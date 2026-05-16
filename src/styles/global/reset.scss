@@ -1,31 +1,19 @@
 @use './variable.scss' as variable;
 
-// Reset CSS
-
 /*
 **********************
 * selector universal *
 ********************** */
 
-*:not([class*='swal']):not([class*='p-']),
-*:not([class*='swal']):not([class*='p-'])::before,
-*:not([class*='swal']):not([class*='p-'])::after {
+*:not([class*='swal']),
+*:not([class*='swal'])::before,
+*:not([class*='swal'])::after {
   box-sizing: border-box;
 }
 
-*:not([class*='btn-']):not([class='swal']):not([class*='p-']):not([class*='button-']):not([class*='m-']):not([class*='mx-']):not([class*='my-']):not([class*='ms-']):not([class*='me-']):not([class*='mt-']):not([class*='mr-']):not([class*='mb-']):not([class*='ml-']):not([class*='space-']):not([class*='p-']):not([class*='px-']):not([class*='py-']):not([class*='ps-']):not([class*='pe-']):not([class*='pt-']):not([class*='pr-']):not([class*='pb-']):not([class*='pl-']) {
+*:not([class='swal']) {
   margin: 0;
   padding: 0;
-}
-
-/*
-**********************
-* ::after y ::before *
-********************** */
-
-*::after,
-*::before {
-  content: "";
 }
 
 /*
@@ -138,7 +126,7 @@ tr,
 th,
 td {
   // color de texto
-  color: black;
+  color: red;
 
   /*
   alineacion uniforme de los numeros

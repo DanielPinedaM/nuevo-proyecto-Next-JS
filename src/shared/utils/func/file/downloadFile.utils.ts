@@ -5,7 +5,7 @@ import { currentDateAndTime } from '@/shared/utils/func/luxon.utils';
 import errorNotification from '@/shared/components/dialog/notification/errorNotification';
 import { isUseClient, titleCase } from '@/shared/utils/func/general.utils';
 import successNotification from '@/shared/components/dialog/notification/successNotification';
-import { IResponse } from '@/shared/API/general-API/types/request-data.types';
+import { IResponse } from '@/shared/api/general-API/types/request-data.types';
 import * as ExcelJS from 'exceljs';
 import { ILoaderState } from '@/shared/store/loader/loaderStore';
 

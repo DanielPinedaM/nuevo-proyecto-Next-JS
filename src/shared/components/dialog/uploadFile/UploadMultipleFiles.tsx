@@ -8,7 +8,7 @@ import Footer from "@/shared/components/dialog/uploadFile/textAndButtons/footer"
 import ListFiles from "@/shared/components/dialog/uploadFile/textAndButtons/listFiles";
 import UploadFile from "@/shared/components/dialog/uploadFile/textAndButtons/uploadFile";
 import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
-import { IResponse } from "@/shared/API/general-API/types/request-data.types";
+import { IResponse } from "@/shared/api/general-API/types/request-data.types";
 import {
   uploadOneOrMoreFilesByBody,
   uploadOneOrMoreFilesByParams,

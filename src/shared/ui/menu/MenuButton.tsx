@@ -2,7 +2,7 @@
 import { CiMenuBurger } from 'react-icons/ci';
 import { FaArrowLeft } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
-import { useMenuStore } from '@/shared/components/ui/menu/store/menu.store';
+import { useMenuStore } from '@/shared/ui/menu/store/menu.store';
 const PrimeReactTooltip = dynamic(() => import('@/shared/components/PrimeReactTooltip'));
 
 export default function MenuButton() {

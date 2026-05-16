@@ -7,15 +7,15 @@ import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import StatusReactIcon from "@/shared/components/StatusIcon";
 import { formatDate } from "@/shared/utils/func/luxon.utils";
-import { IResponse } from "@/shared/API/general-API/types/request-data.types";
+import { IResponse } from "@/shared/api/general-API/types/request-data.types";
 import errorNotification from "@/shared/components/dialog/notification/errorNotification";
 import successNotification from "@/shared/components/dialog/notification/successNotification";
 import infoNotification from "@/shared/components/dialog/notification/infoNotification";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
-import { POST } from "@/shared/API/general-API/http-gateway.api";
+import { POST } from "@/shared/api/general-API/http-gateway.api";
 import visibleRows from "@/shared/models/constants/visible-rows.const";
-import { columns } from "@/app/inicio/administrador/nombre-tabla/models/constants/nombre-tabla.const";
-import { ITableDataNombreTabla } from "@/app/inicio/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
+import { columns } from "@/app/(home)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
+import { ITableDataNombreTabla } from "@/app/(home)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/shared/components/PrimeReactTooltip"));
@@ -45,7 +45,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_NODE_ENV === "production") {
       showLoaderNavigation();
-      router.push("/autenticacion/iniciar-sesion");
+      router.push("/iniciar-sesion");
     }
   }, []);
 

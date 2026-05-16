@@ -15,8 +15,8 @@ import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoader
 import { forceConvertToString, isLiteralObject, literalObjectLength } from "@/shared/utils/func/dataType.utils";
 import { sessionStorageDeleteAll } from "@/shared/utils/func/sessionStorage.utils";
 import { encrypt } from "@/shared/utils/func/cryptoService.utils";
-import { IRequestOptions, IResponse } from "@/shared/API/general-API/types/request-data.types";
-import { POST } from "@/shared/API/general-API/http-gateway.api";
+import { IRequestOptions, IResponse } from "@/shared/api/general-API/types/request-data.types";
+import { POST } from "@/shared/api/general-API/http-gateway.api";
 
 interface IBodyLogin {
   email: string;
@@ -153,7 +153,7 @@ export default function FormLogin() {
     iterateUserData(data); */
 
     showLoaderNavigation();
-    router.push("/inicio/administrador");
+    router.push("/administrador");
     //} else {
     //deleteStorageAndCookies();
     //errorNotification(message);

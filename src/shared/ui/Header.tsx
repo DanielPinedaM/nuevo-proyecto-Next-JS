@@ -1,5 +1,5 @@
 'use client';
-import MenuButton from '@/shared/components/ui/menu/MenuButton';
+import MenuButton from '@/shared/ui/menu/MenuButton';
 
 export default function Header() {
   return (

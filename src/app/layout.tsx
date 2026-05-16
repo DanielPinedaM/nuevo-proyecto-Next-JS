@@ -37,6 +37,7 @@ export default function RootLayout({
     <html lang='es-ES'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <LoaderInApiRequest />
+  
         <Suspense fallback={null}>
           <NavigationLoader />
         </Suspense>

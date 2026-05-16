@@ -12,7 +12,7 @@ export default function NotFound() {
       router.back();
     } else {
       showLoaderNavigation();
-      router.push('/autenticacion/iniciar-sesion');
+      router.push('/iniciar-sesion');
     }
   };
 

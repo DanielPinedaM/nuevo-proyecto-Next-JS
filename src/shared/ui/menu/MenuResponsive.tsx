@@ -13,7 +13,7 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useMenuStore } from '@/shared/components/ui/menu/store/menu.store';
+import { useMenuStore } from '@/shared/ui/menu/store/menu.store';
 
 interface IUrl {
   id: number;
@@ -24,12 +24,12 @@ interface IUrl {
 const apiResponse: IUrl[] = [
   {
     id: 1,
-    url: '/inicio/administrador',
+    url: '/administrador',
     text: 'Administrador',
   },
   {
     id: 2,
-    url: '/inicio/usuario',
+    url: '/usuario',
     text: 'Usuario',
   },
 ];
