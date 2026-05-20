@@ -8,7 +8,7 @@ usar NodeJS 24.15.0
 npm i
 ```
 
-## ▶️ Ejecutar proyecto
+# ▶️ Ejecutar proyecto
 
 comando                | apunta a...   | ruta archivo
 ---------------------- | ------------- | -------------
@@ -23,7 +23,7 @@ comando               | apunta a...   | ruta archivo
 node --run build:test | pruebas       | `environments/.env.test`
 node --run build:prod | producción    | `environments/.env.production`
 
-## 💻 Tecnologías
+# 💻 Tecnologías
 
 * **NextJS:** usa la sintaxis de React y las peticiones son server side rendering
 
@@ -41,7 +41,7 @@ node --run build:prod | producción    | `environments/.env.production`
 
 * **react icons:** Iconos de React
 
-## 📁  Estructura de carpetas
+# 📁  Estructura de carpetas
 
 ESTO HAY Q CORREGIRLO:
 - ACTUALIZARLO POR LAS NUEVAS CARPETAS
@@ -74,7 +74,7 @@ ESTO HAY Q CORREGIRLO:
 
 * **src/api/generalServiceHttp.ts**: Funcion general para hacer peticiones HTTP usando fetch, sirve para Server Side Rendering y "use client"
 
-## 📅 Fechas
+# 📅 Fechas
 
 Usar la librería **Luxon** para el manejo de fechas. **NO** usar `new Date()` **NI** librerías como Moment.js.
 
@@ -235,7 +235,7 @@ export default function MyComponent() {
 }
 ```
 
-## 📝 Formularios
+# 📝 Formularios
 
 INCOMPLETO- aqui me falta:
 * explicar y dar ejemplo incorrecto y correcto de cada uno, se tiene q usar react hook form SIEMPRE  NO usar para formularios 
@@ -244,7 +244,7 @@ INCOMPLETO- aqui me falta:
 
 * usar watch de react hook form, NO usar on change (escribir ejemplo incorrecto y correcto de cada uno)
 
-## 💅 Maquetación
+# 💅 Maquetación
 * Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
 
 * Mezclar Sass con Tailwind es mala práctica porque Sass sobrescribe los estilos de Tailwind porque Sass tiene más especificidad que Tailwind.
