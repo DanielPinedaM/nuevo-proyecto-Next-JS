@@ -1,3 +1,9 @@
+# ⚠️ Advertencia: 🚨
+
+Debido a que la IA no conoce las convenciones ni la arquitectura de este proyecto, antes de hacer preguntas a una IA (Chat GPT, Claude, Gemini, etc.), primero debes copiar y pegar completo este README.md en la IA para que las respuestas de la IA y el código generado sigan las buenas prácticas y se alineen correctamente con la arquitectura del proyecto.
+
+Desobedecer esta advertencia hace que el código generado sea desordenado, inconsistente y no siga las convenciones definidas en el proyecto.
+
 # ⚛️ Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
 
 usar NodeJS 24.15.0
