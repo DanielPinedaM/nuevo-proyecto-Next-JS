@@ -1,6 +1,6 @@
 import ListTable from "@/app/(home)/administrador/nombre-tabla/table/listTable";
 import DataRender from "@/shared/components/DataRender";
-import { POST } from "@/shared/api/general-API/http-gateway.api";
+import { POST } from "@/shared/api/general-api/http-gateway.api";
 import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/app/(home)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { IResponse } from '@/shared/api/general-API/types/request-data.types';
+import { IResponse } from '@/shared/api/general-api/types/request-data.types';
 
 export async function middleware(request: NextRequest) {
   const { url } = request;

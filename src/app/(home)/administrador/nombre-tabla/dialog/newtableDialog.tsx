@@ -19,9 +19,9 @@ import {
 } from "@/app/(home)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
 import { constRegex } from "@/shared/models/constants/regex.constants";
 import { IFormCreateTable } from "@/app/(home)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
-import { POST } from "@/shared/api/general-API/http-gateway.api";
+import { POST } from "@/shared/api/general-api/http-gateway.api";
 import { IDialogProps, IDropdown } from "@/shared/models/interfaces/prime-react.interfaces";
-import { IRequestOptions } from "@/shared/api/general-API/types/request-data.types";
+import { IRequestOptions } from "@/shared/api/general-api/types/request-data.types";
 
 export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
   const router = useRouter();
