@@ -6,7 +6,7 @@ Desobedecer esta advertencia hace que el código generado sea desordenado, incon
 
 # ⚛️ Next JS 15 + React 19 + Prime React 10 + React Hook Form + Tailwind 4 + Sass + Zustand 
 
-usar NodeJS 24.15.0
+usar Node JS 24.15.0
 
 ## 📦 Instalar paquetes
 
@@ -28,24 +28,6 @@ comando               | apunta a...   | ruta archivo
 --------------------- | ------------- | -------------
 node --run build:test | pruebas       | `environments/.env.test`
 node --run build:prod | producción    | `environments/.env.production`
-
-# 💻 Tecnologías
-
-* **NextJS:** usa la sintaxis de React y las peticiones son server side rendering
-
-* **TypeScript:** tipado de datos
-
-* **Turbopack:** es el empaquetador de Next, sirve para ejecutar Next en desarrollo (local)
-
-* **Tailwind y Sass:** estilos y maquetado
-
-* **Zustand:** estado global
-
-* **Prime React:** librería de UI, sirve para tablas, input, etc
-
-* **React hook form:** manejo de formularios
-
-* **react icons:** Iconos de React
 
 # 📁  Estructura de carpetas
 
