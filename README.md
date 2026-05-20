@@ -233,8 +233,201 @@ INCOMPLETO- aqui me falta:
 * usar watch de react hook form, NO usar on change (escribir ejemplo incorrecto y correcto de cada uno)
 
 # 💅 Maquetación
-* Todos los componentes **no** pueden tener archivos de Sass, se tiene que maquetar en Tailwind.
 
-* Mezclar Sass con Tailwind es mala práctica porque Sass sobrescribe los estilos de Tailwind porque Sass tiene más especificidad que Tailwind.
+## ¿Cómo usar Tailwind y Sass juntos?
 
-* Los únicos archivos de Sass tienen que ser globales y estar en ```src/app/scss/global```.
+****❌ Incorrecto:****
+
+Mezclar Sass y Tailwind en un mismo componente es mala práctica porque los estilos de Sass y Tailwind se sobrescriben debido a la especificidad, herencia y cascada de CSS.
+
+Para los estilos esta prohibido lo siguiente:
+
+* Los componentes de React **NO** deben tener archivos propios .scss ni .css
+
+* CSS Modules (`.module.scss` / `.module.css`)
+
+* Styled Components
+
+* No puede existir un único archivo global de Sass donde se escriban directamente los estilos visuales de todos los componentes.
+
+* `<style jsx global>`
+
+* `<style>`
+
+* Estilos en linea
+
+****❌ Ejemplo incorrecto:****
+
+```TSX
+// MyComponent.tsx
+
+export default function MyComponent() {
+  return (
+    <button id="btn-guardar" 
+            className="bg-red-600">
+      Guardar
+    </button>
+  );
+}
+```
+
+```scss
+// src/styles/global/global.scss
+
+#btn-guardar {
+  background-color: red;
+}
+```
+
+***✅ Correcto:***
+
+Sass para estilos globales en `src/styles/global/...`
+
+Tailwind para estilos especificos de cada componente en `src/app/...` y `src/shared/components/...`
+
+****✅ Ejemplo Correcto de Sass global:****
+
+```scss
+// src/styles/global/scroll-bar.scss
+
+// ocultar barra de scroll, pero hacer q siga funcionando la barra de scroll
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+```
+
+```TSX
+// MyComponent1.tsx
+
+export function MyComponent1() {
+  return (
+    <div className="hidden-scrollbar overflow-auto">
+      ...
+    </div>
+  );
+}
+```
+
+```TSX
+// MyComponent2.tsx
+
+export function MyComponent2() {
+  return (
+    <div className="hidden-scrollbar overflow-auto">
+      ...
+    </div>
+  );
+}
+```
+
+****✅ Ejemplo Correcto de Tailwind:****
+
+```TSX
+// MyComponent.tsx
+
+export function MyComponent() {
+  return (
+    <button className="bg-red-600">
+      Guardar
+    </button>
+  );
+}
+```
+
+## 🧱 Configuración de Tailwind 4
+
+[Igual que como se muestra en la documentacion](https://tailwindcss.com/blog/tailwindcss-v4#css-first-configuration)
+
+En este proyecto se está utilizando **Tailwind CSS V4**, por lo tanto el archivo `tailwind.config.js` ya no se utiliza y se considera **obsoleto** en esta arquitectura.
+
+La configuración de Tailwind ahora se realiza en el archivo `src/styles/global/library/tailwind.css`
+
+Esto permite centralizar la definición de tokens de diseño (colores, media queries, etc.) sin necesidad de configuración en archivo JavaScript.
+
+***❌ Incorrecto - Configurar Tailwind 3 con `.js`***
+
+```js
+/* tailwind.config.js */
+
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'primary-color': '#FF0000',
+      },
+    },
+  },
+};
+```
+
+***✅ Correcto - Configurar Tailwind 4 con `.css`***
+
+```CSS
+/* src/styles/global/library/tailwind.css */
+
+@theme {
+  --color-primary-color: #FF0000;
+}
+```
+
+
+## 🎨 Variables de Colores Tailwind y Sass
+
+Las variables con nombres de los colores de **Sass** en `src/styles/global/variable.scss` y **Tailwind** en `src/styles/global/library/tailwind.css` tienen que ser exactamente los mismos
+
+Esto garantiza que los colores sean los mismos entre los estilos globales definidos en Sass y los estilos de cada componente definidos con Tailwind.
+
+****✅ Ejemplo:****
+
+En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo color rojo `#FF0000`
+
+```scss
+// src/styles/global/variable.scss
+
+// colores de Sass
+$primary-color: #FF0000;
+```
+
+[Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
+
+```CSS
+/*
+src/styles/global/library/tailwind.css
+
+colores de Tailwind */
+
+@theme {
+  --color-primary-color: #FF0000;
+}
+```
+
+## ⌨️ Configurar Auto-completado y Linter de Tailwind 4
+
+En VS Code o en cualquier editor basado en VS Code (Antigravity, Cursor, Windsurf, etc.), seguir estos pasos;
+
+1. Instalar extensión [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+2. Instalar extensión [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
+
+3. Abrir el archivo `settings.json`
+
+   - Atajo rápido: `Ctrl + Shift + P`
+   - Luego escribir: `Preferences: Open User Settings (JSON)`
+
+4. En `settings.json` agregar esto:
+
+```json
+/* Tailwind 4 */
+
+{
+  "tailwindCSS.experimental.configFile": "src/styles/global/library/tailwind.css", /* ruta del archivo .css de configuracion de Tailwind 4 */
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+      "javascript": "javascript",
+      "javascriptreact": "javascriptreact",
+      "plaintext": "html",
+      "typescript": "typescript",
+      "typescriptreact": "typescriptreact"
+  },
+}
+```
