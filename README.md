@@ -4,7 +4,7 @@ Debido a que la IA no conoce las convenciones ni la arquitectura de este proyect
 
 Desobedecer esta advertencia hace que el código generado sea desordenado, inconsistente y no siga las convenciones definidas en el proyecto.
 
-# ⚛️ Next JS 15 + React 19 + Prime React 10 +  Tailwind 4
+# ⚛️ Next JS 15 + React 19 + Prime React 10 + Tailwind 4 + Sass + Zustand 
 
 usar NodeJS 24.15.0
 
