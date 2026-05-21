@@ -430,8 +430,55 @@ export function MyComponent() {
   );
 }
 ```
+## 🖼️ Imagenes
+
+Las imagenes se tienen que guardar en `public/assets/img/...`. Ejemplo:
+
+```TSX
+// MyComponent.tsx
+
+import Image from 'next/image';
+import { FiHome } from "react-icons/fi";
+
+export default function MyComponent() {
+  return <Image src='/assets/img/my-image.jpg' alt='icono' width={50} height={50} />
+}
+```
+
+## 🖼️ Iconos
+
+**NO** instales otra libreria para iconos porque en este proyecto es estandar usar [React Icons](https://react-icons.github.io/react-icons/)
+
+Dar prioridad a usar los iconos de [React Icons](https://react-icons.github.io/react-icons/). Ejemplo:
+
+```TSX
+// MyComponent.tsx
+
+import { FiHome } from "react-icons/fi";
+
+export default function MyComponent() {
+  return <FiHome />
+}
+```
+
+No agregar imágenes/SVGs manualmente si el icono ya existe en [React Icons](https://react-icons.github.io/react-icons/)
+
+Cuando el icono no este en React Icons, entonces agregarlo dentro de la carpeta `public/assets/icons/...`. Ejemplo:
+
+```TSX
+// MyComponent.tsx
+
+import Image from 'next/image';
+import { FiHome } from "react-icons/fi";
+
+export default function MyComponent() {
+  return <Image src='/assets/icons/icon.jpg' alt='icono' width={50} height={50} />
+}
+```
 
 ## 🔘 Estilos Globales para Botones
+
+Para que los iconos de los botones funcionen se tiene que usar iconos de [React Icons](https://react-icons.github.io/react-icons/)
 
 ***❌ Incorrecto:***
 
