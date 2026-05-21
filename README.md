@@ -8,7 +8,7 @@ Desobedecer esta advertencia hace que el código generado sea desordenado, incon
 
 usar Node JS 24.15.0
 
-## 📦 Instalar paquetes
+# 📦 Instalar paquetes
 
 ```console
 npm i
@@ -22,7 +22,7 @@ node --run start:local | local host    | `environments/.env.localhost`
 node --run start:test  | pruebas       | `environments/.env.test`
 node --run start:prod  | producción    | `environments/.env.production`
 
-## 🚀 Generar build (dist) para desplegar
+# 🚀 Generar build (dist) para desplegar
 
 comando               | apunta a...   | ruta archivo
 --------------------- | ------------- | -------------
@@ -463,7 +463,7 @@ export default function MyComponent() {
 }
 ```
 
-### ❌ Incorrecto
+***❌ Incorrecto***
 
 **NO** usar rutas relativas para acceder a imágenes e iconos.
 
