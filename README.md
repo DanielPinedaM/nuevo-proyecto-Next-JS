@@ -430,9 +430,86 @@ export function MyComponent() {
   );
 }
 ```
-## 🖼️ Imagenes
 
-Las imagenes se tienen que guardar en `public/assets/img/...`. Ejemplo:
+## 🖼️ Ruta de Iconos e Imagenes
+
+Debes crear las siguientes carpetas:
+
+```txt
+public/
+└── assets/
+    ├── icon/
+    └── img/
+```
+
+***✅ Correcto:***
+
+Al usar las etiquetas `<img>` nativa de HTML y `<Image>` de Next JS, siempre utilizar rutas **absolutas** desde `/assets`.
+
+```tsx
+// MyComponent.tsx
+
+import Image from "next/image";
+
+export default function MyComponent() {
+  return (
+    <Image
+      src="/assets/img/logo.png" /* usar slash al principio de /assets */
+      alt="Logo"
+      width={200}
+      height={200}
+    />
+  );
+}
+```
+
+### ❌ Incorrecto
+
+**NO** usar rutas relativas para acceder a imágenes e iconos.
+
+```tsx
+// MyComponent.tsx
+
+import Image from "next/image";
+
+export default function MyComponent() {
+  return (
+    <Image
+      src="../../../assets/img/logo.png" /* es incorrecto porque se escribe ../ */
+      alt="Logo"
+      width={200}
+      height={200}
+    />
+  );
+}
+```
+
+```tsx
+// MyComponent.tsx
+
+import Image from "next/image";
+
+export default function MyComponent() {
+  return (
+    <Image
+      src="assets/img/logo.png" /* es incorrecto porque NO se escribio el slash al principio de assets */
+      alt="Logo"
+      width={200}
+      height={200}
+    />
+  );
+}
+```
+
+### Imagenes
+
+Las **imagenes** se tienen que guardar en `.`. 
+
+```txt
+public/assets/img/...
+```
+
+Ejemplo:
 
 ```TSX
 // MyComponent.tsx
@@ -441,11 +518,11 @@ import Image from 'next/image';
 import { FiHome } from "react-icons/fi";
 
 export default function MyComponent() {
-  return <Image src='/assets/img/my-image.jpg' alt='icono' width={50} height={50} />
+  return <Image src='/assets/img/my-image.jpg' alt='image' width={50} height={50} />
 }
 ```
 
-## 🖼️ Iconos
+### Iconos
 
 **NO** instales otra libreria para iconos porque en este proyecto es estandar usar [React Icons](https://react-icons.github.io/react-icons/)
 
@@ -463,7 +540,15 @@ export default function MyComponent() {
 
 No agregar imágenes/SVGs manualmente si el icono ya existe en [React Icons](https://react-icons.github.io/react-icons/)
 
-Cuando el icono no este en React Icons, entonces agregarlo dentro de la carpeta `public/assets/icons/...`. Ejemplo:
+Cuando el icono no este en [React Icons](https://react-icons.github.io/react-icons/), entonces agregarlo dentro de la carpeta `public/assets/icon/...`.
+
+Los **iconos** del proyecto se deben guardar dentro de la carpeta 
+
+```txt
+public/assets/icon/...
+```
+
+Ejemplo:
 
 ```TSX
 // MyComponent.tsx
@@ -472,7 +557,7 @@ import Image from 'next/image';
 import { FiHome } from "react-icons/fi";
 
 export default function MyComponent() {
-  return <Image src='/assets/icons/icon.jpg' alt='icono' width={50} height={50} />
+  return <Image src='/assets/icon/icon.jpg' alt='icono' width={50} height={50} />
 }
 ```
 
