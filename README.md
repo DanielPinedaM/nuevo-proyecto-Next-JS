@@ -253,7 +253,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-color': '#FF0000',
+        'primary-color': 'oklch(62.8% 0.258 29.23)',
       },
     },
   },
@@ -266,7 +266,7 @@ module.exports = {
 /* src/styles/global/library/tailwind.css */
 
 @theme {
-  --color-primary-color: #FF0000;
+  --color-primary-color: oklch(62.8% 0.258 29.23) ;
 }
 ```
 
@@ -309,13 +309,13 @@ Esto garantiza que los colores sean los mismos entre los estilos globales defini
 
 ****✅ Ejemplo:****
 
-En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo color rojo `#FF0000`
+En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo color rojo `oklch(62.8% 0.258 29.23) `
 
 ```scss
 // src/styles/global/variable.scss
 
 // colores de Sass
-$primary-color: #FF0000;
+$primary-color: oklch(62.8% 0.258 29.23) ;
 ```
 
 [Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
@@ -327,7 +327,7 @@ src/styles/global/library/tailwind.css
 colores de Tailwind */
 
 @theme {
-  --color-primary-color: #FF0000;
+  --color-primary-color: oklch(62.8% 0.258 29.23) ;
 }
 ```
 

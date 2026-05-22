@@ -26,7 +26,7 @@ export default function NotFound() {
           <p className='text-xl sm:text-2xl font-medium md:text-3xl'>
             Lo sentimos, no pudimos encontrar esta página.
           </p>
-          <p className='italic text-[#6ba1ff] font-medium'>{pathname}</p>
+          <p className='italic text-blue-400 font-medium'>{pathname}</p>
           <p className='mt-4 mb-8 dark:text-gray-400'>
             Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra página
           </p>

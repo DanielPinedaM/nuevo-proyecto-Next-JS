@@ -76,7 +76,7 @@ div.p-dialog-header-icons {
 **************************** */
 
 .p-checkbox .p-checkbox-box {
-  border: 1px solid #6b7280 !important; // Gris oscuro para mejor contraste
+  border: 1px solid oklch(55.1% 0.023 264.36) !important; // #6b7280
   width: 20px !important;
   height: 20px !important;
 }
@@ -113,7 +113,7 @@ div.p-dialog-header-icons {
 ********************************************************* */
 
 div.p-radiobutton {
-  outline: 1.5px solid #d1d5db !important;
+  outline: 1.5px solid oklch(87.17% 0.009 264.51) !important; // #d1d5db
   border-radius: 100% !important;
 }
 
@@ -126,13 +126,11 @@ ul.p-tabview-nav {
   column-gap: 10px !important;
 
   li.p-unselectable-text {
-
     a.p-tabview-nav-link {
       margin: 0 !important;
       padding: 10px 6px !important;
-      background-color: #004884 !important;
+      background-color: oklch(39.67% 0.112 250.61) !important; // #004884
       border-radius: 100px !important;
     }
   }
 }
-

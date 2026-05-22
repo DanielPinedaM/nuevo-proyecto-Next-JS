@@ -82,15 +82,15 @@ table {
   tr {
     &:nth-child(even) {
       // cambiar color de fondo de filas pares de la tabla: 2, 4, 6, etc.
-      background-color: #f2f2f2;
+      background-color: oklch(95.54% 0 0); // #f2f2f2
     }
   }
 
   tbody {
     tr:hover {
       // cambiar color al situar mouse sobre las filas q NO son el <th>
-      background-color: #eff6ff !important;
-      color: #1d4ed8;
+      background-color: oklch(96.74% 0.013 254.11) !important; // #eff6ff
+      color: oklch(48.84% 0.217 264.38); // #1d4ed8
     }
 
     // Evitar hover en filas que contienen <th>

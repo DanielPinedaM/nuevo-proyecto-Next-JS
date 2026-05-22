@@ -3,7 +3,7 @@
 * barra de scroll *
 ******************* */
 
-$scrollbarColor: #bdbdbd;
+$scrollbarColor: oklch(80.73% 0 0); // #bdbdbd
 
 *::-webkit-scrollbar {
   display: block;

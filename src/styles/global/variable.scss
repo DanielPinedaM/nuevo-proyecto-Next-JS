@@ -12,49 +12,57 @@ $inter: "Inter", "DM Sans", "Helvetica Neue", Helvetica, sans-serif, system-ui;
 $monospace: "Lucida Console", monospace, "Courier New", Consolas, Courier, Consolas, SFMono-Regular, Menlo, Monaco, "Liberation Mono", ui-monospace;
 
 /*
-*******************
-* Colores de Sass *
-******************* */
+***********************************
+* Colores de Sass                 *
+* para colores SIEMPRE usar oklch *
+*********************************** */
 
 // azul
-$blue-midnight:           rgba(10, 15, 28, 1);      // #0A0F1C
-$blue-lightning:          rgba(4, 86, 244, 1);      // #0456f4
-$blue-azure:              rgba(1, 145, 238, 1);     // #0191ee
-$blue-ocean:              rgba(0, 201, 233, 1);     // #00c9e9
-$blue-carbon:             rgba(24, 60, 84, 1);      // #183c54
-$blue-deep:               rgba(5, 79, 133, 1);      // #054f85
-$blue-abys:               rgba(16, 52, 84, 1);      // #103454
-$blue-opacity:            rgba(4, 201, 233, 0.25);  // #04c9e940
+$blue-midnight:           oklch(17.61% 0.021 259.82);         // #0A0F1C
+$blue-lightning:          oklch(53.27% 0.262 264.05);         // #0456f4
+$blue-azure:              oklch(62.58% 0.196 244.73);         // #0191ee
+$blue-ocean:              oklch(76.22% 0.139 209.52);         // #00c9e9
+$blue-carbon:             oklch(32.72% 0.050 240.91);         // #183c54
+$blue-deep:               oklch(42.31% 0.108 244.88);         // #054f85
+$blue-abys:               oklch(29.49% 0.057 242.74);         // #103454
+$blue-opacity:            oklch(76.22% 0.139 209.52 / 0.25);  // #04c9e940
 
 // gris
-$gray-blue:               #585b76;
-$gray-dark:               #59595b;
-$gray-light:              #cccccc;
+$gray-blue:               oklch(48.96% 0.039 277.41);         // #585b76
+$gray-dark:               oklch(49.35% 0.005 285.89);         // #59595b
+$gray-light:              oklch(84.46% 0 0);                  // #cccccc
 
 // verde
-$green-dark:             #8cc63f;
-$green-light:            #bfd492;
+$green-dark:              oklch(76.46% 0.164 122.77);         // #8cc63f
+$green-light:             oklch(84.08% 0.092 119.34);         // #bfd492
 
 // blanco
-$white-smoke:            #f5f5f5;
+$white-smoke:             oklch(96.74% 0 0);                  // #f5f5f5
 
 // amarillo
-$yellow:                 #f4d745;
+$yellow:                  oklch(88.15% 0.161 98.62);          // #f4d745
 
 // semi-transparente
-$navy-blue-25:           rgba(38, 49, 79, 0.25);
-$blue-light:            rgba(33, 150, 243, 0.25);
-$semi-transparent:      rgba(255, 255, 255, 0.30);
+$navy-light:              oklch(33.14% 0.046 274.72 / 0.25);  // #26314f40
+$blue-light:              oklch(65.94% 0.173 253.21 / 0.25);  // #2196f340
+$semi-transparent:        oklch(100% 0 0 / 0.30);             // #ffffff4d
 
 /*
 **************************************************
 * Breakpoints para media queries (Responsive)    *
 * https://tailwindcss.com/docs/responsive-design *
 ************************************************** */
-$xsm:    30rem;   // 480px
-$sm:     40rem;   // 640px
-$md:     48rem;   // 768px
-$lg:     64rem;   // 1024px
-$xl:     80rem;   // 1280px
-$xxl:    96rem;   // 1536px
-$xxxl:   120rem;  // 1920px
+//celular
+$xsm:    30rem;   // @media (min-width: 480px) { ... }
+
+// tablet
+$sm:     40rem;   // @media (min-width: 640px) { ... }
+$md:     48rem;   //  @media (min-width: 768px) { ... }
+$lg:     64rem;   // @media (min-width: 1024px) { ... }
+
+// computador portatil
+$xl:     80rem;   // @media (min-width: 1280px) { ... }
+
+// monitor
+$xxl:    96rem;   // @media (min-width: 1536px) { ... }
+$xxxl:   120rem;  // @media (min-width: 1920px) { ... }
