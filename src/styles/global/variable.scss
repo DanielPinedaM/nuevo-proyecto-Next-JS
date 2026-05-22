@@ -17,55 +17,44 @@ $monospace: "Lucida Console", monospace, "Courier New", Consolas, Courier, Conso
 ******************* */
 
 // azul
-$blue-midnight: rgba(10, 15, 28, 1);    // #0A0F1C
-$blue-lightning: rgba(4, 86, 244, 1);   // #0456f4
-$blue-azure: rgba(1, 145, 238, 1);      // #0191ee
-$blue-ocean: rgba(0, 201, 233, 1);      // #00c9e9
-$blue-carbon: rgba(24, 60, 84, 1);      // #183c54
-$blue-deep: rgba(5, 79, 133, 1);        // #054f85
-$blue-abys: rgba(16, 52, 84, 1);        // #103454
-$blue-opacity: rgba(4, 201, 233, 0.25); // #04c9e940
+$blue-midnight:           rgba(10, 15, 28, 1);      // #0A0F1C
+$blue-lightning:          rgba(4, 86, 244, 1);      // #0456f4
+$blue-azure:              rgba(1, 145, 238, 1);     // #0191ee
+$blue-ocean:              rgba(0, 201, 233, 1);     // #00c9e9
+$blue-carbon:             rgba(24, 60, 84, 1);      // #183c54
+$blue-deep:               rgba(5, 79, 133, 1);      // #054f85
+$blue-abys:               rgba(16, 52, 84, 1);      // #103454
+$blue-opacity:            rgba(4, 201, 233, 0.25);  // #04c9e940
 
 // gris
-$gray-blue: #585b76;
-$gray-dark: #59595b;
-$gray-light: #cccccc;
+$gray-blue:               #585b76;
+$gray-dark:               #59595b;
+$gray-light:              #cccccc;
 
 // verde
-$green-dark: #8cc63f;
-$green-light: #bfd492;
+$green-dark:             #8cc63f;
+$green-light:            #bfd492;
 
 // blanco
-$white-smoke: #f5f5f5;
+$white-smoke:            #f5f5f5;
 
 // amarillo
-$yellow: #f4d745;
+$yellow:                 #f4d745;
 
 // semi-transparente
-$navy-blue-25: rgba(38, 49, 79, 0.25);
-$blue-light: rgba(33, 150, 243, 0.25);
-$semi-transparent: "rgba(255, 255, 255, 0.30)";
-
-/*
-***********
-* Botones *
-*********** */
-
-$rounded-button: .5rem;
-$font-size-button: .875rem;
-$padding-button: .625rem;
-$font-weight-button: 500;
-$column-gap-button: .3125rem;
+$navy-blue-25:           rgba(38, 49, 79, 0.25);
+$blue-light:            rgba(33, 150, 243, 0.25);
+$semi-transparent:      rgba(255, 255, 255, 0.30);
 
 /*
 **************************************************
 * Breakpoints para media queries (Responsive)    *
 * https://tailwindcss.com/docs/responsive-design *
 ************************************************** */
-$xsm: 30rem;    // 480px
-$sm: 40rem;     // 640px
-$md: 48rem;     // 768px
-$lg: 64rem;     // 1024px
-$xl: 80rem;     // 1280px
-$xxl: 96rem;    // 1536px
-$xxxl: 120rem;  // 1920px
+$xsm:    30rem;   // 480px
+$sm:     40rem;   // 640px
+$md:     48rem;   // 768px
+$lg:     64rem;   // 1024px
+$xl:     80rem;   // 1280px
+$xxl:    96rem;   // 1536px
+$xxxl:   120rem;  // 1920px
