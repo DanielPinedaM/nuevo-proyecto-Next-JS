@@ -29,7 +29,7 @@ table {
   tfoot,
   th {
     background-color: variable.$blue-ocean !important;
-    color: white;
+    color: oklch(100% 0 0); /* #ffffff */
 
     span,
     p,
@@ -39,7 +39,7 @@ table {
     h4,
     h5,
     h6 {
-      color: white !important;
+      color: oklch(100% 0 0) !important; /* #ffffff */
     }
   }
 
@@ -59,7 +59,7 @@ table {
     background: transparent !important;
 
     // borde de las casillas de las tablas
-    border: 1px solid white;
+    border: 1px solid oklch(100% 0 0); /* #ffffff */
   }
 
   td,
