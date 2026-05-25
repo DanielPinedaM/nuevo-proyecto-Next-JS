@@ -264,9 +264,14 @@ src/shared/components/react-hook-form
 ---
 
 ### 5. Uso obligatorio de `watch`
+
 - Toda lógica condicional del formulario debe resolverse con `watch`.
-- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
+
 - `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
+
+- Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
+
+- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
 
 ---
 
