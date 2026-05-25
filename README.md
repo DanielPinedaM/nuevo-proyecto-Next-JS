@@ -223,14 +223,149 @@ export default function MyComponent() {
 }
 ```
 
-# 📝 Formularios
+# 📝 Formularios en Next JS + React Hook Form + Prime React
 
-INCOMPLETO- aqui me falta:
-* explicar y dar ejemplo incorrecto y correcto de cada uno, se tiene q usar react hook form SIEMPRE  NO usar para formularios 
-   * use state para los formulario controlado
-   * Formularios no controlados
+## Objetivo
+Estandarizar la implementación de formularios escalables, reutilizables y mantenibles en proyectos grandes
 
-* usar watch de react hook form, NO usar on change (escribir ejemplo incorrecto y correcto de cada uno)
+---
+
+## Reglas obligatorias del sistema de formularios
+
+### 1. Framework y renderizado
+- Se trabaja en Next.js (App Router).
+- Todos los componentes de formularios deben ser "use client".
+
+### 2. Ubicación obligatoria de componentes
+
+Es obligatorio usar los componentes reutilizables de inputs ubicados en:
+
+```txt
+src/shared/components/react-hook-form
+```
+
+---
+
+### 3. Restricciones estrictas
+- Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
+- Obligatorio usar componentes de PrimeReact para todos los campos.
+- Prohibido usar formularios controlados con `useState`.
+- Prohibido usar formularios no controlados con `useRef`.
+- React Hook Form es la única fuente válida de estado del formulario.
+
+---
+
+### 4. React Hook Form (RHF)
+- Es el único responsable del estado del formulario.
+- `defaultValues` se define exclusivamente en `useForm` en el componente padre.
+- `watch` es obligatorio para lógica derivada en el componente padre.
+- `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
+
+---
+
+### 5. Uso obligatorio de `watch`
+- Toda lógica condicional del formulario debe resolverse con `watch`.
+- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
+- `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
+
+---
+
+### 6. Componentes reutilizables
+Un input reutilizable debe:
+- Encapsular `Controller` de React Hook Form.
+- Ser genérico (`T extends FieldValues`).
+- Usar `control`, `name`, `rules`, `errors` como contrato base.
+- No contener lógica de negocio.
+- No definir reglas internas.
+- No usar `watch`.
+- Representar un único tipo de campo/input.
+- No mezclar múltiples tipos de input en un mismo componente reutilizable.
+
+***✅ Correcto***
+
+- `InputText`
+- `InputPassword`
+- `InputNumber`
+- `InputEmail`
+- `InputPhone`
+- `InputSelect`
+
+***❌ Incorrecto***
+
+- `GenericInput`
+- `BaseInput`
+- `DynamicInput`
+- Un único componente que maneje:
+  - `input type="text"`
+  - `input type="password"`
+  - `input type="number"`
+  - `input type="email"`
+
+---
+
+### 7. UI (Prime React)
+- PrimeReact solo maneja la capa visual.
+- `disabled`, `placeholder`, `className` son props de UI.
+- Prime React no puede modificar el estado del formulario.
+- Solo refleja el estado final derivado de React Hook Form.
+
+---
+
+### 8. Validaciones
+- Todas las validaciones se definen en el padre mediante `rules`.
+- Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
+- El input solo ejecuta las validaciones, no las define.
+
+---
+
+### 9. Formularios dinámicos
+- La estructura del formulario debe definirse en el padre (config-driven).
+- Los inputs se renderizan mediante mapeo.
+- No se permite lógica condicional dentro de los componentes de input.
+
+---
+
+## Regla clave de arquitectura
+
+* Input (componente hijo) = UI + conexión React Hook Form
+
+* Padre = lógica + `watch` + validaciones + estado derivado
+
+---
+
+## Flujo obligatorio de datos
+
+1. React Hook Form gestiona estado interno.
+2. watch en el componente padre define reglas dinámicas.
+3. El padre calcula props finales (ejemplo: `disabled`).
+4. El input recibe solo valores finales.
+5. PrimeReact renderiza UI.
+
+---
+
+## Prohibido
+
+- Usar `watch` dentro de inputs reutilizables.
+- Usar `useState` para formularios controlados
+- Usar `useRef` para formularios no controlados
+- Usar inputs nativos de HTML.
+- Mezclar lógica de negocio dentro de inputs.
+- Definir `defaultValues` fuera de `useForm`.
+- Duplicar control de estado entre RHF y UI.
+
+---
+
+## Resultado esperado
+
+- Formularios escalables y consistentes.
+- Componentes reutilizables reales (design system).
+- Cero duplicación de lógica de `Controller`.
+- Separación estricta entre lógica y UI.
+- Mantenimiento simple en proyectos grandes.
+
+# INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM
+
+---
 
 # 💅 Maquetación
 
@@ -563,259 +698,6 @@ export default function MyComponent() {
 
 ## 🔘 Estilos Globales para Botones
 
-Para que los iconos de los botones funcionen se tiene que usar iconos de [React Icons](https://react-icons.github.io/react-icons/)
+INCOMPLETO
 
-***❌ Incorrecto:***
-
-Usar Tailwind para estilos de los botones
-
-```TSX
-// MyComponent.tsx
-
-export default function MyComponent() {
-
-  return (
-     <button
-         className="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
-       Aceptar
-     </button>
-  )
-}
-```
-
-***✅ Correcto:***
-
-Siempre se tiene que usar las clases de CSS con los estilos globales para los botones definidos en `src/styles/global/button.scss`
-
-`button.scss` tiene estilos para todos los tipos de botones
-
-A continuación, para cada uno de los botones se muestra como usarlos y se explica sus estilos:
-
-### Boton primario para acciones de confirmacion (guardar, aceptar, si)
-
-  - ❌ icono
-  - ✅ texto
-  - ❌ borde
-  - ✅ fondo
-
-```TSX
-// MyComponent.tsx
-
-export default function MyComponent() {
-
-  return (
-     <button className="btn-primary">
-       Aceptar
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-primary](./docs/readme-md/img/button/btn-primary.png)
-
-### Boton secundario con borde para acciones de cancelacion (eliminar, cancelar, no)
-
-  - ❌ icono
-  - ✅ texto
-  - ✅ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-export default function MyComponent() {
-
-  return (
-     <button className="btn-secondary-with-border">
-       Cancelar
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-secondary-with-border-no-hover](./docs/readme-md/img/button/btn-secondary-with-border-no-hover.png)
-
-hover
-
-![btn-secondary-with-border-hover](./docs/readme-md/img/button/btn-secondary-with-border-hover.png)
-
-### Boton secundario sin borde para acciones de cancelacion (eliminar, cancelar, no)
-
-  - ❌ icono
-  - ✅ texto
-  - ❌ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-export default function MyComponent() {
-
-  return (
-     <button className="btn-secondary-no-border">
-       Cancelar
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-secondary-no-border-no-hover](./docs/readme-md/img/button/btn-secondary-no-border-no-hover.png)
-
-hover
-
-![btn-secondary-no-border-hover](./docs/readme-md/img/button/btn-secondary-no-border-hover.png)
-
-### Boton con icono y texto sin borde
-
-  - ✅ icono
-  - ✅ texto
-  - ❌ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-import { FiHome } from "react-icons/fi";
-
-export default function MyComponent() {
-  return (
-     <button className="btn-icon-no-border">
-       <FiHome />
-       <span>Boton</span>
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-icon-no-border-no-hover](./docs/readme-md/img/button/btn-icon-no-border-no-hover.png)
-
-hover
-
-![btn-icon-no-border-hover](./docs/readme-md/img/button/btn-icon-no-border-hover.png)
-
-### Boton con icono y borde
-
-  - ✅ icono
-  - ❌ texto
-  - ✅ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-import { FiHome } from "react-icons/fi";
-
-export default function MyComponent() {
-  return (
-     <button className="btn-icon-with-border">
-       <FiHome />
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-icon-with-border-no-hover](./docs/readme-md/img/button/btn-icon-with-border-no-hover.png)
-
-hover
-
-![btn-icon-with-border-hover](./docs/readme-md/img/button/btn-icon-with-border-hover.png)
-
-### Boton con icono, texto y fondo
-
-  - ✅ icono
-  - ✅ texto
-  - ❌ borde
-  - ✅ fondo
-
-```TSX
-// MyComponent.tsx
-
-import { FiHome } from "react-icons/fi";
-
-export default function MyComponent() {
-  return (
-     <button className="btn-with-icon-text-background">
-       <FiHome />
-       <span>Boton</span>
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-with-icon-text-background-no-hover](./docs/readme-md/img/button/btn-with-icon-text-background-no-hover.png)
-
-hover
-
-![btn-with-icon-text-background-hover](./docs/readme-md/img/button/btn-with-icon-text-background-hover.png)
-
-### Boton con icono, texto y borde
-
-  - ✅ icono
-  - ✅ texto
-  - ✅ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-import { FiHome } from "react-icons/fi";
-
-export default function MyComponent() {
-  return (
-     <button className="btn-with-icon-text-border">
-       <FiHome />
-       <span>Boton</span>
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-with-icon-text-border-no-hover](./docs/readme-md/img/button/btn-with-icon-text-border-no-hover.png)
-
-hover
-
-![btn-with-icon-text-border-hover](./docs/readme-md/img/button/btn-with-icon-text-border-hover.png)
-
-### Boton con icono y texto
-
-  - ✅ icono
-  - ✅ texto
-  - ❌ borde
-  - 🖱️ fondo solo se muestra en hover
-
-```TSX
-// MyComponent.tsx
-
-import { FiHome } from "react-icons/fi";
-
-export default function MyComponent() {
-  return (
-     <button className="btn-with-icon-text-no-border">
-       <FiHome />
-       <span>Boton</span>
-     </button>
-  )
-}
-```
-
-**NO** hover
-
-![btn-with-icon-text-no-border-no-hover](./docs/readme-md/img/button/btn-with-icon-text-no-border-no-hover.png)
-
-hover
-
-![btn-with-icon-text-no-border-hover](./docs/readme-md/img/button/btn-with-icon-text-no-border-hover.png)
+AQUI ME FALTA COPIARME LA DOCUMENTACION Q TENGO DE ANGULAR PARA BOTONES Q ESTA BASADO EN BOOSTRAP
