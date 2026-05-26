@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import { IListFiles } from "@/shared/components/dialog/uploadFile/models/interfaces/upload-file.interfaces";
 import { truncateString } from "@/shared/utils/func/general.utils";
-const PrimeReactTooltip = dynamic(() => import("@/shared/components/PrimeReactTooltip"));
+const PrimeReactTooltip = dynamic(() => import("@/shared/components/prime-react/Tooltip"));
 const FaRegFileExcel = dynamic(() => import("react-icons/fa").then((mod) => mod.FaRegFileExcel));
 const GrDocumentCsv = dynamic(() => import("react-icons/gr").then((mod) => mod.GrDocumentCsv));
 const FaFilePdf = dynamic(() => import("react-icons/fa").then((mod) => mod.FaFilePdf));

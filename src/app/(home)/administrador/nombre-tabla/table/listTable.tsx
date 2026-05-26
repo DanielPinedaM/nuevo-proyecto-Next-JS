@@ -18,7 +18,7 @@ import { columns } from "@/app/(home)/administrador/nombre-tabla/models/constant
 import { ITableDataNombreTabla } from "@/app/(home)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
-const PrimeReactTooltip = dynamic(() => import("@/shared/components/PrimeReactTooltip"));
+const PrimeReactTooltip = dynamic(() => import("@/shared/components/prime-react/Tooltip"));
 const TableDataDetailsDialog = dynamic(
   () => import("@/shared/components/dialog/tableDataDetails/TableDataDetailsDialog"),
   { ssr: false }

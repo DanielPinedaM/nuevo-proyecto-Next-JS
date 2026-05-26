@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { convertToBoolean } from "@/shared/utils/func/dataType.utils";
 const IoFaCheckCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaCheckCircle));
 const FaTimesCircle = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTimesCircle));
-const PrimeReactTooltip = dynamic(() => import("@/shared/components/PrimeReactTooltip"));
+const PrimeReactTooltip = dynamic(() => import("@/shared/components/prime-react/Tooltip"));
 
 /**
 dependiendo de un booleano o texto muestra icono de ❌ ó ✅ */

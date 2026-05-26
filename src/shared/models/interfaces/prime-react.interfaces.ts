@@ -38,19 +38,6 @@ export interface ICheckbox {
 }
 
 /**
-Prime React - tipo de dato para mostrar componente con tooltip */
-export interface IPrimeReactTooltip {
-  // nombre de la clase a la cual esta asociada el tooltip
-  target: string;
-
-  // texto del tooltip
-  content?: string;
-
-  // lugar donde se ubica el tooltip, undefined es automatico
-  position?: "top" | "bottom" | "left" | "right" | "mouse" | undefined;
-}
-
-/**
 Prime React - ventana modal con una pregunta */
 export interface IQuestionNotification extends IDialogProps {
   message: string;            // mensaje que se mostrará en el modal
