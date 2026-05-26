@@ -1,6 +1,12 @@
-# ⚛️ Next JS 15 + React 19 + Prime React 10 + React Hook Form + Tailwind 4 + Sass + Zustand
+# ⚛️ Next JS 16 + React 19 + Prime React 10 + React Hook Form + Tailwind 4 + Sass + Zustand
 
-usar Node JS 24.15.0
+# 🟢 Versión de Node JS
+
+Este proyecto debe ejecutarse utilizando:
+
+```bash
+Node JS 24.15.0
+```
 
 # 📦 Instalar paquetes
 
@@ -26,7 +32,7 @@ node --run build:prod | producción    | `environments/.env.production`
 # 🤖 Uso de IA
 
 > [!WARNING]
-> # 🚨 ⚠️ ****IMPORTANTE****
+> # ⚠️ ****IMPORTANTE**** 🚨
 >
 > ****Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistentes y desordenadas.****
 
@@ -38,7 +44,7 @@ Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, 
 
 ## Stack Frontend del Proyecto
 
-* Next JS 15 con App Router (`app`)
+* Next JS 16 con App Router (`app`)
 * React 19
 * TypeScript 6
 * PrimeReact 10
