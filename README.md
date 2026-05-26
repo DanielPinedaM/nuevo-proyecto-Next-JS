@@ -370,7 +370,6 @@ Un input reutilizable debe:
 
 ### 9. Formularios dinámicos
 - La estructura del formulario debe definirse en el padre (config-driven).
-- Los inputs se renderizan mediante mapeo.
 - No se permite lógica condicional dentro de los componentes de input.
 
 ---
@@ -402,6 +401,7 @@ Un input reutilizable debe:
 - Mezclar lógica de negocio dentro de inputs.
 - Definir `defaultValues` fuera de `useForm`.
 - Duplicar control de estado entre RHF y UI.
+- Usar `map` para renderizar los campos de los formularios.
 
 ---
 
