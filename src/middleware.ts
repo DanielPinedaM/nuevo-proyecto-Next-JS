@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { IResponse } from '@/shared/api/general-api/types/request-data.types';
+import { GET } from '@/shared/api/general-api/http-gateway.api';
 
 export async function middleware(request: NextRequest) {
   const { url } = request;
@@ -15,31 +16,29 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  /* 
-  el siguiente codigo funciona, esta bueno, lo comente porque este endpoint no existe
+  /**
+   * 🚨 TODO: ⚠️
+   * - Reemplazar esta URL por el endpoint de backend encargado de validar la sesión.
+   * - El backend debe leer el JWT desde la cookie HttpOnly
+   * - NO utilizar localStorage, sessionStorage ni mecanismos similares para almacenar o recuperar el token desde el frontend.
+   * - PROHIBIDO: const token = localStorage.getItem("token")
+   * - El backend debe validar que el JWT sea valido (firma, fecha de expiracion, etc)
+   * - La autenticación debe depender exclusivamente de la validación realizada por el backend sobre la cookie HttpOnly.
+   * - Ignorar estas recomendaciones y exponer el JWT al código JavaScript del frontend incrementa significativamente el riesgo de robo del token mediante ataques XSS (Cross-Site Scripting)
+   * - Descomentar el código de validación ubicado más abajo para activar la protección de rutas. Actualmente se encuentra comentado únicamente para facilitar pruebas y permitir la navegación sin restricciones durante el desarrollo. */
+  //const { success, message, status }: IResponse = await GET(
+  //  `${process.env.NEXT_PUBLIC_API}reemplazar-por-endpoint-de-autenticacion`
+  //);
 
-  en back se debe crear un endpoint q valide la cookie http only true q contiene el token 
-  y si el usuario tiene permisos para acceder a las rutas q estan despues de iniciar sesion
+  //if (!success) {
+  //  console.error('❌ [proxy.ts] Error de autenticación, respuesta de la API: ', {
+  //    success,
+  //    message,
+  //    status,
+  //  });
 
-  // validar q el token no expire
-  const { success, message, status, data }: IResponse = await GET(`${process.env.NEXT_PUBLIC_API}`);
-
-  if (status >= 500) {
-    console.error(`❌ proxy.ts - error en el servidor en la URL ${url}`);
-    return NextResponse.next();
-  }
-
-  if (status === 401) {
-    console.error("❌ proxy.ts - error 401: Unauthorized - NO tiene permisos para acceder");
-    console.error("mensaje de la API ", message);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  if (!success) {
-    console.error("❌ proxy.ts -  success es false");
-    console.error("mensaje de la API ", message);
-    return NextResponse.redirect(loginUrl);
-  } */
+  //  return NextResponse.redirect(loginUrl);
+  //}
 
   return NextResponse.next();
 }
