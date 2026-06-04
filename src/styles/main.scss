@@ -3,17 +3,17 @@
 * Reset CSS *
 ************** */
 
-@use './global/reset.scss';
+@use './global/_reset.scss';
 
 /*
 **********
 * global *
 ********** */
 
-@use './global/table.scss';
-@use './global/library/sweet-alert-2';
-@use './global/scroll-bar.scss';
-@use './global/button.scss';
+@use './global/_table.scss';
+@use './global/library/_sweet-alert-2.scss';
+@use './global/_scroll-bar.scss';
+@use './global/_button.scss';
 
 /*
 ***************
@@ -26,7 +26,7 @@
 // estilos por defecto de Prime React
 @use '../../node_modules/primereact/resources/themes/lara-light-blue/theme.css';
 
-// sobrescribir escribir estilos por defecto de Prime React
+// sobrescribir estilos por defecto de Prime React
 @use './global/library/prime-react.scss';
 
 /*
@@ -35,4 +35,3 @@
 ************** */
 
 @use './global/library/tailwind.css';
-

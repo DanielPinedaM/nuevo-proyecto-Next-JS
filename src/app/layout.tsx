@@ -1,4 +1,4 @@
-import '../styles/index.scss';
+import '../styles/main.scss';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
