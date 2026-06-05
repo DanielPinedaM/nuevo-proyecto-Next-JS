@@ -1,4 +1,4 @@
-import ListData from "@/app/(home)/administrador/fetch/listData";
+import ListData from "@/app/(features)/administrador/fetch/listData";
 import DataRender from "@/shared/components/DataRender";
 import { GET } from "@/shared/api/general-api/http-gateway.api";
 import { IRequestOptions } from "@/shared/api/general-api/types/request-data.types";

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 const IoAdd = dynamic(() => import("react-icons/io5").then((mod) => mod.IoAdd));
 const NewTableDialog = dynamic(
-  () => import("@/app/(home)/administrador/nombre-tabla/dialog/newtableDialog"),
+  () => import("@/app/(features)/administrador/nombre-tabla/dialog/newtableDialog"),
   { ssr: false }
 );
 

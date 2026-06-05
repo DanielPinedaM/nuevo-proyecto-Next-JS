@@ -14,8 +14,8 @@ import infoNotification from "@/shared/components/dialog/notification/infoNotifi
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
 import { POST } from "@/shared/api/general-api/http-gateway.api";
 import visibleRows from "@/shared/models/constants/visible-rows.const";
-import { columns } from "@/app/(home)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
-import { ITableDataNombreTabla } from "@/app/(home)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
+import { columns } from "@/app/(features)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
+import { ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/shared/components/prime-react/Tooltip"));
