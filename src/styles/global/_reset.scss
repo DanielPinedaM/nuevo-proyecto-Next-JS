@@ -149,8 +149,14 @@ img,
 audio,
 video,
 canvas,
-svg,
 picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// SVGs globales - NO afectar a botones con clase .btn 
+svg:not(.btn svg) {
   display: block;
   max-width: 100%;
   height: auto;
