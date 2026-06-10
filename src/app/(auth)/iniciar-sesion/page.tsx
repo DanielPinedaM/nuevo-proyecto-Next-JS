@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <section className='m-2'>
       <button className='btn btn-primary btn-background'>
-        <span>Primary</span>
+        Primary
       </button>
 
       <button className='btn btn-secondary btn-background'>
