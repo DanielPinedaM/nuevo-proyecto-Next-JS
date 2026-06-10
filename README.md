@@ -76,7 +76,7 @@ Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, 
 
 # 📁 Estructura Base del Proyecto
 
-ESTO HAY Q CORREGIRLO:
+# ***ESTO HAY Q CORREGIRLO:***
 - ACTUALIZARLO POR LAS NUEVAS CARPETAS
 
 - USAR ARBOL JERARQUICO DE ARCHIVOS Y CARPETAS CON ├── Y └──
@@ -413,9 +413,7 @@ Un input reutilizable debe:
 - Separación estricta entre lógica y UI.
 - Mantenimiento simple en proyectos grandes.
 
-# INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM
-
----
+# ***INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM***
 
 # 💅 Maquetación
 
@@ -488,32 +486,113 @@ En VS Code o en cualquier editor basado en VS Code (Antigravity, Cursor, Windsur
 
 ## 🎨 Variables de Colores Tailwind y Sass
 
-Las variables con nombres de los colores de **Sass** en `src/styles/global/variable.scss` y **Tailwind** en `src/styles/global/library/tailwind.css` tienen que ser exactamente los mismos
+[Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
+
+Las variables con nombres de los colores de **Sass** en `src/styles/global/variable.scss` y **Tailwind** en `src/styles/global/library/tailwind.css` deben mantener exactamente el mismo nombre y el mismo valor.
 
 Esto garantiza que los colores sean los mismos entre los estilos globales definidos en Sass y los estilos de cada componente definidos con Tailwind.
 
-****✅ Ejemplo:****
+***✅ Ejemplo Correcto:***
 
-En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo color rojo `oklch(62.8% 0.258 29.23) `
+En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo valor con color rojo `oklch(62.8% 0.258 29.23)`
 
 ```scss
-// src/styles/global/variable.scss
+/*
+src/styles/global/variable.scss
 
-// colores de Sass
+colores de Sass */
 $primary-color: oklch(62.8% 0.258 29.23) ;
 ```
-
-[Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
 
 ```CSS
 /*
 src/styles/global/library/tailwind.css
 
 colores de Tailwind */
-
 @theme {
   --color-primary-color: oklch(62.8% 0.258 29.23) ;
 }
+```
+
+***❌ Ejemplo Incorrecto:***
+
+Los nombres o valores no coinciden entre Sass y Tailwind.
+
+
+```scss
+/*
+src/styles/global/variable.scss
+
+colores de Sass */
+$primary-color: oklch(62.8% 0.258 29.23); // color rojo
+```
+
+```css
+/*
+src/styles/global/library/tailwind.css
+
+colores de Tailwind */
+@theme {
+  --color-brand-primary: oklch(54.6% 0.245 262.881); /* color azul */
+}
+```
+
+### 🎨 Formato de Colores
+
+Todos los colores del proyecto se definen utilizando el formato `oklch`.
+
+***✅ Ejemplo Correcto***
+
+```scss
+oklch(62.8% 0.258 29.23)
+```
+
+***❌ Ejemplo Incorrecto***
+
+```scss
+/* Hexadecimal */
+#FF0000
+
+/* RGB */
+rgb(255 0 0)
+
+/* RGBA */
+rgba(255 0 0 / 50%)
+
+/* HSL  */
+hsl(0 100% 50%)
+
+/* HSLA */
+hsla(0, 100%, 50%, 0.5)
+```
+
+### 🎨 Tailwind Custom Values
+
+Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color también debe estar definido en formato `oklch`.
+
+***✅ Ejemplo Correcto***
+
+```html
+<div class="bg-[oklch(62.8%_0.258_29.23)]"></div>
+```
+
+***❌ Ejemplo Incorrecto***
+
+```html
+<!-- Hexadecimal -->
+<div class="bg-[#FF0000]"></div>
+
+<!-- RGB -->
+<div class="bg-[rgb(255_0_0)]"></div>
+
+<!-- RGBA -->
+<div class="bg-[rgba(255_0_0_/_50%)]"></div>
+
+<!-- HSL -->
+<div class="bg-[hsl(0_100%_50%)]"></div>
+
+<!-- HSLA -->
+<div class="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
 ```
 
 ## 🤔 ¿Cómo usar Tailwind y Sass juntos?
