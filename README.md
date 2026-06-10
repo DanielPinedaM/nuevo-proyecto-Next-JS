@@ -649,7 +649,13 @@ export default function MyComponent() {
 }
 ```
 
-* ***Tailwind*** para estilos especificos de cada componente en `src/app/...` y `src/shared/components/...`
+* ***Tailwind*** para estilos especificos de cada componente en: 
+
+* `src/app/...`
+
+* `src/shared/components/...`
+
+* `src/shared/ui/...`
 
 ```tsx
 // MyComponent.tsx
