@@ -81,31 +81,35 @@ Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, 
 
 - USAR ARBOL JERARQUICO DE ARCHIVOS Y CARPETAS CON ├── Y └──
 
-* **/environments**: Variables de entorno .env para desarrollo (local host), produccion y pruebas
-
-* **src/app/**: Enrutado de Next JS
-
-* **src/components**: Componentes generales que se pueden re-utilizar en cualquier parte de la aplicacion
-
-* **src/components/GeneralErrorMessage.tsx**: Componente que muestra los mensajes de error asociados a un campo de un formulario de React Hook Form
-
-* **src/scss**: Estilos globales de Sass
-
-* **src/types/constant**: Constantes
-
-* **src/types/interface**: Interface asociadas a las constantes
-
-* **src/utils/func/general.ts**: Funciones generalres que se pueden re-utilizar en cualquier parte de la aplicacion
-
-* **src/utils/func/sessionStorage.ts**: Funciones para guardar, listar, actualizar y eliminar propiedad:valor en sessionStorage, codifica y de-codifica en base 64, detecta cuando usar JSON.stringify() y JSON.parse()
-
-* **public/assets/icon**: Iconos
-
-* **public/assets/img**: Imagenes
-
-* **src/store**: Estado global en Zustand para compartir estados entre componentes
-
-* **src/api/generalServiceHttp.ts**: Funcion general para hacer peticiones HTTP usando fetch, sirve para Server Side Rendering y "use client"
+```txt
+src/
+│
+└── styles/
+    ├── main.scss → con @use importa estilos .scss globales de toda la pagina web, NO debe contener estilos directos
+    │
+    └── global/ → estilos globales de toda la pagina web
+        ├── _reset.scss → elimina los estilos por defecto del navegador para asegurar una apariencia uniforme en todos los navegadores
+        ├── _scroll-bar.scss → estilos globales de barra de scroll
+        ├── _table.scss → estilos globales para tablas
+        ├── _variables.scss → variables globales de Sass
+        │
+        ├── library/ → estilos que afectan las librerias
+        │   ├── _prime-react.scss → estilos que afectan a Prime React
+        │   ├── _sweet-alert-2.scss → estilos que afectan a Sweet Alert 2
+        │   └── _tailwind.css → archivo de configuración de Tailwind 4
+        │
+        └── buttons/ → estilos globales de botones organizados en archivos .scss composables que permiten combinar variantes, tamaños, estados y temas
+            ├── index-buttons.scss → con @use importa estilos .scss para los botones, NO debe contener estilos directos
+            ├── _base.scss → Reset CSS para botones
+            ├── _effects.scss → utilidades visuales reutilizables para los botones: box-shadow, blur, elevation (sin lógica UI)
+            ├── _modifiers.scss → alteran/extienden características de los botones sin sobrescribir sus estilos principales
+            ├── _sizes.scss → Define el tamaño del botón mediante tokens basados en la escala de Tailwind CSS 4 para padding, font-size y line-height.
+            ├── _states.scss → estados de boton: hover, active, focus, disabled
+            ├── _themes.scss → Define los temas de color del botón mediante CSS Custom Properties generadas a partir de _tokens.scss.
+            ├── _tokens.scss → Define los tokens de diseño del sistema de botones mediante variables Sass (colores, tipografía, espaciado y escalas).
+            ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\buttons
+            └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón.
+```
 
 # 📅 Fechas
 
@@ -827,6 +831,815 @@ export default function MyComponent() {
 
 ## 🔘 Estilos Globales para Botones
 
-INCOMPLETO
+Está guía de estilos para botones está basada en:
 
-AQUI ME FALTA COPIARME LA DOCUMENTACION Q TENGO DE ANGULAR PARA BOTONES Q ESTA BASADO EN BOOSTRAP
+- [Arquitectura de Bootstrap 5.3 para botones](https://getbootstrap.com/docs/5.3/components/buttons/)
+
+- [Tailwind 4 font-size](https://tailwindcss.com/docs/font-size)
+
+- [Tailwind 4 line-height](https://tailwindcss.com/docs/line-height)
+
+- [Tailwind 4 padding](https://tailwindcss.com/docs/padding)
+
+La arquitectura está diseñada para proyectos grandes y escalables, separando responsabilidades.
+
+**❌ Incorrecto:**
+
+Usar los [botones de Prime NG](https://primeng.org/button):
+
+* `p-button`
+
+* Atributo `pButton`
+
+* Directivas auxiliares `pButtonLabel` y `pButtonIcon`
+
+```TS
+/* my-component.component.ts */
+
+import { ButtonModule } from 'primeng/button';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
+  imports: [ButtonModule],
+})
+
+export class MyComponent {}
+```
+
+```HTML
+<!-- my-component.component.html -->
+
+<p-button label="Guardar" />
+
+<button pButton>
+    <i class="pi pi-check" pButtonIcon></i>
+    <span pButtonLabel>Guardar</span>
+</button>
+```
+
+La razón es que los [botones de Prime NG](https://primeng.org/button) agregan estilos por defecto que alteran los estilos globales de `index-buttons.scss`
+
+**✅ Correcto:**
+
+Usar etiqueta `button` nativa de HTML:
+
+```TS
+/* my-component.component.ts */
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
+})
+
+export class MyComponent {}
+```
+
+```HTML
+<!-- my-component.component.html -->
+
+<button class="btn btn-primary btn-background">
+  <span>Primary</span>
+</button>
+
+<button class="btn btn-secondary btn-background">
+  <span class="material-symbols-outlined">arrow_forward</span>
+  <span>Secondary</span>
+</button>
+```
+
+**❌ Incorrecto:**
+
+Usar etiquetas `<img>` para iconos porque las imágenes no se integran correctamente con la arquitectura CSS de los botones y dificultan aplicar estilos dinámicos como:
+
+- `color`
+- `hover`
+- `active`
+- `disabled`
+- `font-size`
+- dark mode
+
+Esto rompe la consistencia visual y vuelve el código más difícil de mantener y escalar.
+
+```html
+<button>
+  <img src="/assets/icon/delete.svg" alt="Eliminar" />
+</button>
+```
+
+Por ejemplo, para intentar cambiar color, tamaño o estados visuales de imágenes `<img>`, normalmente se termina recurriendo a hacks visuales con CSS, lo cual es mala práctica:
+
+```SCSS
+// cambiar tamaño de imagen
+button {
+  img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+}
+```
+
+```SCSS
+// cambiar color de imagen
+img {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+```
+
+```SCSS
+// Recortar la imagen usando la forma del SVG
+img {
+  mask-image: url(icon.svg);
+}
+```
+
+```SCSS
+// Hacer imagen semitransparente al pasar el mouse
+button {
+  &:hover {
+    img {
+      opacity: 0.5;
+    }
+  }
+}
+```
+
+Esto genera:
+
+- Son difíciles de mantener.
+- Generan inconsistencias visuales.
+- Complican los estilos para los estados del botón.
+- Rompen fácilmente en dark mode.
+- Vuelven el CSS más complejo y frágil.
+
+**✅ Correcto:**
+
+Los iconos de los botones deben utilizar [Material Symbols Icons](https://fonts.google.com/icons)
+
+[Material Symbols Icons](https://fonts.google.com/icons) funcionan como texto estilizable mediante CSS, lo que permite integrarlos correctamente con la arquitectura visual del proyecto.
+
+```html
+<button class="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+```
+
+**❌ Incorrecto:**
+
+Usar Tailwind CSS para definir estilos de botones directamente en cada componente, ya que esto suele generar:
+
+```HTML
+<button class="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
+  Aceptar
+</button>
+```
+
+Mezclar las clases globales de botones (`.btn`, `.btn-primary`, `.btn-outline-*`, etc.) con clases de Tailwind CSS.
+
+```HTML
+<button class="btn btn-primary bg-red-500 px-10 rounded-full">
+  <span class="material-symbols-outlined">save</span>
+  <span class="text-blue-500">Guardar</span>
+</button>
+```
+
+Usar muchas clases de Sass para cada uno de los estilos de los botones, porque mezcla múltiples responsabilidades en una sola clase:
+
+- Icono
+- Texto
+- Borde
+
+```HTML
+<button class="btn-with-icon-text-border">
+  <span class="material-symbols-outlined"> home </span>
+  <span>Boton</span>
+</button>
+```
+
+Ese enfoque no escala bien, ya que cada nueva combinación obliga a crear más clases:
+
+```SCSS
+.btn-with-icon-text-border-loading {}
+.btn-with-icon-text-background-lg {}
+.btn-with-icon-text-border-disabled {}
+```
+
+Esto genera:
+
+- Archivos Sass enormes y difíciles de mantener.
+- Duplicación innecesaria de código.
+- Inconsistencias visuales.
+- Dificultad para reutilizar un estándar de diseño.
+
+**✅ Correcto:**
+
+Las clases de botones deben representar una sola responsabilidad y ser **composables**.
+
+En arquitectura CSS y de componentes, composable significa que una clase puede combinarse con otras clases pequeñas y reutilizables para construir distintos comportamientos sin duplicar código.
+
+Cada clase modifica únicamente una característica específica del botón. Esto permite combinar comportamientos sin duplicar estilos:
+
+| Archivo              | Descripción                                                                                                                                                                  | Ejemplo de código                                                |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| `index-buttons.scss` | Archivo orquestador. Importa todos los módulos SCSS mediante `@use`. No debe contener estilos CSS, variables ni lógica visual.                                               | `@use "./base.scss";`                                            |
+| `_base.scss`         | Define la estructura base del sistema de botones: reset CSS, layout, alineación, box model y estilos fundamentales de `.btn`. Todas las variantes parten de esta clase base. | `.btn {} `                                                       |
+| `_variants.scss`     | Define la apariencia principal del botón (fondo, borde y comportamiento visual). Las variantes pueden combinarse con cualquier tema, tamaño o modificador.                   | `.btn-background {} .btn-outline {} .btn-ghost {} .btn-link {} ` |
+| `_themes.scss`       | Define los temas de color mediante CSS Custom Properties. Cada tema establece los colores utilizados por las variantes (`solid`, `outline`, `ghost`, etc.).                  | `.btn-primary {} .btn-secondary {} .btn-success {} `             |
+| `_sizes.scss`        | Define la escala de tamaños del botón mediante `padding`, `font-size` y `line-height`. Puede combinarse con cualquier variante o tema.                                       | `.btn-xs {} .btn-sm {} .btn-base {} .btn-lg {} `                 |
+| `_states.scss`       | Define los estados interactivos y de accesibilidad del botón. Centraliza comportamientos relacionados con `focus-visible`, `hover`, `active` y `disabled`.                   |                                                                  |
+| `_effects.scss`      | Contiene utilidades visuales reutilizables independientes de la lógica del botón. Permite agregar efectos opcionales como sombras, blur o elevación.                         | `.btn-shadow {} `                                                |
+| `_modifiers.scss`    | Clases composables que alteran o extienden características específicas del botón sin modificar su variante principal.                                                        | `.btn-full-width {} .btn-rounded-full {} .btn-icon-only {}`      |
+| `_mixins.scss`       | Codigo de Sass reutilizable que se repite en diferentes archivos de src\styles\global\buttons                                                                                | `@mixin btn-base-size {}`                                        |
+| `_tokens.scss`       | Variables globales de Sass utilizadas por todo el sistema de botones. Centraliza colores, tamaños tipográficos y escalas de espaciado para mantener consistencia visual.     | `$primary: oklch(...);                              `            |
+
+### 📖 Manual de Uso para Dar Estilos a Botones
+
+Esta guía explica cómo utilizar correctamente los estilos globales de botones definidos en:
+
+```txt
+src/styles/global/buttons
+```
+
+### ✨ UI/UX
+
+En el diseño de interfaces (UI/UX), el color de un botón no es solo decorativo:
+cada variante representa una intención de acción dentro del sistema.
+
+Esto ayuda al usuario a entender rápidamente qué va a ocurrir antes de hacer clic.
+
+**🔴 Los colores fuertes:**
+
+- Capturan atención.
+- Indican importancia.
+- El usuario lo identifica como el botón más importante para hacer clic.
+
+**⚪ Los colores suaves o transparentes:**
+
+- Reducen distracción.
+- Bajan la jerarquía visual.
+- Mantienen el foco en el contenido principal.
+
+**📏 Reglas de UI/UX**
+
+- Solo debe existir 1 acción primaria por pantalla (colores fuertes).
+- Las acciones secundarias deben tener menor jerarquía visual (colores suaves).
+- Las acciones destructivas deben ser claramente identificables.
+- El color no es decoración, es comunicación.
+
+### Clase `.btn` con Estilos Base
+
+La clase `.btn` define los estilos base y actúa como un **reset CSS obligatorio para todos los botones**, sin importar su variante o tipo (`primary`, `outline`, `ghost`, etc.).
+
+Esta clase **siempre debe utilizarse**, ya que establece la estructura común del componente y garantiza consistencia en toda la UI.
+
+Incluye estilos fundamentales como `padding`, `font-size`, alineación del contenido, comportamiento de interacción (`hover`, `active`, `disabled`) y configuración de layout.
+
+Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no representa un botón visual completo por sí sola**. Su función es servir como base para que las variantes (`.btn-primary`, `.btn-outline-*`, etc.) apliquen el estilo visual final.
+
+- Botones **activados** usan `cursor: pointer` 👆🏻 para indicar que el botón es interactivo y puede ser clickeado.
+
+- Botones **desactivados** usan `cursor: not-allowed` 🚫 para indicar que el botón no está disponible y no puede ser clickeado.
+
+```html
+<button class="btn">
+  Base class
+</button>
+```
+
+### Enlaces
+
+`btn btn-link` define los estilos para los enlaces para `<a>` y `<button>`
+
+![enlaces](./docs/readme-md/img/button/enlaces.png)
+
+```html
+<a class="btn btn-link" routerLink="/home">
+  Ir a home
+</a>
+
+<button class="btn btn-link" routerLink="/home">
+  Ir a home
+</button>
+
+<button class="btn btn-link" routerLink="/home" disabled>
+  Ir a home
+</button>
+
+<a class="btn btn-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com">
+  Ir a Google
+</a>
+```
+
+### Botones con Color de Fondo
+
+`btn-background` agrega color de fondo al boton.
+
+En sistemas de diseño modernos, los botones se clasifican según su nivel de importancia y riesgo de la acción:
+
+| Tipo de boton    | Significado                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| 🔵 **Primary**   | acción principal (continuar / confirmar / guardar)             |
+| ⚪ **Secondary** | acción secundaria (cancelar / salir)                           |
+| 👻 **Ghost**     | acción discreta sin estructura visual fuerte - no tiene border |
+| 🔴 **Danger**    | eliminar o destruir                                            |
+| 🟡 **Warning**   | advertencia                                                    |
+| 🟢 **Success**   | confirmación positiva                                          |
+| 🔷 **Info**      | información                                                    |
+| 🔗 **Link**      | navegación / enlaces                                           |
+| ⚫ **Dark**      | variante de alto contraste para acciones neutras o de soporte  |
+
+![variantes-con-color-de-fondo](./docs/readme-md/img/button/variantes-con-color-de-fondo.png)
+
+```html
+<button class="btn btn-primary btn-background">Primary</button>
+<button class="btn btn-secondary btn-background">Secondary</button>
+<button class="btn btn-success btn-background">Success</button>
+<button class="btn btn-danger btn-background">Danger</button>
+<button class="btn btn-warning btn-background">Warning</button>
+<button class="btn btn-info btn-background">Info</button>
+<button class="btn btn-light btn-background">Light</button>
+<button class="btn btn-dark btn-background">Dark</button>
+```
+
+### Botones con Borde + Texto
+
+Las clases `.btn-outline-*` se usan para botones que tienen `border`, pero no color de fondo `background-color` por defecto.
+
+El comportamiento visual depende del estado de interacción:
+
+- **Estado normal (sin `hover`)** → sin fondo `background-color: transparent` y se muestra únicamente el `border`.
+
+- **Estado `hover`** → botón cambia su `background-color` dependiendo del tipo de botón.
+
+Algunos botones usan colores claros en el texto o borde, por lo que deben colocarse sobre fondos oscuros para mantener un buen contraste y asegurar que sean claramente visibles.
+
+![borde-con-texto](./docs/readme-md/img/button/borde-con-texto.png)
+
+```html
+<button class="btn btn-primary btn-outline">Primary</button>
+<button class="btn btn-secondary btn-outline">Secondary</button>
+<button class="btn btn-success btn-outline">Success</button>
+<button class="btn btn-danger btn-outline">Danger</button>
+<button class="btn btn-warning btn-outline">Warning</button>
+<button class="btn btn-info btn-outline">Info</button>
+<button class="btn btn-light btn-outline">Light</button>
+<button class="btn btn-dark btn-outline">Dark</button>
+```
+
+### Botones con sombra
+
+`btn-shadow` agrega una sombra a cualquier variante de botón, sin importar su estilo (fondo, borde o ghost).
+
+![botones-con-sombra](./docs/readme-md/img/button/botones-con-sombra.png)
+
+```html
+<!-- sombra + fondo + texto -->
+<button class="btn btn-primary btn-background btn-shadow">Primary</button>
+
+<!-- sombra + texto -->
+<button class="btn btn-secondary btn-ghost btn-shadow">Secondary</button>
+
+<!-- sombra + borde + texto -->
+<button class="btn btn-success btn-outline btn-shadow">Success</button>
+
+<!-- sombra + bordes redondeados + icono + fondo -->
+<button class="btn btn-warning btn-background btn-base btn-shadow">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<!-- sombra + bordes redondeados + icono + borde -->
+<button class="btn btn-success btn-outline btn-icon-only btn-shadow">
+  <span class="material-symbols-outlined">check_circle</span>
+</button>
+
+<!-- sombra + borde + btn-rounded-full forma de circulo + icono -->
+<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full btn-shadow">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<!-- sombra + btn-rounded-full forma de circulo + icono -->
+<button class="btn btn-ghost btn-info btn-icon-only btn-rounded-full btn-shadow">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<!-- sombra + icono + fondo + texto -->
+<button class="btn btn-primary btn-background btn-shadow">
+  <span class="material-symbols-outlined">arrow_forward</span>
+  <span>Primary</span>
+</button>
+
+<!-- sombra + icono + fondo + texto + boton redondo -->
+<button class="btn btn-info btn-background btn-rounded-full btn-shadow">
+  <span class="material-symbols-outlined">info</span>
+  <span>Info</span>
+</button>
+```
+
+### Botones con Icono
+
+Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), se utilicen las clases `btn` y `btn-icon-only`.
+
+![solo-icono](./docs/readme-md/img/button/solo-icono.png)
+
+```HTML
+<!-- bordes redondeados -->
+<button class="btn btn-warning btn-background btn-base">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<!-- btn-rounded-full forma de circulo -->
+<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<button class="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
+  <span class="material-symbols-outlined">settings</span>
+</button>
+
+<!-- xs boton muy pequeño -->
+<button class="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<!-- 2xl boton muy grande -->
+<button class="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+```
+
+### Botones con Icono + Fondo
+
+![icono-fondo](./docs/readme-md/img/button/icono-fondo.png)
+
+```html
+<button class="btn btn-primary btn-background btn-icon-only">
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+
+<button class="btn btn-secondary btn-background btn-icon-only">
+  <span class="material-symbols-outlined">close</span>
+</button>
+
+<button class="btn btn-success btn-background btn-icon-only">
+  <span class="material-symbols-outlined">check_circle</span>
+</button>
+
+<button class="btn btn-danger btn-background btn-icon-only">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<button class="btn btn-warning btn-background btn-icon-only">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<button class="btn btn-info btn-background btn-icon-only">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<button class="btn btn-light btn-background btn-icon-only">
+  <span class="material-symbols-outlined">light_mode</span>
+</button>
+
+<button class="btn btn-dark btn-background btn-icon-only">
+  <span class="material-symbols-outlined">dark_mode</span>
+</button>
+```
+
+### Botones con Borde + Icono
+
+![icono-borde](./docs/readme-md/img/button/icono-borde.png)
+
+```html
+<button class="btn btn-primary btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+
+<button class="btn btn-secondary btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">close</span>
+</button>
+
+<button class="btn btn-success btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">check_circle</span>
+</button>
+
+<button class="btn btn-danger btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<button class="btn btn-warning btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<button class="btn btn-info btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<button class="btn btn-light btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">light_mode</span>
+</button>
+
+<button class="btn btn-dark btn-outline btn-icon-only">
+  <span class="material-symbols-outlined">dark_mode</span>
+</button>
+```
+
+### Botones con Icono + Fondo + Texto
+
+![icono-fondo-texto](./docs/readme-md/img/button/icono-fondo-texto.png)
+
+```html
+<button class="btn btn-primary btn-background">
+  <span class="material-symbols-outlined">arrow_forward</span>
+  <span>Primary</span>
+</button>
+
+<button class="btn btn-secondary btn-background">
+  <span class="material-symbols-outlined">close</span>
+  <span>Secondary</span>
+</button>
+
+<button class="btn btn-success btn-background">
+  <span class="material-symbols-outlined">check_circle</span>
+  <span>Success</span>
+</button>
+
+<button class="btn btn-danger btn-background">
+  <span class="material-symbols-outlined">delete</span>
+  <span>Danger</span>
+</button>
+
+<button class="btn btn-warning btn-background">
+  <span class="material-symbols-outlined">warning</span>
+  <span>Warning</span>
+</button>
+
+<button class="btn btn-info btn-background">
+  <span class="material-symbols-outlined">info</span>
+  <span>Info</span>
+</button>
+
+<button class="btn btn-light btn-background">
+  <span class="material-symbols-outlined">light_mode</span>
+  <span>Light</span>
+</button>
+
+<button class="btn btn-dark btn-background">
+  <span class="material-symbols-outlined">dark_mode</span>
+  <span>Dark</span>
+</button>
+```
+
+### Botones Redondos
+
+`btn-rounded-full` redondea al maximo las esquinas de cualquier tipo de boton
+
+| Tipo de botón  | Condición (dimensiones) | Resultado visual                                  |
+|----------------|-------------------------|---------------------------------------------------|
+| Rectangular    | width ≠ height          | Esquinas totalmente redondeadas (forma alargada)  |
+| Cuadrado       | width = height          | Círculo perfecto (no óvalo)                       |
+
+![botones-redondos](./docs/readme-md/img/button/botones-redondos.png)
+
+```HTML
+<button class="btn btn-primary btn-background btn-rounded-full">Primary</button>
+
+<button class="btn btn-secondary btn-outline btn-rounded-full">Secondary</button>
+
+<button class="btn btn-info btn-background btn-rounded-full">
+  <span class="material-symbols-outlined">info</span>
+  <span>Info</span>
+</button>
+
+<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<button class="btn btn-background btn-warning btn-icon-only btn-rounded-full">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<!-- SIN btn-rounded-full tiene esquinas redondeadas -->
+<button class="btn btn-background btn-success btn-icon-only">
+  <span class="material-symbols-outlined">check_circle</span>
+</button>
+```
+
+### Botones sin Fondo ni Borde
+
+`btn-ghost` tiene las siguientes características:
+
+- **Fondo:** transparente.
+- **Borde:** inexistente.
+- **Color:** usa los mismos colores de las variantes (primary, secondary, success, etc).
+- **Hover:** Cambia color de fondo al situar mouse en boton.
+- **Uso:** acciones secundarias o discretas.
+
+***NO hover***
+
+![botones-sin-fondo-ni-borde](./docs/readme-md/img/button/botones-sin-fondo-ni-borde.png)
+
+***hover***
+
+![botones-sin-fondo-ni-borde-hover](./docs/readme-md/img/button/botones-sin-fondo-ni-borde-hover.png)
+
+```HTML
+<button class="btn btn-primary btn-ghost">Primary</button>
+
+<button class="btn btn-secondary btn-ghost">
+  <span class="material-symbols-outlined">close</span>
+  <span>Secondary</span>
+</button>
+
+<button class="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+```
+
+### 🚫 Boton desactivado `cursor: not-allowed`
+
+Agregar el atributo booleano de HTML `disabled` a la etiqueta `<button>` hace que los botones tomen estilos de desactivados.
+
+El estilo de boton desactivado se aplica a cualquier tipo de boton.
+
+![boton-desactivado](./docs/readme-md/img/button/boton-desactivado.png)
+
+```HTML
+<button disabled class="btn btn-primary btn-background">Primary</button>
+
+<button disabled class="btn btn-secondary btn-outline">Secondary</button>
+
+<button disabled class="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
+  <span class="material-symbols-outlined">delete</span>
+</button>
+
+<button disabled class="btn btn-icon-only btn-warning btn-background">
+  <span class="material-symbols-outlined">warning</span>
+</button>
+
+<button disabled class="btn btn-icon-only btn-outline btn-info">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<button disabled class="btn btn-dark btn-background">
+  <span class="material-symbols-outlined">dark_mode</span>
+  <span>Dark</span>
+</button>
+
+<!-- Enlaces -->
+<button disabled class="btn btn-link" routerLink="/home">Link</button>
+```
+
+### 📐 Tamaños
+
+Puedes modificar el tamaño de cualquier variante de botón, sin importar su estilo (fondo, borde o ghost).
+
+El ajuste de tamaño se aplica a todo el boton y afecta de manera proporcional a todos sus elementos internos:
+
+- Tamaño del botón `padding`.
+
+- Tamaño del texto `font-size`.
+
+- Tamaño de los iconos.
+
+- El espacio entre el icono y el texto `gap` es proporcional al tamaño del botón, ya que utiliza la unidad de medida `em`, la cual depende del `font-size` del propio botón.
+
+El tamaño por defecto de todos los botones es `.btn-base`:
+
+Esto significa que no es necesario declararlo explícitamente: si no se especifica un modificador de tamaño, el botón siempre asumirá este estilo automáticamente.
+
+```SCSS
+.btn-base {
+  padding: 0.5rem 1rem;         // py-2 = 0.5rem = 8px, px-3 = 0.75rem = 12px
+
+  font-size: 1rem;              // text-base = 1rem = 16px
+  line-height: calc(1.2 / 1);   // (line-height que se desea aplicar / font-size)
+}
+```
+
+![tamanos](./docs/readme-md/img/button/tamanos.png)
+
+```HTML
+<button class="btn btn-primary btn-background btn-xs">
+  Muy pequeño
+</button>
+
+<button class="btn btn-secondary btn-outline btn-sm">
+  Pequeño
+</button>
+
+<button class="btn btn-secondary btn-outline">
+  Valor por defecto
+</button>
+
+<button class="btn btn-secondary btn-outline btn-base">
+  Valor por defecto
+</button>
+
+<button class="btn btn-success btn-background btn-lg">
+  <span class="material-symbols-outlined">check_circle</span>
+  <span>Grande</span>
+</button>
+
+<button class="btn btn-danger btn-outline btn-xl">
+  <span class="material-symbols-outlined">delete</span>
+  <span>Muy grande</span>
+</button>
+
+<button class="btn btn-warning btn-background btn-2xl">
+  <span class="material-symbols-outlined">warning</span>
+  <span>Enorme</span>
+</button>
+
+<button class="btn btn-info btn-background btn-3xl">
+  <span class="material-symbols-outlined">rocket_launch</span>
+  <span>Gigante</span>
+</button>
+```
+
+### Modificadores - Boton en Bloque - Responsive
+
+En CSS un elemento en bloque es aquel que ocupa todo el ancho disponible de su contenedor y siempre inicia en una nueva línea ("renglon")
+
+```SCSS
+.block {
+  display: block;
+}
+```
+
+```SCSS
+.flex {
+  display: flex;
+}
+```
+
+`btn-full-width` convierte el boton a elemento en bloque, hace que el boton ocupe todo al ancho disponible de su contenedor padre y es responsive
+
+Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde o ghost).
+
+![boton-responsive](./docs/readme-md/img/button/boton-responsive.png)
+
+```HTML
+<!-- solo texto -->
+<button class="btn btn-danger btn-background btn-full-width">Danger</button>
+
+<!-- solo icono + fondo -->
+<button class="btn btn-dark btn-background btn-icon-only btn-full-width">
+  <span class="material-symbols-outlined">dark_mode</span>
+</button>
+
+<!-- icono + fondo + texto -->
+<button class="btn btn-success btn-background btn-full-width">
+  <span class="material-symbols-outlined">check_circle</span>
+  <span>Success</span>
+</button>
+
+<!-- icono + borde -->
+<button class="btn btn-outline btn-info btn-icon-only btn-full-width">
+  <span class="material-symbols-outlined">info</span>
+</button>
+
+<!-- sin fondo ni borde  -->
+<button class="btn btn-primary btn-icon-only btn-ghost btn-full-width">
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+```
+
+### Ubicación de Iconos y Texto en Botones
+
+**❌ Incorrecto:**
+
+Usar [flex-direction](https://tailwindcss.com/docs/flex-direction) para cambiar ubicacion de iconos:
+
+```HTML
+<button class="btn btn-primary btn-background flex-row-reverse">
+  <span class="material-symbols-outlined">arrow_forward</span>
+  <span>Primary</span>
+</button>
+```
+
+**✅ Correcto:**
+
+Cambiar la ubicación del icono y texto en el HTML, sin usar Sass ni Tailwind.
+
+*icono a la izquierda - texto a la derecha*
+
+![icono-izquierda-texto-derecha](./docs/readme-md/img/button/icono-izquierda-texto-derecha.png)
+
+```HTML
+<button class="btn btn-primary btn-background">
+  <span class="material-symbols-outlined">arrow_forward</span>
+  <span>Primary</span>
+</button>
+```
+
+*icono a la derecha - texto a la izquierda*
+
+![icono-derecha-texto-izquierda](./docs/readme-md/img/button/icono-derecha-texto-izquierda.png)
+
+```HTML
+<button class="btn btn-primary btn-background">
+  <span>Primary</span>
+  <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+```

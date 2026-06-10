@@ -1,0 +1,16 @@
+/* *******************************
+* Estados                        *
+* hover, active, focus, disabled *
+********************************** */
+
+/* ***********************************************************************
+* accesibilidad                                                          *
+* se activa al navegar en los botones con tecla tab                      *
+* esta clase define un focus-visible para cada variante (color) de boton *
+************************************************************************** */
+
+.btn {
+  &:focus-visible {
+    box-shadow: 0 0 0 0.25rem var(--btn-color-emphasis);
+  }
+}

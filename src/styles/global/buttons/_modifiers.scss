@@ -1,0 +1,62 @@
+/* *************************************************
+* Modifiers                                        *
+* alteran/extienden características de los botones *
+* sin sobrescribir sus estilos principales         *
+**************************************************** */
+
+/* **********************************************************
+* boton responsive                                          *
+* que ocupa todo el ancho disponible de su contenedor padre *
+************************************************************* */
+
+.btn-full-width {
+  width: 100%;
+
+  // flexbox
+  display: flex;
+  flex: 0 0 100%;
+
+  // grid
+  grid-column: 1 / -1;
+}
+
+/*
+btn-rounded-full redondea al maximo las esquinas de cualquier tipo de boton
+
+|----------------|-------------------------|---------------------------------------------------|
+| Tipo de botón  | Condición (dimensiones) | Resultado visual                                  |
+|----------------|-------------------------|---------------------------------------------------|
+| Rectangular    | width ≠ height          | Esquinas totalmente redondeadas (forma alargada)  |
+| Cuadrado       | width = height          | Círculo perfecto (no óvalo)                       |
+|----------------|-------------------------|---------------------------------------------------| */
+
+.btn-rounded-full {
+  border-radius: 9999px;
+}
+
+/* ******************************************************************************
+* es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), *
+* se utilicen las clases btn y btn-icon-only                                    *
+********************************************************************************* */
+
+.btn-icon-only {
+  /* usar "em" para q tamaño icono sea proporcional
+  al font-size definido en _sizes.scss */
+  width: 2.5em;
+  height: 2.5em;
+
+  /* mismo line-height que tiene clase .btn-base en _sizes.scss
+  para NO agregar espacio adicional al icono */
+  line-height: calc(1.2 / 1);
+
+  /* eliminar padding de _sizes.scss
+  porque el tamaño de boton q contiene solamente icono
+  tiene q estar definido por width y height,
+  NO por el padding  */
+  padding: 0;
+
+  /* como la clase .btn usa flex entonces se necesita
+  hacer que boton tenga medidas de width y height */
+  flex-shrink: 0; // evitar q boton se ENCOJA
+  flex-grow: 0;   // evitar q boton se EXPANDA
+}

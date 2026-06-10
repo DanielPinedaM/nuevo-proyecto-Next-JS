@@ -1,0 +1,73 @@
+@use "./_tokens.scss" as token;
+
+/* ***************************************
+* Themes                                 *
+* Define los temas de color del botón    *
+* mediante CSS Custom Properties         *
+* generadas a partir de _tokens.scss     *
+****************************************** */
+
+// boton primario para acciones de confirmacion (guardar, aceptar, si)
+.btn-primary {
+  --btn-color: #{token.$primary};
+  --btn-color-contrast: #{token.$primary-contrast};
+  --btn-color-emphasis: #{token.$primary-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+// boton secundario para acciones de cancelacion (eliminar, cancelar, no)
+.btn-secondary {
+  --btn-color: #{token.$secondary};
+  --btn-color-contrast: #{token.$secondary-contrast};
+  --btn-color-emphasis: #{token.$secondary-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-success {
+  --btn-color: #{token.$success};
+  --btn-color-contrast: #{token.$success-contrast};
+  --btn-color-emphasis: #{token.$success-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-danger {
+  --btn-color: #{token.$danger};
+  --btn-color-contrast: #{token.$danger-contrast};
+  --btn-color-emphasis: #{token.$danger-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-warning {
+  --btn-color: #{token.$warning};
+  --btn-color-contrast: #{token.$warning-contrast};
+  --btn-color-emphasis: #{token.$warning-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-info {
+  --btn-color: #{token.$info};
+  --btn-color-contrast: #{token.$info-contrast};
+  --btn-color-emphasis: #{token.$info-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-light {
+  --btn-color: #{token.$light};
+  --btn-color-contrast: #{token.$light-contrast};
+  --btn-color-emphasis: #{token.$light-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-dark {
+  --btn-color: #{token.$dark};
+  --btn-color-contrast: #{token.$dark-contrast};
+  --btn-color-emphasis: #{token.$dark-emphasis};
+  --btn-text-color: #{token.$btn-text-color};
+}
+
+.btn-link {
+  --btn-color: #{token.$link};
+  --btn-color-contrast: #{token.$link-contrast};
+  --btn-color-emphasis: #{token.$link-emphasis};
+  --btn-text-color: #{token.$link};
+}

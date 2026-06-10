@@ -1,0 +1,19 @@
+/* **********************************
+* Effects                           *
+* utilidades visuales reutilizables *
+* que se pueden aplicar de forma    *
+* independiente y reutilizable      *
+* (sombras, blur, filtros, etc.)    *
+* sin afectar la lógica de UI       *
+************************************* */
+
+/* *****************************
+* sombra box-shadow para boton *
+******************************** */
+
+.btn-shadow {
+  box-shadow:
+    oklch(0 0 0 / 0.2)  0px   .1875rem   .0625rem   -0.125rem,
+    oklch(0 0 0 / 0.14) 0px   .125rem    .125rem    0px,
+    oklch(0 0 0 / 0.12) 0px   .0625rem   .3125rem   0px;
+}

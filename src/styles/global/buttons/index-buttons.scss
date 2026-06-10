@@ -1,0 +1,131 @@
+/*
+BUTTON SYSTEM - GLOBAL DESIGN CONTRACT (CSS COMPOSABLE SYSTEM)
+
+Este sistema implementa un sistema de botones basado en CSS composable.
+Inspirado en Bootstrap 5.3 y Tailwind 4.
+*/
+
+
+
+/*
+ARCHITECTURE MAP (RESPONSABILIDAD DE ARCHIVOS)
+
+src/
+│
+└── styles/
+    ├── main.scss → con @use importa estilos .scss globales de toda la pagina web, NO debe contener estilos directos
+    │
+    └── global/ → estilos globales de toda la pagina web
+        │
+        └── buttons/ → estilos globales de botones organizados en archivos .scss composables que permiten combinar variantes, tamaños, estados y temas
+            ├── index-buttons.scss → con @use importa estilos .scss para los botones, NO debe contener estilos directos
+            ├── _base.scss → Reset CSS para botones
+            ├── _effects.scss → utilidades visuales reutilizables para los botones: box-shadow, blur, elevation (sin lógica UI)
+            ├── _modifiers.scss → alteran/extienden características de los botones sin sobrescribir sus estilos principales
+            ├── _sizes.scss → Define el tamaño del botón mediante tokens basados en la escala de Tailwind CSS 4 para padding, font-size y line-height
+            ├── _states.scss → estados de boton: hover, active, focus, disabled
+            ├── _themes.scss → Define los temas de color del botón mediante CSS Custom Properties generadas a partir de _tokens.scss
+            ├── _tokens.scss → Define los tokens de diseño del sistema de botones mediante variables Sass (colores, tipografía, espaciado y escalas)
+            ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\buttons
+            └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón
+*/
+
+
+
+/*
+STRICT DESIGN RULES (NO NEGOCIABLE)
+
+1. CSS COMPOSABLE ONLY
+- Todo debe ser componible mediante clases pequeñas.
+- No se permiten componentes monolíticos.
+
+2. SINGLE RESPONSIBILITY PER FILE
+- Cada archivo tiene una única responsabilidad visual.
+
+3. NO OVERRIDES
+- Prohibido romper composición con estilos globales o dependientes de orden.
+
+4. TOKEN-BASED SYSTEM ONLY
+- Todas las medidas deben venir de tokens.scss
+- Prohibido usar valores arbitrarios (ej: 13px, 7px)
+
+5. TOKEN SEPARATION
+- TIPOGRAFÍA ≠ SPACING
+- font-size y line-height solo tipografía
+- padding, margin, gap solo spacing
+
+6. CONSISTENCY SCALE (TAILWIND-LIKE)
+- Todo debe seguir escalas rem consistentes
+
+7. NO !IMPORTANT (PROHIBIDO)
+- Está estrictamente prohibido el uso de !important en todo el sistema.
+- No se permite su uso ni en componentes, ni en utilities, ni en estados.
+- Si se necesita !important, significa que el sistema de especificidad o arquitectura está mal diseñado y debe corregirse, no forzarse.
+
+8. TOKEN-BASED SYSTEM ONLY
+- Todas las medidas deben venir de tokens.scss
+
+9. MIXINS WITHOUT PARAMETERS (MANDATORIO)
+- Prohibido pasar parámetros a cualquier @mixin.
+- Prohibido crear mixins genéricos configurables.
+- Cada mixin debe representar una única pieza de comportamiento reutilizable y contener sus propios valores internos.
+- Si se necesitan variantes, deben crearse mixins separados y explícitos.
+- Ejemplo correcto:
+  @mixin button-base-size { ... }
+
+- Ejemplo prohibido:
+  @mixin button-size($paddingY, $paddingX, $fontSize) { ... }
+
+- La arquitectura prioriza legibilidad, simplicidad y mantenibilidad por encima de la reutilización excesiva.
+*/
+
+
+
+/*
+ORCHESTRATION RULE
+
+Este archivo SOLO orquesta módulos SCSS.
+
+NO DEBE CONTENER:
+- estilos CSS
+- variables
+- lógica visual
+- reglas de UI
+
+IMPORTACIÓN DE DEPENDENCIAS
+
+- Todos los módulos deben importarse mediante @use.
+- Cada dependencia debe declararse explícitamente en el archivo que la utiliza.
+- Se debe utilizar namespace (ej: token.$sp-2, mixin.button-base-size).
+
+PROHIBIDO USAR @forward
+
+Motivos:
+- Oculta dependencias reales entre archivos.
+- Dificulta identificar el origen de variables, mixins y funciones.
+- Incrementa el acoplamiento entre módulos.
+- Reduce la trazabilidad y mantenibilidad del sistema.
+- La arquitectura prioriza dependencias explícitas sobre reexportaciones implícitas.
+
+Ejemplo correcto:
+
+@use "./_tokens.scss" as token;
+@use "./_mixins.scss" as mixin;
+
+Ejemplo prohibido:
+
+// index.scss
+@forward "./_tokens.scss";
+@forward "./_mixins.scss";
+
+// otro archivo
+@use "./index.scss" as *;
+*/
+
+@use "./_base.scss";
+@use "./_themes.scss";
+@use "./_variants.scss";
+@use "./_sizes.scss";
+@use "./_states.scss";
+@use "./_effects.scss";
+@use "./_modifiers.scss";
