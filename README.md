@@ -608,7 +608,7 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 * ***Sass*** para estilos globales en `src/styles/global/...`
 
 ```scss
-// src\styles\global\_table.scss
+// estilo global para tablas en src/styles/global/_table.scss
 @use './variable.scss' as variable;
 
 table {
