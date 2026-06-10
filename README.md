@@ -29,7 +29,7 @@ comando               | apunta a...   | ruta archivo
 node --run build:test | pruebas       | `environments/.env.test`
 node --run build:prod | producción    | `environments/.env.production`
 
-# 🤖 Uso de IA
+# 🤖 Skill para Uso de IA
 
 > [!WARNING]
 > # ⚠️ ****IMPORTANTE**** 🚨
