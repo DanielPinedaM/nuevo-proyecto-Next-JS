@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import errorNotification from "@/shared/components/dialog/notification/errorNotification";
 import GeneralErrorMessage from "@/shared/components/GeneralErrorMessage";
@@ -17,6 +16,7 @@ import { sessionStorageDeleteAll } from "@/shared/utils/func/sessionStorage.util
 import { encrypt } from "@/shared/utils/func/cryptoService.utils";
 import { IRequestOptions, IResponse } from "@/shared/api/general-api/types/request-data.types";
 import { POST } from "@/shared/api/general-api/http-gateway.api";
+import { Button } from "primereact/button";
 
 interface IBodyLogin {
   email: string;
@@ -162,7 +162,7 @@ export default function FormLogin() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+     {/*  <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <div className="mb-2">
           <label>
             <span className="cursor-pointer">Correo electrónico</span>
@@ -232,7 +232,7 @@ export default function FormLogin() {
             ingresar
           </button>
         </div>
-      </form>
+      </form> */}
     </>
   );
 }

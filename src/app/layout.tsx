@@ -1,4 +1,6 @@
 import '../styles/main.scss';
+import '../styles/global/library/tailwind.css';
+
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';

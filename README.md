@@ -845,59 +845,37 @@ La arquitectura está diseñada para proyectos grandes y escalables, separando r
 
 **❌ Incorrecto:**
 
-Usar los [botones de Prime NG](https://primeng.org/button):
+Usar los [botones de Prime React](https://primereact.org/button/):
 
-* `p-button`
+* Componente `Button`
 
-* Atributo `pButton`
+* Props visuales del componente: `severity`, `outlined`, `label`, `icon`, `severity`, `size`, etc.
 
-* Directivas auxiliares `pButtonLabel` y `pButtonIcon`
+```tsx
+import { Button } from 'primereact/button';
 
-```TS
-/* my-component.component.ts */
-
-import { ButtonModule } from 'primeng/button';
-
-@Component({
-  selector: 'app-my-component',
-  templateUrl: './my-component.component.html',
-  imports: [ButtonModule],
-})
-
-export class MyComponent {}
+export default function MyComponent() {
+  return (
+    <Button
+      label="Guardar"
+      icon="pi pi-check"
+      severity="success"
+      size="large"
+      rounded
+      raised
+      text
+    />
+  );
+}
 ```
 
-```HTML
-<!-- my-component.component.html -->
-
-<p-button label="Guardar" />
-
-<button pButton>
-    <i class="pi pi-check" pButtonIcon></i>
-    <span pButtonLabel>Guardar</span>
-</button>
-```
-
-La razón es que los [botones de Prime NG](https://primeng.org/button) agregan estilos por defecto que alteran los estilos globales de `index-buttons.scss`
+La razón es que los [botones de Prime React](https://primereact.org/button/) agregan estilos por defecto que alteran los estilos globales de `index-buttons.scss`
 
 **✅ Correcto:**
 
 Usar etiqueta `button` nativa de HTML:
 
-```TS
-/* my-component.component.ts */
-
-@Component({
-  selector: 'app-my-component',
-  templateUrl: './my-component.component.html',
-})
-
-export class MyComponent {}
-```
-
-```HTML
-<!-- my-component.component.html -->
-
+```tsx
 <button class="btn btn-primary btn-background">
   <span>Primary</span>
 </button>

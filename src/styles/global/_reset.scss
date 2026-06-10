@@ -10,23 +10,13 @@
 * selector universal *
 ********************** */
 
-*:not(.btn):not([class*='swal']):not([class*='p-'])::before,
-*:not(.btn):not([class*='swal']):not([class*='p-'])::after,
-*:not(.btn):not([class*='swal']):not([class*='p-']) {
-  box-sizing: border-box;
-}
-
-*:not(.btn):not([class*='swal']):not([class*='p-']):not([class*='m-']):not([class*='mx-']):not(
-    [class*='my-']
-  ):not([class*='ms-']):not([class*='me-']):not([class*='mt-']):not([class*='mr-']):not(
-    [class*='mb-']
-  ):not([class*='ml-']):not([class*='space-']):not([class*='p-']):not([class*='px-']):not(
-    [class*='py-']
-  ):not([class*='ps-']):not([class*='pe-']):not([class*='pt-']):not([class*='pr-']):not(
-    [class*='pb-']
-  ):not([class*='pl-']) {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+
+  box-sizing: border-box;
 }
 
 /*
@@ -147,19 +137,6 @@ td {
   https://css-tricks.com/almanac/properties/f/font-variant-numeric/
   https://practice.typekit.com/lesson/caring-about-opentype-features/ */
   font-variant-numeric: tabular-nums !important;
-}
-
-/*
-********************
-* <input> - Campos *
-******************** */
-
-input {
-  &:disabled {
-    &::placeholder {
-      color: variable.$gray-dark !important;
-    }
-  }
 }
 
 /*

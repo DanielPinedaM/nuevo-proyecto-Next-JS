@@ -1,8 +1,21 @@
 import FormLogin from '@/app/(auth)/iniciar-sesion/formLogin';
+import { IoArrowForward } from 'react-icons/io5';
 
 export default function Page() {
   return (
-    <section className='w-full h-screen bg-no-repeat bg-fixed bg-origin-border bg-bottom'>
+    <section className='m-2'>
+      <button className='btn btn-primary btn-background'>
+        <span>Primary</span>
+      </button>
+
+      <button className='btn btn-secondary btn-background'>
+        <span aria-hidden='true'>
+          <IoArrowForward />
+        </span>
+        <span>Secondary</span>
+      </button>
+
+      {/* <section className='w-full h-screen bg-no-repeat bg-fixed bg-origin-border bg-bottom'>
       <div className='flex justify-center'>
         <div
           style={{
@@ -21,6 +34,7 @@ export default function Page() {
           </div>
         </div>
       </div>
+    </section> */}
     </section>
   );
 }

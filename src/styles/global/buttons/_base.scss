@@ -67,11 +67,7 @@
     box-shadow 0.2s ease;
 
   // tamaño iconos es proporcional al font-size del boton
-  span,
-  svg,
-  .material-symbols-outlined,
-  .material-symbols-rounded,
-  .material-symbols-sharp {
+  svg {
     font-size: inherit;
     line-height: inherit;
   }
