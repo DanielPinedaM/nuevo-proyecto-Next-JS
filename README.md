@@ -5,7 +5,7 @@
 Este proyecto debe ejecutarse utilizando:
 
 ```bash
-Node JS 24.15.0
+Node JS 24.16.0
 ```
 
 # 📦 Instalar paquetes
