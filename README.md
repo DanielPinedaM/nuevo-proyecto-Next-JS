@@ -671,12 +671,12 @@ export default function MyComponent() {
 
 ### 🚨 PRINCIPIO BASE (INNEGOCIABLE)
 
-- ❌ Tailwind y Sass **NO** se mezclan en la capa de UI
-- ❌ **NO** existen overrides entre Sass y Tailwind
-- ❌ **NO** se resuelve con especificidad
-- ❌ **NO** está permitido usar `!important` ni en Sass ni en Tailwind
-- ❌ **NO** se duplican responsabilidades de estilos
-- ❌ **NO** se crean estilos visuales en Sass para componentes
+* ❌ Tailwind y Sass **NO** se mezclan en la capa de UI
+* ❌ **NO** existen overrides entre Sass y Tailwind
+* ❌ **NO** se resuelve con especificidad
+* ❌ **NO** está permitido usar `!important` ni en Sass ni en Tailwind
+* ❌ **NO** se duplican responsabilidades de estilos
+* ❌ **NO** se crean estilos visuales en Sass para componentes
 
 👉 Si esto ocurre, la arquitectura está mal diseñada.
 
@@ -697,12 +697,11 @@ export default function MyComponent() {
 
 Está prohibido:
 
-- Estilos de UI de componentes
-- Cards, layouts
-- Selectores por ID para componentes
-- Overrides de Tailwind
-- Reescritura de clases visuales
-- Diseño de interfaces completas
+* Estilos de UI de componentes
+* Cards, layouts
+* Selectores por ID para componentes
+* Overrides de Tailwind
+* Diseño de interfaces completas
 
 ### 🚨 ANTIPATRÓN - ERROR CRÍTICO
 
