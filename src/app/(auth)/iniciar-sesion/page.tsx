@@ -4,9 +4,9 @@ import { IoArrowForward } from 'react-icons/io5';
 export default function Page() {
   return (
     <section className='m-2'>
-      <button className='btn btn-primary btn-background'>
-        Primary
-      </button>
+      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+
+      <button className='btn btn-primary btn-background'>Primary</button>
 
       <button className='btn btn-secondary btn-background'>
         <span aria-hidden='true'>

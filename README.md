@@ -599,39 +599,136 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 <div class="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
 ```
 
-## 🤔 ¿Cómo usar Tailwind y Sass juntos?
+## 🤔 ¿Cómo Usar Tailwind y Sass Juntos?
 
-****❌ Incorrecto:****
+### ✅ PATRÓN CORRECTO (OBLIGATORIO)
 
-Mezclar Sass y Tailwind en un mismo componente es mala práctica porque los estilos de Sass y Tailwind se sobrescriben debido a la especificidad, herencia y cascada de CSS.
+👉 Separación estricta de responsabilidades:
 
-Para los estilos esta prohibido lo siguiente:
+* ***Sass*** para estilos globales en `src/styles/global/...`
 
-* Los componentes de React **NO** deben tener archivos propios .scss ni .css
+```scss
+// src\styles\global\_table.scss
+@use './variable.scss' as variable;
 
-* CSS Modules (`.module.scss` / `.module.css`)
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 
-* Styled Components
+  thead,
+  tfoot,
+  th {
+    background-color: variable.$blue-ocean;
+    color: oklch(100% 0 0); /* #ffffff */
+  }
 
-* No puede existir un único archivo global de Sass donde se escriban directamente los estilos visuales de todos los componentes.
+  // ...
+}
+```
 
-* `<style jsx global>`
+```tsx
+// MyComponent.tsx
 
-* `<style>`
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
-* Estilos en linea
+const PRODUCTS = [
+  { id: 1, name: 'Laptop', price: 2500 },
+  { id: 2, name: 'Mouse', price: 50 },
+];
 
-****❌ Ejemplo incorrecto:****
+export default function MyComponent() {
+  return (
+    <DataTable value={PRODUCTS}>
+      <Column field="id" header="ID" />
+      <Column field="name" header="Nombre" />
+      <Column field="price" header="Precio" />
+    </DataTable>
+  );
+}
+```
 
-```TSX
+* ***Tailwind*** para estilos especificos de cada componente en `src/app/...` y `src/shared/components/...`
+
+```tsx
 // MyComponent.tsx
 
 export default function MyComponent() {
   return (
-    <button id="btn-guardar" 
-            className="bg-red-600">
+    <h1 className="text-center text-blue-600">
       Guardar
-    </button>
+    </h1>
+  );
+}
+```
+
+### 🚨 PRINCIPIO BASE (INNEGOCIABLE)
+
+- ❌ Tailwind y Sass **NO** se mezclan en la capa de UI
+- ❌ **NO** existen overrides entre Sass y Tailwind
+- ❌ **NO** se resuelve con especificidad
+- ❌ **NO** está permitido usar `!important` ni en Sass ni en Tailwind
+- ❌ **NO** se duplican responsabilidades de estilos
+- ❌ **NO** se crean estilos visuales en Sass para componentes
+
+👉 Si esto ocurre, la arquitectura está mal diseñada.
+
+### ❌ LOS COMPONENTES DE REACT NO PUEDEN USAR:
+
+* `.scss`
+* `.css`
+* CSS Modules (`.module.scss`, `.module.css`)
+* Styled Components
+* `<style jsx>`
+* `<style jsx global>`
+* `<style>`
+* `style={{}}` estilos en línea 
+* `import './styles.scss'` Importar archivos .scss
+* `import './styles.css'` Importar archivos .css 
+
+### 🚫 En Sass global
+
+Está prohibido:
+
+- Estilos de UI de componentes
+- Cards, layouts
+- Selectores por ID para componentes
+- Overrides de Tailwind
+- Reescritura de clases visuales
+- Diseño de interfaces completas
+
+### 🚨 ANTIPATRÓN - ERROR CRÍTICO
+
+```tsx
+// MyComponent.tsx
+
+import styles from './MyComponent.module.scss';
+
+export default function MyComponent() {
+  return (
+    <>
+      <button id="btn-guardar" className="bg-red-600!">
+        Guardar
+      </button>
+
+      <div className="card">
+        Contenido de la card
+      </div>
+
+      <section className={styles.panel}>
+        Contenido del panel
+      </section>
+
+      <style jsx global>{`
+        .card {
+          background-color: white;
+          padding: 16px;
+          border-radius: 8px;
+          border: 1px solid oklch(92.2% 0.005 264);
+        }
+      `}</style>
+    </>
   );
 }
 ```
@@ -640,60 +737,55 @@ export default function MyComponent() {
 // src/styles/global/global.scss
 
 #btn-guardar {
-  background-color: red;
+  background-color: blue !important;
 }
 ```
-
-***✅ Correcto:***
-
-Sass para estilos globales en `src/styles/global/...`
-
-Tailwind para estilos especificos de cada componente en `src/app/...` y `src/shared/components/...`
-
-****✅ Ejemplo Correcto de Sass global:****
 
 ```scss
-// src/styles/global/scroll-bar.scss
+// MyComponent.module.scss
 
-// ocultar barra de scroll, pero hacer q siga funcionando la barra de scroll
-.hidden-scrollbar::-webkit-scrollbar {
-  display: none;
+.panel {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid oklch(92.2% 0.005 264);
 }
 ```
 
-```TSX
-// MyComponent1.tsx
+### ❌ PROHIBIDO USAR `@apply` DE TAILWIND
 
-export function MyComponent1() {
-  return (
-    <div className="hidden-scrollbar overflow-auto">
-      ...
-    </div>
-  );
+En estos enlaces el creador de Tailwind explica porque **NO** usar `@apply`:
+
+* [Tutorial](https://x.com/adamwathan/status/1226511611592085504)
+
+* [X (Twitter)](https://x.com/adamwathan/status/1559250403547652097)
+
+Está estrictamente prohibido utilizar la directiva `@apply` de Tailwind.
+
+Esto incluye cualquier uso dentro de archivos:
+* `.css`
+* `.scss`
+* cualquier archivo de estilos globales o de componentes
+
+***❌ EJEMPLO INCORRECTO USANDO  `@apply`***
+
+```scss
+/* src/styles/global/global.scss
+
+❌ MAL: usando Tailwind dentro de Sass/CSS con @apply */
+
+.button {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg;
 }
 ```
 
-```TSX
-// MyComponent2.tsx
-
-export function MyComponent2() {
-  return (
-    <div className="hidden-scrollbar overflow-auto">
-      ...
-    </div>
-  );
-}
-```
-
-****✅ Ejemplo Correcto de Tailwind:****
-
-```TSX
+```tsx
 // MyComponent.tsx
 
-export function MyComponent() {
+export default function MyComponent() {
   return (
-    <button className="bg-red-600">
-      Guardar
+    <button className="button">
+      Boton
     </button>
   );
 }

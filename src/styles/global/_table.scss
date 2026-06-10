@@ -28,7 +28,7 @@ table {
   thead,
   tfoot,
   th {
-    background-color: variable.$blue-ocean !important;
+    background-color: variable.$blue-ocean;
     color: oklch(100% 0 0); /* #ffffff */
 
     span,

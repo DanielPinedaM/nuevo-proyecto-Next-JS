@@ -1,5 +1,7 @@
+//#region ⚠️ estilos globales de Next JS - NO modificar esta sección 🚨
 import '../styles/main.scss';
 import '../styles/global/library/tailwind.css';
+//#endregion
 
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
