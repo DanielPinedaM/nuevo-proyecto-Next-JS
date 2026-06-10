@@ -577,26 +577,26 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 ***✅ Ejemplo Correcto***
 
 ```html
-<div class="bg-[oklch(62.8%_0.258_29.23)]"></div>
+<div className="bg-[oklch(62.8%_0.258_29.23)]"></div>
 ```
 
 ***❌ Ejemplo Incorrecto***
 
 ```html
 <!-- Hexadecimal -->
-<div class="bg-[#FF0000]"></div>
+<div className="bg-[#FF0000]"></div>
 
 <!-- RGB -->
-<div class="bg-[rgb(255_0_0)]"></div>
+<div className="bg-[rgb(255_0_0)]"></div>
 
 <!-- RGBA -->
-<div class="bg-[rgba(255_0_0_/_50%)]"></div>
+<div className="bg-[rgba(255_0_0_/_50%)]"></div>
 
 <!-- HSL -->
-<div class="bg-[hsl(0_100%_50%)]"></div>
+<div className="bg-[hsl(0_100%_50%)]"></div>
 
 <!-- HSLA -->
-<div class="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
+<div className="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
 ```
 
 ## 🤔 ¿Cómo Usar Tailwind y Sass Juntos?
@@ -973,12 +973,12 @@ La razón es que los [botones de Prime React](https://primereact.org/button/) ag
 Usar etiqueta `button` nativa de HTML:
 
 ```tsx
-<button class="btn btn-primary btn-background">
+<button className="btn btn-primary btn-background">
   <span>Primary</span>
 </button>
 
-<button class="btn btn-secondary btn-background">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-secondary btn-background">
+  <span className="material-symbols-outlined">arrow_forward</span>
   <span>Secondary</span>
 </button>
 ```
@@ -1055,8 +1055,8 @@ Los iconos de los botones deben utilizar [Material Symbols Icons](https://fonts.
 [Material Symbols Icons](https://fonts.google.com/icons) funcionan como texto estilizable mediante CSS, lo que permite integrarlos correctamente con la arquitectura visual del proyecto.
 
 ```html
-<button class="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 ```
 
@@ -1065,7 +1065,7 @@ Los iconos de los botones deben utilizar [Material Symbols Icons](https://fonts.
 Usar Tailwind CSS para definir estilos de botones directamente en cada componente, ya que esto suele generar:
 
 ```HTML
-<button class="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
+<button className="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
   Aceptar
 </button>
 ```
@@ -1073,9 +1073,9 @@ Usar Tailwind CSS para definir estilos de botones directamente en cada component
 Mezclar las clases globales de botones (`.btn`, `.btn-primary`, `.btn-outline-*`, etc.) con clases de Tailwind CSS.
 
 ```HTML
-<button class="btn btn-primary bg-red-500 px-10 rounded-full">
-  <span class="material-symbols-outlined">save</span>
-  <span class="text-blue-500">Guardar</span>
+<button className="btn btn-primary bg-red-500 px-10 rounded-full">
+  <span className="material-symbols-outlined">save</span>
+  <span className="text-blue-500">Guardar</span>
 </button>
 ```
 
@@ -1086,8 +1086,8 @@ Usar muchas clases de Sass para cada uno de los estilos de los botones, porque m
 - Borde
 
 ```HTML
-<button class="btn-with-icon-text-border">
-  <span class="material-symbols-outlined"> home </span>
+<button className="btn-with-icon-text-border">
+  <span className="material-symbols-outlined"> home </span>
   <span>Boton</span>
 </button>
 ```
@@ -1177,7 +1177,7 @@ Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no repre
 - Botones **desactivados** usan `cursor: not-allowed` 🚫 para indicar que el botón no está disponible y no puede ser clickeado.
 
 ```html
-<button class="btn">
+<button className="btn">
   Base class
 </button>
 ```
@@ -1189,19 +1189,19 @@ Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no repre
 ![enlaces](./docs/readme-md/img/button/enlaces.png)
 
 ```html
-<a class="btn btn-link" routerLink="/home">
+<a className="btn btn-link" routerLink="/home">
   Ir a home
 </a>
 
-<button class="btn btn-link" routerLink="/home">
+<button className="btn btn-link" routerLink="/home">
   Ir a home
 </button>
 
-<button class="btn btn-link" routerLink="/home" disabled>
+<button className="btn btn-link" routerLink="/home" disabled>
   Ir a home
 </button>
 
-<a class="btn btn-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com">
+<a className="btn btn-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com">
   Ir a Google
 </a>
 ```
@@ -1227,14 +1227,14 @@ En sistemas de diseño modernos, los botones se clasifican según su nivel de im
 ![variantes-con-color-de-fondo](./docs/readme-md/img/button/variantes-con-color-de-fondo.png)
 
 ```html
-<button class="btn btn-primary btn-background">Primary</button>
-<button class="btn btn-secondary btn-background">Secondary</button>
-<button class="btn btn-success btn-background">Success</button>
-<button class="btn btn-danger btn-background">Danger</button>
-<button class="btn btn-warning btn-background">Warning</button>
-<button class="btn btn-info btn-background">Info</button>
-<button class="btn btn-light btn-background">Light</button>
-<button class="btn btn-dark btn-background">Dark</button>
+<button className="btn btn-primary btn-background">Primary</button>
+<button className="btn btn-secondary btn-background">Secondary</button>
+<button className="btn btn-success btn-background">Success</button>
+<button className="btn btn-danger btn-background">Danger</button>
+<button className="btn btn-warning btn-background">Warning</button>
+<button className="btn btn-info btn-background">Info</button>
+<button className="btn btn-light btn-background">Light</button>
+<button className="btn btn-dark btn-background">Dark</button>
 ```
 
 ### Botones con Borde + Texto
@@ -1252,14 +1252,14 @@ Algunos botones usan colores claros en el texto o borde, por lo que deben coloca
 ![borde-con-texto](./docs/readme-md/img/button/borde-con-texto.png)
 
 ```html
-<button class="btn btn-primary btn-outline">Primary</button>
-<button class="btn btn-secondary btn-outline">Secondary</button>
-<button class="btn btn-success btn-outline">Success</button>
-<button class="btn btn-danger btn-outline">Danger</button>
-<button class="btn btn-warning btn-outline">Warning</button>
-<button class="btn btn-info btn-outline">Info</button>
-<button class="btn btn-light btn-outline">Light</button>
-<button class="btn btn-dark btn-outline">Dark</button>
+<button className="btn btn-primary btn-outline">Primary</button>
+<button className="btn btn-secondary btn-outline">Secondary</button>
+<button className="btn btn-success btn-outline">Success</button>
+<button className="btn btn-danger btn-outline">Danger</button>
+<button className="btn btn-warning btn-outline">Warning</button>
+<button className="btn btn-info btn-outline">Info</button>
+<button className="btn btn-light btn-outline">Light</button>
+<button className="btn btn-dark btn-outline">Dark</button>
 ```
 
 ### Botones con sombra
@@ -1270,43 +1270,43 @@ Algunos botones usan colores claros en el texto o borde, por lo que deben coloca
 
 ```html
 <!-- sombra + fondo + texto -->
-<button class="btn btn-primary btn-background btn-shadow">Primary</button>
+<button className="btn btn-primary btn-background btn-shadow">Primary</button>
 
 <!-- sombra + texto -->
-<button class="btn btn-secondary btn-ghost btn-shadow">Secondary</button>
+<button className="btn btn-secondary btn-ghost btn-shadow">Secondary</button>
 
 <!-- sombra + borde + texto -->
-<button class="btn btn-success btn-outline btn-shadow">Success</button>
+<button className="btn btn-success btn-outline btn-shadow">Success</button>
 
 <!-- sombra + bordes redondeados + icono + fondo -->
-<button class="btn btn-warning btn-background btn-base btn-shadow">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-background btn-base btn-shadow">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
 <!-- sombra + bordes redondeados + icono + borde -->
-<button class="btn btn-success btn-outline btn-icon-only btn-shadow">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-outline btn-icon-only btn-shadow">
+  <span className="material-symbols-outlined">check_circle</span>
 </button>
 
 <!-- sombra + borde + btn-rounded-full forma de circulo + icono -->
-<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full btn-shadow">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full btn-shadow">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
 <!-- sombra + btn-rounded-full forma de circulo + icono -->
-<button class="btn btn-ghost btn-info btn-icon-only btn-rounded-full btn-shadow">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-ghost btn-info btn-icon-only btn-rounded-full btn-shadow">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
 <!-- sombra + icono + fondo + texto -->
-<button class="btn btn-primary btn-background btn-shadow">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background btn-shadow">
+  <span className="material-symbols-outlined">arrow_forward</span>
   <span>Primary</span>
 </button>
 
 <!-- sombra + icono + fondo + texto + boton redondo -->
-<button class="btn btn-info btn-background btn-rounded-full btn-shadow">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-background btn-rounded-full btn-shadow">
+  <span className="material-symbols-outlined">info</span>
   <span>Info</span>
 </button>
 ```
@@ -1319,27 +1319,27 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 
 ```HTML
 <!-- bordes redondeados -->
-<button class="btn btn-warning btn-background btn-base">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-background btn-base">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
 <!-- btn-rounded-full forma de circulo -->
-<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
-<button class="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
-  <span class="material-symbols-outlined">settings</span>
+<button className="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
+  <span className="material-symbols-outlined">settings</span>
 </button>
 
 <!-- xs boton muy pequeño -->
-<button class="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
 <!-- 2xl boton muy grande -->
-<button class="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 ```
 
@@ -1348,36 +1348,36 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![icono-fondo](./docs/readme-md/img/button/icono-fondo.png)
 
 ```html
-<button class="btn btn-primary btn-background btn-icon-only">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background btn-icon-only">
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 
-<button class="btn btn-secondary btn-background btn-icon-only">
-  <span class="material-symbols-outlined">close</span>
+<button className="btn btn-secondary btn-background btn-icon-only">
+  <span className="material-symbols-outlined">close</span>
 </button>
 
-<button class="btn btn-success btn-background btn-icon-only">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-background btn-icon-only">
+  <span className="material-symbols-outlined">check_circle</span>
 </button>
 
-<button class="btn btn-danger btn-background btn-icon-only">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-danger btn-background btn-icon-only">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
-<button class="btn btn-warning btn-background btn-icon-only">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-background btn-icon-only">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
-<button class="btn btn-info btn-background btn-icon-only">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-background btn-icon-only">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
-<button class="btn btn-light btn-background btn-icon-only">
-  <span class="material-symbols-outlined">light_mode</span>
+<button className="btn btn-light btn-background btn-icon-only">
+  <span className="material-symbols-outlined">light_mode</span>
 </button>
 
-<button class="btn btn-dark btn-background btn-icon-only">
-  <span class="material-symbols-outlined">dark_mode</span>
+<button className="btn btn-dark btn-background btn-icon-only">
+  <span className="material-symbols-outlined">dark_mode</span>
 </button>
 ```
 
@@ -1386,36 +1386,36 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![icono-borde](./docs/readme-md/img/button/icono-borde.png)
 
 ```html
-<button class="btn btn-primary btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 
-<button class="btn btn-secondary btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">close</span>
+<button className="btn btn-secondary btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">close</span>
 </button>
 
-<button class="btn btn-success btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">check_circle</span>
 </button>
 
-<button class="btn btn-danger btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-danger btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
-<button class="btn btn-warning btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
-<button class="btn btn-info btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
-<button class="btn btn-light btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">light_mode</span>
+<button className="btn btn-light btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">light_mode</span>
 </button>
 
-<button class="btn btn-dark btn-outline btn-icon-only">
-  <span class="material-symbols-outlined">dark_mode</span>
+<button className="btn btn-dark btn-outline btn-icon-only">
+  <span className="material-symbols-outlined">dark_mode</span>
 </button>
 ```
 
@@ -1424,43 +1424,43 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![icono-fondo-texto](./docs/readme-md/img/button/icono-fondo-texto.png)
 
 ```html
-<button class="btn btn-primary btn-background">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background">
+  <span className="material-symbols-outlined">arrow_forward</span>
   <span>Primary</span>
 </button>
 
-<button class="btn btn-secondary btn-background">
-  <span class="material-symbols-outlined">close</span>
+<button className="btn btn-secondary btn-background">
+  <span className="material-symbols-outlined">close</span>
   <span>Secondary</span>
 </button>
 
-<button class="btn btn-success btn-background">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-background">
+  <span className="material-symbols-outlined">check_circle</span>
   <span>Success</span>
 </button>
 
-<button class="btn btn-danger btn-background">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-danger btn-background">
+  <span className="material-symbols-outlined">delete</span>
   <span>Danger</span>
 </button>
 
-<button class="btn btn-warning btn-background">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-background">
+  <span className="material-symbols-outlined">warning</span>
   <span>Warning</span>
 </button>
 
-<button class="btn btn-info btn-background">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-background">
+  <span className="material-symbols-outlined">info</span>
   <span>Info</span>
 </button>
 
-<button class="btn btn-light btn-background">
-  <span class="material-symbols-outlined">light_mode</span>
+<button className="btn btn-light btn-background">
+  <span className="material-symbols-outlined">light_mode</span>
   <span>Light</span>
 </button>
 
-<button class="btn btn-dark btn-background">
-  <span class="material-symbols-outlined">dark_mode</span>
+<button className="btn btn-dark btn-background">
+  <span className="material-symbols-outlined">dark_mode</span>
   <span>Dark</span>
 </button>
 ```
@@ -1477,26 +1477,26 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![botones-redondos](./docs/readme-md/img/button/botones-redondos.png)
 
 ```HTML
-<button class="btn btn-primary btn-background btn-rounded-full">Primary</button>
+<button className="btn btn-primary btn-background btn-rounded-full">Primary</button>
 
-<button class="btn btn-secondary btn-outline btn-rounded-full">Secondary</button>
+<button className="btn btn-secondary btn-outline btn-rounded-full">Secondary</button>
 
-<button class="btn btn-info btn-background btn-rounded-full">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-info btn-background btn-rounded-full">
+  <span className="material-symbols-outlined">info</span>
   <span>Info</span>
 </button>
 
-<button class="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
-<button class="btn btn-background btn-warning btn-icon-only btn-rounded-full">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-background btn-warning btn-icon-only btn-rounded-full">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
 <!-- SIN btn-rounded-full tiene esquinas redondeadas -->
-<button class="btn btn-background btn-success btn-icon-only">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-background btn-success btn-icon-only">
+  <span className="material-symbols-outlined">check_circle</span>
 </button>
 ```
 
@@ -1519,15 +1519,15 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![botones-sin-fondo-ni-borde-hover](./docs/readme-md/img/button/botones-sin-fondo-ni-borde-hover.png)
 
 ```HTML
-<button class="btn btn-primary btn-ghost">Primary</button>
+<button className="btn btn-primary btn-ghost">Primary</button>
 
-<button class="btn btn-secondary btn-ghost">
-  <span class="material-symbols-outlined">close</span>
+<button className="btn btn-secondary btn-ghost">
+  <span className="material-symbols-outlined">close</span>
   <span>Secondary</span>
 </button>
 
-<button class="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 ```
 
@@ -1540,29 +1540,29 @@ El estilo de boton desactivado se aplica a cualquier tipo de boton.
 ![boton-desactivado](./docs/readme-md/img/button/boton-desactivado.png)
 
 ```HTML
-<button disabled class="btn btn-primary btn-background">Primary</button>
+<button disabled className="btn btn-primary btn-background">Primary</button>
 
-<button disabled class="btn btn-secondary btn-outline">Secondary</button>
+<button disabled className="btn btn-secondary btn-outline">Secondary</button>
 
-<button disabled class="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
-  <span class="material-symbols-outlined">delete</span>
+<button disabled className="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
+  <span className="material-symbols-outlined">delete</span>
 </button>
 
-<button disabled class="btn btn-icon-only btn-warning btn-background">
-  <span class="material-symbols-outlined">warning</span>
+<button disabled className="btn btn-icon-only btn-warning btn-background">
+  <span className="material-symbols-outlined">warning</span>
 </button>
 
-<button disabled class="btn btn-icon-only btn-outline btn-info">
-  <span class="material-symbols-outlined">info</span>
+<button disabled className="btn btn-icon-only btn-outline btn-info">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
-<button disabled class="btn btn-dark btn-background">
-  <span class="material-symbols-outlined">dark_mode</span>
+<button disabled className="btn btn-dark btn-background">
+  <span className="material-symbols-outlined">dark_mode</span>
   <span>Dark</span>
 </button>
 
 <!-- Enlaces -->
-<button disabled class="btn btn-link" routerLink="/home">Link</button>
+<button disabled className="btn btn-link" routerLink="/home">Link</button>
 ```
 
 ### 📐 Tamaños
@@ -1595,39 +1595,39 @@ Esto significa que no es necesario declararlo explícitamente: si no se especifi
 ![tamanos](./docs/readme-md/img/button/tamanos.png)
 
 ```HTML
-<button class="btn btn-primary btn-background btn-xs">
+<button className="btn btn-primary btn-background btn-xs">
   Muy pequeño
 </button>
 
-<button class="btn btn-secondary btn-outline btn-sm">
+<button className="btn btn-secondary btn-outline btn-sm">
   Pequeño
 </button>
 
-<button class="btn btn-secondary btn-outline">
+<button className="btn btn-secondary btn-outline">
   Valor por defecto
 </button>
 
-<button class="btn btn-secondary btn-outline btn-base">
+<button className="btn btn-secondary btn-outline btn-base">
   Valor por defecto
 </button>
 
-<button class="btn btn-success btn-background btn-lg">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-background btn-lg">
+  <span className="material-symbols-outlined">check_circle</span>
   <span>Grande</span>
 </button>
 
-<button class="btn btn-danger btn-outline btn-xl">
-  <span class="material-symbols-outlined">delete</span>
+<button className="btn btn-danger btn-outline btn-xl">
+  <span className="material-symbols-outlined">delete</span>
   <span>Muy grande</span>
 </button>
 
-<button class="btn btn-warning btn-background btn-2xl">
-  <span class="material-symbols-outlined">warning</span>
+<button className="btn btn-warning btn-background btn-2xl">
+  <span className="material-symbols-outlined">warning</span>
   <span>Enorme</span>
 </button>
 
-<button class="btn btn-info btn-background btn-3xl">
-  <span class="material-symbols-outlined">rocket_launch</span>
+<button className="btn btn-info btn-background btn-3xl">
+  <span className="material-symbols-outlined">rocket_launch</span>
   <span>Gigante</span>
 </button>
 ```
@@ -1656,27 +1656,27 @@ Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde
 
 ```HTML
 <!-- solo texto -->
-<button class="btn btn-danger btn-background btn-full-width">Danger</button>
+<button className="btn btn-danger btn-background btn-full-width">Danger</button>
 
 <!-- solo icono + fondo -->
-<button class="btn btn-dark btn-background btn-icon-only btn-full-width">
-  <span class="material-symbols-outlined">dark_mode</span>
+<button className="btn btn-dark btn-background btn-icon-only btn-full-width">
+  <span className="material-symbols-outlined">dark_mode</span>
 </button>
 
 <!-- icono + fondo + texto -->
-<button class="btn btn-success btn-background btn-full-width">
-  <span class="material-symbols-outlined">check_circle</span>
+<button className="btn btn-success btn-background btn-full-width">
+  <span className="material-symbols-outlined">check_circle</span>
   <span>Success</span>
 </button>
 
 <!-- icono + borde -->
-<button class="btn btn-outline btn-info btn-icon-only btn-full-width">
-  <span class="material-symbols-outlined">info</span>
+<button className="btn btn-outline btn-info btn-icon-only btn-full-width">
+  <span className="material-symbols-outlined">info</span>
 </button>
 
 <!-- sin fondo ni borde  -->
-<button class="btn btn-primary btn-icon-only btn-ghost btn-full-width">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-icon-only btn-ghost btn-full-width">
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 ```
 
@@ -1687,8 +1687,8 @@ Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde
 Usar [flex-direction](https://tailwindcss.com/docs/flex-direction) para cambiar ubicacion de iconos:
 
 ```HTML
-<button class="btn btn-primary btn-background flex-row-reverse">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background flex-row-reverse">
+  <span className="material-symbols-outlined">arrow_forward</span>
   <span>Primary</span>
 </button>
 ```
@@ -1702,8 +1702,8 @@ Cambiar la ubicación del icono y texto en el HTML, sin usar Sass ni Tailwind.
 ![icono-izquierda-texto-derecha](./docs/readme-md/img/button/icono-izquierda-texto-derecha.png)
 
 ```HTML
-<button class="btn btn-primary btn-background">
-  <span class="material-symbols-outlined">arrow_forward</span>
+<button className="btn btn-primary btn-background">
+  <span className="material-symbols-outlined">arrow_forward</span>
   <span>Primary</span>
 </button>
 ```
@@ -1713,8 +1713,8 @@ Cambiar la ubicación del icono y texto en el HTML, sin usar Sass ni Tailwind.
 ![icono-derecha-texto-izquierda](./docs/readme-md/img/button/icono-derecha-texto-izquierda.png)
 
 ```HTML
-<button class="btn btn-primary btn-background">
+<button className="btn btn-primary btn-background">
   <span>Primary</span>
-  <span class="material-symbols-outlined">arrow_forward</span>
+  <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 ```
