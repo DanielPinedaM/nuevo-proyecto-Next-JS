@@ -20,7 +20,7 @@ export default function ListData({ post }: any) {
         <span className="font-bold">completed</span> <span>{completed ? "si" : "no"}</span>
       </p>
 
-      <button className="btn-with-icon-text-background" onClick={() => onClickViewAlert(userId)}>
+      <button className='btn btn-primary btn-background' onClick={() => onClickViewAlert(userId)}>
         <GrView />
         <span>ver userId</span>
       </button>

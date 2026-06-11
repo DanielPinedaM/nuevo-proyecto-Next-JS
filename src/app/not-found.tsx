@@ -31,7 +31,7 @@ export default function NotFound() {
             Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra página
           </p>
 
-          <button onClick={() => onClickReturnToPreviousPage()} className='btn-primary'>
+          <button onClick={() => onClickReturnToPreviousPage()} className='btn btn-primary btn-background'>
             Volver
           </button>
         </div>

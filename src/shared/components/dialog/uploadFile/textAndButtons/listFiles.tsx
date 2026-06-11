@@ -83,8 +83,8 @@ export default function ListFiles({ acceptedFile, onClickDeleteFile, i }: IListF
           content={`Borrar ${name}`}
           position="top"
         />
-        <button className={`tooltip-delete-file-${i} btn-icon-with-border`} onClick={() => onClickDeleteFile(i)}>
-          <MdDelete className="!text-red-600" />
+        <button className={`tooltip-delete-file-${i} btn btn-outline btn-danger btn-icon-only btn-rounded-full`} onClick={() => onClickDeleteFile(i)}>
+          <MdDelete />
         </button>
       </div>
     </div>

@@ -55,11 +55,11 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
 
   const Footer = () => (
     <div className="flex justify-center gap-x-2 col-span-full">
-      <button form="form-new-dialog" type="submit" className="btn-primary">
+      <button form="form-new-dialog" type="submit" className='btn btn-primary btn-background'>
         aceptar
       </button>
 
-      <button className="btn-secondary-with-border" onClick={() => onHide()}>
+      <button className='btn btn-secondary btn-background' onClick={() => onHide()}>
         cancelar
       </button>
     </div>

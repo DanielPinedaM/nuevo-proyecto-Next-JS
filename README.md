@@ -576,26 +576,26 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 
 ***✅ Ejemplo Correcto***
 
-```html
+```tsx
 <div className="bg-[oklch(62.8%_0.258_29.23)]"></div>
 ```
 
 ***❌ Ejemplo Incorrecto***
 
-```html
-<!-- Hexadecimal -->
+```tsx
+{/* Hexadecimal */}
 <div className="bg-[#FF0000]"></div>
 
-<!-- RGB -->
+{/* RGB */}
 <div className="bg-[rgb(255_0_0)]"></div>
 
-<!-- RGBA -->
+{/* RGBA */}
 <div className="bg-[rgba(255_0_0_/_50%)]"></div>
 
-<!-- HSL -->
+{/* HSL */}
 <div className="bg-[hsl(0_100%_50%)]"></div>
 
-<!-- HSLA -->
+{/* HSLA */}
 <div className="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
 ```
 
@@ -973,14 +973,23 @@ La razón es que los [botones de Prime React](https://primereact.org/button/) ag
 Usar etiqueta `button` nativa de HTML:
 
 ```tsx
-<button className="btn btn-primary btn-background">
-  <span>Primary</span>
-</button>
+import { Button } from 'primereact/button';
+import { MdArrowForward } from 'react-icons/md';
 
-<button className="btn btn-secondary btn-background">
-  <span className="material-symbols-outlined">arrow_forward</span>
-  <span>Secondary</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+    <button className="btn btn-primary btn-background">
+       Primary
+    </button>
+
+    <button className="btn btn-secondary btn-background">
+      <MdArrowForward />
+      <span className="material-symbols-outlined">arrow_forward</span>
+    </button>
+    </>
+  );
+}
 ```
 
 **❌ Incorrecto:**
@@ -996,7 +1005,7 @@ Usar etiquetas `<img>` para iconos porque las imágenes no se integran correctam
 
 Esto rompe la consistencia visual y vuelve el código más difícil de mantener y escalar.
 
-```html
+```tsx
 <button>
   <img src="/assets/icon/delete.svg" alt="Eliminar" />
 </button>
@@ -1050,21 +1059,27 @@ Esto genera:
 
 **✅ Correcto:**
 
-Los iconos de los botones deben utilizar [Material Symbols Icons](https://fonts.google.com/icons)
+Los iconos de los botones deben utilizar [React Icons](https://react-icons.github.io/react-icons/)
 
-[Material Symbols Icons](https://fonts.google.com/icons) funcionan como texto estilizable mediante CSS, lo que permite integrarlos correctamente con la arquitectura visual del proyecto.
+[React Icons](https://react-icons.github.io/react-icons/) funcionan como texto estilizable mediante CSS, lo que permite integrarlos correctamente con la arquitectura visual del proyecto.
 
-```html
-<button className="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+```tsx
+import { MdArrowForward } from 'react-icons/md';
+
+export default function MyComponent() {
+  return (
+    <button className="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
+      <MdArrowForward />
+    </button>
+  );
+}
 ```
 
 **❌ Incorrecto:**
 
-Usar Tailwind CSS para definir estilos de botones directamente en cada componente, ya que esto suele generar:
+Usar Tailwind CSS para definir estilos de botones directamente en cada componente, ya que esto genera estilos inconsistentes y no escalables:
 
-```HTML
+```tsx
 <button className="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
   Aceptar
 </button>
@@ -1072,11 +1087,17 @@ Usar Tailwind CSS para definir estilos de botones directamente en cada component
 
 Mezclar las clases globales de botones (`.btn`, `.btn-primary`, `.btn-outline-*`, etc.) con clases de Tailwind CSS.
 
-```HTML
-<button className="btn btn-primary bg-red-500 px-10 rounded-full">
-  <span className="material-symbols-outlined">save</span>
-  <span className="text-blue-500">Guardar</span>
-</button>
+```tsx
+import { MdSave } from "react-icons/md";
+
+export default function MyComponent() {
+  return (
+    <button className="btn btn-primary bg-red-500 px-10 rounded-full">
+      <MdSave />
+      <span className="text-blue-500">Guardar</span>
+    </button>
+  );
+}
 ```
 
 Usar muchas clases de Sass para cada uno de los estilos de los botones, porque mezcla múltiples responsabilidades en una sola clase:
@@ -1085,11 +1106,17 @@ Usar muchas clases de Sass para cada uno de los estilos de los botones, porque m
 - Texto
 - Borde
 
-```HTML
-<button className="btn-with-icon-text-border">
-  <span className="material-symbols-outlined"> home </span>
-  <span>Boton</span>
-</button>
+```tsx
+import { MdHome } from "react-icons/md";
+
+export default function MyComponent() {
+  return (
+    <button className="btn-with-icon-text-border">
+      <MdHome />
+      <span>Boton</span>
+    </button>
+  );
+}
 ```
 
 Ese enfoque no escala bien, ya que cada nueva combinación obliga a crear más clases:
@@ -1126,7 +1153,7 @@ Cada clase modifica únicamente una característica específica del botón. Esto
 | `_effects.scss`      | Contiene utilidades visuales reutilizables independientes de la lógica del botón. Permite agregar efectos opcionales como sombras, blur o elevación.                         | `.btn-shadow {} `                                                |
 | `_modifiers.scss`    | Clases composables que alteran o extienden características específicas del botón sin modificar su variante principal.                                                        | `.btn-full-width {} .btn-rounded-full {} .btn-icon-only {}`      |
 | `_mixins.scss`       | Codigo de Sass reutilizable que se repite en diferentes archivos de src\styles\global\buttons                                                                                | `@mixin btn-base-size {}`                                        |
-| `_tokens.scss`       | Variables globales de Sass utilizadas por todo el sistema de botones. Centraliza colores, tamaños tipográficos y escalas de espaciado para mantener consistencia visual.     | `$primary: oklch(...);                              `            |
+| `_tokens.scss`       | Variables globales de Sass utilizadas por todo el sistema de botones. Centraliza colores, tamaños tipográficos y escalas de espaciado para mantener consistencia visual.     | `$primary: oklch(...);`                                          |
 
 ### 📖 Manual de Uso para Dar Estilos a Botones
 
@@ -1176,7 +1203,7 @@ Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no repre
 
 - Botones **desactivados** usan `cursor: not-allowed` 🚫 para indicar que el botón no está disponible y no puede ser clickeado.
 
-```html
+```tsx
 <button className="btn">
   Base class
 </button>
@@ -1184,26 +1211,48 @@ Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no repre
 
 ### Enlaces
 
-`btn btn-link` define los estilos para los enlaces para `<a>` y `<button>`
+`btn btn-link` define los estilos para los enlaces para `<a>`, `<button>` y `<Link>` de Next.js
 
 ![enlaces](./docs/readme-md/img/button/enlaces.png)
 
-```html
-<a className="btn btn-link" routerLink="/home">
-  Ir a home
-</a>
+```tsx
+'use client';
 
-<button className="btn btn-link" routerLink="/home">
-  Ir a home
-</button>
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-<button className="btn btn-link" routerLink="/home" disabled>
-  Ir a home
-</button>
+export default function MyComponent() {
+  const router = useRouter();
 
-<a className="btn btn-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com">
-  Ir a Google
-</a>
+  const onClickNavigation = (): void => {
+    router.push('/home');
+  };
+
+  return (
+    <>
+      <Link href='/home' className='btn btn-link'>
+        Ir a home
+      </Link>
+
+      <button className='btn btn-link' onClick={onClickNavigation}>
+        Ir a home
+      </button>
+
+      <button disabled className='btn btn-link' onClick={onClickNavigation}>
+        Ir a home
+      </button>
+
+      <a
+        className='btn btn-link'
+        href='https://www.google.com'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Ir a Google
+      </a>
+    </>
+  );
+}
 ```
 
 ### Botones con Color de Fondo
@@ -1226,7 +1275,7 @@ En sistemas de diseño modernos, los botones se clasifican según su nivel de im
 
 ![variantes-con-color-de-fondo](./docs/readme-md/img/button/variantes-con-color-de-fondo.png)
 
-```html
+```tsx
 <button className="btn btn-primary btn-background">Primary</button>
 <button className="btn btn-secondary btn-background">Secondary</button>
 <button className="btn btn-success btn-background">Success</button>
@@ -1251,7 +1300,7 @@ Algunos botones usan colores claros en el texto o borde, por lo que deben coloca
 
 ![borde-con-texto](./docs/readme-md/img/button/borde-con-texto.png)
 
-```html
+```tsx
 <button className="btn btn-primary btn-outline">Primary</button>
 <button className="btn btn-secondary btn-outline">Secondary</button>
 <button className="btn btn-success btn-outline">Success</button>
@@ -1268,201 +1317,280 @@ Algunos botones usan colores claros en el texto o borde, por lo que deben coloca
 
 ![botones-con-sombra](./docs/readme-md/img/button/botones-con-sombra.png)
 
-```html
-<!-- sombra + fondo + texto -->
-<button className="btn btn-primary btn-background btn-shadow">Primary</button>
+```tsx
+import {
+  MdWarning,
+  MdCheckCircle,
+  MdDelete,
+  MdInfo,
+  MdArrowForward,
+} from "react-icons/md";
 
-<!-- sombra + texto -->
-<button className="btn btn-secondary btn-ghost btn-shadow">Secondary</button>
+export default function MyComponent() {
+  return (
+    <>
+      {/* sombra + fondo + texto */}
+      <button className='btn btn-primary btn-background btn-shadow'>Primary</button>
 
-<!-- sombra + borde + texto -->
-<button className="btn btn-success btn-outline btn-shadow">Success</button>
+      {/* sombra + texto */}
+      <button className='btn btn-secondary btn-ghost btn-shadow'>Secondary</button>
 
-<!-- sombra + bordes redondeados + icono + fondo -->
-<button className="btn btn-warning btn-background btn-base btn-shadow">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+      {/* sombra + borde + texto */}
+      <button className='btn btn-success btn-outline btn-shadow'>Success</button>
 
-<!-- sombra + bordes redondeados + icono + borde -->
-<button className="btn btn-success btn-outline btn-icon-only btn-shadow">
-  <span className="material-symbols-outlined">check_circle</span>
-</button>
+      {/* sombra + bordes redondeados + icono + fondo */}
+      <button className='btn btn-warning btn-background btn-icon-only btn-shadow'>
+        <MdWarning />
+      </button>
 
-<!-- sombra + borde + btn-rounded-full forma de circulo + icono -->
-<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full btn-shadow">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+      {/* sombra + bordes redondeados + icono + borde */}
+      <button className='btn btn-success btn-outline btn-icon-only btn-shadow'>
+        <MdCheckCircle />
+      </button>
 
-<!-- sombra + btn-rounded-full forma de circulo + icono -->
-<button className="btn btn-ghost btn-info btn-icon-only btn-rounded-full btn-shadow">
-  <span className="material-symbols-outlined">info</span>
-</button>
+      {/* sombra + borde + btn-rounded-full forma de circulo + icono */}
+      <button className='btn btn-outline btn-danger btn-icon-only btn-rounded-full btn-shadow'>
+        <MdDelete />
+      </button>
 
-<!-- sombra + icono + fondo + texto -->
-<button className="btn btn-primary btn-background btn-shadow">
-  <span className="material-symbols-outlined">arrow_forward</span>
-  <span>Primary</span>
-</button>
+      {/* sombra + btn-rounded-full forma de circulo + icono */}
+      <button className='btn btn-ghost btn-info btn-icon-only btn-rounded-full btn-shadow'>
+        <MdInfo />
+      </button>
 
-<!-- sombra + icono + fondo + texto + boton redondo -->
-<button className="btn btn-info btn-background btn-rounded-full btn-shadow">
-  <span className="material-symbols-outlined">info</span>
-  <span>Info</span>
-</button>
+      {/* sombra + icono + fondo + texto */}
+      <button className='btn btn-primary btn-background btn-shadow'>
+        <MdArrowForward />
+        <span>Primary</span>
+      </button>
+
+      {/* sombra + icono + fondo + texto + boton redondo */}
+      <button className='btn btn-info btn-background btn-rounded-full btn-shadow'>
+        <MdInfo />
+        <span>Info</span>
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones con Icono
 
-Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), se utilicen las clases `btn` y `btn-icon-only`.
+Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), se utilicen las clases `btn` y `btn-icon-only`
 
 ![solo-icono](./docs/readme-md/img/button/solo-icono.png)
 
-```HTML
-<!-- bordes redondeados -->
-<button className="btn btn-warning btn-background btn-base">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+```tsx
+import {
+  MdWarning,
+  MdDelete,
+  MdSettings,
+  MdInfo,
+  MdArrowForward,
+} from "react-icons/md";
 
-<!-- btn-rounded-full forma de circulo -->
-<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      {/* bordes redondeados */}
+      <button className="btn btn-warning btn-background btn-icon-only">
+        <MdWarning />
+      </button>
 
-<button className="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
-  <span className="material-symbols-outlined">settings</span>
-</button>
+      {/* btn-rounded-full forma de circulo */}
+      <button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+        <MdDelete />
+      </button>
 
-<!-- xs boton muy pequeño -->
-<button className="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
-  <span className="material-symbols-outlined">info</span>
-</button>
+      <button className="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
+        <MdSettings />
+      </button>
 
-<!-- 2xl boton muy grande -->
-<button className="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+      {/* xs boton muy pequeño */}
+      <button className="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
+        <MdInfo />
+      </button>
+
+      {/* 2xl boton muy grande*/}
+      <button className="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
+        <MdArrowForward />
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones con Icono + Fondo
 
 ![icono-fondo](./docs/readme-md/img/button/icono-fondo.png)
 
-```html
-<button className="btn btn-primary btn-background btn-icon-only">
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+```tsx
+import {
+  MdArrowForward,
+  MdClose,
+  MdCheckCircle,
+  MdDelete,
+  MdWarning,
+  MdInfo,
+  MdLightMode,
+  MdDarkMode,
+} from "react-icons/md";
 
-<button className="btn btn-secondary btn-background btn-icon-only">
-  <span className="material-symbols-outlined">close</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-background btn-icon-only">
+        <MdArrowForward />
+      </button>
 
-<button className="btn btn-success btn-background btn-icon-only">
-  <span className="material-symbols-outlined">check_circle</span>
-</button>
+      <button className="btn btn-secondary btn-background btn-icon-only">
+        <MdClose />
+      </button>
 
-<button className="btn btn-danger btn-background btn-icon-only">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+      <button className="btn btn-success btn-background btn-icon-only">
+        <MdCheckCircle />
+      </button>
 
-<button className="btn btn-warning btn-background btn-icon-only">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+      <button className="btn btn-danger btn-background btn-icon-only">
+        <MdDelete />
+      </button>
 
-<button className="btn btn-info btn-background btn-icon-only">
-  <span className="material-symbols-outlined">info</span>
-</button>
+      <button className="btn btn-warning btn-background btn-icon-only">
+        <MdWarning />
+      </button>
 
-<button className="btn btn-light btn-background btn-icon-only">
-  <span className="material-symbols-outlined">light_mode</span>
-</button>
+      <button className="btn btn-info btn-background btn-icon-only">
+        <MdInfo />
+      </button>
 
-<button className="btn btn-dark btn-background btn-icon-only">
-  <span className="material-symbols-outlined">dark_mode</span>
-</button>
+      <button className="btn btn-light btn-background btn-icon-only">
+        <MdLightMode />
+      </button>
+
+      <button className="btn btn-dark btn-background btn-icon-only">
+        <MdDarkMode />
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones con Borde + Icono
 
 ![icono-borde](./docs/readme-md/img/button/icono-borde.png)
 
-```html
-<button className="btn btn-primary btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+```tsx
+import {
+  MdArrowForward,
+  MdClose,
+  MdCheckCircle,
+  MdDelete,
+  MdWarning,
+  MdInfo,
+  MdLightMode,
+  MdDarkMode,
+} from "react-icons/md";
 
-<button className="btn btn-secondary btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">close</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-outline btn-icon-only">
+        <MdArrowForward />
+      </button>
 
-<button className="btn btn-success btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">check_circle</span>
-</button>
+      <button className="btn btn-secondary btn-outline btn-icon-only">
+        <MdClose />
+      </button>
 
-<button className="btn btn-danger btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+      <button className="btn btn-success btn-outline btn-icon-only">
+        <MdCheckCircle />
+      </button>
 
-<button className="btn btn-warning btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+      <button className="btn btn-danger btn-outline btn-icon-only">
+        <MdDelete />
+      </button>
 
-<button className="btn btn-info btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">info</span>
-</button>
+      <button className="btn btn-warning btn-outline btn-icon-only">
+        <MdWarning />
+      </button>
 
-<button className="btn btn-light btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">light_mode</span>
-</button>
+      <button className="btn btn-info btn-outline btn-icon-only">
+        <MdInfo />
+      </button>
 
-<button className="btn btn-dark btn-outline btn-icon-only">
-  <span className="material-symbols-outlined">dark_mode</span>
-</button>
+      <button className="btn btn-light btn-outline btn-icon-only">
+        <MdLightMode />
+      </button>
+
+      <button className="btn btn-dark btn-outline btn-icon-only">
+        <MdDarkMode />
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones con Icono + Fondo + Texto
 
 ![icono-fondo-texto](./docs/readme-md/img/button/icono-fondo-texto.png)
 
-```html
-<button className="btn btn-primary btn-background">
-  <span className="material-symbols-outlined">arrow_forward</span>
-  <span>Primary</span>
-</button>
+```tsx
+import {
+  MdArrowForward,
+  MdClose,
+  MdCheckCircle,
+  MdDelete,
+  MdWarning,
+  MdInfo,
+  MdLightMode,
+  MdDarkMode,
+} from "react-icons/md";
 
-<button className="btn btn-secondary btn-background">
-  <span className="material-symbols-outlined">close</span>
-  <span>Secondary</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-background">
+        <MdArrowForward />
+        <span>Primary</span>
+      </button>
 
-<button className="btn btn-success btn-background">
-  <span className="material-symbols-outlined">check_circle</span>
-  <span>Success</span>
-</button>
+      <button className="btn btn-secondary btn-background">
+        <MdClose />
+        <span>Secondary</span>
+      </button>
 
-<button className="btn btn-danger btn-background">
-  <span className="material-symbols-outlined">delete</span>
-  <span>Danger</span>
-</button>
+      <button className="btn btn-success btn-background">
+        <MdCheckCircle />
+        <span>Success</span>
+      </button>
 
-<button className="btn btn-warning btn-background">
-  <span className="material-symbols-outlined">warning</span>
-  <span>Warning</span>
-</button>
+      <button className="btn btn-danger btn-background">
+        <MdDelete />
+        <span>Danger</span>
+      </button>
 
-<button className="btn btn-info btn-background">
-  <span className="material-symbols-outlined">info</span>
-  <span>Info</span>
-</button>
+      <button className="btn btn-warning btn-background">
+        <MdWarning />
+        <span>Warning</span>
+      </button>
 
-<button className="btn btn-light btn-background">
-  <span className="material-symbols-outlined">light_mode</span>
-  <span>Light</span>
-</button>
+      <button className="btn btn-info btn-background">
+        <MdInfo />
+        <span>Info</span>
+      </button>
 
-<button className="btn btn-dark btn-background">
-  <span className="material-symbols-outlined">dark_mode</span>
-  <span>Dark</span>
-</button>
+      <button className="btn btn-light btn-background">
+        <MdLightMode />
+        <span>Light</span>
+      </button>
+
+      <button className="btn btn-dark btn-background">
+        <MdDarkMode />
+        <span>Dark</span>
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones Redondos
@@ -1476,28 +1604,45 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 
 ![botones-redondos](./docs/readme-md/img/button/botones-redondos.png)
 
-```HTML
-<button className="btn btn-primary btn-background btn-rounded-full">Primary</button>
+```tsx
+import {
+  MdInfo,
+  MdDelete,
+  MdWarning,
+  MdCheckCircle,
+} from "react-icons/md";
 
-<button className="btn btn-secondary btn-outline btn-rounded-full">Secondary</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-background btn-rounded-full">
+        Primary
+      </button>
 
-<button className="btn btn-info btn-background btn-rounded-full">
-  <span className="material-symbols-outlined">info</span>
-  <span>Info</span>
-</button>
+      <button className="btn btn-secondary btn-outline btn-rounded-full">
+        Secondary
+      </button>
 
-<button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+      <button className="btn btn-info btn-background btn-rounded-full">
+        <MdInfo />
+        <span>Info</span>
+      </button>
 
-<button className="btn btn-background btn-warning btn-icon-only btn-rounded-full">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+      <button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+        <MdDelete />
+      </button>
 
-<!-- SIN btn-rounded-full tiene esquinas redondeadas -->
-<button className="btn btn-background btn-success btn-icon-only">
-  <span className="material-symbols-outlined">check_circle</span>
-</button>
+      <button className="btn btn-background btn-warning btn-icon-only btn-rounded-full">
+        <MdWarning />
+      </button>
+
+      {/* SIN btn-rounded-full tiene esquinas redondeadas */}
+      <button className="btn btn-background btn-success btn-icon-only">
+        <MdCheckCircle />
+      </button>
+    </>
+  );
+}
 ```
 
 ### Botones sin Fondo ni Borde
@@ -1518,17 +1663,27 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 
 ![botones-sin-fondo-ni-borde-hover](./docs/readme-md/img/button/botones-sin-fondo-ni-borde-hover.png)
 
-```HTML
-<button className="btn btn-primary btn-ghost">Primary</button>
+```tsx
+import { MdClose, MdWarning } from "react-icons/md";
 
-<button className="btn btn-secondary btn-ghost">
-  <span className="material-symbols-outlined">close</span>
-  <span>Secondary</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-ghost">
+        Primary
+      </button>
 
-<button className="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+      <button className="btn btn-secondary btn-ghost">
+        <MdClose />
+        <span>Secondary</span>
+      </button>
+
+      <button className="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
+        <MdWarning />
+      </button>
+    </>
+  );
+}
 ```
 
 ### 🚫 Boton desactivado `cursor: not-allowed`
@@ -1539,30 +1694,57 @@ El estilo de boton desactivado se aplica a cualquier tipo de boton.
 
 ![boton-desactivado](./docs/readme-md/img/button/boton-desactivado.png)
 
-```HTML
-<button disabled className="btn btn-primary btn-background">Primary</button>
+```tsx
+'use client';
 
-<button disabled className="btn btn-secondary btn-outline">Secondary</button>
+import {
+  MdDelete,
+  MdWarning,
+  MdInfo,
+  MdDarkMode,
+} from "react-icons/md";
 
-<button disabled className="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
-  <span className="material-symbols-outlined">delete</span>
-</button>
+export default function MyComponent() {
+  const router = useRouter();
 
-<button disabled className="btn btn-icon-only btn-warning btn-background">
-  <span className="material-symbols-outlined">warning</span>
-</button>
+  const onClickNavigation = (): void => {
+    router.push('/home');
+  };
 
-<button disabled className="btn btn-icon-only btn-outline btn-info">
-  <span className="material-symbols-outlined">info</span>
-</button>
+  return (
+    <>
+      <button disabled className="btn btn-primary btn-background">
+        Primary
+      </button>
 
-<button disabled className="btn btn-dark btn-background">
-  <span className="material-symbols-outlined">dark_mode</span>
-  <span>Dark</span>
-</button>
+      <button disabled className="btn btn-secondary btn-outline">
+        Secondary
+      </button>
 
-<!-- Enlaces -->
-<button disabled className="btn btn-link" routerLink="/home">Link</button>
+      <button disabled className="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
+        <MdDelete />
+      </button>
+
+      <button disabled className="btn btn-icon-only btn-warning btn-background">
+        <MdWarning />
+      </button>
+
+      <button disabled className="btn btn-icon-only btn-outline btn-info">
+        <MdInfo />
+      </button>
+
+      <button disabled className="btn btn-dark btn-background">
+        <MdDarkMode />
+        <span>Dark</span>
+      </button>
+
+      {/* Enlaces */}
+      <button disabled className='btn btn-link' onClick={onClickNavigation}>
+        Ir a home
+      </button>
+    </>
+  );
+}
 ```
 
 ### 📐 Tamaños
@@ -1594,42 +1776,55 @@ Esto significa que no es necesario declararlo explícitamente: si no se especifi
 
 ![tamanos](./docs/readme-md/img/button/tamanos.png)
 
-```HTML
-<button className="btn btn-primary btn-background btn-xs">
-  Muy pequeño
-</button>
+```tsx
+import {
+  MdCheckCircle,
+  MdDelete,
+  MdWarning,
+  MdRocketLaunch,
+} from "react-icons/md";
 
-<button className="btn btn-secondary btn-outline btn-sm">
-  Pequeño
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      <button className="btn btn-primary btn-background btn-xs">
+        Muy pequeño
+      </button>
 
-<button className="btn btn-secondary btn-outline">
-  Valor por defecto
-</button>
+      <button className="btn btn-secondary btn-outline btn-sm">
+        Pequeño
+      </button>
 
-<button className="btn btn-secondary btn-outline btn-base">
-  Valor por defecto
-</button>
+      <button className="btn btn-secondary btn-outline">
+        Valor por defecto
+      </button>
 
-<button className="btn btn-success btn-background btn-lg">
-  <span className="material-symbols-outlined">check_circle</span>
-  <span>Grande</span>
-</button>
+      <button className="btn btn-secondary btn-outline btn-base">
+        Valor por defecto
+      </button>
 
-<button className="btn btn-danger btn-outline btn-xl">
-  <span className="material-symbols-outlined">delete</span>
-  <span>Muy grande</span>
-</button>
+      <button className="btn btn-success btn-background btn-lg">
+        <MdCheckCircle />
+        <span>Grande</span>
+      </button>
 
-<button className="btn btn-warning btn-background btn-2xl">
-  <span className="material-symbols-outlined">warning</span>
-  <span>Enorme</span>
-</button>
+      <button className="btn btn-danger btn-outline btn-xl">
+        <MdDelete />
+        <span>Muy grande</span>
+      </button>
 
-<button className="btn btn-info btn-background btn-3xl">
-  <span className="material-symbols-outlined">rocket_launch</span>
-  <span>Gigante</span>
-</button>
+      <button className="btn btn-warning btn-background btn-2xl">
+        <MdWarning />
+        <span>Enorme</span>
+      </button>
+
+      <button className="btn btn-info btn-background btn-3xl">
+        <MdRocketLaunch />
+        <span>Gigante</span>
+      </button>
+    </>
+  );
+}
 ```
 
 ### Modificadores - Boton en Bloque - Responsive
@@ -1654,30 +1849,45 @@ Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde
 
 ![boton-responsive](./docs/readme-md/img/button/boton-responsive.png)
 
-```HTML
-<!-- solo texto -->
-<button className="btn btn-danger btn-background btn-full-width">Danger</button>
+```tsx
+import {
+  MdDarkMode,
+  MdCheckCircle,
+  MdInfo,
+  MdArrowForward,
+} from "react-icons/md";
 
-<!-- solo icono + fondo -->
-<button className="btn btn-dark btn-background btn-icon-only btn-full-width">
-  <span className="material-symbols-outlined">dark_mode</span>
-</button>
+export default function MyComponent() {
+  return (
+    <>
+      {/* solo texto */}
+      <button className="btn btn-danger btn-background btn-full-width">
+        Danger
+      </button>
 
-<!-- icono + fondo + texto -->
-<button className="btn btn-success btn-background btn-full-width">
-  <span className="material-symbols-outlined">check_circle</span>
-  <span>Success</span>
-</button>
+      {/* solo icono + fondo */}
+      <button className="btn btn-dark btn-background btn-icon-only btn-full-width">
+        <MdDarkMode />
+      </button>
 
-<!-- icono + borde -->
-<button className="btn btn-outline btn-info btn-icon-only btn-full-width">
-  <span className="material-symbols-outlined">info</span>
-</button>
+      {/* icono + fondo + texto */}
+      <button className="btn btn-success btn-background btn-full-width">
+        <MdCheckCircle />
+        <span>Success</span>
+      </button>
 
-<!-- sin fondo ni borde  -->
-<button className="btn btn-primary btn-icon-only btn-ghost btn-full-width">
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+      {/* icono + borde */}
+      <button className="btn btn-outline btn-info btn-icon-only btn-full-width">
+        <MdInfo />
+      </button>
+
+      {/* sin fondo ni borde */}
+      <button className="btn btn-primary btn-icon-only btn-ghost btn-full-width">
+        <MdArrowForward />
+      </button>
+    </>
+  );
+}
 ```
 
 ### Ubicación de Iconos y Texto en Botones
@@ -1686,11 +1896,17 @@ Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde
 
 Usar [flex-direction](https://tailwindcss.com/docs/flex-direction) para cambiar ubicacion de iconos:
 
-```HTML
-<button className="btn btn-primary btn-background flex-row-reverse">
-  <span className="material-symbols-outlined">arrow_forward</span>
-  <span>Primary</span>
-</button>
+```tsx
+import { MdArrowForward } from "react-icons/md";
+
+export default function MyComponent() {
+  return (
+      <button className="btn btn-primary btn-background flex-row-reverse">
+        <MdArrowForward />
+        <span>Primary</span>
+      </button>
+  );
+}
 ```
 
 **✅ Correcto:**
@@ -1701,20 +1917,32 @@ Cambiar la ubicación del icono y texto en el HTML, sin usar Sass ni Tailwind.
 
 ![icono-izquierda-texto-derecha](./docs/readme-md/img/button/icono-izquierda-texto-derecha.png)
 
-```HTML
-<button className="btn btn-primary btn-background">
-  <span className="material-symbols-outlined">arrow_forward</span>
-  <span>Primary</span>
-</button>
+```tsx
+import { MdArrowForward } from "react-icons/md";
+
+export default function MyComponent() {
+  return (
+      <button className="btn btn-primary btn-background">
+        <MdArrowForward />
+        <span>Primary</span>
+      </button>
+  );
+}
 ```
 
 *icono a la derecha - texto a la izquierda*
 
 ![icono-derecha-texto-izquierda](./docs/readme-md/img/button/icono-derecha-texto-izquierda.png)
 
-```HTML
-<button className="btn btn-primary btn-background">
-  <span>Primary</span>
-  <span className="material-symbols-outlined">arrow_forward</span>
-</button>
+```tsx
+import { MdArrowForward } from "react-icons/md";
+
+export default function MyComponent() {
+  return (
+      <button className="btn btn-primary btn-background">
+        <span>Primary</span>
+         <MdArrowForward />
+      </button>
+  );
+}
 ```

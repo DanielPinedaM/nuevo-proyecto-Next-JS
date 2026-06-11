@@ -226,7 +226,7 @@ export default function UploadMultipleFiles({
 
           {acceptedFiles && acceptedFiles?.length > 0 && (
             <div className="flex justify-end mt-2">
-              <button onClick={onClickDeleteAllFiles} className="btn-with-icon-text-background">
+              <button onClick={onClickDeleteAllFiles} className="btn btn-secondary btn-background">
                 <MdDeleteSweep />
                 <span>Eliminar todos los archivos</span>
               </button>

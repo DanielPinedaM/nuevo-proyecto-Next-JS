@@ -30,7 +30,7 @@ export default function QuestionNotification({
           onClickAccept?.();
           onHide?.();
         }}
-        className="btn-primary"
+        className='btn btn-primary btn-background'
       >
         Sí
       </button>
@@ -40,7 +40,7 @@ export default function QuestionNotification({
           onClickCancel?.();
           onHide?.();
         }}
-        className="btn-secondary-with-border"
+       className='btn btn-secondary btn-outline'
       >
         No
       </button>

@@ -8,11 +8,11 @@ export default function Footer({ onSubmit, onHide, isDragActive }: IFileUploadBu
     <>
       {!isDragActive ? (
         <div className='flex justify-center gap-x-2'>
-          <button className='btn-primary' onClick={onSubmit}>
+          <button className="btn btn-primary btn-background" onClick={onSubmit}>
             aceptar
           </button>
 
-          <button className='btn-secondary-with-border' onClick={onHide}>
+          <button className="btn btn-secondary btn-outline" onClick={onHide}>
             cancelar
           </button>
         </div>
