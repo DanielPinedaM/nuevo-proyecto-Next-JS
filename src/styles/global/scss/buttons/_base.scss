@@ -1,6 +1,5 @@
 @use './_tokens.scss' as token;
 @use './_mixins.scss' as mixin;
-@use './../variable.scss' as variable;
 
 /* ***********************
 * Base                   *
@@ -53,7 +52,7 @@
 
   background-color: transparent;
 
-  font-family: variable.$inter;
+  font-family: 'Inter', 'DM Sans', 'Helvetica Neue', Helvetica, sans-serif, system-ui;
 
   // eliminar espacio vertical en blanco que causa el line-height
   text-box: trim-both cap alphabetic;

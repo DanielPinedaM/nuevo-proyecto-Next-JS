@@ -1,0 +1,31 @@
+/*
+***********************************
+* Variables de Sass para colores  *
+* para colores SIEMPRE usar oklch *
+*********************************** */
+
+// azul
+$blue-azure:              oklch(62.58% 0.196 244.73);         // #0191ee
+
+// semi-transparente
+$white-transparent:    oklch(100% 0 0 / 0.30);             // #ffffff4d
+
+/*
+**************************************************
+* Breakpoints para media queries (Responsive)    *
+* https://tailwindcss.com/docs/responsive-design *
+************************************************** */
+//celular
+$xsm:    30rem;   // @media (min-width: 480px) { ... }
+
+// tablet
+$sm:     40rem;   // @media (min-width: 640px) { ... }
+$md:     48rem;   //  @media (min-width: 768px) { ... }
+$lg:     64rem;   // @media (min-width: 1024px) { ... }
+
+// computador portatil
+$xl:     80rem;   // @media (min-width: 1280px) { ... }
+
+// monitor
+$xxl:    96rem;   // @media (min-width: 1536px) { ... }
+$xxxl:   120rem;  // @media (min-width: 1920px) { ... }

@@ -492,7 +492,7 @@ En VS Code o en cualquier editor basado en VS Code (Antigravity, Cursor, Windsur
 
 [Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
 
-Las variables con nombres de los colores de **Sass** en `src/styles/global/variable.scss` y **Tailwind** en `src/styles/global/library/tailwind.css` deben mantener exactamente el mismo nombre y el mismo valor.
+Las variables con nombres de los colores de **Sass** en `src/styles/global/scss/_variable.scss` y **Tailwind** en `src/styles/global/library/tailwind.css` deben mantener exactamente el mismo nombre y el mismo valor.
 
 Esto garantiza que los colores sean los mismos entre los estilos globales definidos en Sass y los estilos de cada componente definidos con Tailwind.
 
@@ -502,7 +502,7 @@ En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-col
 
 ```scss
 /*
-src/styles/global/variable.scss
+src/styles/global/scss/_variable.scss
 
 colores de Sass */
 $primary-color: oklch(62.8% 0.258 29.23) ;
@@ -510,7 +510,7 @@ $primary-color: oklch(62.8% 0.258 29.23) ;
 
 ```CSS
 /*
-src/styles/global/library/tailwind.css
+src/styles/global/tailwind/index-tailwind.css
 
 colores de Tailwind */
 @theme {
@@ -525,7 +525,7 @@ Los nombres o valores no coinciden entre Sass y Tailwind.
 
 ```scss
 /*
-src/styles/global/variable.scss
+src/styles/global/scss/_variable.scss
 
 colores de Sass */
 $primary-color: oklch(62.8% 0.258 29.23); // color rojo
@@ -608,7 +608,7 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 * ***Sass*** para estilos globales en `src/styles/global/...`
 
 ```scss
-// estilo global para tablas en src/styles/global/_table.scss
+// estilo global para tablas en src/styles/global/scss/prime-react/data/_data-table.scss
 @use './variable.scss' as variable;
 
 table {

@@ -1,6 +1,6 @@
 //#region ⚠️ estilos globales de Next JS - NO modificar esta sección 🚨
-import '../styles/main.scss';
-import '../styles/global/library/tailwind.css';
+import '../styles/global/tailwind/index-tailwind.css';
+import '../styles/global/scss/main.scss';
 //#endregion
 
 import type { Metadata } from 'next';
@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang='es-ES'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <LoaderInApiRequest />
-  
+
         <Suspense fallback={null}>
           <NavigationLoader />
         </Suspense>

@@ -1,5 +1,3 @@
-@use './variable.scss' as variable;
-
 /*
 ************************************************************
 * Estilos globales para tabla nativa de HTML y Prime React *
@@ -7,7 +5,7 @@
 
 table {
   // borde redondeado de tabla
-  border: 1px solid variable.$gray-light;
+  border: 1px solid red;
   border-style: hidden;
   border-radius: 15px;
   overflow: hidden;
@@ -24,7 +22,7 @@ table {
   thead,
   tfoot,
   th {
-    background-color: variable.$blue-ocean;
+    background-color: green;
     color: oklch(100% 0 0); /* #ffffff */
 
     span,
@@ -41,7 +39,7 @@ table {
 
   td {
     // borde de las casillas de las tablas
-    border: 1px solid variable.$gray-light;
+    border: 1px solid blue;
 
     &.p-selection-column {
       // Prime NG - centrar campos chequeables: checkbox, radio button, etc

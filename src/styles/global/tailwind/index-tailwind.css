@@ -1,0 +1,39 @@
+/* #region ⚠️ configurar estilos de Tailwind 4 - NO modificar esta sección 🚨
+https://tailwindcss.com/docs/preflight */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import './preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+/* #endregion */
+
+@theme {
+  /*
+  ***********************************
+  * Colores de Tailwind             *
+  * para colores SIEMPRE usar oklch *
+  *********************************** */
+
+  /* azul */
+  --color-blue-azure: oklch(62.58% 0.196 244.73); /* #0191ee */
+
+  /*
+  *******************************************************************************
+  * Breakpoints para media queries (Responsive)                                 *
+  * https://tailwindcss.com/docs/responsive-design#removing-default-breakpoints *
+  ******************************************************************************* */
+  /* celular */
+  --breakpoint-xsm: 30rem; /* @media (min-width: 480px) { ... } */
+
+  /* tablet */
+  --breakpoint-sm: 40rem; /* @media (min-width: 640px) { ... } */
+  --breakpoint-md: 48rem; /* @media (min-width: 768px) { ... } */
+  --breakpoint-lg: 64rem; /* @media (min-width: 1024px) { ... } */
+
+  /* pantalla computador portatil */
+  --breakpoint-xl: 80rem; /* @media (min-width: 1280px) { ... } */
+
+  /* monitor */
+  --breakpoint-2xl: 96rem; /* @media (min-width: 1536px) { ... } */
+  --breakpoint-3xl: 120rem; /* @media (min-width: 1920px) { ... } */
+}
