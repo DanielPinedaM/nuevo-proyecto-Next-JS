@@ -1,6 +1,6 @@
-@use "./_tokens.scss" as token;
-@use "./_mixins.scss" as mixin;
-@use "./../variable.scss" as variable;
+@use './_tokens.scss' as token;
+@use './_mixins.scss' as mixin;
+@use './../variable.scss' as variable;
 
 /* ***********************
 * Base                   *
@@ -26,7 +26,7 @@
   sea proporcional al font-size definido en _sizes.scss (Tamaño de boton) */
   gap: 0.5em;
 
-  /* ancho y alto del boton dependen de su contenido */
+  // ancho y alto del boton dependen de su contenido
   width: fit-content;
   height: fit-content;
 
@@ -54,7 +54,9 @@
   background-color: transparent;
 
   font-family: variable.$inter;
-  font-weight: 500;
+
+  // eliminar espacio vertical en blanco que causa el line-height
+  text-box: trim-both cap alphabetic;
 
   /* Eliminar color de fondo azul cuando se hace click en los enlaces <a>
   https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic */
@@ -68,15 +70,11 @@
     transform 0.1s ease,
     box-shadow 0.2s ease;
 
-  // tamaño iconos es proporcional al font-size del boton
-  svg,
-  span {
-    font-size: inherit;
-    line-height: inherit;
-  }
-
+  span,
   svg {
     display: block;
+    font-size: inherit; // tamaño iconos es proporcional al font-size del boton
+    line-height: inherit;
   }
 
   /* **************************************************
@@ -85,7 +83,7 @@
 
   // botón activado
   &:enabled,
-  &[role="button"]:not([aria-disabled="true"]) {
+  &[role='button']:not([aria-disabled='true']) {
     cursor: pointer;
   }
 

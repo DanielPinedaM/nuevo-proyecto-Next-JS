@@ -1,54 +1,33 @@
 @use './variable.scss' as variable;
 
 /*
-*************
-* Reset CSS *
-*********** */
+Reset CSS
+basado en Tailwind 4
+https://github.com/tailwindlabs/tailwindcss/blob/main/packages/tailwindcss/preflight.css
+*/
 
 /*
-**********************
-* selector universal *
-********************** */
+selector universal
+1. Evita que el padding y el borde afecten el ancho del elemento.
+   (https://github.com/mozdevs/cssremedy/issues/4)
+2. Elimina los márgenes y rellenos predeterminados.
+3. Restablece todos los bordes.
+*/
 
 *,
-*::before,
-*::after {
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
+  border: 0 solid;
 }
 
 /*
-******************************************************************
-* forzar tema claro en navegadores configurados con tema oscuro *
-****************************************************************** */
-
-html,
-body {
-  background-color: variable.$white-smoke;
-  background-color: light-dark(variable.$white-smoke, variable.$white-smoke);
-
-  @media (prefers-color-scheme: dark) {
-    background-color: variable.$white-smoke;
-  }
-
-  @media (prefers-color-scheme: light) {
-    background-color: variable.$white-smoke;
-  }
-}
-
-*,
-:root,
-html,
-body {
-  color-scheme: only light !important;
-}
-
-/*
-***********************************************
-* etiquetas padre contenedoras de toda la web *
-*********************************************** */
+etiquetas padre contenedoras de toda la web
+*/
 
 html {
   font-size: 16px; // 1rem = 16px
@@ -60,7 +39,6 @@ body {
   // color de todos los textos <h1>, <p>, etc
   color: black;
 
-  line-height: 1.2;
   font-family: variable.$inter !important;
 
   display: block;
@@ -69,6 +47,10 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
 
+  // area segura en mobile
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+
   text-rendering: optimizeSpeed !important;
 
   overflow-x: hidden;
@@ -76,15 +58,12 @@ body {
   // suavizar texto
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  font-weight: 500;
 }
 
 /*
-*******************************************************
-* Mejorar proporsion de los saltos de linea del texto *
-* https://www.youtube.com/watch?v=66ky3Dopcq0&t=282s  *
-******************************************************* */
+Mejorar proporsion de los saltos de linea del texto
+https://www.youtube.com/watch?v=66ky3Dopcq0&t=282s
+*/
 
 h1,
 h2,
@@ -100,34 +79,58 @@ h6 {
 }
 
 /*
-*********
-* Texto *
-********* */
+Texto
+*/
 
-// etiquetas para texto
+// titulos
 h1, h2, h3, h4, h5, h6,
+
+// texto general
 p,
 span:not(.btn),
 b,
 strong,
+i,
+em,
+small,
+mark,
+abbr,
+cite,
+dfn,
+q,
+blockquote,
+time,
+
+// enlaces
+a,
+
+// listas
+li,
+dt,
+dd,
+
+// contenido técnico
 code,
 pre,
+kbd,
+samp,
+var,
 
-// campos con datos de entrada
+// formularios
+label,
 input,
 textarea,
 select,
-label,
+option,
+optgroup,
+legend,
 
-// contenedor padre de tabla
+// tabla
 table,
-
-// cuerpo de tabla
 thead,
 tbody,
 tfoot,
-
-tr,
+caption,
 th,
 td {
   /*
@@ -137,13 +140,27 @@ td {
   https://css-tricks.com/almanac/properties/f/font-variant-numeric/
   https://practice.typekit.com/lesson/caring-about-opentype-features/ */
   font-variant-numeric: tabular-nums !important;
+
+  // eliminar espacio vertical en blanco que causa el line-height
+  text-box: trim-both cap alphabetic;
 }
 
 /*
-*******************************************************
-* Multimedia Responsive                               *
-* https://www.youtube.com/watch?v=udGrXWeJp1Y&t=4090s *
-******************************************************* */
+tabla - <table>
+*/
+
+table {
+  width: 100%;
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+Multimedia Responsive
+https://www.youtube.com/watch?v=udGrXWeJp1Y&t=4090s
+*/
 
 img,
 audio,
@@ -155,7 +172,7 @@ picture {
   height: auto;
 }
 
-// SVGs globales - NO afectar a botones con clase .btn 
+// SVGs globales - NO afectar a botones con clase .btn
 svg:not(.btn svg) {
   display: block;
   max-width: 100%;
@@ -168,9 +185,8 @@ video {
 }
 
 /*
-**************
-* Tipografia *
-**************/
+Tipografia
+*/
 
 .font-monospace {
   font-family: variable.$monospace !important;
@@ -182,16 +198,16 @@ a {
 
   text-decoration-line: none;
 
-  // Eliminar color de fondo azul cuando se hace click en los enlaces <a>
-  // https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic
+  /* Eliminar color de fondo azul cuando se hace click en los enlaces <a>
+  https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic */
   -webkit-tap-highlight-color: transparent !important;
 }
 
 /*
-*******************************************************
-* Utopia Fluid - Texto Responsive                      *
-* https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s * 
-******************************************************** */
+Utopia Fluid - Texto Responsive
+https://www.youtube.com/watch?v=udGrXWeJp1Y&t=18750s
+https://utopia.fyi/type/calculator
+*/
 
 :root {
   --step--1: clamp(0.89rem, calc(0.87rem + 0.07vw), 0.94rem);
@@ -408,11 +424,10 @@ h6:not([class*='text-[']):not([class*='text-xs']):not([class*='text-sm']):not(
 }
 
 /*
-*******************************
-* cursor de botones activados *
-******************************* */
+cursor de elementos HTML activados
+*/
 
-/* button:enabled,
+button:enabled,
 input[type='button']:enabled,
 input[type='submit']:enabled,
 input[type='reset']:enabled,
@@ -422,14 +437,13 @@ input[type='color']:enabled,
 input[type='file']:enabled::file-selector-button,
 input[type='file']:enabled {
   cursor: pointer;
-} */
+}
 
 /*
-**********************************
-* cursor de botones desactivados *
-********************************** */
+cursor de elementos HTML desactivados
+*/
 
-/* button:disabled,
+button:disabled,
 fieldset:disabled,
 optgroup:disabled,
 option:disabled,
@@ -440,7 +454,5 @@ input[type='file']:disabled::file-selector-button,
 input[type='file']:disabled,
 input:read-only,
 textarea:read-only {
-  //cursor: not-allowed !important;
-  opacity: 0.75 !important;
-  font-weight: 500 !important;
-} */
+  cursor: not-allowed !important;
+}
