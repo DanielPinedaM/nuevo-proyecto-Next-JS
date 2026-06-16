@@ -1,5 +1,4 @@
-import FormLogin from '@/app/(auth)/iniciar-sesion/formLogin';
-import { IoArrowForward } from 'react-icons/io5';
+import FormLogin from '@/app/(auth)/iniciar-sesion/FormLogin';
 
 export default function Page() {
   return (
