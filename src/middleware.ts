@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { IResponse } from '@/shared/api/general-api/types/request-data.types';
 import { GET } from '@/shared/api/general-api/http-gateway.api';
 
 export async function middleware(request: NextRequest) {
@@ -30,7 +29,7 @@ export async function middleware(request: NextRequest) {
    * - La autenticación debe depender exclusivamente de la validación realizada por el backend sobre la cookie HttpOnly.
    * - Ignorar estas recomendaciones y exponer el JWT al código JavaScript del frontend incrementa significativamente el riesgo de robo del token mediante ataques XSS (Cross-Site Scripting)
    * - Descomentar el código de validación ubicado más abajo para activar la protección de rutas. Actualmente se encuentra comentado únicamente para facilitar pruebas y permitir la navegación sin restricciones durante el desarrollo. */
-  //const { success, message, status }: IResponse = await GET(
+  //const { success, message, status } = await GET(
   //  `${process.env.NEXT_PUBLIC_API}reemplazar-por-endpoint-de-autenticacion`
   //);
 

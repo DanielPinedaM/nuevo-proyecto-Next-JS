@@ -7,7 +7,6 @@ import { DataTable } from "primereact/datatable";
 import { useEffect, useState } from "react";
 import StatusReactIcon from "@/shared/components/StatusIcon";
 import { formatDate } from "@/shared/utils/func/luxon.utils";
-import { IResponse } from "@/shared/api/general-api/types/request-data.types";
 import errorNotification from "@/shared/components/dialog/notification/errorNotification";
 import successNotification from "@/shared/components/dialog/notification/successNotification";
 import infoNotification from "@/shared/components/dialog/notification/infoNotification";
@@ -71,7 +70,7 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
     infoNotification("aceptar");
 
     // peticion de ventana modal q hace una pregunta
-    const { success }: IResponse = await POST(`${process.env.NEXT_PUBLIC_}`);
+    const { success } = await POST(`${process.env.NEXT_PUBLIC_}`);
 
     if (success) {
       successNotification("Diste click en boton aceptar");
