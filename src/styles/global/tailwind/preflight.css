@@ -84,7 +84,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* texto general */
 p,
-span:not(.btn),
+span,
 b,
 strong,
 i,
@@ -137,9 +137,6 @@ td {
   https://css-tricks.com/almanac/properties/f/font-variant-numeric/
   https://practice.typekit.com/lesson/caring-about-opentype-features/ */
   font-variant-numeric: tabular-nums !important;
-
-  /* eliminar espacio vertical en blanco que causa el line-height */
-  text-box: trim-both cap alphabetic;
 }
 
 /*
