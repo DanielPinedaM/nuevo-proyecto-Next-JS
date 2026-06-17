@@ -1,9 +1,9 @@
 import { forwardRef, ReactNode, type ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-// ---------------------------------------------------------------------------
-// Tipos — derivados de la arquitectura Sass en src/styles/global/buttons/
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// Componente derivado de la arquitectura Sass en src/styles/global/scss/buttons
+// -----------------------------------------------------------------------------
 
 /** Colores con temas de boton — se asigna con .btn-{theme} dependiendo de _themes.scss */
 type ButtonTheme =
