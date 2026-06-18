@@ -12,15 +12,15 @@ import { InputSwitch } from "primereact/inputswitch";
 import { InputText } from "primereact/inputtext";
 import { Controller, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
-import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
+import { globalTailwindStyle } from "@/shared/data-types/constants/layout.const";
 import {
   constIsStandardGEL,
   constIsStandardMSPS,
 } from "@/app/(features)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
-import { constRegex } from "@/shared/models/constants/regex.constants";
+import { constRegex } from "@/shared/data-types/constants/regex.constants";
 import { IFormCreateTable } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 import { POST } from "@/shared/api/general-api/http-gateway.api";
-import { IDialogProps, IDropdown } from "@/shared/models/interfaces/prime-react.interfaces";
+import { IDialogProps, IDropdown } from "@/shared/data-types/interfaces/prime-react.interfaces";
 import { IRequestOptions } from "@/shared/api/general-api/types/request-data.types";
 
 export default function NewTableDialog({ visible, setVisible }: IDialogProps) {

@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { useCallback, useEffect } from 'react';
 import { useState } from 'react';
-import { globalTailwindStyle } from '@/shared/models/constants/layout.const';
+import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 
 interface IInputSearchParams {
   label?: string;

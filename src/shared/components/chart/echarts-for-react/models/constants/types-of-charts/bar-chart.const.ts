@@ -3,7 +3,7 @@ import { EChartsOption } from "echarts-for-react";
 import { IChartData, IDataChart, ISeries } from "@/shared/components/chart/echarts-for-react/models/interfaces/chart.interfaces";
 import { isNumber } from "@/shared/utils/func/dataType.utils";
 import { getRandomItem } from "@/shared/utils/func/general.utils";
-import { defaultGraphColors } from "@/shared/models/constants/colors.const";
+import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
 
 /**
 opciones de echarts-for-react

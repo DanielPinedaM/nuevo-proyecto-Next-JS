@@ -1,5 +1,5 @@
 
-import { ITitles } from '@/shared/models/interfaces/prime-react.interfaces';
+import { ITitles } from '@/shared/data-types/interfaces/prime-react.interfaces';
 import { titleCase } from '@/shared/utils/func/general.utils';
 
 /**

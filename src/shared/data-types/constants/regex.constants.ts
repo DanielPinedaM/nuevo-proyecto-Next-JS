@@ -1,4 +1,4 @@
-import IRegExp from "@/shared/models/interfaces/reg-exp.interfaces";
+import IRegExp from "@/shared/data-types/interfaces/reg-exp.interfaces";
 
 export const constRegex: IRegExp = {
   number: {

@@ -1,15 +1,15 @@
 'use client';
 import errorNotification from '@/shared/components/dialog/notification/errorNotification';
 import GeneralErrorMessage from '@/shared/components/GeneralErrorMessage';
-import { cookieOptionsInLogin } from '@/shared/models/constants/cookie-storage.const';
+import { cookieOptionsInLogin } from '@/shared/data-types/constants/cookie-storage.const';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { globalTailwindStyle } from '@/shared/models/constants/layout.const';
-import { constRegex } from '@/shared/models/constants/regex.constants';
+import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
+import { constRegex } from '@/shared/data-types/constants/regex.constants';
 import { useNavigationLoaderStore } from '@/shared/store/loader/navigationLoaderStore';
 import {
   forceConvertToString,

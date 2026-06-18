@@ -1,5 +1,5 @@
 'use client';
-import { IGeneralErrorMessage } from '@/shared/models/interfaces/general-error-message.interfaces';
+import { IGeneralErrorMessage } from '@/shared/data-types/interfaces/general-error-message.interfaces';
 import { ErrorMessage } from '@hookform/error-message';
 
 const generateUniqueKey = (): string => Math.random().toString(36).slice(2, 11);

@@ -5,9 +5,9 @@ import { rowsPerPageOptions } from '@/shared/utils/func/general.utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import columnBodyMap from './columnBodyMap';
-import { IColumns, ITableDataDetailsDialog } from '@/shared/models/interfaces/prime-react.interfaces';
-import { globalTailwindStyle } from '@/shared/models/constants/layout.const';
-import visibleRows from '@/shared/models/constants/visible-rows.const';
+import { IColumns, ITableDataDetailsDialog } from '@/shared/data-types/interfaces/prime-react.interfaces';
+import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
+import visibleRows from '@/shared/data-types/constants/visible-rows.const';
 
 type TCell = string | boolean | null | undefined | Date | number | object | any[];
 

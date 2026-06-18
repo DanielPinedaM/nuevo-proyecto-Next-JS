@@ -12,7 +12,7 @@ import successNotification from "@/shared/components/dialog/notification/success
 import infoNotification from "@/shared/components/dialog/notification/infoNotification";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
 import { POST } from "@/shared/api/general-api/http-gateway.api";
-import visibleRows from "@/shared/models/constants/visible-rows.const";
+import visibleRows from "@/shared/data-types/constants/visible-rows.const";
 import { columns } from "@/app/(features)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
 import { ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));

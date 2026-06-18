@@ -1,6 +1,6 @@
 
 import { enc, mode, pad, AES } from "crypto-js";
-import { IVAuth, secretKeyAuthentication } from "@/shared/models/constants/crypto.const";
+import { IVAuth, secretKeyAuthentication } from "@/shared/data-types/constants/crypto.const";
 import { isValidJSONparse } from "@/shared/utils/func/dataType.utils";
 
 /**

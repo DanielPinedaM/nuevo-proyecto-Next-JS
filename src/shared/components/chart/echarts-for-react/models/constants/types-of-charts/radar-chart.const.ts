@@ -3,7 +3,7 @@ import {
   IDataChart,
   ISeries,
 } from "@/shared/components/chart/echarts-for-react/models/interfaces/chart.interfaces";
-import { defaultGraphColors } from "@/shared/models/constants/colors.const";
+import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
 import { getRandomItem } from "@/shared/utils/func/general.utils";
 import { EChartsOption } from "echarts-for-react";
 

@@ -1,4 +1,4 @@
-import { IObjStorage } from '@/shared/models/interfaces/cookie-storage.interfaces';
+import { IObjStorage } from '@/shared/data-types/interfaces/cookie-storage.interfaces';
 
 
 /**

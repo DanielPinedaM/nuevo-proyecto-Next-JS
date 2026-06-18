@@ -3,7 +3,7 @@ import { DataTable } from "primereact/datatable";
 import { rowsPerPageOptions, titleCase } from "@/shared/utils/func/general.utils";
 import { Column } from "primereact/column";
 import DataRender from "@/shared/components/DataRender";
-import visibleRows from "@/shared/models/constants/visible-rows.const";
+import visibleRows from "@/shared/data-types/constants/visible-rows.const";
 
 /**
 Muestra una tabla de forma dinamica,

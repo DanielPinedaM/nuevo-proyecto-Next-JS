@@ -7,7 +7,7 @@ import {
   IRadiusAxis,
   ISeries,
 } from "@/shared/components/chart/echarts-for-react/models/interfaces/chart.interfaces";
-import { defaultGraphColors } from "@/shared/models/constants/colors.const";
+import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
 
 /**
 opciones de echarts-for-react

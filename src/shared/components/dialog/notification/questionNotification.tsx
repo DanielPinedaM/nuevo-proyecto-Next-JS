@@ -1,6 +1,6 @@
 "use client";
-import { globalTailwindStyle } from "@/shared/models/constants/layout.const";
-import { IQuestionNotification } from "@/shared/models/interfaces/prime-react.interfaces";
+import { globalTailwindStyle } from "@/shared/data-types/constants/layout.const";
+import { IQuestionNotification } from "@/shared/data-types/interfaces/prime-react.interfaces";
 import dynamic from "next/dynamic";
 import { Dialog } from "primereact/dialog";
 const FaQuestionCircle = dynamic(() =>

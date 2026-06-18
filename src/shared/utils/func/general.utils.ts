@@ -3,7 +3,7 @@ import errorNotification from "@/shared/components/dialog/notification/errorNoti
 import successNotification from "@/shared/components/dialog/notification/successNotification";
 import { Options, titleCase as titleCaseNpm } from "title-case";
 import { isString } from "@/shared/utils/func/dataType.utils";
-import { titleCaseOptions } from "@/shared/models/constants/title-case.const";
+import { titleCaseOptions } from "@/shared/data-types/constants/title-case.const";
 
 /**
 prime NG - calcular paginador y numero de filas q se muestran en <table>

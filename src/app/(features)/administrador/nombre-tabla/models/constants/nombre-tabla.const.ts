@@ -1,4 +1,4 @@
-import { IColumns, IDropdown } from "@/shared/models/interfaces/prime-react.interfaces";
+import { IColumns, IDropdown } from "@/shared/data-types/interfaces/prime-react.interfaces";
 
 export const tables: IDropdown[] = [
   { label: 'Tabla 1', value: '1' },
