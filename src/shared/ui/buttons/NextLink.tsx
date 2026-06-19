@@ -54,10 +54,9 @@ const NextLink = forwardRef<HTMLAnchorElement, NextLinkButtonProps>(
       theme,
       variant,
       size = 'base',
-      modifier,
-      effect,
+      modifiers,
+      effects,
       children,
-      className,
       ...rest
     },
     ref
@@ -65,7 +64,7 @@ const NextLink = forwardRef<HTMLAnchorElement, NextLinkButtonProps>(
     return (
       <Link
         ref={ref}
-        className={composableButtonClass({ theme, variant, size, modifier, effect, className })}
+        className={composableButtonClass({ theme, variant, size, modifiers, effects })}
         {...rest}
       >
         {children}

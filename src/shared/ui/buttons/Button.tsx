@@ -1,14 +1,31 @@
-import { forwardRef, type ButtonHTMLAttributes } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type Ref } from 'react';
+import type { ReactElement } from 'react';
 
-import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
+import {
+  type SharedStandardButtonProps,
+  type SharedLinkButtonProps,
+  type ButtonVisualProps,
+} from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
 type ButtonProps = ButtonVisualProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
+type StandardButtonProps = SharedStandardButtonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & { ref?: Ref<HTMLButtonElement> };
+
+type LinkButtonProps = SharedLinkButtonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & { ref?: Ref<HTMLButtonElement> };
+
+type ButtonComponent = {
+  (props: StandardButtonProps): ReactElement | null;
+  (props: LinkButtonProps): ReactElement | null;
+  displayName?: string;
+};
+
 /**
  * `Button` — componente base composable para botones.
  *
- * Construido sobre el elemento nativo `<button>`, sin dependencias de PrimeReact.
+ * Construido sobre el elemento nativo `<button>`,
  * Los estilos se aplican completamente mediante la arquitectura Sass global
  * ubicada en `src/styles/global/buttons/`.
  *
@@ -23,7 +40,7 @@ type ButtonProps = ButtonVisualProps & ButtonHTMLAttributes<HTMLButtonElement>;
  *
  * @example
  * // Botón danger con borde, tamaño grande y sombra
- * <Button theme="danger" variant="outline" size="lg" effect="shadow">
+ * <Button theme="danger" variant="outline" size="lg" effects={['shadow']}>
  *   <MdDelete />
  *   <span>Eliminar</span>
  * </Button>
@@ -70,10 +87,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       theme,
       variant,
       size = 'base',
-      modifier,
-      effect,
+      modifiers,
+      effects,
       children,
-      className,
       type = 'button',
       ...rest
     },
@@ -84,14 +100,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         // variant="link" fuerza type="button" para no enviar formularios accidentalmente
         type={variant === 'link' ? 'button' : type}
-        className={composableButtonClass({ theme, variant, size, modifier, effect, className })}
+        className={composableButtonClass({ theme, variant, size, modifiers, effects })}
         {...rest}
       >
         {children}
       </button>
     );
   }
-);
+) as unknown as ButtonComponent;
 
 Button.displayName = 'Button';
 

@@ -54,7 +54,7 @@ type AnchorButtonProps = ButtonVisualProps & AnchorHTMLAttributes<HTMLAnchorElem
  */
 const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
   (
-    { theme, variant, size = 'base', modifier, effect, children, className, target, rel, ...rest },
+    { theme, variant, size = 'base', modifiers, effects, children, target, rel, ...rest },
 
     ref
   ) => {
@@ -66,7 +66,7 @@ const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
     return (
       <a
         ref={ref}
-        className={composableButtonClass({ theme, variant, size, modifier, effect, className })}
+        className={composableButtonClass({ theme, variant, size, modifiers, effects })}
         target={target}
         rel={safeRel}
         {...rest}

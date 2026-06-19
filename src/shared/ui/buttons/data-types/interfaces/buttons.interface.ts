@@ -47,7 +47,7 @@ export type SharedVisualProps = {
    *
    * Se pueden combinar múltiples modificadores: `['rounded-full', 'icon-only']`.
    */
-  modifier?: ButtonModifier[];
+  modifiers?: ButtonModifier[];
 
   /**
    * Modificadores de efectos visuales.
@@ -57,7 +57,7 @@ export type SharedVisualProps = {
    *
    * Se pueden combinar múltiples efectos: `['shadow']`.
    */
-  effect?: ButtonEffect[];
+  effects?: ButtonEffect[];
 
   /**
    * Contenido del botón.
@@ -71,7 +71,7 @@ export type SharedVisualProps = {
    * <Button theme="danger" variant="outline"><MdDelete /><span>Eliminar</span></Button>
    * <Button theme="info" variant="background" modifier="icon-only"><MdInfo /></Button>
    */
-  children?: ReactNode;
+  children: ReactNode;
 };
 
 /**

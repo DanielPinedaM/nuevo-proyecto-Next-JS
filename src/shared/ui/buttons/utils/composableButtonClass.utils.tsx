@@ -6,42 +6,23 @@ import {
   type ButtonSize,
   type ButtonTheme,
   type ButtonVariant,
-} from '../data-types/interfaces/buttons.interface';
+} from '@/shared/ui/buttons/data-types/interfaces/buttons.interface';
 
 type ComposableButtonClassParams = {
   theme?: ButtonTheme;
   variant: ButtonVariant;
   size?: ButtonSize;
-  modifier?: ButtonModifier | ButtonModifier[];
-  effect?: ButtonEffect | ButtonEffect[];
-  className?: string;
+  modifiers?: ButtonModifier[];
+  effects?: ButtonEffect[];
 };
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-/** Convierte un valor o un array de valores en un array */
-function toArray<T>(value: T | T[] | undefined): T[] {
-  if (value === undefined) return [];
-
-  return Array.isArray(value) ? value : [value];
-}
-
-// ---------------------------------------------------------------------------
-// composableButtonClass
-// ---------------------------------------------------------------------------
 
 export default function composableButtonClass({
   theme,
   variant,
   size = 'base',
-  modifier,
-  effect,
-  className,
+  modifiers,
+  effects,
 }: ComposableButtonClassParams): string {
-  const modifiers: ButtonModifier[] = toArray(modifier);
-  const effects = toArray(effect);
 
   return clsx(
     // ── Reset CSS para botón - requerido siempre ──────────────────────────────────────
@@ -57,12 +38,9 @@ export default function composableButtonClass({
     size && `btn-${size}`,
 
     // ── Modificadores de forma y diseño ──────────────────────────────────────────
-    modifiers.map((m) => `btn-${m}`),
+    modifiers?.map((modifier) => `btn-${modifier}`),
 
     // ── Modificadores de efectos visuales ──────────────────────────────────────────────────
-    effects.map((e) => `btn-${e}`),
-
-    // ──  className proporcionado por el consumidor (siempre al final, máxima prioridad) ─────
-    className
+    effects?.map((effect) => `btn-${effect}`),
   );
 }
