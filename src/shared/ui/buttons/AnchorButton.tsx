@@ -1,8 +1,26 @@
-import { forwardRef, type AnchorHTMLAttributes } from 'react';
-import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
+import { forwardRef, type AnchorHTMLAttributes, type Ref } from 'react';
+import type { ReactElement } from 'react';
+
+import {
+  type SharedStandardButtonProps,
+  type SharedLinkButtonProps,
+  type ButtonVisualProps,
+} from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
 type AnchorButtonProps = ButtonVisualProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>;
+
+type StandardAnchorButtonProps = SharedStandardButtonProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> & { ref?: Ref<HTMLAnchorElement> };
+
+type LinkAnchorButtonProps = SharedLinkButtonProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> & { ref?: Ref<HTMLAnchorElement> };
+
+type AnchorButtonComponent = {
+  (props: StandardAnchorButtonProps): ReactElement | null;
+  (props: LinkAnchorButtonProps): ReactElement | null;
+  displayName?: string;
+};
 
 /**
  * `AnchorButton` — botón composable construido sobre el elemento nativo `<a>`.
@@ -75,7 +93,7 @@ const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
       </a>
     );
   }
-);
+) as unknown as AnchorButtonComponent;
 
 AnchorButton.displayName = 'AnchorButton';
 

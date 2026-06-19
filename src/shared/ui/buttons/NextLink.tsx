@@ -1,10 +1,27 @@
 import React, { forwardRef } from 'react';
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 
-import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
+import {
+  type SharedStandardButtonProps,
+  type SharedLinkButtonProps,
+  type ButtonVisualProps,
+} from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
 type NextLinkButtonProps = ButtonVisualProps & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>;
+
+type StandardNextLinkProps = SharedStandardButtonProps &
+  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & { ref?: React.Ref<HTMLAnchorElement> };
+
+type LinkNextLinkProps = SharedLinkButtonProps &
+  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & { ref?: React.Ref<HTMLAnchorElement> };
+
+type NextLinkComponent = {
+  (props: StandardNextLinkProps): ReactElement | null;
+  (props: LinkNextLinkProps): ReactElement | null;
+  displayName?: string;
+};
 
 /**
  * `NextLink` — botón composable construido sobre el componente `Link` de Next.js.
@@ -71,7 +88,7 @@ const NextLink = forwardRef<HTMLAnchorElement, NextLinkButtonProps>(
       </Link>
     );
   }
-);
+) as unknown as NextLinkComponent;
 
 NextLink.displayName = 'NextLink';
 

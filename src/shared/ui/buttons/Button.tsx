@@ -17,8 +17,8 @@ type LinkButtonProps = SharedLinkButtonProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & { ref?: Ref<HTMLButtonElement> };
 
 type ButtonComponent = {
-  (props: StandardButtonProps): ReactElement | null;
-  (props: LinkButtonProps): ReactElement | null;
+  (props: StandardButtonProps): ReactElement | null;  // variant: background|outline|ghost → theme: ButtonTheme (obligatorio)
+  (props: LinkButtonProps): ReactElement | null;      // variant: "link" → theme?: never (prohibido)
   displayName?: string;
 };
 
