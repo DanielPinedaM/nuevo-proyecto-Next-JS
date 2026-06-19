@@ -21,7 +21,6 @@ import { encrypt } from '@/shared/utils/func/cryptoService.utils';
 import { IRequestOptions } from '@/shared/api/general-api/types/request-data.types';
 import { POST } from '@/shared/api/general-api/http-gateway.api';
 import Button from '@/shared/ui/buttons/Button';
-import AnchorButton from '@/shared/ui/buttons/AnchorButton';
 
 interface IBodyLogin {
   email: string;
@@ -168,8 +167,6 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-       {/*  <AnchorButton variant='link' theme="info" >Ver términos</AnchorButton> */}
-
         <div className='mb-2'>
           <label>
             <span className='cursor-pointer'>Correo electrónico</span>
@@ -235,9 +232,9 @@ export default function FormLogin() {
         </div>
 
         <div className='flex justify-end'>
-          {/*  <button type='submit' className='btn btn-primary btn-background'>
+          <Button theme='primary' variant='background' type='submit'>
             ingresar
-          </button> */}
+          </Button>
         </div>
       </form>
     </>
