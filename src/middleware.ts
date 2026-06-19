@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { GET } from '@/shared/api/general-api/http-gateway.api';
+import { GET } from '@/shared/api/http-client/http-gateway.api';
 
 export async function middleware(request: NextRequest) {
   const { url } = request;

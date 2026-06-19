@@ -18,8 +18,8 @@ import {
 } from '@/shared/utils/func/dataType.utils';
 import { sessionStorageDeleteAll } from '@/shared/utils/func/sessionStorage.utils';
 import { encrypt } from '@/shared/utils/func/cryptoService.utils';
-import { IRequestOptions } from '@/shared/api/general-api/types/request-data.types';
-import { POST } from '@/shared/api/general-api/http-gateway.api';
+import { IRequestOptions } from '@/shared/api/http-client/types/request-data.types';
+import { POST } from '@/shared/api/http-client/http-gateway.api';
 import Button from '@/shared/ui/buttons/Button';
 
 interface IBodyLogin {

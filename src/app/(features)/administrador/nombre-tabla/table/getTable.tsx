@@ -1,5 +1,5 @@
 import ListTable from "@/app/(features)/administrador/nombre-tabla/table/listTable";
-import { POST } from "@/shared/api/general-api/http-gateway.api";
+import { POST } from "@/shared/api/http-client/http-gateway.api";
 import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 
 export default async function GetTable({ search }: IGetTableNombreTabla) {

@@ -11,7 +11,7 @@ import errorNotification from "@/shared/components/dialog/notification/errorNoti
 import successNotification from "@/shared/components/dialog/notification/successNotification";
 import infoNotification from "@/shared/components/dialog/notification/infoNotification";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
-import { POST } from "@/shared/api/general-api/http-gateway.api";
+import { POST } from "@/shared/api/http-client/http-gateway.api";
 import visibleRows from "@/shared/data-types/constants/visible-rows.const";
 import { columns } from "@/app/(features)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
 import { ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
