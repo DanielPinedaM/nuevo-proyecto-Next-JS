@@ -167,7 +167,7 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-        <Button variant='link' className=''>Ver términos</Button>
+        <Button variant='link' >Ver términos</Button>
 
         <div className='mb-2'>
           <label>

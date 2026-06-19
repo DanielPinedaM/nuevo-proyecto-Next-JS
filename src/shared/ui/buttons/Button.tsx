@@ -8,13 +8,13 @@ import {
 } from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
-type ButtonProps = ButtonVisualProps & ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = ButtonVisualProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>;
 
 type StandardButtonProps = SharedStandardButtonProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & { ref?: Ref<HTMLButtonElement> };
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & { ref?: Ref<HTMLButtonElement> };
 
 type LinkButtonProps = SharedLinkButtonProps &
-  ButtonHTMLAttributes<HTMLButtonElement> & { ref?: Ref<HTMLButtonElement> };
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & { ref?: Ref<HTMLButtonElement> };
 
 type ButtonComponent = {
   (props: StandardButtonProps): ReactElement | null;

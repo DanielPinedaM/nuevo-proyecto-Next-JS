@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
-type NextLinkButtonProps = ButtonVisualProps & React.ComponentPropsWithoutRef<typeof Link>;
+type NextLinkButtonProps = ButtonVisualProps & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>;
 
 /**
  * `NextLink` — botón composable construido sobre el componente `Link` de Next.js.

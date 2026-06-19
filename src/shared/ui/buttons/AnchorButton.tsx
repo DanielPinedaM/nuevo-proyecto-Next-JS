@@ -2,7 +2,7 @@ import { forwardRef, type AnchorHTMLAttributes } from 'react';
 import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
 import composableButtonClass from './utils/composableButtonClass.utils';
 
-type AnchorButtonProps = ButtonVisualProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+type AnchorButtonProps = ButtonVisualProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>;
 
 /**
  * `AnchorButton` — botón composable construido sobre el elemento nativo `<a>`.
