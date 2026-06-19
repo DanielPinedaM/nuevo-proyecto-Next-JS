@@ -1,6 +1,7 @@
 'use client';
 import { useNavigationLoaderStore } from '@/shared/store/loader/navigationLoaderStore';
 import { usePathname, useRouter } from 'next/navigation';
+import Button from '@/shared/ui/buttons/Button';
 
 export default function NotFound() {
   const { showLoaderNavigation } = useNavigationLoaderStore();
@@ -31,9 +32,9 @@ export default function NotFound() {
             Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra página
           </p>
 
-          <button onClick={() => onClickReturnToPreviousPage()} className='btn btn-primary btn-background'>
+          <Button theme="primary" variant="background" onClick={() => onClickReturnToPreviousPage()}>
             Volver
-          </button>
+          </Button>
         </div>
       </div>
     </section>

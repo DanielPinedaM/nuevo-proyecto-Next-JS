@@ -1,5 +1,6 @@
 "use client";
 import { GrView } from "react-icons/gr";
+import Button from "@/shared/ui/buttons/Button";
 
 export default function ListData({ post }: any) {
   const { id, userId, title, completed } = post;
@@ -20,10 +21,10 @@ export default function ListData({ post }: any) {
         <span className="font-bold">completed</span> <span>{completed ? "si" : "no"}</span>
       </p>
 
-      <button className='btn btn-primary btn-background' onClick={() => onClickViewAlert(userId)}>
+      <Button theme="primary" variant="background" onClick={() => onClickViewAlert(userId)}>
         <GrView />
         <span>ver userId</span>
-      </button>
+      </Button>
 
       <br />
       <br />

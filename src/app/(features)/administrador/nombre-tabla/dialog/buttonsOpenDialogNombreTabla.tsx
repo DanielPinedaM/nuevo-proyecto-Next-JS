@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import Button from "@/shared/ui/buttons/Button";
 const IoAdd = dynamic(() => import("react-icons/io5").then((mod) => mod.IoAdd));
 const NewTableDialog = dynamic(
   () => import("@/app/(features)/administrador/nombre-tabla/dialog/newtableDialog"),
@@ -44,13 +45,14 @@ export default function ButtonsOpenDialogNombreTabla() {
   const Buttons = () => (
     <div className="flex gap-x-2">
       {/* guardar nueva fila en la tabla */}
-      <button
-        className='btn btn-primary btn-background'
+      <Button
+        theme="primary"
+        variant="background"
         onClick={() => onClickOpenDialog("newTableDialog")}
       >
         <IoAdd />
-         <span>Nuevo</span>
-      </button>
+        <span>Nuevo</span>
+      </Button>
     </div>
   );
 

@@ -21,6 +21,7 @@ import { encrypt } from '@/shared/utils/func/cryptoService.utils';
 import { IRequestOptions } from '@/shared/api/general-api/types/request-data.types';
 import { POST } from '@/shared/api/general-api/http-gateway.api';
 import Button from '@/shared/ui/buttons/Button';
+import AnchorButton from '@/shared/ui/buttons/AnchorButton';
 
 interface IBodyLogin {
   email: string;
@@ -167,7 +168,7 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-        <Button variant='link' >Ver términos</Button>
+       {/*  <AnchorButton variant='link' theme="info" >Ver términos</AnchorButton> */}
 
         <div className='mb-2'>
           <label>

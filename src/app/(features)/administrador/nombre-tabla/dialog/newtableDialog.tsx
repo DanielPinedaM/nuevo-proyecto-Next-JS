@@ -22,6 +22,7 @@ import { IFormCreateTable } from "@/app/(features)/administrador/nombre-tabla/mo
 import { POST } from "@/shared/api/general-api/http-gateway.api";
 import { IDialogProps, IDropdown } from "@/shared/data-types/interfaces/prime-react.interfaces";
 import { IRequestOptions } from "@/shared/api/general-api/types/request-data.types";
+import Button from "@/shared/ui/buttons/Button";
 
 export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
   const router = useRouter();
@@ -55,13 +56,13 @@ export default function NewTableDialog({ visible, setVisible }: IDialogProps) {
 
   const Footer = () => (
     <div className="flex justify-center gap-x-2 col-span-full">
-      <button form="form-new-dialog" type="submit" className='btn btn-primary btn-background'>
+      <Button theme="primary" variant="background" form="form-new-dialog" type="submit">
         aceptar
-      </button>
+      </Button>
 
-      <button className='btn btn-secondary btn-background' onClick={() => onHide()}>
+      <Button theme="secondary" variant="background" onClick={() => onHide()}>
         cancelar
-      </button>
+      </Button>
     </div>
   );
 

@@ -8,6 +8,7 @@ import columnBodyMap from './columnBodyMap';
 import { IColumns, ITableDataDetailsDialog } from '@/shared/data-types/interfaces/prime-react.interfaces';
 import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 import visibleRows from '@/shared/data-types/constants/visible-rows.const';
+import Button from '@/shared/ui/buttons/Button';
 
 type TCell = string | boolean | null | undefined | Date | number | object | any[];
 
@@ -40,14 +41,13 @@ export default function TableDataDetailsDialog({
   const Footer = () => {
     return (
       <div className='flex justify-center'>
-        <button
-          onClick={() => {
-            onHide();
-          }}
-          className='btn btn-secondary btn-outline'
+        <Button
+          theme="secondary"
+          variant="outline"
+          onClick={() => onHide()}
         >
           Cerrar
-        </button>
+        </Button>
       </div>
     );
   };

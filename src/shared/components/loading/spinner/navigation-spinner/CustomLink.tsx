@@ -2,9 +2,8 @@
 import { useQueryParams } from "@/shared/hooks/useQueryParams";
 import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
 import { isString } from "@/shared/utils/func/dataType.utils";
-import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import { twMerge } from "tailwind-merge";
+import Button from '@/shared/ui/buttons/Button';
 
 interface ICustomLink {
   href: string;
@@ -71,11 +70,10 @@ export default function CustomLink({
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className={twMerge(clsx(className), "disabled:cursor-not-allowed enabled:cursor-pointer")}
-    >
-      {children}
-    </button>
+    <span className={className}>
+      <Button variant="link" onClick={handleClick}>
+        {children}
+      </Button>
+    </span>
   );
 }

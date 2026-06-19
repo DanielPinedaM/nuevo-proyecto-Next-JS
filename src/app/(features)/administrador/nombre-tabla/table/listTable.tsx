@@ -15,6 +15,7 @@ import { POST } from "@/shared/api/general-api/http-gateway.api";
 import visibleRows from "@/shared/data-types/constants/visible-rows.const";
 import { columns } from "@/app/(features)/administrador/nombre-tabla/models/constants/nombre-tabla.const";
 import { ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
+import Button from "@/shared/ui/buttons/Button";
 const IoMdEye = dynamic(() => import("react-icons/io").then((mod) => mod.IoMdEye));
 const FaQuestion = dynamic(() => import("react-icons/fa").then((mod) => mod.FaQuestion));
 const PrimeReactTooltip = dynamic(() => import("@/shared/components/prime-react/Tooltip"));
@@ -127,15 +128,18 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
               content="Ver más columnas"
               position="right"
             />
-            <button
-              className={`tooltip-details-${rowIndex} flex items-center`}
-              onClick={() => {
-                setCurrentRowIndex(rowIndex);
-                onClickOpenDialog("tableDataDetailsDialog");
-              }}
-            >
-              <IoMdEye className="text-dark-blue text-xl" />
-            </button>
+            <span className={`tooltip-details-${rowIndex}`}>
+              <Button
+                variant="link"
+                modifiers={['icon-only']}
+                onClick={() => {
+                  setCurrentRowIndex(rowIndex);
+                  onClickOpenDialog("tableDataDetailsDialog");
+                }}
+              >
+                <IoMdEye className="text-dark-blue text-xl" />
+              </Button>
+            </span>
 
             {/* hacer una pregunta al usuario */}
             <PrimeReactTooltip
@@ -143,15 +147,18 @@ export default function ListTable({ tableData }: { tableData: ITableDataNombreTa
               content="Pregunta"
               position="right"
             />
-            <button
-              className={`tooltip-question-${rowIndex} flex items-center`}
-              onClick={() => {
-                setCurrentRowIndex(rowIndex);
-                onClickOpenDialog("question");
-              }}
-            >
-              <FaQuestion className="text-dark-blue text-xl" />
-            </button>
+            <span className={`tooltip-question-${rowIndex}`}>
+              <Button
+                variant="link"
+                modifiers={['icon-only']}
+                onClick={() => {
+                  setCurrentRowIndex(rowIndex);
+                  onClickOpenDialog("question");
+                }}
+              >
+                <FaQuestion className="text-dark-blue text-xl" />
+              </Button>
+            </span>
           </div>
         )}
       />

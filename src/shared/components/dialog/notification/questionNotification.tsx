@@ -3,6 +3,7 @@ import { globalTailwindStyle } from "@/shared/data-types/constants/layout.const"
 import { IQuestionNotification } from "@/shared/data-types/interfaces/prime-react.interfaces";
 import dynamic from "next/dynamic";
 import { Dialog } from "primereact/dialog";
+import Button from "@/shared/ui/buttons/Button";
 const FaQuestionCircle = dynamic(() =>
   import("react-icons/fa").then((mod) => mod.FaQuestionCircle)
 );
@@ -25,25 +26,27 @@ export default function QuestionNotification({
 
   const Footer = () => (
     <div className="flex justify-center gap-x-2">
-      <button
+      <Button
+        theme="primary"
+        variant="background"
         onClick={() => {
           onClickAccept?.();
           onHide?.();
         }}
-        className='btn btn-primary btn-background'
       >
         Sí
-      </button>
+      </Button>
 
-      <button
+      <Button
+        theme="secondary"
+        variant="outline"
         onClick={() => {
           onClickCancel?.();
           onHide?.();
         }}
-       className='btn btn-secondary btn-outline'
       >
         No
-      </button>
+      </Button>
     </div>
   );
 
