@@ -1,5 +1,4 @@
 import ListTable from "@/app/(features)/administrador/nombre-tabla/table/listTable";
-import DataRender from "@/shared/components/DataRender";
 import { POST } from "@/shared/api/general-api/http-gateway.api";
 import { IGetTableNombreTabla, ITableDataNombreTabla } from "@/app/(features)/administrador/nombre-tabla/models/interfaces/nombre-tabla.interfaces";
 
@@ -37,11 +36,7 @@ export default async function GetTable({ search }: IGetTableNombreTabla) {
 
   return (
     <>
-    <DataRender
-      data={data}
-      RenderComponent={<ListTable tableData={data} />}
-      EmptyComponent={<p className='text-center'>No hay datos</p>}
-    />
+       <ListTable tableData={data} />
     </>
   );
 }

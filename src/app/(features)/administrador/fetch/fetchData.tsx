@@ -1,7 +1,6 @@
-import ListData from "@/app/(features)/administrador/fetch/listData";
-import DataRender from "@/shared/components/DataRender";
-import { GET } from "@/shared/api/general-api/http-gateway.api";
-import { IRequestOptions } from "@/shared/api/general-api/types/request-data.types";
+import ListData from '@/app/(features)/administrador/fetch/listData';
+import { GET } from '@/shared/api/general-api/http-gateway.api';
+import { IRequestOptions } from '@/shared/api/general-api/types/request-data.types';
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */
@@ -25,17 +24,9 @@ export default async function FetchData() {
   que recibe los datos y los renderiza del lado del cliente */
   return (
     <>
-      <DataRender
-        data={posts}
-        RenderComponent={
-          <>
-            {posts.map((post: any, i: number) => (
-              <ListData post={post} key={post.id ?? i} />
-            ))}
-          </>
-        }
-        EmptyComponent={<p className="text-center">No hay datos</p>}
-      />
+      {posts?.map((post: any, i: number) => (
+        <ListData post={post} key={post.id ?? i} />
+      ))}
     </>
   );
 }

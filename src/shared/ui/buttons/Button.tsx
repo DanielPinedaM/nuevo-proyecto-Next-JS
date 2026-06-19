@@ -5,8 +5,8 @@ import {
   type SharedStandardButtonProps,
   type SharedLinkButtonProps,
   type ButtonVisualProps,
-} from './data-types/interfaces/buttons.interface';
-import composableButtonClass from './utils/composableButtonClass.utils';
+} from '@/shared/ui/buttons/data-types/interfaces/buttons.interface';
+import composableButtonClass from '@/shared/ui/buttons/utils/composableButtonClass.utils';
 
 type ButtonProps = ButtonVisualProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>;
 

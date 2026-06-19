@@ -4,7 +4,7 @@ import HeaderDialog from '@/shared/components/dialog/HeaderDialog';
 import { rowsPerPageOptions } from '@/shared/utils/func/general.utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import columnBodyMap from './columnBodyMap';
+import columnBodyMap from '@/shared/components/dialog/tableDataDetails/columnBodyMap';
 import { IColumns, ITableDataDetailsDialog } from '@/shared/data-types/interfaces/prime-react.interfaces';
 import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 import visibleRows from '@/shared/data-types/constants/visible-rows.const';

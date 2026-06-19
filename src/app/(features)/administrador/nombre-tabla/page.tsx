@@ -1,7 +1,7 @@
 
 import { Suspense } from 'react';
-import ButtonsOpenDialogNombreTabla from './dialog/buttonsOpenDialogNombreTabla';
-import GetTable from './table/getTable';
+import ButtonsOpenDialogNombreTabla from '@/app/(features)/administrador/nombre-tabla/dialog/buttonsOpenDialogNombreTabla';
+import GetTable from '@/app/(features)/administrador/nombre-tabla/table/getTable';
 import InputSearchParams from '@/shared/components/InputSearchParams';
 import IParams from '@/shared/data-types/interfaces/params.interfaces';
 import SkeletonTable from '@/shared/components/loading/skeleton/skeletonTable';

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import FetchData from './fetch/fetchData';
+import FetchData from '@/app/(features)/administrador/fetch/fetchData';
 import SkeletonCards from '@/shared/components/loading/skeleton/skeletonCards';
 
 /* Page() crea la ruta  http://localhost:3000/fetch-ssr */
