@@ -20,7 +20,7 @@ import { sessionStorageDeleteAll } from '@/shared/utils/func/sessionStorage.util
 import { encrypt } from '@/shared/utils/func/cryptoService.utils';
 import { IRequestOptions } from '@/shared/api/general-api/types/request-data.types';
 import { POST } from '@/shared/api/general-api/http-gateway.api';
-import { Button } from 'primereact/button';
+import Button from '@/shared/ui/buttons/Button';
 
 interface IBodyLogin {
   email: string;
@@ -167,6 +167,8 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+        <Button variant='link' theme='danger' />
+
         <div className='mb-2'>
           <label>
             <span className='cursor-pointer'>Correo electrónico</span>
@@ -232,9 +234,9 @@ export default function FormLogin() {
         </div>
 
         <div className='flex justify-end'>
-          <button type='submit' className='btn btn-primary btn-background'>
+          {/*  <button type='submit' className='btn btn-primary btn-background'>
             ingresar
-          </button>
+          </button> */}
         </div>
       </form>
     </>

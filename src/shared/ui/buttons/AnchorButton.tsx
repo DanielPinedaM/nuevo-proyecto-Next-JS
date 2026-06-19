@@ -1,0 +1,82 @@
+import { forwardRef, type AnchorHTMLAttributes } from 'react';
+import { type ButtonVisualProps } from './data-types/interfaces/buttons.interface';
+import composableButtonClass from './utils/composableButtonClass.utils';
+
+type AnchorButtonProps = ButtonVisualProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+
+/**
+ * `AnchorButton` — botón composable construido sobre el elemento nativo `<a>`.
+ *
+ * Comparte exactamente la misma API visual que `Button`
+ * (theme, variant, size, modifier, effect), pero renderiza un `<a>` en lugar de un `<button>`.
+ *
+ * Ideal para enlaces externos, descargas o cualquier caso donde se necesite
+ * semántica de enlace con apariencia de botón.
+ *
+ * Al usar `variant="link"`, no es necesario especificar `theme`.
+ *
+ * Cuando se especifica `target="_blank"`, el componente añade automáticamente
+ * `rel="noopener noreferrer"` para prevenir ataques de `window.opener`,
+ * fusionándolo con cualquier valor de `rel` que el consumidor haya pasado.
+ *
+ * Los estilos se aplican completamente mediante la arquitectura Sass global
+ * ubicada en `src/styles/global/scss/buttons/`.
+ *
+ * @example
+ * // Enlace primario con fondo
+ * <AnchorButton theme="primary" variant="background" href="https://example.com">
+ *   Ir a Example
+ * </AnchorButton>
+ *
+ * @example
+ * // Enlace de descarga con estilo danger
+ * <AnchorButton theme="danger" variant="outline" href="/report.pdf" download>
+ *   <MdDownload />
+ *   <span>Descargar reporte</span>
+ * </AnchorButton>
+ *
+ * @example
+ * // Enlace tipo link (no requiere theme)
+ * <AnchorButton variant="link" href="/terms">
+ *   Ver términos
+ * </AnchorButton>
+ *
+ * @example
+ * // Enlace que se abre en una nueva pestaña — rel="noopener noreferrer" se añade automáticamente
+ * <AnchorButton
+ *   theme="info"
+ *   variant="outline"
+ *   href="https://docs.example.com"
+ *   target="_blank"
+ * >
+ *   Ver documentación
+ * </AnchorButton>
+ */
+const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
+  (
+    { theme, variant, size = 'base', modifier, effect, children, className, target, rel, ...rest },
+
+    ref
+  ) => {
+    const safeRel: string | undefined =
+      target === '_blank'
+        ? [...new Set(['noopener', 'noreferrer', ...(rel?.split(' ') ?? [])])].join(' ')
+        : rel;
+
+    return (
+      <a
+        ref={ref}
+        className={composableButtonClass({ theme, variant, size, modifier, effect, className })}
+        target={target}
+        rel={safeRel}
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+);
+
+AnchorButton.displayName = 'AnchorButton';
+
+export default AnchorButton;
