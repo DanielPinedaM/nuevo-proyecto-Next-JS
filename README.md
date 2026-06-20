@@ -154,65 +154,52 @@ Es la guía principal que determina cómo se organiza el código, no una lista e
 src/
 │
 └── styles/
-    ├── main.scss → con @use importa estilos .scss globales de toda la pagina web, NO debe contener estilos directos
-    │
-    └── global/ → estilos globales de toda la pagina web
-        ├── _reset.scss → elimina los estilos por defecto del navegador para asegurar una apariencia uniforme en todos los navegadores
-        ├── _scroll-bar.scss → estilos globales de barra de scroll
-        ├── _table.scss → estilos globales para tablas
-        ├── _variables.scss → variables globales de Sass
+    └── global/
+        ├── scss/
+        │   ├── main.scss → con @use importa estilos .scss globales de toda la pagina web, NO debe contener estilos directos
+        │   ├── _scroll-bar.scss → estilos globales de barra de scroll
+        │   ├── _variables.scss → variables globales de Sass
+        │   │
+        │   ├── prime-react/ → sobrescribir estilos de Prime NG
+        │   │   └── index-prime-react.scss → con @use importa estilos .scss para Prime React, NO debe contener estilos directos
+        │   │
+        │   └── buttons/ → estilos globales de botones organizados en archivos .scss composables que permiten combinar variantes, tamaños, estados y temas
+        │       ├── index-buttons.scss → con @use importa estilos .scss para los botones, NO debe contener estilos directos
+        │       ├── _base.scss → Reset CSS para botones
+        │       ├── _effects.scss → utilidades visuales reutilizables para los botones: box-shadow, blur, elevation (sin lógica UI)
+        │       ├── _modifiers.scss → alteran/extienden características de los botones sin sobrescribir sus estilos principales
+        │       ├── _sizes.scss → Define el tamaño del botón mediante tokens basados en la escala de Tailwind CSS 4 para padding, font-size y line-height
+        │       ├── _states.scss → estados de boton: hover, active, focus, disabled
+        │       ├── _themes.scss → Define los temas de color del botón mediante CSS Custom Properties generadas a partir de _tokens.scss.
+        │       ├── _tokens.scss → Define los tokens de diseño del sistema de botones mediante variables Sass (colores, tipografía, espaciado y escalas).
+        │       ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\scss\buttons
+        │       └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón.
         │
-        ├── library/ → estilos que afectan las librerias
-        │   ├── _prime-react.scss → estilos que afectan a Prime React
-        │   ├── _sweet-alert-2.scss → estilos que afectan a Sweet Alert 2
-        │   └── _tailwind.css → archivo de configuración de Tailwind 4
-        │
-        └── buttons/ → estilos globales de botones organizados en archivos .scss composables que permiten combinar variantes, tamaños, estados y temas
-            ├── index-buttons.scss → con @use importa estilos .scss para los botones, NO debe contener estilos directos
-            ├── _base.scss → Reset CSS para botones
-            ├── _effects.scss → utilidades visuales reutilizables para los botones: box-shadow, blur, elevation (sin lógica UI)
-            ├── _modifiers.scss → alteran/extienden características de los botones sin sobrescribir sus estilos principales
-            ├── _sizes.scss → Define el tamaño del botón mediante tokens basados en la escala de Tailwind CSS 4 para padding, font-size y line-height.
-            ├── _states.scss → estados de boton: hover, active, focus, disabled
-            ├── _themes.scss → Define los temas de color del botón mediante CSS Custom Properties generadas a partir de _tokens.scss.
-            ├── _tokens.scss → Define los tokens de diseño del sistema de botones mediante variables Sass (colores, tipografía, espaciado y escalas).
-            ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\buttons
-            └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón.
+        └── tailwind/
+            ├── index-tailwind.css → archivo de configuración de Tailwind 4
+            └── preflight.css → Reset CSS basado en Tailwind 4
 ```
 
 # Feature Architecture
 
-Este proyecto utiliza **Feature Architecture** sobre Next.js App Router.
+Esta sección es la definición oficial de la arquitectura del proyecto. Toda decisión sobre dónde ubicar un archivo o carpeta debe respetarla de forma estricta.
 
-La regla principal es:
+La arquitectura es **agnóstica al framework**: describe un modelo reutilizable en cualquier tecnología. Las rutas indicadas (`src/app/(features)`, `src/core`, `src/shared`) son la convención de carpetas del proyecto, no una característica de un framework específico.
 
-* La lógica de negocio pertenece a una feature.
+La arquitectura define **únicamente tres capas**:
 
-* El código agnóstico al negocio pertenece a `shared`.
+* **Feature**
+* **Core**
+* **Shared**
 
-Un archivo no pertenece a `shared` únicamente por ser reutilizado en múltiples `features`
+## Principio fundamental
 
-La reutilización no convierte automáticamente un archivo en código compartido (`shared`)
+La ubicación de cualquier archivo o carpeta depende de **su conocimiento del dominio**, no de su nivel de reutilización.
 
-# Regla de Ubicación de Archivos y Carpetas
+* El código que conoce el dominio (entidades, reglas de negocio, casos de uso, permisos) pertenece a una feature o a `src/core`.
+* El código completamente agnóstico al dominio pertenece a `src/shared`.
 
-La ubicación de cualquier archivo o carpeta depende de su conocimiento del dominio, no de su nivel de reutilización.
-
-Un archivo pertenece a `src/app/(features)/**` cuando conoce entidades, reglas de negocio, casos de uso o comportamientos específicos de una funcionalidad.
-
-Un archivo pertenece a `src/shared` cuando es completamente agnóstico al dominio y puede existir sin conocer ninguna feature.
-
-Un archivo reutilizado por múltiples features puede seguir perteneciendo a una feature si contiene conocimiento del dominio.
-
-# Código Reutilizado entre Múltiples Features
-
-Existe un tercer tipo de código que no encaja ni en una sola `feature` ni en `shared`:
-
-> Código que **conoce el dominio** (entidades, permisos, reglas del negocio) y que **se reutiliza en varias features al mismo tiempo**.
-
-La reutilización **NO** elimina su conocimiento del dominio. Por lo tanto **NO** puede ir a `shared`, porque `shared` es código agnóstico que no conoce ninguna entidad del negocio.
-
-Para este caso existe una **tercera capa**: `src/core`.
+La reutilización **no** convierte automáticamente un archivo en código compartido. Un archivo reutilizado por varias features sigue perteneciendo al dominio si conoce entidades o reglas de negocio; en ese caso pertenece a `src/core`, nunca a `src/shared`.
 
 ## Capas de la Arquitectura
 
@@ -222,19 +209,69 @@ Para este caso existe una **tercera capa**: `src/core`.
 | Core (dominio compartido) | `src/core`                     | Sí                  | 2 o más                    | No                |
 | Shared (agnóstico)        | `src/shared`                   | No                  | Cualquiera                 | No                |
 
-# Regla de decisión:
+## Regla de decisión
+
+Estas reglas tienen prioridad absoluta sobre cualquier otra explicación del documento. Para ubicar cualquier archivo o carpeta, evaluar en este orden:
 
 1. ¿El código **NO** conoce el dominio (es 100% agnóstico)? → `src/shared`
-
 2. ¿Conoce el dominio y lo usa **una sola** feature? → dentro de esa feature en `src/app/(features)/<feature>`
-
 3. ¿Conoce el dominio y lo usan **dos o más** features? → `src/core`
+
+## Verificación obligatoria
+
+Antes de ubicar el archivo, responder en orden:
+
+1. ¿Seguiría teniendo sentido si **todas** las features fueran eliminadas?
+   * **SÍ** → es agnóstico → `src/shared`
+   * **NO** → conoce el dominio → continuar a la pregunta 2
+2. ¿Lo usa **una sola** feature o **varias**?
+   * **Una** → dentro de esa feature en `src/app/(features)/<feature>`
+   * **Varias** → `src/core`
+
+## Responsabilidades de cada capa
+
+### Feature — `src/app/(features)/<feature>`
+
+Contiene el código específico de una funcionalidad del sistema. Conoce entidades, reglas, procesos y casos de uso del negocio, y lo usa una sola feature.
+
+La lógica de negocio nunca debe salir de su feature.
+
+**Ejemplo de carpetas internas:**
+
+* `src/app/(features)/<feature>/components` componentes con lógica de negocio de esa feature.
+* `src/app/(features)/<feature>/ui` interfaz reutilizable únicamente dentro de esa feature.
+* `src/app/(features)/<feature>/hooks` hooks específicos de esa feature.
+* `src/app/(features)/<feature>/store` estado específico de esa feature.
+* `src/app/(features)/<feature>/utils` utilidades específicas de esa feature.
+
+### Core — `src/core`
+
+Contiene código que **conoce el dominio** y se reutiliza en **dos o más** features al mismo tiempo (por ejemplo: entidades, permisos o reglas de negocio compartidas).
+
+La reutilización **no** elimina su conocimiento del dominio, por lo que **no** puede ubicarse en `src/shared`. Tampoco puede ubicarse dentro de `(features)`, porque quedaría atado a una sola feature.
+
+`src/core` se organiza **por entidad del dominio**, no por tipo de archivo.
+
+### Shared — `src/shared`
+
+Contiene únicamente código reutilizable y **completamente agnóstico al dominio**.
+
+* `shared` no puede conocer ninguna feature.
+* `shared` no puede contener reglas de negocio.
+* `shared` no puede contener componentes, servicios ni lógica relacionados con usuarios, autenticación, productos, órdenes, dashboard ni cualquier otro concepto del dominio.
+
+**Ejemplo de carpetas internas:**
+
+* `src/shared/ui` interfaz reutilizable global.
+* `src/shared/hooks` hooks reutilizables globales.
+* `src/shared/store` estado global de la aplicación.
+* `src/shared/utils` utilidades genéricas reutilizables.
 
 ## ¿Por qué `src/core` y no dentro de `(features)`?
 
-En este proyecto, todo lo que está después de `src/app/(features)/` **define la ruta URL del navegador**.
+Todo lo que está dentro de `src/app/(features)/` **define una ruta URL** (enrutamiento basado en el sistema de archivos).
 
-Si colocaras código de dominio compartido dentro de `(features)`, crearías una ruta URL que no corresponde a ninguna pantalla real, además de atar ese código a una sola feature.
+Si colocaras código de dominio compartido dentro de `(features)`, crearías una ruta URL que no corresponde a ninguna pantalla real y, además, atarías ese código a una sola feature.
 
 `src/core` vive **fuera** de `src/app`, por lo tanto:
 
@@ -242,11 +279,11 @@ Si colocaras código de dominio compartido dentro de `(features)`, crearías una
 * **NO** es agnóstico (puede conocer el dominio).
 * Es reutilizable por todas las features.
 
-Esto además lo mantiene **agnóstico al framework**: en Angular, Next.js, etc., `src/core` es simplemente una capa de dominio que no participa del enrutamiento. La arquitectura se traslada igual entre frameworks.
+Esto mantiene la arquitectura **agnóstica al framework**: `src/core` es una capa de dominio que no participa del enrutamiento, por lo que el modelo se traslada igual a cualquier tecnología.
 
-## Organización interna de `src/core`
+## Organización interna de las capas
 
-`src/core` se organiza **por entidad del dominio**, no por tipo de archivo:
+Cada capa se organiza **por entidad o funcionalidad del dominio**, no por tipo de archivo:
 
 ```txt
 src/
@@ -265,6 +302,41 @@ src/
 │
 └── shared/           → código 100% agnóstico al dominio (global)
 ```
+
+## Prohibición de nuevas capas arquitectónicas
+
+Está estrictamente prohibido crear nuevas capas arquitectónicas fuera de las tres definidas (Feature, Core y Shared).
+
+Toda carpeta, módulo o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas. No se permite introducir carpetas que representen una nueva capa conceptual, una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas por la arquitectura.
+
+La regla de decisión es la única forma válida de determinar la ubicación de cualquier nuevo código dentro del proyecto.
+
+## Carpetas internas permitidas
+
+Se permite crear subcarpetas dentro de una capa siempre que **no introduzcan una nueva capa arquitectónica** y respeten las responsabilidades definidas por la arquitectura.
+
+Ejemplos válidos:
+
+```text
+src/shared
+├── ui
+├── layouts
+├── utils
+├── hooks
+└── data-types
+
+src/core
+├── auth
+├── users
+└── permissions
+
+src/app/(features)
+├── products
+├── orders
+└── dashboard
+```
+
+Estas carpetas son válidas porque únicamente organizan el contenido dentro de una capa existente y no crean nuevas capas arquitectónicas.
 
 ## Ejemplo
 
@@ -288,54 +360,6 @@ src/app/(features)/usuarios/services/user-permissions.service.ts
 src/core/permissions/services/user-permissions.service.ts
 ```
 
-## Verificación obligatoria
-
-Antes de ubicar el archivo, responder en orden:
-
-1. ¿Seguiría teniendo sentido si **todas** las features fueran eliminadas?
-   * **SÍ** → es agnóstico → `src/shared`
-   * **NO** → conoce el dominio → continuar a la pregunta 2
-2. ¿Lo usa **una sola** feature o **varias**?
-   * **Una** → dentro de esa feature en `src/app/(features)/<feature>`
-   * **Varias** → `src/core`
-
-# Diferencia entre `src/app/(features)` y `src/shared`
-
-## `src/app/(features)`
-
-Contiene código específico de una funcionalidad del sistema.
-
-Todo archivo que conozca entidades, reglas, procesos o casos de uso del negocio debe permanecer dentro de la feature correspondiente.
-
-La lógica de negocio nunca debe salir de su feature.
-
-**Ejemplo:**
-* `src/app/(features)/*/ui` interfaz reutilizable únicamente para esa feature.
-
-* `src/app/(features)/*/components` componentes con lógica de negocio de esa feature.
-
-* `src/app/(features)/*/hooks` hooks específicos de esa feature.
-
-* `src/app/(features)/*/store` estado específico de esa feature.
-
-* `src/app/(features)/*/utils` utilidades específicas de esa feature.
-
-## `src/shared`
-
-Contiene únicamente código reutilizable y completamente agnóstico al dominio.
-
-`shared` no puede conocer ninguna `feature`.
-
-`shared` no puede contener reglas de negocio.
-
-`shared` no puede contener componentes, servicios o lógica relacionados con usuarios, autenticación, productos, órdenes, dashboard o cualquier otro concepto del dominio.
-
-**Ejemplo:**
-* `src/shared/ui` interfaz reutilizable global.
-* `src/shared/hooks` hooks reutilizables globales.
-* `src/shared/store` estado global de la aplicación.
-* `src/shared/utils` utilidades genéricas reutilizables.
-
 # Diferencia entre `components` y `ui`
 
 ## ui
@@ -356,7 +380,7 @@ Un componente pertenece a `components` cuando conoce el dominio, participa en un
 
 La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
 
-## Prohibido `src/shared/components`|
+## Prohibido `src/shared/components`
 
 La carpeta `src/shared/components` está prohibida.
 
