@@ -545,8 +545,8 @@ Está prohibido **duplicar** el código en la segunda feature para evitar el mov
 
 Todos los formularios del proyecto deben utilizar obligatoriamente:
 
-- React Hook Form
-- Componentes ubicados en `src/shared/ui/prime-react/react-hook-form`
+* React Hook Form
+* Componentes ubicados en `src/shared/ui/prime-react/react-hook-form`
 
 No crear formularios con manejo manual de estado cuando exista un componente React Hook Form equivalente.
 
@@ -574,20 +574,20 @@ Su única responsabilidad es conectar el formulario con la UI.
 
 Estos componentes solamente manejan integración técnica:
 
-- `useController`
-- `Controller`
-- `value`
-- `onChange`
-- `onBlur`
-- errores visuales del formulario
+* `useController`
+* `Controller`
+* `value`
+* `onChange`
+* `onBlur`
+* errores visuales del formulario
 
 No representan formularios del negocio.
 
 ## Reglas obligatorias del sistema de formularios
 
 ### 1. Framework y renderizado
-- Se trabaja en Next.js (App Router).
-- Todos los componentes de formularios deben ser `"use client"`.
+* Se trabaja en Next.js (App Router).
+* Todos los componentes de formularios deben ser `"use client"`.
 
 ### 2. Ubicación obligatoria de componentes
 
@@ -598,11 +598,11 @@ src/shared/ui/prime-react/react-hook-form
 ```
 
 ### 3. Restricciones estrictas
-- Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
-- Obligatorio usar componentes de PrimeReact para todos los campos.
-- Prohibido usar formularios controlados con `useState`.
-- Prohibido usar formularios no controlados con `useRef`.
-- React Hook Form es la única fuente válida de estado del formulario.
+* Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
+* Obligatorio usar componentes de PrimeReact para todos los campos.
+* Prohibido usar formularios controlados con `useState`.
+* Prohibido usar formularios no controlados con `useRef`.
+* React Hook Form es la única fuente válida de estado del formulario.
 
 ### 4. Flujo de React Hook Form y Prime React
 
@@ -641,69 +641,72 @@ PrimeReact
 ```
 
 ### 5. React Hook Form (RHF)
-- Es el único responsable del estado del formulario.
-- `defaultValues` se define exclusivamente en `useForm` en el componente padre.
-- `watch` es obligatorio para lógica derivada en el componente padre.
-- `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
+* Es el único responsable del estado del formulario.
+* `defaultValues` se define exclusivamente en `useForm` en el componente padre.
+* `watch` es obligatorio para lógica derivada en el componente padre.
+* `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
 
 ### 6. Uso obligatorio de `watch`
+* Toda lógica condicional del formulario debe resolverse con `watch`.
 
-- Toda lógica condicional del formulario debe resolverse con `watch`.
+* `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
 
-- `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
+* Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
 
-- Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
-
-- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
+* Ejemplos: `disabled`, visibilidad, dependencias entre campos.
 
 ### 7. Componentes reutilizables
 Un input reutilizable debe:
-- Encapsular `Controller` de React Hook Form.
-- Ser genérico (`T extends FieldValues`).
-- Usar `control`, `name`, `rules`, `errors` como contrato base.
-- No contener lógica de negocio.
-- No definir reglas internas.
-- No usar `watch`.
-- Representar un único tipo de campo/input.
-- No mezclar múltiples tipos de input en un mismo componente reutilizable.
+* Encapsular `Controller` de React Hook Form.
+* Ser genérico (`T extends FieldValues`).
+* Usar `control`, `name`, `rules`, `errors` como contrato base.
+* No contener lógica de negocio.
+* No definir reglas internas.
+* No usar `watch`.
+* Representar un único tipo de campo/input.
+* No mezclar múltiples tipos de input en un mismo componente reutilizable.
 
 ***✅ Correcto***
 
-- `InputText`
-- `InputPassword`
-- `InputNumber`
-- `InputEmail`
-- `InputPhone`
-- `InputSelect`
+* `InputText`
+* `InputPassword`
+* `InputNumber`
+* `InputEmail`
+* `InputPhone`
+* `InputSelect`
 
 ***❌ Incorrecto***
 
-- `GenericInput`
-- `BaseInput`
-- `DynamicInput`
-- Un único componente que maneje:
-  - `input type="text"`
-  - `input type="password"`
-  - `input type="number"`
-  - `input type="email"`
+* `GenericInput`
+* `BaseInput`
+* `DynamicInput`
+* Un único componente que maneje:
+  * `input type="text"`
+  * `input type="password"`
+  * `input type="number"`
+  * `input type="email"`
 
 ### 8. UI (Prime React)
-- PrimeReact solo maneja la capa visual.
-- `disabled`, `placeholder`, `className` son props de UI.
-- Prime React no puede modificar el estado del formulario.
-- Solo refleja el estado final derivado de React Hook Form.
+* PrimeReact solo maneja la capa visual.
+* `disabled`, `placeholder`, `className` son props de UI.
+* Prime React no puede modificar el estado del formulario.
+* Solo refleja el estado final derivado de React Hook Form.
 
 ### 9. Validaciones
-- Todas las validaciones se definen en el padre mediante `rules`.
-- Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
-- El input solo ejecuta las validaciones, no las define.
+* Todas las validaciones se definen en el padre mediante `rules`.
+* Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
+* El input solo ejecuta las validaciones, no las define.
 
 ### 10. Formularios dinámicos
-- La estructura del formulario debe definirse en el padre (config-driven).
-- No se permite lógica condicional dentro de los componentes de input.
+* La estructura del formulario debe definirse en el padre (config-driven).
+* No se permite lógica condicional dentro de los componentes de input.
+
+### 11. Mensajes de error de formulario
+* Todo componente de campo ubicado en `src/shared/ui/prime-react/react-hook-form` debe usar `FormErrorMessages` para mostrar los mensajes de error de React Hook Form.
+
+- Prohibido mostrar errores de validación con elementos HTML propios, lógica manual o cualquier otro componente alternativo.
 
 ## Regla clave de arquitectura
-
 * Input (componente hijo) = UI + conexión React Hook Form
 
 * Padre = lógica + `watch` + validaciones + estado derivado
@@ -717,36 +720,35 @@ Un input reutilizable debe:
 5. PrimeReact renderiza UI.
 
 ## Prohibido
-
-- Usar `watch` dentro de inputs reutilizables.
-- Usar `useState` para formularios controlados
-- Usar `useRef` para formularios no controlados
-- Usar inputs nativos de HTML.
-- Mezclar lógica de negocio dentro de inputs.
-- Definir `defaultValues` fuera de `useForm`.
-- Duplicar control de estado entre RHF y UI.
-- Usar `map` para renderizar los campos de los formularios.
+* Usar `watch` dentro de inputs reutilizables.
+* Usar `useState` para formularios controlados
+* Usar `useRef` para formularios no controlados
+* Usar inputs nativos de HTML.
+* Mezclar lógica de negocio dentro de inputs.
+* Definir `defaultValues` fuera de `useForm`.
+* Duplicar control de estado entre RHF y UI.
+* Usar `map` para renderizar los campos de los formularios.
+* Mostrar errores de validación sin usar `FormErrorMessages` en componentes de `src/shared/ui/prime-react/react-hook-form`.
 
 ## Resultado esperado
-
-- Formularios escalables y consistentes.
-- Componentes reutilizables reales (design system).
-- Cero duplicación de lógica de `Controller`.
-- Separación estricta entre lógica y UI.
-- Mantenimiento simple en proyectos grandes.
+* Formularios escalables y consistentes.
+* Componentes reutilizables reales (design system).
+* Cero duplicación de lógica de `Controller`.
+* Separación estricta entre lógica y UI.
+* Mantenimiento simple en proyectos grandes.
 
 ## Prohibido agregar lógica de negocio dentro de src/shared/ui/prime-react/react-hook-form
 
 En `src/shared/ui/prime-react/react-hook-form` nunca agregar:
 
-- Reglas de negocio
-- Reglas específicas de una feature
-- Validaciones de dominio
-- Condiciones de negocio
-- if relacionados con entidades del sistema
-- Permisos
-- Roles
-- Lógica de cualquier feature. Ejemplo: tareas, productos, usuarios, etc.
+* Reglas de negocio
+* Reglas específicas de una feature
+* Validaciones de dominio
+* Condiciones de negocio
+* if relacionados con entidades del sistema
+* Permisos
+* Roles
+* Lógica de cualquier feature. Ejemplo: tareas, productos, usuarios, etc.
 
 ***Ejemplo prohibido:***
 
