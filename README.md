@@ -396,35 +396,18 @@ Un componente pertenece a `components` cuando conoce el dominio, participa en un
 
 La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
 
-## 🚫 Carpetas Prohibidas de Crear
+## 🚫 Archivos y Carpetas Prohibidas de Crear
 
 Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, porque ocultan responsabilidades distintas dentro de un mismo contenedor en lugar de expresar **una única responsabilidad clara**. Cada carpeta debe nombrar de forma específica lo que contiene (`validators/`, `components/`, `utils/`, etc).
 
-* `services/` → No es una convención propia de React ni de Next.js, su nombre no expresa qué responsabilidad contiene y mezcla lógica de negocio, acceso a datos, validaciones y acciones en un mismo lugar. No debe reemplazarse por otra carpeta genérica equivalente (`helpers/`, `logic/`, etc.): el objetivo no es renombrarla, sino **separar responsabilidades**.
+* `services/`: No es una convención propia de React ni de Next.js, su nombre no expresa qué responsabilidad contiene y mezcla lógica de negocio, acceso a datos, validaciones y acciones en un mismo lugar. No debe reemplazarse por otra carpeta genérica equivalente (`helpers/`, `logic/`, etc.): el objetivo no es renombrarla, sino **separar responsabilidades**.
 
-* `common/` → Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
+* `common/`: Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
 
-## Prohibido `src/shared/components`
-
-La carpeta `src/shared/components` está prohibida.
-
-`shared` representa código agnóstico al dominio.
-
-`components` representa componentes con comportamiento funcional asociado a una feature.
-
-Ambos conceptos son incompatibles.
-
-Si un componente es agnóstico al dominio, pertenece a `shared/ui`.
-
-Si un componente contiene lógica de negocio, pertenece a `src/app/(features)/*/components`.
-
-Por esta razón **NO** debe exitir:
-
-* `src/shared/components`
-* `src/app/shared/components`
-* `src/app/(features)/*/shared/components`
-
-La única ubicación válida para componentes compartidos es `src/shared/ui`.
+* `shared/components`: Combina conceptos incompatibles: `shared` es código agnóstico al dominio, mientras que `components` contiene lógica de negocio asociada a una feature. Un componente agnóstico pertenece a `src/shared/ui` y un componente con lógica de negocio a `src/app/(features)/<feature>/components`. Por eso **NO** debe existir en ninguna de estas rutas:
+  * `src/shared/components`
+  * `src/app/shared/components`
+  * `src/app/(features)/*/shared/components`
 
 # 📝 Formularios - Integración Prime React y React Hook Form
 
@@ -489,7 +472,7 @@ src/shared/ui/prime-react/react-hook-form
 - Prohibido usar formularios no controlados con `useRef`.
 - React Hook Form es la única fuente válida de estado del formulario.
 
-### 4. Flujo React Hook Form y Prime React
+### 4. Flujo de React Hook Form y Prime React
 
 ```text
 Feature (Padre)
