@@ -409,6 +409,56 @@ Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, p
   * `src/app/shared/components`
   * `src/app/(features)/*/shared/components`
 
+## Regla de Dirección de Dependencias
+
+Esta sección complementa la "Regla de Decisión". Una vez que un archivo está ubicado en su capa, esta regla define **en qué dirección puede importar**. Es tan obligatoria como la ubicación misma: una capa bien ubicada pero con imports en la dirección incorrecta vuelve a acoplar exactamente lo que la arquitectura intenta separar.
+
+Las dependencias fluyen en **una sola dirección**:
+
+```txt
+feature  →  core  →  shared
+```
+
+***Reglas:***
+* **Feature** puede importar de **Core** y de **Shared**.
+
+* **Core** puede importar de **Shared** y de otras entidades o procesos dentro de **Core**.
+
+* **Shared** no importa de **Core** ni de ninguna **Feature**. Solo depende de librerías externas y de otros módulos dentro de **Shared**.
+
+* Una **Feature** **nunca** importa de otra **Feature**.
+
+* **Core** **nunca** importa de una **Feature**.
+
+* Las dependencias entre módulos de **Core** deben ser **acíclicas**: si `A` importa de `B`, entonces `B` no puede importar de `A`.
+
+Cuando una **Feature** necesita lógica que pertenece a otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a `core`** (ver "Promoción de Feature a Core") y ambas la consumen desde ahí.
+
+### ¿Por qué una sola dirección?
+
+Esta regla es la que mantiene la arquitectura escalable cuando el número de features crece. Sin ella, `core` puede terminar importando de una feature (invirtiendo la dependencia y atando el dominio compartido a una pantalla concreta), o dos features pueden acoplarse directamente entre sí (creando dependencias ocultas imposibles de rastrear). La dirección única garantiza que lo más reutilizable (`shared`) sea también lo más estable, y que lo más volátil (`feature`) dependa de lo estable y nunca al revés.
+
+***✅ Ejemplos válidos:***
+
+```ts
+// src/app/(features)/orders/components/OrderList.tsx
+import { getUserPermissions } from '@/core/permissions/get-user-permissions'
+import { Button } from '@/shared/ui/buttons/Button'
+```
+
+***🚫 Ejemplos prohibidos:***
+
+```ts
+// src/app/(features)/orders/components/OrderList.tsx
+import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'          // feature → feature
+
+// src/core/users/actions/update-user.ts
+import { OrderForm } from '@/app/(features)/orders/components/OrderForm'  // core → feature
+
+// src/shared/ui/buttons/Button.tsx
+import { User } from '@/core/users/data-types/interfaces/user.interface'  // shared → core
+```
+
 # 📝 Formularios - Integración Prime React y React Hook Form
 
 Todos los formularios del proyecto deben utilizar obligatoriamente:
