@@ -376,20 +376,6 @@ Además, estarías acoplando un módulo compartido a una única feature, lo que 
 
 Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido utilizado por múltiples features sin pertenecer a una feature específica ni participar directamente en la definición de rutas.
 
-##  Prohibido Usar la Carpeta `services/`
-
-Dentro de esta arquitectura está **prohibido** crear una carpeta `services/`, porque:
-
-* `services` no es una convención propia de React ni de Next.js.
-
-* El nombre es demasiado ambiguo: No expresa qué responsabilidad contiene.
-
-* Mezcla responsabilidades distintas (lógica de negocio, acceso a datos, validaciones y acciones) dentro de un mismo contenedor.
-
-En esta arquitectura cada carpeta debe expresar **una única responsabilidad clara** mediante un nombre específico: `actions/`, `repositories/`, `policies/`, `validators/` o `utils/`.
-
-No reemplazar `services/` por otra carpeta genérica equivalente (por ejemplo `helpers/`, `utils/` o `logic/`): El objetivo no es renombrar la carpeta, sino **separar responsabilidades**.
-
 ## Diferencia entre `components` y `ui`
 
 ### ui
@@ -409,6 +395,14 @@ Su única responsabilidad es renderizar interfaz reutilizable.
 Un componente pertenece a `components` cuando conoce el dominio, participa en un caso de uso o implementa comportamiento propio de la funcionalidad.
 
 La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
+
+## 🚫 Carpetas Prohibidas de Crear
+
+Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, porque ocultan responsabilidades distintas dentro de un mismo contenedor en lugar de expresar **una única responsabilidad clara**. Cada carpeta debe nombrar de forma específica lo que contiene (`validators/`, `components/`, `utils/`, etc).
+
+* `services/` → No es una convención propia de React ni de Next.js, su nombre no expresa qué responsabilidad contiene y mezcla lógica de negocio, acceso a datos, validaciones y acciones en un mismo lugar. No debe reemplazarse por otra carpeta genérica equivalente (`helpers/`, `logic/`, etc.): el objetivo no es renombrarla, sino **separar responsabilidades**.
+
+* `common/` → Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
 
 ## Prohibido `src/shared/components`
 
