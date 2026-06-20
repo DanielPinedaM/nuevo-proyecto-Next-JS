@@ -272,25 +272,33 @@ Las carpetas internas representan responsabilidades específicas dentro de cada 
 
 ```txt
 src/
-├── app/(features)/            → route group: agrupa todas las features y NO genera segmento de URL
-│   └── <feature>/             → App Router de Next.js: una feature concreta. Ejemplos: tasks, products; cada una = una ruta URL
-│       ├── page.tsx           → punto de entrada de la feature (define la ruta URL)
-│       ├── components/        → componentes con lógica de negocio de la feature
-│       ├── ui/                → interfaz reutilizable solo dentro de la feature
+├── app/(features)/                   → route group: agrupa todas las features y NO genera segmento de URL
+│   └── <feature>/                    → App Router de Next.js: una feature concreta. Ejemplos: tasks, products; cada una = una ruta URL
+│       ├── page.tsx                  → punto de entrada de la feature (define la ruta URL)
+│       ├── components/               → componentes con lógica de negocio de la feature
+│       │   └── TaskList.tsx
+│       ├── ui/                       → interfaz reutilizable solo dentro de la feature
+│       │   └── TaskListSkeleton.tsx
 │       ├── hooks/
+│       │   └── useTasks.ts{}
 │       ├── stores/
+│       │   └── tasks.store.ts
 │       ├── utils/
-│       ├── data-types/
-│       │   ├── constants/
-│       │   ├── interfaces/
-│       │   └── enums/
+│       │   └── task.utils.ts
+│       └── data-types/
+│           ├── constants/
+│           │   └── task.constants.ts
+│           ├── interfaces/
+│           │   └── task.interface.ts
+│           └── enums/
+│               └── task-status.enum.ts
 │
-├── core/                      → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
+├── core/                             → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
-│   │   ├── actions/           → casos de uso / operaciones del dominio (crear, actualizar, etc.)
-│   │   ├── policies/          → reglas de autorización y decisiones de permiso
-│   │   ├── validators/        → validación de reglas del dominio
-│   │   ├── utils/             → utilidades específicas de la entidad
+│   │   ├── actions/                  → casos de uso / operaciones del dominio (crear, actualizar, etc.)
+│   │   ├── policies/                 → reglas de autorización y decisiones de permiso
+│   │   ├── validators/               → validación de reglas del dominio
+│   │   ├── utils/                    → utilidades específicas de la entidad
 │   │   └── data-types/
 │   │       ├── constants/
 │   │       ├── interfaces/
