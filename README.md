@@ -272,24 +272,33 @@ src/
 │       ├── components/        → componentes con lógica de negocio de la feature
 │       ├── ui/                → interfaz reutilizable solo dentro de la feature
 │       ├── hooks/
-│       ├── store/
+│       ├── stores/
+│       ├── data-types/
+│       │   ├── constants/
+│       │   ├── interfaces/
+│       │   └── enums/
 │       └── utils/
 │
 ├── core/                      → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
 │   │   ├── services/
-│   │   ├── interfaces/
-│   │   ├── constants/
+│   │   ├── data-types/
+│   │   │   ├── constants/
+│   │   │   ├── interfaces/
+│   │   │   └── enums/
 │   │   └── utils/
 │   │
 │   └── permissions/
 │       ├── services/
-│       └── interfaces/
+│       └── data-types/
+│           ├── constants/
+│           ├── interfaces/
+│           └── enums/
 │
 └── shared/                    → código 100% agnóstico al dominio (global)
     ├── ui/                    → interfaz reutilizable global
     ├── hooks/
-    ├── store/
+    ├── stores/
     └── utils/
 ```
 

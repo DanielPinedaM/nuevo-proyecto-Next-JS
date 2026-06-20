@@ -20,7 +20,7 @@ import {
   IIsValidOptions,
   Method,
 } from "@/shared/api/http-client/types/request-data.types";
-import { ILoaderState } from "@/shared/store/loader/loaderStore";
+import { ILoaderState } from "@/shared/stores/loader/loaderStore";
 
 /*
  ***************************
@@ -103,7 +103,7 @@ async function executeRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient() && showLoader) {
-    const { useLoaderStore } = await import("@/shared/store/loader/loaderStore");
+    const { useLoaderStore } = await import("@/shared/stores/loader/loaderStore");
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }
