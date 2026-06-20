@@ -272,33 +272,33 @@ Las carpetas internas representan responsabilidades específicas dentro de cada 
 
 ```txt
 src/
-├── app/(features)/                   → route group: agrupa todas las features y NO genera segmento de URL
-│   └── <feature>/                    → App Router de Next.js: una feature concreta. Ejemplos: tasks, products; cada una = una ruta URL
-│       ├── page.tsx                  → punto de entrada de la feature (define la ruta URL)
-│       ├── components/               → componentes con lógica de negocio de la feature
+├── app/(features)/                      → route group: agrupa todas las features y NO genera segmento de URL
+│   └── <feature>/                       → una feature concreta. Ejemplos: tasks, products; cada una = una ruta URL
+│       ├── page.tsx                     → punto de entrada de la feature (define la ruta URL en el App Router de Next.js)
+│       ├── components/                  → componentes con lógica de negocio de la feature
 │       │   └── TaskList.tsx
-│       ├── ui/                       → interfaz reutilizable solo dentro de la feature
+│       ├── ui/                          → componentes para la interfaz grafica reutilizable solo dentro de la feature
 │       │   └── TaskListSkeleton.tsx
-│       ├── hooks/
-│       │   └── useTasks.ts{}
-│       ├── stores/
+│       ├── hooks/                       → hooks de la feature
+│       │   └── useTasks.ts
+│       ├── stores/                      → estados globales de Zustand, accesibles solo dentro de la feature (NO en toda la aplicación)
 │       │   └── tasks.store.ts
-│       ├── utils/
+│       ├── utils/                       → utilidades de la feature
 │       │   └── task.utils.ts
-│       └── data-types/
-│           ├── constants/
+│       └── data-types/                  → tipos de datos de la feature
+│           ├── constants/               → constantes de la feature
 │           │   └── task.constants.ts
-│           ├── interfaces/
+│           ├── interfaces/              → interfaces de la feature
 │           │   └── task.interface.ts
-│           └── enums/
+│           └── enums/                   → enums de la feature
 │               └── task-status.enum.ts
 │
-├── core/                             → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
+├── core/                                → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
-│   │   ├── actions/                  → casos de uso / operaciones del dominio (crear, actualizar, etc.)
-│   │   ├── policies/                 → reglas de autorización y decisiones de permiso
-│   │   ├── validators/               → validación de reglas del dominio
-│   │   ├── utils/                    → utilidades específicas de la entidad
+│   │   ├── actions/                     → casos de uso / operaciones del dominio (crear, actualizar, etc.)
+│   │   ├── policies/                    → reglas de autorización y decisiones de permiso
+│   │   ├── validators/                  → validación de reglas del dominio
+│   │   ├── utils/                       → utilidades específicas de la entidad
 │   │   └── data-types/
 │   │       ├── constants/
 │   │       ├── interfaces/
@@ -321,16 +321,20 @@ src/
 │           ├── interfaces/
 │           └── enums/
 │
-└── shared/                    → código 100% agnóstico al dominio (global)
-    ├── ui/                    → interfaz reutilizable global
-    ├── hooks/
-    ├── stores/
-    └── utils/
+└── shared/                              → código 100% agnóstico al dominio (global)
+    ├── ui/                              → componentes para la interfaz grafica reutilizable en toda la app
+    │   └── buttons/
+    │       ├── Button.tsx
+    │       ├── AnchorButton.tsx
+    │       └── NextLink.tsx
+    ├── hooks/                           → hooks reutilizables en toda la app
+    ├── stores/                          → estado global de Zustand, compartido por toda la app
+    └── utils/                           → utilidades reutilizables en toda la app
 ```
 
 **Diferencia entre `(features)` y `<feature>`:**
 
-* **`(features)`** es un *route group* de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas ellas.
+* **`(features)`** es un *route group* de App Router de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas las features.
 
 * **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
 
