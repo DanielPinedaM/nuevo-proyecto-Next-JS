@@ -54,7 +54,7 @@ export default function InputSearchParams({
       if (newInputSearch) {
         setQueryParams(
           { [keySearchParams]: newInputSearch },
-          { replaceAll: true, showLoader: false }
+          { replaceAll: true }
         );
       } else {
         // cuando el input está vacío en la URL borrar el query params keySearchParams para buscar

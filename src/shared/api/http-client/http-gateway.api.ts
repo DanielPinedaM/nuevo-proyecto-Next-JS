@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isUseClient } from "@/shared/utils/func/general.utils";
 import { forceConvertToString, isFile, literalObjectLength } from "@/shared/utils/func/dataType.utils";
 import {
@@ -13,13 +12,13 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from "@/shared/api/http-client/utils/request-functions.utils";
+} from "@/shared/api/http-client/utils/func/gateway.utils";
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
-  Method,
-} from "@/shared/api/http-client/types/request-data.types";
+} from "@/shared/api/http-client/data-types/interfaces/gateway.interface";
+import { Method } from "@/shared/api/http-client/data-types/types/gateway.type";
 import { ILoaderState } from "@/shared/stores/loader/loaderStore";
 
 /*

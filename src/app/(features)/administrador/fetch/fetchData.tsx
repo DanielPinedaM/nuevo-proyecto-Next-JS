@@ -1,6 +1,6 @@
 import ListData from '@/app/(features)/administrador/fetch/listData';
 import { GET } from '@/shared/api/http-client/http-gateway.api';
-import { IRequestOptions } from '@/shared/api/http-client/types/request-data.types';
+import { IRequestOptions } from '@/shared/api/http-client/data-types/interfaces/gateway.interface';
 
 export default async function FetchData() {
   /* hacer peticion de la data del lado del servidor con SSR */

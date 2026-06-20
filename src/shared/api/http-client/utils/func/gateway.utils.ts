@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable prefer-const */
 import ErrorToast from "@/shared/ui/overlay/toast/ErrorToast";
 import {
   IObjectLogs,
@@ -8,8 +6,8 @@ import {
   IResponse,
   IIsValidOptions,
   IValidateApiResponse,
-  Method,
-} from "@/shared/api/http-client/types/request-data.types";
+} from "@/shared/api/http-client/data-types/interfaces/gateway.interface";
+import { Method } from "@/shared/api/http-client/data-types/types/gateway.type";
 import {
   isFile,
   isLiteralObject,

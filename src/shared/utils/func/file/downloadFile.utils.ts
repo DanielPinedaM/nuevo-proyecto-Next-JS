@@ -5,13 +5,12 @@ import { currentDateAndTime } from '@/shared/utils/func/luxon.utils';
 import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import { isUseClient, titleCase } from '@/shared/utils/func/general.utils';
 import SuccessToast from '@/shared/ui/overlay/toast/SuccessToast';
-import { IResponse } from '@/shared/api/http-client/types/request-data.types';
 import * as ExcelJS from 'exceljs';
 import { ILoaderState } from '@/shared/stores/loader/loaderStore';
 
 /**
 Funcion para descargar archivo */
-export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefined): void => {
+export const downloadBlob = (blob: Blob, fileName: string | undefined): void => {
   if (!isUseClient()) {
     console.error("❌ error, no se puede descargar archivo en un componente servidor 'use server'");
     return;
@@ -60,7 +59,7 @@ export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefine
 
 /**
 Funcion para ver archivo */
-export const viewBlob = (blob: Blob | IResponse): void => {
+export const viewBlob = (blob: Blob): void => {
   if (blob instanceof Blob) {
     const fileURL = URL.createObjectURL(blob);
     window.open(fileURL, '_blank');
