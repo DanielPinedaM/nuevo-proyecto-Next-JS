@@ -212,7 +212,7 @@ Código que **conoce el dominio** (entidades, permisos o reglas de negocio) y es
 
 Ejemplos:
 
-* `src/core/users/services/user.service.ts`
+* `src/core/users/actions/update-user.ts`
 * `src/core/users/data-types/interfaces/user.interface.ts`
 * `src/core/permissions/get-user-permissions.ts`
 
@@ -281,15 +281,28 @@ src/
 │
 ├── core/                      → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
-│   │   ├── services/
-│   │   ├── data-types/
-│   │   │   ├── constants/
-│   │   │   ├── interfaces/
-│   │   │   └── enums/
-│   │   └── utils/
+│   │   ├── actions/           → casos de uso / operaciones del dominio (crear, actualizar, etc.)
+│   │   ├── repositories/      → acceso a datos (peticiones a la API, persistencia)
+│   │   ├── policies/          → reglas de autorización y decisiones de permiso
+│   │   ├── validators/        → validación de reglas del dominio
+│   │   ├── utils/             → utilidades específicas de la entidad
+│   │   └── data-types/
+│   │       ├── constants/
+│   │       ├── interfaces/
+│   │       └── enums/
 │   │
-│   └── permissions/
-│       ├── services/
+│   ├── permissions/
+│   │   ├── policies/
+│   │   ├── validators/
+│   │   └── data-types/
+│   │       ├── constants/
+│   │       ├── interfaces/
+│   │       └── enums/
+│   │
+│   └── auth/
+│       ├── actions/
+│       ├── repositories/
+│       ├── validators/
 │       └── data-types/
 │           ├── constants/
 │           ├── interfaces/
@@ -305,7 +318,39 @@ src/
 **Distinción entre `(features)` y `<feature>`:**
 
 * **`(features)`** es un *route group* de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas ellas.
+
 * **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
+
+**Prohibido usar la carpeta `services/`:**
+
+Dentro de esta arquitectura está **prohibido** crear una carpeta `services/`, porque:
+
+* `services` no es una convención propia de React ni de Next.js.
+* El nombre es demasiado ambiguo: no expresa qué responsabilidad contiene.
+* Mezcla responsabilidades distintas (lógica de negocio, acceso a datos, validaciones y acciones) dentro de un mismo contenedor.
+
+En esta arquitectura cada carpeta debe expresar **una única responsabilidad clara** mediante un nombre específico: `actions/`, `repositories/`, `policies/`, `validators/` o `utils/`.
+
+***❌ Incorrecto - `services/` agrupa responsabilidades ambiguas***
+
+```txt
+users/
+└── services/
+    └── user.service.ts
+```
+
+***✅ Correcto - cada responsabilidad en su propia carpeta***
+
+```txt
+users/
+├── actions/
+├── repositories/
+├── policies/
+├── validators/
+└── utils/
+```
+
+No reemplazar `services/` por otra carpeta genérica equivalente (por ejemplo `helpers/`, `managers/` o `logic/`): el objetivo no es renombrar la carpeta, sino **separar responsabilidades**.
 
 Está estrictamente prohibido crear **nuevas capas** fuera de las tres definidas (Feature, Core y Shared). Toda carpeta, módulo o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas; no se permite introducir una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas.
 
