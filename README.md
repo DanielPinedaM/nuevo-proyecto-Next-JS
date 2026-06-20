@@ -204,22 +204,100 @@ Un archivo pertenece a `src/shared` cuando es completamente agnóstico al domini
 
 Un archivo reutilizado por múltiples features puede seguir perteneciendo a una feature si contiene conocimiento del dominio.
 
-***Regla obligatoria:***
-
-Antes de mover un archivo a `shared`, responder:
-
-> ¿Este archivo seguiría teniendo sentido si todas las features fueran eliminadas?
-
-* **SI:** El archivo puede pertenecer a `shared`.
-
-* **NO:** el archivo pertenece a una feature y no debe moverse a `shared`.
-
 # Código Reutilizado entre Múltiples Features
 
+Existe un tercer tipo de código que no encaja ni en una sola `feature` ni en `shared`:
 
+> Código que **conoce el dominio** (entidades, permisos, reglas del negocio) y que **se reutiliza en varias features al mismo tiempo**.
 
+La reutilización **NO** elimina su conocimiento del dominio. Por lo tanto **NO** puede ir a `shared`, porque `shared` es código agnóstico que no conoce ninguna entidad del negocio.
 
+Para este caso existe una **tercera capa**: `src/core`.
 
+## Capas de la Arquitectura
+
+| Capa                      | Ubicación                      | ¿Conoce el dominio? | ¿Cuántas features lo usan? | ¿Genera ruta URL? |
+| ------------------------- | ------------------------------ | ------------------- | -------------------------- | ----------------- |
+| Feature                   | `src/app/(features)/<feature>` | Sí                  | Solo 1                     | Sí                |
+| Core (dominio compartido) | `src/core`                     | Sí                  | 2 o más                    | No                |
+| Shared (agnóstico)        | `src/shared`                   | No                  | Cualquiera                 | No                |
+
+# Regla de decisión:
+
+1. ¿El código **NO** conoce el dominio (es 100% agnóstico)? → `src/shared`
+
+2. ¿Conoce el dominio y lo usa **una sola** feature? → dentro de esa feature en `src/app/(features)/<feature>`
+
+3. ¿Conoce el dominio y lo usan **dos o más** features? → `src/core`
+
+## ¿Por qué `src/core` y no dentro de `(features)`?
+
+En este proyecto, todo lo que está después de `src/app/(features)/` **define la ruta URL del navegador**.
+
+Si colocaras código de dominio compartido dentro de `(features)`, crearías una ruta URL que no corresponde a ninguna pantalla real, además de atar ese código a una sola feature.
+
+`src/core` vive **fuera** de `src/app`, por lo tanto:
+
+* **NO** genera ninguna ruta URL.
+* **NO** es agnóstico (puede conocer el dominio).
+* Es reutilizable por todas las features.
+
+Esto además lo mantiene **agnóstico al framework**: en Angular, Next.js, etc., `src/core` es simplemente una capa de dominio que no participa del enrutamiento. La arquitectura se traslada igual entre frameworks.
+
+## Organización interna de `src/core`
+
+`src/core` se organiza **por entidad del dominio**, no por tipo de archivo:
+
+```txt
+src/
+├── app/(features)/   → features (cada carpeta = ruta URL + lógica de esa feature)
+│
+├── core/             → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
+│   ├── users/
+│   │   ├── services/
+│   │   ├── interfaces/
+│   │   ├── constants/
+│   │   └── utils/
+│   │
+│   └── permissions/
+│       ├── services/
+│       └── interfaces/
+│
+└── shared/           → código 100% agnóstico al dominio (global)
+```
+
+## Ejemplo
+
+Un `UserPermissionsService` se usa en las features `Usuarios`, `Dashboard` y `Configuración`. Aunque se reutilice en 3 features, **sigue conociendo** usuarios, permisos y reglas del sistema.
+
+***❌ Incorrecto - en `shared` (la reutilización no elimina el conocimiento del dominio)***
+
+```txt
+src/shared/services/user-permissions.service.ts
+```
+
+***❌ Incorrecto - dentro de `(features)` (crearía una ruta URL inexistente y lo ataría a una sola feature)***
+
+```txt
+src/app/(features)/usuarios/services/user-permissions.service.ts
+```
+
+***✅ Correcto - en `src/core`, organizado por la entidad del dominio***
+
+```txt
+src/core/permissions/services/user-permissions.service.ts
+```
+
+## Verificación obligatoria
+
+Antes de ubicar el archivo, responder en orden:
+
+1. ¿Seguiría teniendo sentido si **todas** las features fueran eliminadas?
+   * **SÍ** → es agnóstico → `src/shared`
+   * **NO** → conoce el dominio → continuar a la pregunta 2
+2. ¿Lo usa **una sola** feature o **varias**?
+   * **Una** → dentro de esa feature en `src/app/(features)/<feature>`
+   * **Varias** → `src/core`
 
 # Diferencia entre `src/app/(features)` y `src/shared`
 
