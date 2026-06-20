@@ -29,20 +29,85 @@ comando               | apunta a...   | ruta archivo
 node --run build:test | pruebas       | `environments/.env.test`
 node --run build:prod | producción    | `environments/.env.production`
 
-# 🤖 Skill para Uso de IA
+# 🤖 Uso de IA
 
 > [!WARNING]
 > # ⚠️ ****IMPORTANTE**** 🚨
 >
-> ****Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistentes y desordenadas.****
+> ****Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente y desordenado.****
 
-Para que la IA pueda responder correctamente y respetar la estructura de este proyecto, antes de realizar cualquier pregunta en herramientas de IA como Chat GPT, Claude, Gemini, etc., ***desde aquí en adelante*** debes copiar y pegar completamente este `README.md`
+Esta sección está diseñada para utilizarse como contexto en herramientas de IA como Chat GPT, Claude, Gemini, Antigravity, etc.
 
-No debes copiar secciones anteriores del `README.md`
+Antes de realizar cualquier consulta relacionada con este proyecto en una IA, se debe proporcionar este contexto completo para que la herramienta pueda entender y respetar las reglas establecidas.
 
-Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, incluyendo todas las secciones posteriores completas y sin omitir información.
+Es recomendable ****utilizar IA desde la terminal (bash)**** y no en interfaces graficasa web ni aplicaciones de escritorio.
 
-## Stack Frontend del Proyecto
+No es recomendable usar herramientas de IA mediante interfaces gráficas como:
+
+* [Open Code Desktop](https://youtu.be/_SVSv2Y59P0?si=auL72MgiH7cyg37J)
+
+* [GPT Codex Desktop](https://youtu.be/bgx8ownl3O4?si=IIRgtKcmLaHW_Jc0)
+* [Chat GPT desde la interfaz web](https://chatgpt.com/)
+
+* [Claude Desktop](https://youtu.be/DYwZy7VNKws?si=h8dUgpeITRXuf9G1)
+* [Claude desde la interfaz web](https://chat.chatbotapp.ai/claude)
+
+* [Google AI Studio](https://aistudio.google.com/)
+
+* Chats con interfaces gráficas equivalentes
+
+Siempre usar la IA en la terminal (bash)
+
+***Ejemplos:***
+
+* Chat GPT desde la interfaz web → usar [GPT Codex CLI](https://youtu.be/Ub-K1n4YYsg?si=AECFbRb8VmaquZYr)
+* Claude desde la interfaz web → usar [Claude Code](https://youtu.be/Bf7hfpItrDk?si=v05Cqqe4yW3vJBgx)
+* Google AI Studio → usar [Antigravity CLI](https://youtu.be/bdEqIchP4x4?si=o0-bS58bZbuPP99d)
+
+La terminal permite que la IA tenga:
+* Mayor contexto del proyecto
+
+* Estructura completa del código
+
+* Acceso al sistema operativo (archivos y carpetas)
+
+* Realizar cambios respetando la arquitectura del proyecto.
+
+## Uso de Git y de IA
+
+Siempre realizar un commit antes de solicitar modificaciones a la IA.
+
+Esto evita acumular cambios sin control y permite tener trazabilidad clara de lo que la IA modifica.
+
+Trabajar bajo el principio:
+
+> 1 commit = 1 feature
+
+## Contexto para la IA
+Este contenido puede utilizarse dentro de archivos de configuración como:
+
+* `CLAUDE.md`
+* Archivos equivalentes de instrucciones para otras herramientas de IA
+
+Al copiar este contenido hacia una herramienta de IA:
+
+* Copiar únicamente desde esta sección hacia abajo.
+* Copiar todas las secciones posteriores completas sin omitir reglas.
+* No copiar secciones anteriores de este `README.md`.
+* Antes de pegarlo en la IA, eliminar los emojis del README.md
+
+# `CLAUDE.md`
+
+# 🌐 Reglas de idioma
+
+* Responder siempre en español.
+* Redactar explicaciones y documentación en español.
+* Escribir código en inglés.
+* Mantener el código, identificadores, nombres de archivos, clases, interfaces, métodos, funciones y variables en inglés.
+* No traducir términos técnicos de uso común en desarrollo de software (por ejemplo: middleware, service, controller, repository, signal, interceptor, provider, endpoint, payload, etc).
+* No traducir nombres de frameworks, librerías, APIs ni patrones de diseño.
+
+# Stack Frontend del Proyecto
 
 * Next JS 16 con App Router (`app`)
 * React 19
@@ -58,7 +123,7 @@ Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, 
 * react-icons
 * cookies-next
 
-## Reglas Obligatorias para la IA
+# Reglas Obligatorias
 
 * No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
 
@@ -76,10 +141,14 @@ Debes copiar únicamente el contenido que se encuentra desde aquí hacia abajo, 
 
 # 📁 Estructura Base del Proyecto
 
-# ***ESTO HAY Q CORREGIRLO:***
-- ACTUALIZARLO POR LAS NUEVAS CARPETAS
+> [!WARNING]
+> # ***ESTO HAY Q CORREGIRLO:***
 
-- USAR ARBOL JERARQUICO DE ARCHIVOS Y CARPETAS CON ├── Y └──
+La estructura de carpetas definida a continuación **no representa la totalidad completa del proyecto**, representa la **arquitectura base de referencia**.
+
+Esta arquitectura define el patrón estructural que toda la aplicación debe seguir, independientemente del crecimiento del proyecto o la incorporación de nuevas features.
+
+Es la guía principal que determina cómo se organiza el código, no una lista exhaustiva de todos los archivos existentes.
 
 ```txt
 src/
@@ -110,6 +179,344 @@ src/
             ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\buttons
             └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón.
 ```
+
+# Feature Architecture
+
+Este proyecto utiliza **Feature Architecture** sobre Next.js App Router.
+
+La regla principal es:
+
+* La lógica de negocio pertenece a una feature.
+
+* El código agnóstico al negocio pertenece a `shared`.
+
+Un archivo no pertenece a `shared` únicamente por ser reutilizado en múltiples `features`
+
+La reutilización no convierte automáticamente un archivo en código compartido (`shared`)
+
+# Regla de Ubicación de Archivos y Carpetas
+
+La ubicación de cualquier archivo o carpeta depende de su conocimiento del dominio, no de su nivel de reutilización.
+
+Un archivo pertenece a `src/app/(features)/**` cuando conoce entidades, reglas de negocio, casos de uso o comportamientos específicos de una funcionalidad.
+
+Un archivo pertenece a `src/shared` cuando es completamente agnóstico al dominio y puede existir sin conocer ninguna feature.
+
+Un archivo reutilizado por múltiples features puede seguir perteneciendo a una feature si contiene conocimiento del dominio.
+
+***Regla obligatoria:***
+
+Antes de mover un archivo a `shared`, responder:
+
+> ¿Este archivo seguiría teniendo sentido si todas las features fueran eliminadas?
+
+* **SI:** El archivo puede pertenecer a `shared`.
+
+* **NO:** el archivo pertenece a una feature y no debe moverse a `shared`.
+
+# Código Reutilizado entre Múltiples Features
+
+
+
+
+
+
+# Diferencia entre `src/app/(features)` y `src/shared`
+
+## `src/app/(features)`
+
+Contiene código específico de una funcionalidad del sistema.
+
+Todo archivo que conozca entidades, reglas, procesos o casos de uso del negocio debe permanecer dentro de la feature correspondiente.
+
+La lógica de negocio nunca debe salir de su feature.
+
+**Ejemplo:**
+* `src/app/(features)/*/ui` interfaz reutilizable únicamente para esa feature.
+
+* `src/app/(features)/*/components` componentes con lógica de negocio de esa feature.
+
+* `src/app/(features)/*/hooks` hooks específicos de esa feature.
+
+* `src/app/(features)/*/store` estado específico de esa feature.
+
+* `src/app/(features)/*/utils` utilidades específicas de esa feature.
+
+## `src/shared`
+
+Contiene únicamente código reutilizable y completamente agnóstico al dominio.
+
+`shared` no puede conocer ninguna `feature`.
+
+`shared` no puede contener reglas de negocio.
+
+`shared` no puede contener componentes, servicios o lógica relacionados con usuarios, autenticación, productos, órdenes, dashboard o cualquier otro concepto del dominio.
+
+**Ejemplo:**
+* `src/shared/ui` interfaz reutilizable global.
+* `src/shared/hooks` hooks reutilizables globales.
+* `src/shared/store` estado global de la aplicación.
+* `src/shared/utils` utilidades genéricas reutilizables.
+
+# Diferencia entre `components` y `ui`
+
+## ui
+
+`ui` contiene exclusivamente componentes de presentación y maquetación.
+
+Los componentes de `ui` deben ser completamente agnósticos al dominio.
+
+Un componente de `ui` no puede conocer logica de negocio, entidades del sistema ni casos de uso.
+
+Su única responsabilidad es renderizar interfaz reutilizable.
+
+## components
+
+`components` contiene componentes con lógica de negocio específica de la feature donde están definidos.
+
+Un componente pertenece a `components` cuando conoce el dominio, participa en un caso de uso o implementa comportamiento propio de la funcionalidad.
+
+La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
+
+## Prohibido `src/shared/components`|
+
+La carpeta `src/shared/components` está prohibida.
+
+`shared` representa código agnóstico al dominio.
+
+`components` representa componentes con comportamiento funcional asociado a una feature.
+
+Ambos conceptos son incompatibles.
+
+Si un componente es agnóstico al dominio, pertenece a `shared/ui`.
+
+Si un componente contiene lógica de negocio, pertenece a `src/app/(features)/*/components`.
+
+Por esta razón **NO** debe exitir:
+
+* `src/shared/components`
+* `src/app/shared/components`
+* `src/app/(features)/*/shared/components`
+
+La única ubicación válida para componentes compartidos es `src/shared/ui`.
+
+# 📝 Formularios - Integración Prime React y React Hook Form
+
+Todos los formularios del proyecto deben utilizar obligatoriamente:
+
+- React Hook Form
+- Componentes ubicados en `src/shared/ui/prime-react/react-hook-form`
+
+No crear formularios con manejo manual de estado cuando exista un componente React Hook Form equivalente.
+
+## `src/shared/ui/prime-react`
+
+Contiene componentes visuales basados en Prime React.
+
+Su responsabilidad es únicamente encapsular y estandarizar la UI.
+
+Estos componentes:
+
+* No conocen features
+* No contienen lógica de negocio
+* No contienen reglas del dominio
+
+## `src/shared/ui/prime-react/react-hook-form`
+
+Contiene adaptadores entre:
+
+* Prime React
+* React Hook Form
+* Componentes visuales
+
+Su única responsabilidad es conectar el formulario con la UI.
+
+Estos componentes solamente manejan integración técnica:
+
+- `useController`
+- `Controller`
+- `value`
+- `onChange`
+- `onBlur`
+- errores visuales del formulario
+
+No representan formularios del negocio.
+
+## Reglas obligatorias del sistema de formularios
+
+### 1. Framework y renderizado
+- Se trabaja en Next.js (App Router).
+- Todos los componentes de formularios deben ser `"use client"`.
+
+### 2. Ubicación obligatoria de componentes
+
+Es obligatorio usar los componentes reutilizables de inputs ubicados en:
+
+```txt
+src/shared/ui/prime-react/react-hook-form
+```
+
+### 3. Restricciones estrictas
+- Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
+- Obligatorio usar componentes de PrimeReact para todos los campos.
+- Prohibido usar formularios controlados con `useState`.
+- Prohibido usar formularios no controlados con `useRef`.
+- React Hook Form es la única fuente válida de estado del formulario.
+
+### 4. Flujo React Hook Form y Prime React
+
+```text
+Feature (Padre)
+    useForm()
+    defaultValues
+    handleSubmit()
+    control
+    rules
+    watch()
+    lógica condicional
+    estado derivado
+
+            │
+            ▼
+
+src\shared\ui\prime-react\react-hook-form
+    useController()
+    Controller
+    field.value
+    field.onChange
+    field.onBlur
+    field.ref
+    fieldState.error
+
+            │
+            ▼
+
+PrimeReact
+    InputText
+    Dropdown
+    Calendar
+    Checkbox
+    ...
+```
+
+### 5. React Hook Form (RHF)
+- Es el único responsable del estado del formulario.
+- `defaultValues` se define exclusivamente en `useForm` en el componente padre.
+- `watch` es obligatorio para lógica derivada en el componente padre.
+- `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
+
+### 6. Uso obligatorio de `watch`
+
+- Toda lógica condicional del formulario debe resolverse con `watch`.
+
+- `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
+
+- Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
+
+- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
+
+### 7. Componentes reutilizables
+Un input reutilizable debe:
+- Encapsular `Controller` de React Hook Form.
+- Ser genérico (`T extends FieldValues`).
+- Usar `control`, `name`, `rules`, `errors` como contrato base.
+- No contener lógica de negocio.
+- No definir reglas internas.
+- No usar `watch`.
+- Representar un único tipo de campo/input.
+- No mezclar múltiples tipos de input en un mismo componente reutilizable.
+
+***✅ Correcto***
+
+- `InputText`
+- `InputPassword`
+- `InputNumber`
+- `InputEmail`
+- `InputPhone`
+- `InputSelect`
+
+***❌ Incorrecto***
+
+- `GenericInput`
+- `BaseInput`
+- `DynamicInput`
+- Un único componente que maneje:
+  - `input type="text"`
+  - `input type="password"`
+  - `input type="number"`
+  - `input type="email"`
+
+### 8. UI (Prime React)
+- PrimeReact solo maneja la capa visual.
+- `disabled`, `placeholder`, `className` son props de UI.
+- Prime React no puede modificar el estado del formulario.
+- Solo refleja el estado final derivado de React Hook Form.
+
+### 9. Validaciones
+- Todas las validaciones se definen en el padre mediante `rules`.
+- Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
+- El input solo ejecuta las validaciones, no las define.
+
+### 10. Formularios dinámicos
+- La estructura del formulario debe definirse en el padre (config-driven).
+- No se permite lógica condicional dentro de los componentes de input.
+
+## Regla clave de arquitectura
+
+* Input (componente hijo) = UI + conexión React Hook Form
+
+* Padre = lógica + `watch` + validaciones + estado derivado
+
+## Flujo obligatorio de datos
+
+1. React Hook Form gestiona estado interno.
+2. watch en el componente padre define reglas dinámicas.
+3. El padre calcula props finales (ejemplo: `disabled`).
+4. El input recibe solo valores finales.
+5. PrimeReact renderiza UI.
+
+## Prohibido
+
+- Usar `watch` dentro de inputs reutilizables.
+- Usar `useState` para formularios controlados
+- Usar `useRef` para formularios no controlados
+- Usar inputs nativos de HTML.
+- Mezclar lógica de negocio dentro de inputs.
+- Definir `defaultValues` fuera de `useForm`.
+- Duplicar control de estado entre RHF y UI.
+- Usar `map` para renderizar los campos de los formularios.
+
+## Resultado esperado
+
+- Formularios escalables y consistentes.
+- Componentes reutilizables reales (design system).
+- Cero duplicación de lógica de `Controller`.
+- Separación estricta entre lógica y UI.
+- Mantenimiento simple en proyectos grandes.
+
+## Prohibido agregar lógica de negocio dentro de src/shared/ui/prime-react/react-hook-form
+
+En `src/shared/ui/prime-react/react-hook-form` nunca agregar:
+
+- Reglas de negocio
+- Reglas específicas de una feature
+- Validaciones de dominio
+- Condiciones de negocio
+- if relacionados con entidades del sistema
+- Permisos
+- Roles
+- Lógica de cualquier feature. Ejemplo: tareas, productos, usuarios, etc.
+
+***Ejemplo prohibido:***
+
+```tsx
+if (user.role === "admin") {
+  ...
+}
+```
+
+> [!WARNING]
+> # ***INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM***
 
 # 📅 Fechas
 
@@ -271,153 +678,6 @@ export default function MyComponent() {
   );
 }
 ```
-
-# 📝 Formularios en Next JS + React Hook Form + Prime React
-
-## Objetivo
-Estandarizar la implementación de formularios escalables, reutilizables y mantenibles en proyectos grandes
-
----
-
-## Reglas obligatorias del sistema de formularios
-
-### 1. Framework y renderizado
-- Se trabaja en Next.js (App Router).
-- Todos los componentes de formularios deben ser "use client".
-
-### 2. Ubicación obligatoria de componentes
-
-Es obligatorio usar los componentes reutilizables de inputs ubicados en:
-
-```txt
-src/shared/components/react-hook-form
-```
-
----
-
-### 3. Restricciones estrictas
-- Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
-- Obligatorio usar componentes de PrimeReact para todos los campos.
-- Prohibido usar formularios controlados con `useState`.
-- Prohibido usar formularios no controlados con `useRef`.
-- React Hook Form es la única fuente válida de estado del formulario.
-
----
-
-### 4. React Hook Form (RHF)
-- Es el único responsable del estado del formulario.
-- `defaultValues` se define exclusivamente en `useForm` en el componente padre.
-- `watch` es obligatorio para lógica derivada en el componente padre.
-- `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
-
----
-
-### 5. Uso obligatorio de `watch`
-
-- Toda lógica condicional del formulario debe resolverse con `watch`.
-
-- `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
-
-- Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
-
-- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
-
----
-
-### 6. Componentes reutilizables
-Un input reutilizable debe:
-- Encapsular `Controller` de React Hook Form.
-- Ser genérico (`T extends FieldValues`).
-- Usar `control`, `name`, `rules`, `errors` como contrato base.
-- No contener lógica de negocio.
-- No definir reglas internas.
-- No usar `watch`.
-- Representar un único tipo de campo/input.
-- No mezclar múltiples tipos de input en un mismo componente reutilizable.
-
-***✅ Correcto***
-
-- `InputText`
-- `InputPassword`
-- `InputNumber`
-- `InputEmail`
-- `InputPhone`
-- `InputSelect`
-
-***❌ Incorrecto***
-
-- `GenericInput`
-- `BaseInput`
-- `DynamicInput`
-- Un único componente que maneje:
-  - `input type="text"`
-  - `input type="password"`
-  - `input type="number"`
-  - `input type="email"`
-
----
-
-### 7. UI (Prime React)
-- PrimeReact solo maneja la capa visual.
-- `disabled`, `placeholder`, `className` son props de UI.
-- Prime React no puede modificar el estado del formulario.
-- Solo refleja el estado final derivado de React Hook Form.
-
----
-
-### 8. Validaciones
-- Todas las validaciones se definen en el padre mediante `rules`.
-- Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
-- El input solo ejecuta las validaciones, no las define.
-
----
-
-### 9. Formularios dinámicos
-- La estructura del formulario debe definirse en el padre (config-driven).
-- No se permite lógica condicional dentro de los componentes de input.
-
----
-
-## Regla clave de arquitectura
-
-* Input (componente hijo) = UI + conexión React Hook Form
-
-* Padre = lógica + `watch` + validaciones + estado derivado
-
----
-
-## Flujo obligatorio de datos
-
-1. React Hook Form gestiona estado interno.
-2. watch en el componente padre define reglas dinámicas.
-3. El padre calcula props finales (ejemplo: `disabled`).
-4. El input recibe solo valores finales.
-5. PrimeReact renderiza UI.
-
----
-
-## Prohibido
-
-- Usar `watch` dentro de inputs reutilizables.
-- Usar `useState` para formularios controlados
-- Usar `useRef` para formularios no controlados
-- Usar inputs nativos de HTML.
-- Mezclar lógica de negocio dentro de inputs.
-- Definir `defaultValues` fuera de `useForm`.
-- Duplicar control de estado entre RHF y UI.
-- Usar `map` para renderizar los campos de los formularios.
-
----
-
-## Resultado esperado
-
-- Formularios escalables y consistentes.
-- Componentes reutilizables reales (design system).
-- Cero duplicación de lógica de `Controller`.
-- Separación estricta entre lógica y UI.
-- Mantenimiento simple en proyectos grandes.
-
-# ***INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM***
 
 # 💅 Maquetación
 

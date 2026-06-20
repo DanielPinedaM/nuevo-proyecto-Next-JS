@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
-import errorNotification from "@/shared/components/dialog/notification/errorNotification";
+import ErrorToast from "@/shared/ui/overlay/toast/ErrorToast";
 import {
   IObjectLogs,
   IParamsValidateOptions,
@@ -130,7 +130,7 @@ export function internetConnection({
   if (withoutInternet) {
     const message: string = "Conéctese a internet para que la página web pueda funcionar";
 
-    if (isUseClient()) errorNotification(message);
+    if (isUseClient()) ErrorToast(message);
 
     errorLogs({
       message,
@@ -355,7 +355,7 @@ export function errorHandling(status: number | undefined, url: string): void {
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
     handleUnauthorized();
 
-    if (!pathnameIsLogin() && isUseClient()) errorNotification("Inicie sesión para continuar");
+    if (!pathnameIsLogin() && isUseClient()) ErrorToast("Inicie sesión para continuar");
   } else if (status === 403) {
     console.error(
       "❌ http.service.ts - Error 403: Forbidden",
@@ -369,21 +369,21 @@ export function errorHandling(status: number | undefined, url: string): void {
     returnToBrowserHistory();
 
     if (isUseClient())
-      errorNotification("Acceso denegado, no tiene permisos para realizar esta acción");
+      ErrorToast("Acceso denegado, no tiene permisos para realizar esta acción");
   } else if (status === 404) {
     console.error(
       `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
     );
 
     if (isUseClient())
-      errorNotification(
+      ErrorToast(
         "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
       );
   } else if (status >= 500) {
     console.error(`❌ http.service.ts - error en el servidor en la URL ${url}`);
 
     if (isUseClient())
-      errorNotification(
+      ErrorToast(
         "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
       );
   }

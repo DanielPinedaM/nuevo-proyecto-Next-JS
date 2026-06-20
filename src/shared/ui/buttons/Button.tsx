@@ -50,7 +50,7 @@ type ButtonComponent = {
  * <Button
  *   theme="success"
  *   variant="background"
- *   modifier={['icon-only', 'rounded-full']}
+ *   modifiers={['icon-only', 'rounded-full']}
  * >
  *   <MdCheckCircle />
  * </Button>
@@ -60,7 +60,7 @@ type ButtonComponent = {
  * <Button
  *   theme="secondary"
  *   variant="ghost"
- *   modifier="full-width"
+ *   modifiers={['full-width']}
  * >
  *   Cancelar
  * </Button>

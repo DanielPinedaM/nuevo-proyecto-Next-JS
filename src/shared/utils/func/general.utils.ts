@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import errorNotification from "@/shared/components/dialog/notification/errorNotification";
-import successNotification from "@/shared/components/dialog/notification/successNotification";
+import ErrorToast from "@/shared/ui/overlay/toast/ErrorToast";
+import SuccessToast from "@/shared/ui/overlay/toast/SuccessToast";
 import { Options, titleCase as titleCaseNpm } from "title-case";
 import { isString } from "@/shared/utils/func/dataType.utils";
 import { titleCaseOptions } from "@/shared/data-types/constants/title-case.const";
@@ -117,13 +117,13 @@ export const copyText = (text: string): void => {
   }
 
   if (!isString(text)) {
-    errorNotification(errorMessage);
+    ErrorToast(errorMessage);
     console.error("❌ error, text NO es tipo string\ntypeof text ", typeof text);
     return;
   }
 
   if (text.trim() === "") {
-    errorNotification(errorMessage);
+    ErrorToast(errorMessage);
     console.error("❌ error, text es un string vacio ''\ntext ", text);
     return;
   }
@@ -140,7 +140,7 @@ export const copyText = (text: string): void => {
   document.execCommand("copy");
   document.body.removeChild(selBox);
 
-  successNotification("Texto copiado");
+  SuccessToast("Texto copiado");
 };
 
 /**

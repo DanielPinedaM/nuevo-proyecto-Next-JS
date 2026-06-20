@@ -1,5 +1,5 @@
 'use client';
-import errorNotification from '@/shared/components/dialog/notification/errorNotification';
+import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import GeneralErrorMessage from '@/shared/components/GeneralErrorMessage';
 import { cookieOptionsInLogin } from '@/shared/data-types/constants/cookie-storage.const';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 import { constRegex } from '@/shared/data-types/constants/regex.constants';
-import { useNavigationLoaderStore } from '@/shared/store/loader/navigationLoaderStore';
 import {
   forceConvertToString,
   isLiteralObject,
@@ -33,8 +32,6 @@ interface IFormLogin {
 }
 
 export default function FormLogin() {
-  const { showLoaderNavigation } = useNavigationLoaderStore();
-
   const {
     formState: { errors },
     handleSubmit,
@@ -156,11 +153,10 @@ export default function FormLogin() {
     /* este es el codigo correcto q se tiene q des-comentar
     iterateUserData(data); */
 
-    showLoaderNavigation();
     router.push('/administrador');
     //} else {
     //deleteStorageAndCookies();
-    //errorNotification(message);
+    //ErrorToast(message);
     //}
   };
 

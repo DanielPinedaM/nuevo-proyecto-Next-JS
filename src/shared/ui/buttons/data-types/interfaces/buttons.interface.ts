@@ -69,7 +69,7 @@ export type SharedVisualProps = {
    * @example
    * <Button theme="primary" variant="background">Guardar</Button>
    * <Button theme="danger" variant="outline"><MdDelete /><span>Eliminar</span></Button>
-   * <Button theme="info" variant="background" modifier="icon-only"><MdInfo /></Button>
+   * <Button theme="info" variant="background" modifiers={['icon-only']}><MdInfo /></Button>
    */
   children: ReactNode;
 };

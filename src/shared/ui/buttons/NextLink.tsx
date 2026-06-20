@@ -59,7 +59,7 @@ type NextLinkComponent = {
  * <NextLink
  *   theme="success"
  *   variant="background"
- *   modifier={['icon-only', 'rounded-full']}
+ *   modifiers={['icon-only', 'rounded-full']}
  *   href="/notifications"
  * >
  *   <MdNotifications />

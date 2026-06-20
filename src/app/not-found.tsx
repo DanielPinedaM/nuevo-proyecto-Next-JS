@@ -1,10 +1,8 @@
 'use client';
-import { useNavigationLoaderStore } from '@/shared/store/loader/navigationLoaderStore';
 import { usePathname, useRouter } from 'next/navigation';
 import Button from '@/shared/ui/buttons/Button';
 
 export default function NotFound() {
-  const { showLoaderNavigation } = useNavigationLoaderStore();
   const pathname: string = usePathname();
   const router = useRouter();
 
@@ -12,7 +10,6 @@ export default function NotFound() {
     if (window.history.length > 1) {
       router.back();
     } else {
-      showLoaderNavigation();
       router.push('/iniciar-sesion');
     }
   };

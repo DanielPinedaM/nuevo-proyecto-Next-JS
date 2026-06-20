@@ -1,7 +1,7 @@
 'use client';
-import errorNotification from '@/shared/components/dialog/notification/errorNotification';
-import SkeletonMenu from '@/shared/components/loading/skeleton/SkeletonMenu';
-import CustomLink from '@/shared/components/loading/spinner/navigation-spinner/CustomLink';
+import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
+
+
 import { titleCase } from '@/shared/utils/func/general.utils';
 import {
   sessionStorageDeleteSpecific,
@@ -69,7 +69,7 @@ export default function MenuResponsive() {
   const setMenuInStorage = (data: IUrl[]): void => {
     if (!data || data?.length === 0) {
       console.error('❌ error, el endpoint de listar opciones del menu no tiene datos data', data);
-      errorNotification('Al mostrar el menu');
+      ErrorToast('Al mostrar el menu');
       sessionStorageDeleteSpecific('menu');
       setUrl([]);
 
@@ -88,7 +88,7 @@ export default function MenuResponsive() {
     } else {
       setUrl([]);
       console.error('❌ error en la llamada al endpoint q lista las opciones del menu');
-      errorNotification('Al mostrar el menu');
+      ErrorToast('Al mostrar el menu');
     }
   }; */
 
@@ -96,7 +96,7 @@ export default function MenuResponsive() {
     <>
       {url?.map((item: IUrl) => (
         <li key={item.id} className='transition duration-300 hover:text-blue-ocean'>
-          <CustomLink
+          <a
             href={item.url}
             onClick={hiddenMenu}
             className={twMerge(
@@ -107,7 +107,7 @@ export default function MenuResponsive() {
             )}
           >
             {titleCase(item.text)}
-          </CustomLink>
+          </a>
         </li>
       ))}
     </>
@@ -117,7 +117,6 @@ export default function MenuResponsive() {
     <>
       {showMenu && (
         <menu className='h-full gap-y-1 flex flex-col py-4 px-2 fixed left-0 top-0 xl:static bg-blue-600/50 rounded-tr-2xl rounded-tb-2xl'>
-          {url === undefined && <SkeletonMenu />}
           {url && url?.length > 0 && <RenderMenu />}
         </menu>
       )}

@@ -2,9 +2,9 @@
 'use client';
 import { saveAs } from 'file-saver';
 import { currentDateAndTime } from '@/shared/utils/func/luxon.utils';
-import errorNotification from '@/shared/components/dialog/notification/errorNotification';
+import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import { isUseClient, titleCase } from '@/shared/utils/func/general.utils';
-import successNotification from '@/shared/components/dialog/notification/successNotification';
+import SuccessToast from '@/shared/ui/overlay/toast/SuccessToast';
 import { IResponse } from '@/shared/api/http-client/types/request-data.types';
 import * as ExcelJS from 'exceljs';
 import { ILoaderState } from '@/shared/store/loader/loaderStore';
@@ -26,12 +26,12 @@ export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefine
       blob
     );
 
-    errorNotification(message);
+    ErrorToast(message);
     return;
   }
 
   if (!fileName) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error('❌ el nombre del archivo fileName NO puede ser falsy\n', fileName);
     return;
   }
@@ -45,7 +45,7 @@ export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefine
       extension
     );
 
-    errorNotification(message);
+    ErrorToast(message);
     return;
   }
 
@@ -53,7 +53,7 @@ export const downloadBlob = (blob: Blob | IResponse, fileName: string | undefine
   const baseFileName: string = lastDotIndex > -1 ? fileName.slice(0, lastDotIndex) : fileName;
   const date: string = currentDateAndTime().replaceAll(':', '_').replaceAll(' ', '-');
 
-  successNotification(`Archivo descargado ${baseFileName}.${extension}`);
+  SuccessToast(`Archivo descargado ${baseFileName}.${extension}`);
 
   saveAs(blob, `${date}-${baseFileName}.${extension}`);
 };
@@ -67,7 +67,7 @@ export const viewBlob = (blob: Blob | IResponse): void => {
 
     setTimeout(() => URL.revokeObjectURL(fileURL), 5000);
   } else {
-    errorNotification("Al ver archivo");
+    ErrorToast("Al ver archivo");
     console.error('❌ error, para poder ver el archivo, tiene q ser tipo blob\n', blob);
   }
 };
@@ -86,7 +86,7 @@ export const downloadExcel = async (
   const message: string = 'Ocurrió un error al descargar Excel';
 
   if (!nonNestedArrayOfObjects) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error(
       '❌ el array de objetos NO puede ser falsy\n',
       nonNestedArrayOfObjects
@@ -95,7 +95,7 @@ export const downloadExcel = async (
   }
 
   if (!(Array.isArray(nonNestedArrayOfObjects))) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error(
       '❌ el parametro nonNestedArrayOfObjects tiene q ser un array de objetos NO anidado\n',
       nonNestedArrayOfObjects
@@ -104,7 +104,7 @@ export const downloadExcel = async (
   }
 
   if (nonNestedArrayOfObjects.length === 0) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error(
       '❌ la longitud del array de objetos NO puede ser cero\n',
       nonNestedArrayOfObjects
@@ -113,13 +113,13 @@ export const downloadExcel = async (
   }
 
   if (!fileName) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error('❌ el nombre del archivo fileName NO puede ser falsy\n', fileName);
     return;
   }
 
   if (!(String(fileName).includes('.xlsx'))) {
-    errorNotification(message);
+    ErrorToast(message);
     console.error('❌ fileName tiene q contener la extension .xlsx\n', fileName);
     return;
   }
@@ -175,7 +175,7 @@ export const downloadExcel = async (
     })
     .catch((error) => {
       console.error('❌ error al generar el archivo Excel\n', error);
-      errorNotification(message);
+      ErrorToast(message);
     })
     .finally(() => {
       loaderStore.hideLoader();

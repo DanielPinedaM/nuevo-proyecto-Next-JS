@@ -2,16 +2,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { forceConvertToString, literalObjectLength } from '@/shared/utils/func/dataType.utils';
-import { useNavigationLoaderStore } from "@/shared/store/loader/navigationLoaderStore";
 
 interface IOptionsSetQueryParams {
   replaceAll?: boolean;
-  showLoader?: boolean;
   customPathname?: string;
 }
 
 export const useQueryParams = () => {
-  const { showLoaderNavigation } = useNavigationLoaderStore();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -22,13 +19,11 @@ export const useQueryParams = () => {
    *
    * @param {Object} [paramsObj] — objeto literal con query params a actualizar
    * @param {Object} [customPathname] — ruta personalizada a la cual se le setea los query params, por defecto es la ruta actual
-   * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params
-   * @param {boolean} [options.showLoader] — true = MOSTRAR icono de cargando, false = OCULTAR icono de cargando */
+   * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params */
   const setQueryParams = useCallback(
     (paramsObj: Record<string, any> = {}, options?: IOptionsSetQueryParams): void => {
       const {
         replaceAll = false,
-        showLoader = true,
         customPathname = null,
       } = options ?? {};
 
@@ -56,10 +51,6 @@ export const useQueryParams = () => {
 
       // NO actualizar la URL cuando los query params no han cambiado
       if (oldUrl !== newUrl) {
-        if (showLoader) {
-          showLoaderNavigation();
-        }
-
         router.push(newUrl);
       }
     },
