@@ -406,6 +406,17 @@ Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, p
 
 * `common/`: Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
 
+* `**/utils/func/general.utils.ts` / `**/utils/func/global.utils.ts`: Un archivo cuyo nombre no describe ninguna responsabilidad concreta termina acumulando funciones sin relación entre sí. Un nombre genérico (`general`, `global`, `misc`, `helpers`, etc.) invita a meter cualquier cosa, lo que convierte el archivo en un depósito sin dueño que rompe la separación de responsabilidades. Cada utilidad debe residir en un archivo que nombre explícitamente **su responsabilidad concreta** (la capacidad técnica en `shared`, la entidad o concepto en `core`). Ejemplo: `luxon.utils.ts`, `string.utils.ts`, `user.utils.ts`. No basta con renombrar a otro nombre comodín equivalente: el objetivo es **separar responsabilidades**, no reetiquetarlas. Por eso **NO** debe existir en ninguna de estas rutas:
+
+  * `src/shared/utils/func/general.utils.ts`
+  * `src/shared/utils/func/global.utils.ts`
+
+  * `src/core/<entity>/utils/func/general.utils.ts`
+  * `src/core/<entity>/utils/func/global.utils.ts`
+
+  * `src/app/(features)/<feature>/utils/func/general.utils.ts`
+  * `src/app/(features)/<feature>/utils/func/global.utils.ts`
+
 * `shared/components`: Combina conceptos incompatibles: `shared` es código agnóstico al dominio, mientras que `components` contiene lógica de negocio asociada a una feature. Un componente agnóstico pertenece a `src/shared/ui` y un componente con lógica de negocio a `src/app/(features)/<feature>/components`. Por eso **NO** debe existir en ninguna de estas rutas:
   * `src/shared/components`
   * `src/app/shared/components`
