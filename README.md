@@ -262,7 +262,13 @@ Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido util
 
 ## Organización interna de las capas
 
-Cada capa se organiza **por entidad o funcionalidad del dominio**, no por tipo de archivo:
+Cada capa utiliza un criterio de organización diferente según su responsabilidad:
+
+* **Feature** se organiza por **funcionalidades del producto**.
+* **Core** se organiza por **conceptos o entidades del dominio**.
+* **Shared** se organiza por **capacidades técnicas reutilizables**.
+
+Las carpetas internas representan responsabilidades específicas dentro de cada contexto, pero no todas las capas siguen la misma estructura:
 
 ```txt
 src/
@@ -273,16 +279,15 @@ src/
 │       ├── ui/                → interfaz reutilizable solo dentro de la feature
 │       ├── hooks/
 │       ├── stores/
+│       ├── utils/
 │       ├── data-types/
 │       │   ├── constants/
 │       │   ├── interfaces/
 │       │   └── enums/
-│       └── utils/
 │
 ├── core/                      → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
 │   │   ├── actions/           → casos de uso / operaciones del dominio (crear, actualizar, etc.)
-│   │   ├── repositories/      → acceso a datos (peticiones a la API, persistencia)
 │   │   ├── policies/          → reglas de autorización y decisiones de permiso
 │   │   ├── validators/        → validación de reglas del dominio
 │   │   ├── utils/             → utilidades específicas de la entidad
@@ -315,7 +320,7 @@ src/
     └── utils/
 ```
 
-**Distinción entre `(features)` y `<feature>`:**
+**Diferencia entre `(features)` y `<feature>`:**
 
 * **`(features)`** es un *route group* de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas ellas.
 
