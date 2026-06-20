@@ -1,4 +1,4 @@
-import FormLogin from '@/app/(auth)/iniciar-sesion/FormLogin';
+import FormLogin from '@/app/(features)/(auth)/iniciar-sesion/FormLogin';
 
 export default function Page() {
   return (

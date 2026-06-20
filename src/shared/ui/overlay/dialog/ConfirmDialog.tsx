@@ -1,5 +1,4 @@
 "use client";
-import { globalTailwindStyle } from "@/shared/data-types/constants/layout.const";
 import dynamic from "next/dynamic";
 import { Dialog, DialogProps } from "primereact/dialog";
 import Button from "@/shared/ui/buttons/Button";
@@ -65,7 +64,7 @@ export default function ConfirmDialog({
       className="max-w-md"
       onHide={() => onHide?.()}
     >
-      <section className={`${globalTailwindStyle.dialog.container.content}`}>
+      <section>
         <p className="text-center">¿{message}?</p>
       </section>
     </Dialog>

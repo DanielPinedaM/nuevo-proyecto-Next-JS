@@ -20,14 +20,3 @@ export interface IBreakpoint {
   // => @media (min-width: 1920px) { ... }
   "3xl": number;
 }
-
-export interface IGlobalTailwindStyle {
-  input: {
-    general: string;
-  };
-  dialog: {
-    container: {
-      content: string;
-    };
-  };
-}

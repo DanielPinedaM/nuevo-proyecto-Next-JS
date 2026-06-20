@@ -8,7 +8,6 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 import { constRegex } from '@/shared/data-types/constants/regex.constants';
 import {
   forceConvertToString,
@@ -192,7 +191,7 @@ export default function FormLogin() {
                   onChange={(e) => onChange(e.target.value)}
                   onBlur={onBlur}
                   placeholder='nombre@correo.com'
-                  className={`${globalTailwindStyle.input.general} block w-full`}
+                  className={`block w-full`}
                 />
               )}
             />
@@ -219,7 +218,6 @@ export default function FormLogin() {
                   variant='filled'
                   feedback={false}
                   placeholder='Contraseña'
-                  className={`${globalTailwindStyle.input.general}`}
                 />
               )}
             />

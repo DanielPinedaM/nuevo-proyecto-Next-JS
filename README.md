@@ -109,6 +109,7 @@ Al copiar este contenido hacia una herramienta de IA:
 
 # Stack Frontend del Proyecto
 
+* Node JS 24.16.0
 * Next JS 16 con App Router (`app`)
 * React 19
 * TypeScript 6

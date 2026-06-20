@@ -6,7 +6,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { useCallback, useEffect } from 'react';
 import { useState } from 'react';
-import { globalTailwindStyle } from '@/shared/data-types/constants/layout.const';
 
 interface IInputSearchParams {
   label?: string;
@@ -82,7 +81,6 @@ export default function InputSearchParams({
       <InputText
         autoComplete='off'
         placeholder={placeholder ?? ""}
-        className={`${globalTailwindStyle.input.general} block w-full`}
         value={inputValue}
         onChange={(e) => onChangeInputValue(e.target.value)}
       />

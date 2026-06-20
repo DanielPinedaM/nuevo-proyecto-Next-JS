@@ -7,9 +7,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
-import LoaderInApiRequest from '@/shared/components/loading/spinner/LoaderInApiRequest';
 import { Suspense } from 'react';
-import NavigationLoader from '@/shared/components/loading/spinner/navigation-spinner/NavigationLoader';
+import FixedLoader from '@/shared/ui/FixedLoader';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -35,11 +34,7 @@ export default function RootLayout({
   return (
     <html lang='es-ES'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <LoaderInApiRequest />
-
-        <Suspense fallback={null}>
-          <NavigationLoader />
-        </Suspense>
+        <FixedLoader />
 
         <Toaster position='top-right' reverseOrder={true} />
 
