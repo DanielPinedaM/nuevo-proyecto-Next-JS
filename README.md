@@ -194,12 +194,37 @@ La arquitectura define **únicamente tres capas**:
 
 ## Principio fundamental
 
-La ubicación de cualquier archivo o carpeta depende de **su conocimiento del dominio**, no de su nivel de reutilización.
+Esta sección define qué representa cada una de las tres capas de la arquitectura. La clasificación de un archivo concreto se realiza en la sección "Regla de decisión".
 
-* El código que conoce el dominio (entidades, reglas de negocio, casos de uso, permisos) pertenece a una feature o a `src/core`.
-* El código completamente agnóstico al dominio pertenece a `src/shared`.
+### Feature
 
-La reutilización **no** convierte automáticamente un archivo en código compartido. Un archivo reutilizado por varias features sigue perteneciendo al dominio si conoce entidades o reglas de negocio; en ese caso pertenece a `src/core`, nunca a `src/shared`.
+Código específico de **una sola** funcionalidad del sistema. Conoce el dominio (entidades, reglas de negocio, procesos y casos de uso) y es utilizado por una única feature. Al vivir dentro de `src/app/(features)`, **genera una ruta URL**. Su lógica de negocio nunca debe salir de la feature a la que pertenece.
+
+Ejemplos:
+
+* `src/app/(features)/tasks/components/ListTasks.tsx`
+* `src/app/(features)/tasks/hooks/useTasks.ts`
+* `src/app/(features)/tasks/store/tasks.store.ts`
+
+### Core
+
+Código que **conoce el dominio** (entidades, permisos o reglas de negocio) y es compartido por **dos o más** features al mismo tiempo. Vive fuera de `src/app`, por lo que **no genera ruta URL**. No es agnóstico: ser reutilizado por varias features no elimina su conocimiento del dominio.
+
+Ejemplos:
+
+* `src/core/users/services/user.service.ts`
+* `src/core/users/data-types/interfaces/user.interface.ts`
+* `src/core/permissions/get-user-permissions.ts`
+
+### Shared
+
+Código reutilizable y **completamente agnóstico al dominio**. No conoce ninguna feature ni concepto del negocio (usuarios, autenticación, productos, órdenes, dashboard, etc.) y no contiene reglas de negocio. Vive fuera de `src/app`, por lo que **no genera ruta URL**.
+
+Ejemplos:
+
+* `src/shared/ui/prime-react/react-hook-form/InputText.tsx`
+* `src/shared/utils/func/luxon.utils.ts`
+* `src/shared/ui/buttons/Button.tsx`
 
 ## Capas de la Arquitectura
 
@@ -211,75 +236,29 @@ La reutilización **no** convierte automáticamente un archivo en código compar
 
 ## Regla de decisión
 
-Estas reglas tienen prioridad absoluta sobre cualquier otra explicación del documento. Para ubicar cualquier archivo o carpeta, evaluar en este orden:
+Esta es la **única** sección para decidir dónde ubicar cualquier archivo o carpeta y tiene prioridad absoluta sobre cualquier otra explicación del documento. Responder las preguntas en orden:
 
-1. ¿El código **NO** conoce el dominio (es 100% agnóstico)? → `src/shared`
-2. ¿Conoce el dominio y lo usa **una sola** feature? → dentro de esa feature en `src/app/(features)/<feature>`
-3. ¿Conoce el dominio y lo usan **dos o más** features? → `src/core`
+**1. ¿Seguiría teniendo sentido el código si se eliminaran TODAS las features?**
 
-## Verificación obligatoria
+* **Sí** → es 100 % agnóstico al dominio → `src/shared`.
+* **No** → conoce el dominio → continuar con la pregunta 2.
 
-Antes de ubicar el archivo, responder en orden:
+**2. ¿Cuántas features lo usan?**
 
-1. ¿Seguiría teniendo sentido si **todas** las features fueran eliminadas?
-   * **SÍ** → es agnóstico → `src/shared`
-   * **NO** → conoce el dominio → continuar a la pregunta 2
-2. ¿Lo usa **una sola** feature o **varias**?
-   * **Una** → dentro de esa feature en `src/app/(features)/<feature>`
-   * **Varias** → `src/core`
+* **Una sola** → dentro de esa feature, en `src/app/(features)/<feature>`.
+* **Dos o más** → `src/core`.
 
-## Responsabilidades de cada capa
+## ¿Por qué `src/core` y no dentro de `src/app/(features)/<feature>`?
 
-### Feature — `src/app/(features)/<feature>`
+Todo lo que está dentro de `src/app/(features)/` forma parte de la estructura de rutas del App Router de Next.js.
 
-Contiene el código específico de una funcionalidad del sistema. Conoce entidades, reglas, procesos y casos de uso del negocio, y lo usa una sola feature.
+En Next.js App Router, las rutas se definen mediante archivos especiales como `page.tsx` dentro de `src/app/(features)/`. Las carpetas representan segmentos de la URL, mientras que archivos como `page.tsx` determinan qué segmentos se convierten en rutas accesibles.
 
-La lógica de negocio nunca debe salir de su feature.
+Si colocaras código de dominio compartido dentro de `(features)`, ese código quedaría asociado a una feature específica dentro de la estructura de rutas de Next.js App Router, aunque no represente una pantalla propia.
 
-**Ejemplo de carpetas internas:**
+Además, estarías acoplando un módulo compartido a una única feature, lo que impediría reutilizarlo correctamente entre diferentes funcionalidades.
 
-* `src/app/(features)/<feature>/components` componentes con lógica de negocio de esa feature.
-* `src/app/(features)/<feature>/ui` interfaz reutilizable únicamente dentro de esa feature.
-* `src/app/(features)/<feature>/hooks` hooks específicos de esa feature.
-* `src/app/(features)/<feature>/store` estado específico de esa feature.
-* `src/app/(features)/<feature>/utils` utilidades específicas de esa feature.
-
-### Core — `src/core`
-
-Contiene código que **conoce el dominio** y se reutiliza en **dos o más** features al mismo tiempo (por ejemplo: entidades, permisos o reglas de negocio compartidas).
-
-La reutilización **no** elimina su conocimiento del dominio, por lo que **no** puede ubicarse en `src/shared`. Tampoco puede ubicarse dentro de `(features)`, porque quedaría atado a una sola feature.
-
-`src/core` se organiza **por entidad del dominio**, no por tipo de archivo.
-
-### Shared — `src/shared`
-
-Contiene únicamente código reutilizable y **completamente agnóstico al dominio**.
-
-* `shared` no puede conocer ninguna feature.
-* `shared` no puede contener reglas de negocio.
-* `shared` no puede contener componentes, servicios ni lógica relacionados con usuarios, autenticación, productos, órdenes, dashboard ni cualquier otro concepto del dominio.
-
-**Ejemplo de carpetas internas:**
-
-* `src/shared/ui` interfaz reutilizable global.
-* `src/shared/hooks` hooks reutilizables globales.
-* `src/shared/store` estado global de la aplicación.
-* `src/shared/utils` utilidades genéricas reutilizables.
-
-## ¿Por qué `src/core` y no dentro de `(features)`?
-
-Todo lo que está dentro de `src/app/(features)/` **define una ruta URL** (enrutamiento basado en el sistema de archivos).
-
-Si colocaras código de dominio compartido dentro de `(features)`, crearías una ruta URL que no corresponde a ninguna pantalla real y, además, atarías ese código a una sola feature.
-
-`src/core` vive **fuera** de `src/app`, por lo tanto:
-
-* **NO** genera ninguna ruta URL.
-* **NO** es agnóstico (puede conocer el dominio).
-* Es reutilizable por todas las features.
-
-Esto mantiene la arquitectura **agnóstica al framework**: `src/core` es una capa de dominio que no participa del enrutamiento, por lo que el modelo se traslada igual a cualquier tecnología.
+Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido utilizado por múltiples features sin pertenecer a una feature específica ni participar directamente en la definición de rutas.
 
 ## Organización interna de las capas
 
@@ -287,9 +266,16 @@ Cada capa se organiza **por entidad o funcionalidad del dominio**, no por tipo d
 
 ```txt
 src/
-├── app/(features)/   → features (cada carpeta = ruta URL + lógica de esa feature)
+├── app/(features)/            → route group: agrupa todas las features y NO genera segmento de URL
+│   └── <feature>/             → App Router de Next.js: una feature concreta. Ejemplos: tasks, products; cada una = una ruta URL
+│       ├── page.tsx           → punto de entrada de la feature (define la ruta URL)
+│       ├── components/        → componentes con lógica de negocio de la feature
+│       ├── ui/                → interfaz reutilizable solo dentro de la feature
+│       ├── hooks/
+│       ├── store/
+│       └── utils/
 │
-├── core/             → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
+├── core/                      → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
 │   ├── users/
 │   │   ├── services/
 │   │   ├── interfaces/
@@ -300,22 +286,21 @@ src/
 │       ├── services/
 │       └── interfaces/
 │
-└── shared/           → código 100% agnóstico al dominio (global)
+└── shared/                    → código 100% agnóstico al dominio (global)
+    ├── ui/                    → interfaz reutilizable global
+    ├── hooks/
+    ├── store/
+    └── utils/
 ```
 
-## Prohibición de nuevas capas arquitectónicas
+**Distinción entre `(features)` y `<feature>`:**
 
-Está estrictamente prohibido crear nuevas capas arquitectónicas fuera de las tres definidas (Feature, Core y Shared).
+* **`(features)`** es un *route group* de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas ellas.
+* **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
 
-Toda carpeta, módulo o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas. No se permite introducir carpetas que representen una nueva capa conceptual, una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas por la arquitectura.
+Está estrictamente prohibido crear **nuevas capas** fuera de las tres definidas (Feature, Core y Shared). Toda carpeta, módulo o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas; no se permite introducir una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas.
 
-La regla de decisión es la única forma válida de determinar la ubicación de cualquier nuevo código dentro del proyecto.
-
-## Carpetas internas permitidas
-
-Se permite crear subcarpetas dentro de una capa siempre que **no introduzcan una nueva capa arquitectónica** y respeten las responsabilidades definidas por la arquitectura.
-
-Ejemplos válidos:
+Sí está permitido crear **subcarpetas dentro de una capa existente**, siempre que no introduzcan una nueva capa y respeten las responsabilidades de esa capa. Ejemplos válidos:
 
 ```text
 src/shared
@@ -336,7 +321,7 @@ src/app/(features)
 └── dashboard
 ```
 
-Estas carpetas son válidas porque únicamente organizan el contenido dentro de una capa existente y no crean nuevas capas arquitectónicas.
+Estas subcarpetas son válidas porque únicamente organizan el contenido dentro de una capa existente.
 
 ## Ejemplo
 
