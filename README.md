@@ -16,11 +16,11 @@ npm i
 
 # ▶️ Ejecutar proyecto
 
-comando                | apunta a...   | ruta archivo
----------------------- | ------------- | -------------
-node --run start:local | local host    | `environments/.env.localhost`
-node --run start:test  | pruebas       | `environments/.env.test`
-node --run start:prod  | producción    | `environments/.env.production`
+|comando                | apunta a...   | ruta archivo
+|---------------------- | ------------- | -------------
+|node --run start:local | local host    | `environments/.env.localhost`
+|node --run start:test  | pruebas       | `environments/.env.test`
+|node --run start:prod  | producción    | `environments/.env.production`
 
 # 🚀 Generar build (dist) para desplegar
 
@@ -114,6 +114,7 @@ Al copiar este contenido hacia una herramienta de IA:
 * TypeScript 6
 * PrimeReact 10
 * React Hook Form 7
+* hookform/error-message
 * Tailwind CSS 4
 * Sass (versión moderna con `@use` y `@forward`, no utilizar `@import`)
 * Zustand 5
@@ -432,7 +433,7 @@ feature  →  core  →  shared
 
 * Las dependencias entre módulos de **Core** deben ser **acíclicas**: si `A` importa de `B`, entonces `B` no puede importar de `A`.
 
-Cuando una **Feature** necesita lógica que pertenece a otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a `core`** (ver "Promoción de Feature a Core") y ambas la consumen desde ahí.
+Cuando una **Feature** necesita lógica que pertenece a otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a `core`** (ver "Mover de Feature a Core") y ambas la consumen desde ahí.
 
 ### ¿Por qué una sola dirección?
 
@@ -441,23 +442,104 @@ Esta regla es la que mantiene la arquitectura escalable cuando el número de fea
 ***✅ Ejemplos válidos:***
 
 ```ts
+// feature → core      (una feature usa dominio compartido)
 // src/app/(features)/orders/components/OrderList.tsx
 import { getUserPermissions } from '@/core/permissions/get-user-permissions'
+
+// feature → shared    (una feature usa código agnóstico)
+// src/app/(features)/orders/components/OrderList.tsx
+import { Button } from '@/shared/ui/buttons/Button'
+
+// core → shared       (el dominio usa código agnóstico)
+// src/core/users/actions/update-user.ts
+import { formatDate } from '@/shared/utils/func/luxon.utils'
+
+// core → core         (una entidad usa otra, en UNA sola dirección y sin ciclo)
+// src/core/orders/validators/order.validator.ts
+import { isActiveUser } from '@/core/users/utils/user.utils'
+
+// shared → shared     (un módulo agnóstico usa otro módulo agnóstico)
+// src/shared/ui/overlay/dialog/ConfirmDialog.tsx
 import { Button } from '@/shared/ui/buttons/Button'
 ```
 
 ***🚫 Ejemplos prohibidos:***
 
 ```ts
+// ❌ feature → feature   (una feature nunca importa de otra feature)
 // src/app/(features)/orders/components/OrderList.tsx
-import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'          // feature → feature
+import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'
 
+// ❌ core → feature       (core nunca importa de una feature)
 // src/core/users/actions/update-user.ts
-import { OrderForm } from '@/app/(features)/orders/components/OrderForm'  // core → feature
+import { OrderForm } from '@/app/(features)/orders/components/OrderForm'
 
+// ❌ shared → feature     (shared nunca importa de una feature)
 // src/shared/ui/buttons/Button.tsx
-import { User } from '@/core/users/data-types/interfaces/user.interface'  // shared → core
+import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'
+
+// ❌ shared → core        (shared nunca importa de core)
+// src/shared/ui/buttons/Button.tsx
+import { User } from '@/core/users/data-types/interfaces/user.interface'
 ```
+
+## Procesos del Dominio en Core
+
+`core` se organiza por **conceptos del dominio**. Una **entidad** (`users`, `orders`, `permissions`) es un tipo de concepto, pero **no el único**.
+
+Cuando una operación del dominio involucra **dos o más entidades a la vez** (por ejemplo un proceso de checkout que coordina `orders`, `payments` e `inventory`), ese proceso **es en sí mismo un concepto del dominio** y recibe su **propia carpeta** dentro de `core`. No debe forzarse dentro de una de las entidades que coordina, porque no pertenece a ninguna en exclusiva.
+
+```txt
+src/core/
+├── orders/            → entidad
+├── payments/          → entidad
+├── inventory/         → entidad
+└── checkout/          → proceso del dominio que coordina las tres
+    ├── actions/
+    ├── validators/
+    └── data-types/
+```
+
+Regla práctica: si no puedes responder "¿de qué entidad es esto?" con **una sola** entidad, probablemente es un **proceso** y merece su propia carpeta en `core`, no un lugar prestado dentro de otra entidad.
+
+Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (conoce el dominio, es compartido por varias features, no genera ruta URL).
+
+***✅ Caso especial - core → core cíclico:***
+
+Importar de una entidad a otra dentro de core sí está permitido, pero solo en una dirección. Queda prohibido cuando se forma un ciclo (A importa de B y B importa de A):
+
+```ts
+// src/core/users/utils/user.utils.ts
+import { getOrdersByUser } from '@/core/orders/actions/get-orders-by-user'  // users depende de orders
+
+// src/core/orders/validators/order.validator.ts
+import { isActiveUser } from '@/core/users/utils/user.utils'                // orders depende de users
+```
+
+## Mover de Feature a Core
+
+La "Regla de Decisión" ubica dentro de una feature todo el código de dominio usado por **una sola** feature. En cuanto una **segunda** feature necesita ese mismo código, deja de cumplir la condición de "una sola feature" y debe **moverse a `core`**.
+
+Esto es un **movimiento esperado y normal** del ciclo de vida del proyecto, no una excepción ni un error de diseño previo. Que un archivo nazca dentro de una feature y luego suba a `core` es el comportamiento correcto de la arquitectura.
+
+***Procedimiento al Mover de Feature a Core:***
+
+1. Mover el archivo (o carpeta) desde `src/app/(features)/<feature>/...` hacia la entidad o proceso correspondiente en `src/core/...`.
+2. Reescribir todos los imports que apuntaban a la ubicación anterior.
+3. Verificar que el módulo movido **no conserve imports hacia ninguna feature** (violaría la Regla de Dirección de Dependencias).
+4. Confirmar que ahora **ambas** features lo consumen desde `core`.
+
+Está prohibido **duplicar** el código en la segunda feature para evitar el movimiento: duplicar lógica de dominio rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
+
+## Resumen de Regla de Dirección de Dependencias
+
+| Desde ↓ \ Hacia → | Feature | Core | Shared |
+|-------------------|---------|------|--------|
+| **Feature**       | ❌     | ✅   | ✅    |
+| **Core**          | ❌     | ✅\* | ✅    |
+| **Shared**        | ❌     | ❌   | ✅    |
+
+\* core → core es válido solo en una dirección; queda prohibido si forma un ciclo (ver "Procesos del Dominio en Core").
 
 # 📝 Formularios - Integración Prime React y React Hook Form
 

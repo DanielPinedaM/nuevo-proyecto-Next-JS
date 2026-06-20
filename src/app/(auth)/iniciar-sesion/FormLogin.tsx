@@ -1,6 +1,6 @@
 'use client';
 import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
-import GeneralErrorMessage from '@/shared/components/GeneralErrorMessage';
+import FormErrorMessages from '@/shared/ui/prime-react/react-hook-form/FormErrorMessages';
 import { cookieOptionsInLogin } from '@/shared/data-types/constants/cookie-storage.const';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
@@ -197,7 +197,7 @@ export default function FormLogin() {
               )}
             />
           </label>
-          <GeneralErrorMessage errors={errors} name='user' />
+          <FormErrorMessages errors={errors} name='user' />
         </div>
 
         <div className='mb-2'>
@@ -224,7 +224,7 @@ export default function FormLogin() {
               )}
             />
           </label>
-          <GeneralErrorMessage errors={errors} name='password' />
+          <FormErrorMessages errors={errors} name='password' />
         </div>
 
         <div className='flex justify-end'>
