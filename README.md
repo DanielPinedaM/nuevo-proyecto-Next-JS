@@ -192,7 +192,7 @@ La arquitectura define **únicamente tres capas**:
 * **Core**
 * **Shared**
 
-## Principio fundamental
+## Definición de las Capas
 
 Esta sección define qué representa cada una de las tres capas de la arquitectura. La clasificación de un archivo concreto se realiza en la sección "Regla de decisión".
 
@@ -226,7 +226,7 @@ Ejemplos:
 * `src/shared/utils/func/luxon.utils.ts`
 * `src/shared/ui/buttons/Button.tsx`
 
-## Capas de la Arquitectura
+## Resumen de las Capas de Arquitectura
 
 | Capa                      | Ubicación                      | ¿Conoce el dominio? | ¿Cuántas features lo usan? | ¿Genera ruta URL? |
 | ------------------------- | ------------------------------ | ------------------- | -------------------------- | ----------------- |
@@ -234,7 +234,7 @@ Ejemplos:
 | Core (dominio compartido) | `src/core`                     | Sí                  | 2 o más                    | No                |
 | Shared (agnóstico)        | `src/shared`                   | No                  | Cualquiera                 | No                |
 
-## Regla de decisión
+## Regla de Decisión
 
 Esta es la **única** sección para decidir dónde ubicar cualquier archivo o carpeta y tiene prioridad absoluta sobre cualquier otra explicación del documento. Responder las preguntas en orden:
 
@@ -248,19 +248,7 @@ Esta es la **única** sección para decidir dónde ubicar cualquier archivo o ca
 * **Una sola** → dentro de esa feature, en `src/app/(features)/<feature>`.
 * **Dos o más** → `src/core`.
 
-## ¿Por qué `src/core` y no dentro de `src/app/(features)/<feature>`?
-
-Todo lo que está dentro de `src/app/(features)/` forma parte de la estructura de rutas del App Router de Next.js.
-
-En Next.js App Router, las rutas se definen mediante archivos especiales como `page.tsx` dentro de `src/app/(features)/`. Las carpetas representan segmentos de la URL, mientras que archivos como `page.tsx` determinan qué segmentos se convierten en rutas accesibles.
-
-Si colocaras código de dominio compartido dentro de `(features)`, ese código quedaría asociado a una feature específica dentro de la estructura de rutas de Next.js App Router, aunque no represente una pantalla propia.
-
-Además, estarías acoplando un módulo compartido a una única feature, lo que impediría reutilizarlo correctamente entre diferentes funcionalidades.
-
-Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido utilizado por múltiples features sin pertenecer a una feature específica ni participar directamente en la definición de rutas.
-
-## Organización interna de las capas
+## Organización Interna de las Capas
 
 Cada capa utiliza un criterio de organización diferente según su responsabilidad:
 
@@ -332,93 +320,79 @@ src/
     └── utils/                           → utilidades reutilizables en toda la app
 ```
 
-**Diferencia entre `(features)` y `<feature>`:**
+## Diferencia entre `(features)` y `<feature>`
 
-* **`(features)`** es un *route group* de App Router de Next.js (los paréntesis lo definen). Es la carpeta contenedora que **agrupa todas las features** y, por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es solo el contenedor de todas las features.
+* **`(features)`** es un *route group* de App Router de Next.js (los paréntesis lo definen). Por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es el contenedor de todas las features.
 
 * **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
 
-**Prohibido usar la carpeta `services/`:**
+## Prohibido Modificar o Crear Nuevas Capas de Arquitectrua
 
-Dentro de esta arquitectura está **prohibido** crear una carpeta `services/`, porque:
+Está estrictamente prohibido modificar, reemplazar, eliminar o crear nuevas capas arquitectónicas fuera de las tres capas oficiales definidas en este documento:
 
-* `services` no es una convención propia de React ni de Next.js.
-* El nombre es demasiado ambiguo: no expresa qué responsabilidad contiene.
-* Mezcla responsabilidades distintas (lógica de negocio, acceso a datos, validaciones y acciones) dentro de un mismo contenedor.
+* Feature
+* Core
+* Shared
 
-En esta arquitectura cada carpeta debe expresar **una única responsabilidad clara** mediante un nombre específico: `actions/`, `repositories/`, `policies/`, `validators/` o `utils/`.
+Toda carpeta, módulo, archivo (componente) o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas; no se permite introducir una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas.
 
-***❌ Incorrecto - `services/` agrupa responsabilidades ambiguas***
+Sí está permitido crear **subcarpetas dentro de una capa existente**, siempre que no introduzcan una nueva capa y respeten las responsabilidades de esa capa.
 
-```txt
-users/
-└── services/
-    └── user.service.ts
-```
-
-***✅ Correcto - cada responsabilidad en su propia carpeta***
-
-```txt
-users/
-├── actions/
-├── repositories/
-├── policies/
-├── validators/
-└── utils/
-```
-
-No reemplazar `services/` por otra carpeta genérica equivalente (por ejemplo `helpers/`, `managers/` o `logic/`): el objetivo no es renombrar la carpeta, sino **separar responsabilidades**.
-
-Está estrictamente prohibido crear **nuevas capas** fuera de las tres definidas (Feature, Core y Shared). Toda carpeta, módulo o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas; no se permite introducir una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas.
-
-Sí está permitido crear **subcarpetas dentro de una capa existente**, siempre que no introduzcan una nueva capa y respeten las responsabilidades de esa capa. Ejemplos válidos:
+***✅ Ejemplos válidos:***
 
 ```text
 src/shared
-├── ui
-├── layouts
-├── utils
-├── hooks
-└── data-types
+    ├── ui
+    ├── layouts
+    ├── utils
+    ├── hooks
+    └── data-types
 
 src/core
-├── auth
-├── users
-└── permissions
+    ├── auth
+    ├── users
+    └── permissions
 
 src/app/(features)
-├── products
-├── orders
-└── dashboard
+         ├── products
+         │   └── page.tsx
+         ├── orders
+         │   └── page.tsx
+         └── dashboard
+             └── page.tsx
 ```
 
 Estas subcarpetas son válidas porque únicamente organizan el contenido dentro de una capa existente.
 
-## Ejemplo
+## ¿Por qué `src/core` y no dentro de `src/app/(features)/<feature>`?
 
-Un `UserPermissionsService` se usa en las features `Usuarios`, `Dashboard` y `Configuración`. Aunque se reutilice en 3 features, **sigue conociendo** usuarios, permisos y reglas del sistema.
+Todo lo que está dentro de `src/app/(features)/<feature>/page.tsx` forma parte de la estructura de rutas del App Router de Next.js.
 
-***❌ Incorrecto - en `shared` (la reutilización no elimina el conocimiento del dominio)***
+En Next.js App Router, las rutas se definen mediante archivos especiales como `page.tsx` dentro de `src/app/(features)/`. Las carpetas representan segmentos de la URL, mientras que archivos como `page.tsx` determinan qué segmentos se convierten en rutas accesibles.
 
-```txt
-src/shared/services/user-permissions.service.ts
-```
+Si colocaras código de dominio compartido dentro de `(features)`, ese código quedaría asociado a una feature específica dentro de la estructura de rutas de Next.js App Router, aunque no represente una pantalla propia.
 
-***❌ Incorrecto - dentro de `(features)` (crearía una ruta URL inexistente y lo ataría a una sola feature)***
+Además, estarías acoplando un módulo compartido a una única feature, lo que impediría reutilizarlo correctamente entre diferentes funcionalidades.
 
-```txt
-src/app/(features)/usuarios/services/user-permissions.service.ts
-```
+Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido utilizado por múltiples features sin pertenecer a una feature específica ni participar directamente en la definición de rutas.
 
-***✅ Correcto - en `src/core`, organizado por la entidad del dominio***
+##  Prohibido Usar la Carpeta `services/`
 
-```txt
-src/core/permissions/services/user-permissions.service.ts
-```
+Dentro de esta arquitectura está **prohibido** crear una carpeta `services/`, porque:
 
-# Diferencia entre `components` y `ui`
+* `services` no es una convención propia de React ni de Next.js.
 
-## ui
+* El nombre es demasiado ambiguo: No expresa qué responsabilidad contiene.
+
+* Mezcla responsabilidades distintas (lógica de negocio, acceso a datos, validaciones y acciones) dentro de un mismo contenedor.
+
+En esta arquitectura cada carpeta debe expresar **una única responsabilidad clara** mediante un nombre específico: `actions/`, `repositories/`, `policies/`, `validators/` o `utils/`.
+
+No reemplazar `services/` por otra carpeta genérica equivalente (por ejemplo `helpers/`, `utils/` o `logic/`): El objetivo no es renombrar la carpeta, sino **separar responsabilidades**.
+
+## Diferencia entre `components` y `ui`
+
+### ui
 
 `ui` contiene exclusivamente componentes de presentación y maquetación.
 
@@ -428,7 +402,7 @@ Un componente de `ui` no puede conocer logica de negocio, entidades del sistema 
 
 Su única responsabilidad es renderizar interfaz reutilizable.
 
-## components
+### components
 
 `components` contiene componentes con lógica de negocio específica de la feature donde están definidos.
 
