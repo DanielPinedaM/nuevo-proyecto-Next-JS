@@ -198,9 +198,11 @@ La arquitectura define **únicamente tres capas**:
 
 Esta sección define qué representa cada una de las tres capas de la arquitectura. La clasificación de un archivo concreto se realiza en la sección "Regla de decisión".
 
+La capa de un archivo se define por el **significado** del código, no por la **frecuencia** con que se reutiliza. El número de features que usan un código **no** determina su capa.
+
 ### Feature
 
-Código específico de **una sola** funcionalidad del sistema. Conoce el dominio (entidades, reglas de negocio, procesos y casos de uso) y es utilizado por una única feature. Al vivir dentro de `src/app/(features)`, **genera una ruta URL**. Su lógica de negocio nunca debe salir de la feature a la que pertenece.
+Código que pertenece a **una sola** funcionalidad o flujo del sistema. Contiene la UI, el estado y la lógica de esa funcionalidad: código que **solo tiene sentido dentro de ese flujo** y que dejaría de tener sentido fuera de él. Al vivir dentro de `src/app/(features)`, **genera una ruta URL**. Su lógica nunca debe salir de la feature a la que pertenece.
 
 Ejemplos:
 
@@ -210,7 +212,9 @@ Ejemplos:
 
 ### Core
 
-Código que **conoce el dominio** (entidades, permisos o reglas de negocio) y es compartido por **dos o más** features al mismo tiempo. Vive fuera de `src/app`, por lo que **no genera ruta URL**. No es agnóstico: ser reutilizado por varias features no elimina su conocimiento del dominio.
+Contiene la **lógica del dominio del sistema que existe de forma independiente de cualquier feature o pantalla específica**. Representa reglas del negocio del sistema (entidades, permisos, autorización, validaciones del dominio, cálculos globales del negocio). No depende de la UI ni del flujo de una feature concreta. Vive fuera de `src/app`, por lo que **no genera ruta URL**.
+
+Core **no** se define por reutilización, se define por **significado del negocio**. Un código pertenece a core porque representa una regla del dominio del sistema, no porque varias features lo usen.
 
 Ejemplos:
 
@@ -220,7 +224,7 @@ Ejemplos:
 
 ### Shared
 
-Código reutilizable y **completamente agnóstico al dominio**. No conoce ninguna feature ni concepto del negocio (usuarios, autenticación, productos, órdenes, dashboard, etc.) y no contiene reglas de negocio. Vive fuera de `src/app`, por lo que **no genera ruta URL**.
+Código **completamente agnóstico al dominio**: utilidades técnicas reutilizables y componentes de UI sin conocimiento del negocio. No conoce ninguna feature ni concepto del negocio (usuarios, autenticación, productos, órdenes, dashboard, etc.) y no contiene reglas de negocio. Vive fuera de `src/app`, por lo que **no genera ruta URL**.
 
 Ejemplos:
 
@@ -230,25 +234,39 @@ Ejemplos:
 
 ## Resumen de las Capas de Arquitectura
 
-| Capa                      | Ubicación                      | ¿Conoce el dominio? | ¿Cuántas features lo usan? | ¿Genera ruta URL? |
-| ------------------------- | ------------------------------ | ------------------- | -------------------------- | ----------------- |
-| Feature                   | `src/app/(features)/<feature>` | Sí                  | Solo 1                     | Sí                |
-| Core (dominio compartido) | `src/core`                     | Sí                  | 2 o más                    | No                |
-| Shared (agnóstico)        | `src/shared`                   | No                  | Cualquiera                 | No                |
+| Capa                      | Ubicación                      | ¿Qué contiene?                                          | ¿Conoce el dominio? | ¿Genera ruta URL? |
+| ------------------------- | ------------------------------ | ------------------------------------------------------- | ------------------- | ----------------- |
+| Feature                   | `src/app/(features)/<feature>` | Lógica de una sola funcionalidad o flujo               | Sí                  | Sí                |
+| Core (dominio del sistema)| `src/core`                     | Reglas del negocio del sistema, independientes de la UI | Sí                  | No                |
+| Shared (agnóstico)        | `src/shared`                   | Código técnico reutilizable sin conocimiento del negocio| No                  | No                |
+
+> El número de features que usan un código **no** aparece como criterio en esta tabla porque **no define la capa**. La capa se decide por el significado del código (ver "Regla de Decisión").
 
 ## Regla de Decisión
 
-Esta es la **única** sección para decidir dónde ubicar cualquier archivo o carpeta y tiene prioridad absoluta sobre cualquier otra explicación del documento. Responder las preguntas en orden:
+Esta es la **única** sección para decidir dónde ubicar cualquier archivo o carpeta y tiene prioridad absoluta sobre cualquier otra explicación del documento. La decisión se basa en el **significado** del código, **nunca** en cuántas features lo usan. Responder las preguntas en orden:
 
-**1. ¿Seguiría teniendo sentido el código si se eliminaran TODAS las features?**
+**1. ¿El código representa una regla del negocio del sistema?**
 
-* **Sí** → es 100 % agnóstico al dominio → `src/shared`.
-* **No** → conoce el dominio → continuar con la pregunta 2.
+Es decir, una regla del dominio que existe por sí misma, independientemente de cualquier feature o pantalla (permisos, autorización, validaciones del dominio, cálculos globales del negocio, entidades del sistema).
 
-**2. ¿Cuántas features lo usan?**
+* **Sí** → `src/core`.
+* **No** → continuar con la pregunta 2.
 
-* **Una sola** → dentro de esa feature, en `src/app/(features)/<feature>`.
-* **Dos o más** → `src/core`.
+**2. ¿El código pertenece a una sola funcionalidad o flujo?**
+
+Es decir, código que solo tiene sentido dentro de esa feature y dejaría de tenerlo fuera de ella.
+
+* **Sí** → dentro de esa feature, en `src/app/(features)/<feature>`.
+* **No** → continuar con la pregunta 3.
+
+**3. ¿El código es completamente agnóstico al dominio?**
+
+Es decir, código técnico que no conoce el negocio y funcionaría igual en cualquier proyecto.
+
+* **Sí** → `src/shared`.
+
+> **Reutilizar un código en dos o más features NO lo convierte automáticamente en core.** Que dos features compartan un código solo indica que no pertenece en exclusiva a una de ellas; para saber su capa hay que volver a aplicar estas preguntas: si es una regla del negocio del sistema va a `core`, y si es técnico y agnóstico va a `shared`.
 
 ## Organización Interna de las Capas
 
@@ -283,7 +301,7 @@ src/
 │           └── enums/                   → enums de la feature
 │               └── task-status.enum.ts
 │
-├── core/                                → dominio compartido entre varias features (NO es ruta, NO es agnóstico)
+├── core/                                → reglas del negocio del sistema, independientes de cada feature (NO es ruta, NO es agnóstico)
 │   ├── users/
 │   │   ├── actions/                     → casos de uso / operaciones del dominio (crear, actualizar, etc.)
 │   │   ├── policies/                    → reglas de autorización y decisiones de permiso
@@ -376,7 +394,7 @@ Si colocaras código de dominio compartido dentro de `(features)`, ese código q
 
 Además, estarías acoplando un módulo compartido a una única feature, lo que impediría reutilizarlo correctamente entre diferentes funcionalidades.
 
-Por eso `src/core` vive **fuera** de `src/app`: aloja el dominio compartido utilizado por múltiples features sin pertenecer a una feature específica ni participar directamente en la definición de rutas.
+Por eso `src/core` vive **fuera** de `src/app`: aloja las reglas del negocio del sistema, que existen de forma independiente de cualquier feature específica y no participan directamente en la definición de rutas.
 
 ## Diferencia entre `components` y `ui`
 
@@ -445,7 +463,7 @@ feature  →  core  →  shared
 
 * Las dependencias entre módulos de **Core** deben ser **acíclicas**: si `A` importa de `B`, entonces `B` no puede importar de `A`.
 
-Cuando una **Feature** necesita lógica que pertenece a otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a `core`** (ver "Mover de Feature a Core") y ambas la consumen desde ahí.
+Cuando una **Feature** necesita lógica que vive dentro de otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a una capa compartida** (`core` si es una regla del negocio del sistema, `shared` si es código técnico agnóstico) y ambas la consumen desde ahí. La capa destino se decide con la "Regla de Decisión", nunca por el hecho de que dos features la necesiten (ver "Mover de Feature a Core").
 
 ### ¿Por qué una sola dirección?
 
@@ -454,7 +472,7 @@ Esta regla es la que mantiene la arquitectura escalable cuando el número de fea
 ***✅ Ejemplos válidos:***
 
 ```ts
-// feature → core      (una feature usa dominio compartido)
+// feature → core      (una feature usa una regla del negocio del sistema)
 // src/app/(features)/orders/components/OrderList.tsx
 import { getUserPermissions } from '@/core/permissions/get-user-permissions'
 
@@ -514,7 +532,7 @@ src/core/
 
 Regla práctica: si no puedes responder "¿de qué entidad es esto?" con **una sola** entidad, probablemente es un **proceso** y merece su propia carpeta en `core`, no un lugar prestado dentro de otra entidad.
 
-Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (conoce el dominio, es compartido por varias features, no genera ruta URL).
+Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (representa una regla del negocio del sistema, es independiente de cualquier feature específica, no genera ruta URL).
 
 ***✅ Caso especial - core → core cíclico:***
 
@@ -530,18 +548,68 @@ import { isActiveUser } from '@/core/users/utils/user.utils'                // o
 
 ## Mover de Feature a Core
 
-La "Regla de Decisión" ubica dentro de una feature todo el código de dominio usado por **una sola** feature. En cuanto una **segunda** feature necesita ese mismo código, deja de cumplir la condición de "una sola feature" y debe **moverse a `core`**.
+El movimiento de código a `core` **NO depende de la reutilización** ni del número de features que lo usen. Depende exclusivamente del **significado del dominio**.
 
-Esto es un **movimiento esperado y normal** del ciclo de vida del proyecto, no una excepción ni un error de diseño previo. Que un archivo nazca dentro de una feature y luego suba a `core` es el comportamiento correcto de la arquitectura.
+> El hecho de que un código sea reutilizado en dos o más features NO define que deba ser movido a core.
 
-***Procedimiento al Mover de Feature a Core:***
+Un código se mueve a `core` cuando representa una **regla del negocio del sistema** que existe de forma independiente de cualquier feature o pantalla. Si nació dentro de una feature pero en realidad es una regla del dominio del sistema, su lugar correcto es `core`. Que un archivo nazca dentro de una feature y luego se promueva a `core` es un movimiento esperado y normal del ciclo de vida del proyecto, no un error de diseño previo.
 
-1. Mover el archivo (o carpeta) desde `src/app/(features)/<feature>/...` hacia la entidad o proceso correspondiente en `src/core/...`.
-2. Reescribir todos los imports que apuntaban a la ubicación anterior.
-3. Verificar que el módulo movido **no conserve imports hacia ninguna feature** (violaría la Regla de Dirección de Dependencias).
-4. Confirmar que ahora **ambas** features lo consumen desde `core`.
+Que una **segunda** feature necesite el mismo código **no** es, por sí solo, motivo para moverlo a `core`: solo indica que ese código no pertenece en exclusiva a una feature. Para decidir su destino se vuelve a aplicar la "Regla de Decisión".
 
-Está prohibido **duplicar** el código en la segunda feature para evitar el movimiento: duplicar lógica de dominio rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
+### Casos críticos
+
+#### Caso 1: un código es usado por dos features
+
+**No** se mueve automáticamente a `core`. Debe evaluarse su significado:
+
+* **Si es técnico o reutilizable genérico** → se mueve a `shared`.
+
+  Ejemplos: `formatDate`, `debounce`, utilidades de strings, componentes de UI reutilizables.
+
+* **Si representa una regla del negocio del sistema** → se mueve a `core`.
+
+  Ejemplos: permisos de usuario, reglas de validación del dominio, lógica de autorización.
+
+#### Caso 2: un código está repetido en dos features
+
+Se permite la duplicación **solo si** se cumplen todas estas condiciones:
+
+* Es lógica específica de cada feature.
+* No representa una regla del negocio del sistema.
+* No es reutilizable sin acoplar el contexto de la feature.
+
+En este caso **no** se mueve a `core` ni a `shared`.
+
+### Qué SÍ puede repetirse en features
+
+* Lógica específica de la UI de esa feature.
+* Lógica de presentación.
+* Lógica que depende del contexto de esa feature.
+* Código pequeño que no representa una regla del sistema.
+
+Ejemplos válidos de repetición:
+
+* Validaciones de formularios específicas de la feature.
+* Mapeo de datos de UI.
+* Lógica de estados locales.
+* Hooks específicos de la feature.
+
+### Qué NO debe repetirse en features
+
+* Reglas de negocio del sistema → `core`.
+* Lógica de permisos o autenticación → `core`.
+* Cálculos globales del dominio → `core`.
+* Utilidades técnicas genéricas → `shared`.
+
+Duplicar una regla del negocio del sistema rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
+
+### Procedimiento al promover código fuera de una feature
+
+1. Aplicar la "Regla de Decisión" para determinar la capa destino: `core` (regla del negocio del sistema) o `shared` (código técnico agnóstico).
+2. Mover el archivo (o carpeta) desde `src/app/(features)/<feature>/...` hacia la entidad o proceso correspondiente en `src/core/...`, o hacia la capacidad técnica correspondiente en `src/shared/...`.
+3. Reescribir todos los imports que apuntaban a la ubicación anterior.
+4. Verificar que el módulo movido **no conserve imports hacia ninguna feature** (violaría la Regla de Dirección de Dependencias).
+5. Confirmar que las features que lo necesitan lo consumen desde su nueva capa.
 
 ## Resumen de Regla de Dirección de Dependencias
 
