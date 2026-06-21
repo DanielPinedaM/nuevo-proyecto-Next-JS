@@ -1,7 +1,9 @@
 
 import { enc, mode, pad, AES } from "crypto-js";
-import { IV_AUTH, SECRET_KEY_AUTHENTICATION } from "@/shared/data-types/constants/crypto.const";
 import { isValidJSONparse } from "@/shared/utils/func/dataType.utils";
+
+const SECRET_KEY_AUTHENTICATION: string = "GestionAlcaldeCO";
+const IV_AUTH: string = "encryptionIntVec";
 
 /**
 encriptar texto */

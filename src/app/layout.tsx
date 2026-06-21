@@ -7,7 +7,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
-import { Suspense } from 'react';
 import FixedLoader from '@/shared/ui/FixedLoader';
 
 const geistSans = localFont({

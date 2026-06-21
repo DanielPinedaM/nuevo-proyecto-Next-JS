@@ -6,7 +6,7 @@ import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import { isUseClient, titleCase } from '@/shared/utils/func/general.utils';
 import SuccessToast from '@/shared/ui/overlay/toast/SuccessToast';
 import * as ExcelJS from 'exceljs';
-import { ILoaderState } from '@/shared/stores/loader/loaderStore';
+import { ILoaderState } from '@/shared/stores/loader/loader.store';
 
 /**
 Funcion para descargar archivo */
@@ -127,7 +127,7 @@ export const downloadExcel = async (
   let loaderStore: ILoaderState | null = null;
 
   // acceder al valor booleano del loader
-  const { useLoaderStore } = await import('@/shared/stores/loader/loaderStore');
+  const { useLoaderStore } = await import('@/shared/stores/loader/loader.store');
   loaderStore = useLoaderStore.getState();
   loaderStore.showLoader();
 

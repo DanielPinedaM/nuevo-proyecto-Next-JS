@@ -5,7 +5,6 @@ import {
   errorHandling,
   errorLogs,
   getToken,
-  internetConnection,
   isNoContentStatus,
   isValidUrl,
   responseFile,
@@ -19,7 +18,7 @@ import {
   IIsValidOptions,
 } from "@/shared/api/http-client/data-types/interfaces/gateway.interface";
 import { Method } from "@/shared/api/http-client/data-types/types/gateway.type";
-import { ILoaderState } from "@/shared/stores/loader/loaderStore";
+import { ILoaderState } from "@/shared/stores/loader/loader.store";
 
 /*
  ***************************
@@ -66,22 +65,6 @@ async function executeRequest<T = any>(
     };
   }
 
-  // validar q tenga conexion a internet
-  // window?.navigator?.onLine no siempre funciona
-  const _internetConnection: IIsValidOptions = internetConnection({
-    url,
-    method,
-    options,
-  });
-  if (!_internetConnection.valid) {
-    return {
-      success: false,
-      status: 503,
-      message: "conéctese a internet para que la página web pueda funcionar",
-      data: [],
-    };
-  }
-
   // Validar que el método GET NO tenga body
   const _validateBodyWithGetMethod: IIsValidOptions = validateBodyWithGetMethod({
     url,
@@ -102,7 +85,7 @@ async function executeRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient() && showLoader) {
-    const { useLoaderStore } = await import("@/shared/stores/loader/loaderStore");
+    const { useLoaderStore } = await import("@/shared/stores/loader/loader.store");
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }

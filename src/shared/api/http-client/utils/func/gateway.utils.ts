@@ -116,34 +116,6 @@ export function validateBodyWithGetMethod({
 }
 
 /**
-validar q tenga conexion a internet,
-window?.navigator?.onLine no siempre funciona */
-export function internetConnection({
-  url,
-  method,
-  options,
-}: IParamsValidateOptions): IIsValidOptions {
-  const withoutInternet: boolean = isUseClient() && !window?.navigator?.onLine;
-
-  if (withoutInternet) {
-    const message: string = "Conéctese a internet para que la página web pueda funcionar";
-
-    if (isUseClient()) ErrorToast(message);
-
-    errorLogs({
-      message,
-      method,
-      url,
-      options,
-    });
-
-    return { valid: false };
-  }
-
-  return { valid: true };
-}
-
-/**
 obtener token en componentes cliente 'use client' y servidor 'use server' */
 export async function getToken(): Promise<string | null> {
   let token: string | null = null;

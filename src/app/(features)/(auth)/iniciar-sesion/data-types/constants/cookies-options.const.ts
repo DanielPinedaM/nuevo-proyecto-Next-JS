@@ -1,9 +1,6 @@
-import { IObjStorage } from '@/shared/data-types/interfaces/cookie-storage.interfaces';
-
-
 /**
 lista de opciones de configuracion de las cookies al loguearse */
-export const cookieOptionsInLogin = ({ maxAge }: { maxAge: number }) => ({
+export const cookieOptions = ({ maxAge }: { maxAge: number }) => ({
   // la cookie es accesible por el servidor y cliente
   httpOnly: false,
 
@@ -22,13 +19,3 @@ export const cookieOptionsInLogin = ({ maxAge }: { maxAge: number }) => ({
   // la cookie es accesible desde todas las rutas en el dominio donde se esta ejecutando la pagina web
   path: "/",
 });
-
-/* ***************
- * sessionStorage *
- * **************** */
-
-// nombres de las propiedades q se guardan en SESSION STORAGE
-export const OBJ_STORAGE: IObjStorage = {
-  // hace q la petición http de listar menu se ejecuta UNA VEZ, solamente al cargar la página por primera vez
-  menuOptions: 'menuOptions',
-};

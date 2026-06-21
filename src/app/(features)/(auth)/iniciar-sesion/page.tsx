@@ -5,12 +5,7 @@ export default function Page() {
     <section>
       <section className='w-full h-screen bg-no-repeat bg-fixed bg-origin-border bg-bottom'>
         <div className='flex justify-center'>
-          <div
-            style={{
-              boxShadow: 'oklch(37.72% 0.030 281.56 / 0.25) 0px 2px 5px -1px,',
-            }}
-            className='flex flex-col items-center h-fit mx-2 basis-[460px] rounded-xl mt-3 xsm:mt-6 p-4'
-          >
+          <div className='shadow-[0px_2px_5px_-1px_oklch(37.72%_0.03_281.56_/_0.25)] flex flex-col items-center h-fit mx-2 basis-[460px] rounded-xl mt-3 xsm:mt-6 p-4'>
             <div className='xsm:w-[70%]'>
               <h1 className='text-dark-blue text-center text-[25px] font-medium mb-5'>
                 <span className='block'>Bienvenido a </span>

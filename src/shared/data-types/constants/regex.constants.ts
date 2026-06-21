@@ -1,6 +1,4 @@
-import IRegExp from "@/shared/data-types/interfaces/reg-exp.interfaces";
-
-export const CONST_REGEX: IRegExp = {
+const CONST_REGEX = {
   number: {
     // valida numeros enteros, negativos y decimales con coma y punto
     integerOrDecimal: /^(-?\d{0,}(\,|\.)?){0,}$/,
@@ -21,3 +19,5 @@ export const CONST_REGEX: IRegExp = {
       /^(?=.[!@#$%^&()_+\[\]{};':"\\|,.<>/?])(?=.[0-9])(?=.[A-ZÑÁÉÍÓÚ])(?=.*[a-zñáéíóú])/,
   },
 };
+
+export default CONST_REGEX;

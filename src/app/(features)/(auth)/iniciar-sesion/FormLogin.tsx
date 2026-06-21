@@ -1,21 +1,21 @@
 'use client';
 import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import FormErrorMessages from '@/shared/ui/prime-react/react-hook-form/FormErrorMessages';
-import { cookieOptionsInLogin } from '@/shared/data-types/constants/cookie-storage.const';
+import { cookieOptions } from '@/app/(features)/(auth)/iniciar-sesion/data-types/constants/cookies-options.const';
 import { deleteCookie, getCookies, setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { CONST_REGEX } from '@/shared/data-types/constants/regex.constants';
+import CONST_REGEX from '@/shared/data-types/constants/regex.constants';
 import {
   forceConvertToString,
   isLiteralObject,
   literalObjectLength,
 } from '@/shared/utils/func/dataType.utils';
 import { sessionStorageDeleteAll } from '@/shared/utils/func/sessionStorage.utils';
-import { encrypt } from '@/shared/utils/func/cryptoService.utils';
+import { encrypt } from '@/shared/utils/func/crypto-js.utils';
 import { IRequestOptions } from '@/shared/api/http-client/data-types/interfaces/gateway.interface';
 import { POST } from '@/shared/api/http-client/http-gateway.api';
 import Button from '@/shared/ui/buttons/Button';
@@ -109,7 +109,7 @@ export default function FormLogin() {
         return;
       }
 
-      setCookie(key, forceConvertToString(value), cookieOptionsInLogin({ maxAge }));
+      setCookie(key, forceConvertToString(value), cookieOptions({ maxAge }));
     });
   };
 
