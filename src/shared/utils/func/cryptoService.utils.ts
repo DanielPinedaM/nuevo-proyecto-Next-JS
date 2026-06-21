@@ -1,13 +1,13 @@
 
 import { enc, mode, pad, AES } from "crypto-js";
-import { IVAuth, secretKeyAuthentication } from "@/shared/data-types/constants/crypto.const";
+import { IV_AUTH, SECRET_KEY_AUTHENTICATION } from "@/shared/data-types/constants/crypto.const";
 import { isValidJSONparse } from "@/shared/utils/func/dataType.utils";
 
 /**
 encriptar texto */
 export const encrypt = async (text: string): Promise<string> => {
-  const key = enc.Utf8.parse(secretKeyAuthentication); // número hexadecimal de 16 dígitos como clave
-  const iv = enc.Utf8.parse(IVAuth); // Número hexadecimal como desplazamiento de clave
+  const key = enc.Utf8.parse(SECRET_KEY_AUTHENTICATION); // número hexadecimal de 16 dígitos como clave
+  const iv = enc.Utf8.parse(IV_AUTH); // Número hexadecimal como desplazamiento de clave
 
   const textoHexa = enc.Utf8.parse(text);
   const encrypted = AES.encrypt(textoHexa, key, {
@@ -24,8 +24,8 @@ export const encrypt = async (text: string): Promise<string> => {
 /**
 desencriptar texto */
 export const decrypt = async (encryptedText: string): Promise<string> => {
-  const key = enc.Utf8.parse(secretKeyAuthentication);
-  const iv = enc.Utf8.parse(IVAuth);
+  const key = enc.Utf8.parse(SECRET_KEY_AUTHENTICATION);
+  const iv = enc.Utf8.parse(IV_AUTH);
 
   // AES.decrypt ahora acepta el texto cifrado completo
   const decrypted = AES.decrypt(encryptedText, key, {

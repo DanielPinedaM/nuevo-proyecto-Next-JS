@@ -3,7 +3,7 @@ import { EChartsOption } from "echarts-for-react";
 import { IChartData, IDataChart, ISeries } from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
 import { isNumber } from "@/shared/utils/func/dataType.utils";
 import { getRandomItem } from "@/shared/utils/func/general.utils";
-import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
+import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
 
 /**
 opciones de echarts-for-react
@@ -53,7 +53,7 @@ const bar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
           ? {
               itemStyle: {
                 ...(serie?.itemStyle ?? {}),
-                color: serie?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? "",
+                color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
               },
             }
           : {}),
@@ -68,7 +68,7 @@ const bar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
               ...obj,
               itemStyle: {
                 ...(obj?.itemStyle ?? {}),
-                color: obj?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? "",
+                color: obj?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
               },
             };
           }) ?? [],

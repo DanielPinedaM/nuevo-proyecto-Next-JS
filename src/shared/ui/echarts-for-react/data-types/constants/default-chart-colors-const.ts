@@ -1,4 +1,4 @@
-export const defaultGraphColors: string[] = [
+const DEFAULT_CHART_COLORS: string[] = [
   // Celestes / Azules claros (tonalidad de #4FC3F7)
   'oklch(77.99% 0.113 236.64)', // #4FC3F7
   'oklch(71.84% 0.154 240.32)', // #03A9F4
@@ -55,3 +55,5 @@ export const defaultGraphColors: string[] = [
   'oklch(80.07% 0.110 210.87)', // #4DD0E1
   'oklch(64.42% 0.107 214.73)', // #00ACC1
 ];
+
+export default DEFAULT_CHART_COLORS;

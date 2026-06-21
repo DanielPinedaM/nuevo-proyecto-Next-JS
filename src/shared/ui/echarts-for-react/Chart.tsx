@@ -7,7 +7,7 @@
 import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { useEffect, useState } from 'react';
 
-import { chartTypes } from '@/shared/ui/echarts-for-react/data-types/types/chart.types';
+import { CHART_TYPES } from '@/shared/ui/echarts-for-react/data-types/types/chart.types';
 import getChartOptions from '@/shared/ui/echarts-for-react/utils/get-chart-options.utils';
 import { isLiteralObject, literalObjectLength } from '@/shared/utils/func/dataType.utils';
 import { IChartComponentProps } from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
@@ -30,12 +30,12 @@ export default function Chart({
     if (hasData()) setLoadingChart(false);
   }, [data]);
 
-  if (!chartTypes?.includes(type)) {
+  if (!CHART_TYPES?.includes(type)) {
     console.error(
       '❌ error\ntipo de grafico ',
       type,
       'no soportado, los tipos de graficos soportados son ',
-      chartTypes,
+      CHART_TYPES,
       '\npara mostrar otro tipo de grafico, agregar mas opciones a getChartOptions'
     );
     return null;

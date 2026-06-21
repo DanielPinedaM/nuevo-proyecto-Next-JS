@@ -12,8 +12,8 @@ export type TFontWeight = number | "normal" | "bold" | "bolder" | "lighter";
 
 /**
 tipos de graficas q puede mostrar el componente <ChartComponent> */
-export const chartTypes: string[] = ["pie", "bar", "line", "polarArea", "radar"] as const;
-export type ChartType = (typeof chartTypes)[number];
+export const CHART_TYPES: string[] = ["pie", "bar", "line", "polarArea", "radar"] as const;
+export type ChartType = (typeof CHART_TYPES)[number];
 
 export type TType = "category";
 

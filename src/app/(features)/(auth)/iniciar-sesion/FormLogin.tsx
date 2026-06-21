@@ -8,7 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { constRegex } from '@/shared/data-types/constants/regex.constants';
+import { CONST_REGEX } from '@/shared/data-types/constants/regex.constants';
 import {
   forceConvertToString,
   isLiteralObject,
@@ -171,7 +171,7 @@ export default function FormLogin() {
               rules={{
                 required: 'Digite correo electrónico',
                 pattern: {
-                  value: constRegex.text.email,
+                  value: CONST_REGEX.text.email,
                   message: 'Correo electrónico invalido',
                 },
                 minLength: {

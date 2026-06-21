@@ -3,7 +3,7 @@ import ErrorToast from "@/shared/ui/overlay/toast/ErrorToast";
 import SuccessToast from "@/shared/ui/overlay/toast/SuccessToast";
 import { Options, titleCase as titleCaseNpm } from "title-case";
 import { isString } from "@/shared/utils/func/dataType.utils";
-import { titleCaseOptions } from "@/shared/data-types/constants/title-case.const";
+import { TITLE_CASE_OPTIONS } from "@/shared/data-types/constants/title-case.const";
 
 /**
 prime NG - calcular paginador y numero de filas q se muestran en <table>
@@ -76,7 +76,7 @@ export const titleCase = (string: string, options?: Partial<Options>): string | 
   if (!isString(string)) return string;
   if (String(string).trim() === "") return "";
 
-  const finalOptions: Options = { ...titleCaseOptions, ...options };
+  const finalOptions: Options = { ...TITLE_CASE_OPTIONS, ...options };
 
   return titleCaseNpm(string, finalOptions);
 };

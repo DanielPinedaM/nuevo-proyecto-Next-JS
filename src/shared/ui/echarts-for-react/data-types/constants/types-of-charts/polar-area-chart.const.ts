@@ -7,7 +7,7 @@ import {
   IRadiusAxis,
   ISeries,
 } from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
-import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
+import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
 
 /**
 opciones de echarts-for-react
@@ -66,7 +66,7 @@ const polarArea = (baseOption: EChartsOption, data: IChartData | undefined) => (
           coordinateSystem: "polar",
           itemStyle: {
             ...(serie?.itemStyle ?? {}),
-            color: serie?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? "",
+            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
           },
         }))
       : isLiteralObject(data?.series)
@@ -77,7 +77,7 @@ const polarArea = (baseOption: EChartsOption, data: IChartData | undefined) => (
           coordinateSystem: "polar",
           itemStyle: {
             ...(data?.series?.itemStyle ?? {}),
-            color: data?.series?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? "",
+            color: data?.series?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
           },
         }
       : [],

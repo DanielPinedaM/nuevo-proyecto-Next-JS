@@ -5,7 +5,7 @@ import {
   IDataChart,
   ISeries,
 } from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
-import { defaultGraphColors } from '@/shared/data-types/constants/colors.const';
+import DEFAULT_CHART_COLORS from '@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const';
 
 /**
 opciones de echarts-for-react
@@ -31,7 +31,7 @@ const pie = (baseOption: EChartsOption, data: IChartData | undefined) => ({
           ...item,
           itemStyle: {
             ...(item?.itemStyle ?? {}),
-            color: item?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? '',
+            color: item?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
           },
         })) ?? [],
     })) ?? [],

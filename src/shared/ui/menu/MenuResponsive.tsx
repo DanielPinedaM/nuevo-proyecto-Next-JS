@@ -21,7 +21,7 @@ interface IUrl {
   url: string;
 }
 
-const apiResponse: IUrl[] = [
+const API_RESPONSE: IUrl[] = [
   {
     id: 1,
     url: '/administrador',
@@ -44,7 +44,7 @@ export default function MenuResponsive() {
   /*
   Para q menu funcione
   1) borrar el siguiente useEffect
-  2) borrar la constante apiResponse
+  2) borrar la constante API_RESPONSE
   3) descomentar el codigo q esta comentado
   4) cambiar el parametro URL de la funcion listUrl q esta en src/services/auth.ts por la URL q tiene en endpoint para listar menu
   5) la API tiene q responder asi 
@@ -55,7 +55,7 @@ export default function MenuResponsive() {
     data: IUrl[];
   } */
   useEffect(() => {
-    setUrl(apiResponse);
+    setUrl(API_RESPONSE);
   }, []);
 
   /* useEffect(() => {

@@ -28,7 +28,7 @@ export const cookieOptionsInLogin = ({ maxAge }: { maxAge: number }) => ({
  * **************** */
 
 // nombres de las propiedades q se guardan en SESSION STORAGE
-export const objStorage: IObjStorage = {
+export const OBJ_STORAGE: IObjStorage = {
   // hace q la petición http de listar menu se ejecuta UNA VEZ, solamente al cargar la página por primera vez
   menuOptions: 'menuOptions',
 };

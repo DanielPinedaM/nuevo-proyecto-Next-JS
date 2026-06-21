@@ -4,7 +4,7 @@ import {
   IChartData,
 } from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
 import { getRandomItem } from '@/shared/utils/func/general.utils';
-import { defaultGraphColors } from '@/shared/data-types/constants/colors.const';
+import DEFAULT_CHART_COLORS from '@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const';
 
 /**
 opciones de echarts-for-react
@@ -27,7 +27,7 @@ const line = (baseOption: EChartsOption, data: IChartData | undefined) => ({
     type: 'line',
     itemStyle: {
       ...(serie?.itemStyle ?? {}),
-      color: serie?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? '',
+      color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
     },
   })),
 });

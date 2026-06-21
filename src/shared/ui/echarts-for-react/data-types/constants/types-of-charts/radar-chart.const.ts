@@ -3,7 +3,7 @@ import {
   IDataChart,
   ISeries,
 } from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
-import { defaultGraphColors } from "@/shared/data-types/constants/colors.const";
+import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
 import { getRandomItem } from "@/shared/utils/func/general.utils";
 import { EChartsOption } from "echarts-for-react";
 
@@ -26,7 +26,7 @@ const radar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
           ...item,
           itemStyle: {
             ...(item?.itemStyle ?? {}),
-            color: serie?.itemStyle?.color ?? getRandomItem(defaultGraphColors) ?? "",
+            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
           },
         })) ?? [],
     })) ?? [],

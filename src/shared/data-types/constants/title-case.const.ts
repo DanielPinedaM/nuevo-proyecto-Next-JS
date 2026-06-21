@@ -5,7 +5,7 @@
 
 import { Options } from "title-case";
 
-const smallWords: string[] = [
+const SMALL_WORDS: string[] = [
   "a",
   "ante",
   "bajo",
@@ -47,8 +47,8 @@ const smallWords: string[] = [
   "al",
 ];
 
-export const titleCaseOptions: Options = {
+export const TITLE_CASE_OPTIONS: Options = {
   locale: "es-CO",
   sentenceCase: false,
-  smallWords: new Set(smallWords),
+  smallWords: new Set(SMALL_WORDS),
 };
