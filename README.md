@@ -295,7 +295,7 @@ src/
 │       │   └── task.utils.ts
 │       └── data-types/                  → tipos de datos de la feature
 │           ├── constants/               → constantes de la feature
-│           │   └── task.constants.ts
+│           │   └── task.const.ts
 │           ├── interfaces/              → interfaces de la feature
 │           │   └── task.interface.ts
 │           └── enums/                   → enums de la feature
