@@ -16,18 +16,18 @@ npm i
 
 # ▶️ Ejecutar proyecto
 
-|comando                | apunta a...   | ruta archivo
-|---------------------- | ------------- | -------------
-|node --run start:local | local host    | `environments/.env.localhost`
-|node --run start:test  | pruebas       | `environments/.env.test`
-|node --run start:prod  | producción    | `environments/.env.production`
+| comando                | apunta a...   | ruta archivo                   |
+| ---------------------- | ------------- | ------------------------------ |
+| node --run start:local | local host    | `environments/.env.localhost`  |
+| node --run start:test  | pruebas       | `environments/.env.test`       |
+| node --run start:prod  | producción    | `environments/.env.production` |
 
 # 🚀 Generar build (dist) para desplegar
 
-comando               | apunta a...   | ruta archivo
---------------------- | ------------- | -------------
-node --run build:test | pruebas       | `environments/.env.test`
-node --run build:prod | producción    | `environments/.env.production`
+| comando               | apunta a...   | ruta archivo                   |
+| --------------------- | ------------- | ------------------------------ |
+| node --run build:test | pruebas       | `environments/.env.test`       |
+| node --run build:prod | producción    | `environments/.env.production` |
 
 # 🤖 Uso de IA
 
@@ -236,7 +236,7 @@ Ejemplos:
 
 | Capa                      | Ubicación                      | ¿Qué contiene?                                          | ¿Conoce el dominio? | ¿Genera ruta URL? |
 | ------------------------- | ------------------------------ | ------------------------------------------------------- | ------------------- | ----------------- |
-| Feature                   | `src/app/(features)/<feature>` | Lógica de una sola funcionalidad o flujo               | Sí                  | Sí                |
+| Feature                   | `src/app/(features)/<feature>` | Lógica de una sola funcionalidad o flujo                | Sí                  | Sí                |
 | Core (dominio del sistema)| `src/core`                     | Reglas del negocio del sistema, independientes de la UI | Sí                  | No                |
 | Shared (agnóstico)        | `src/shared`                   | Código técnico reutilizable sin conocimiento del negocio| No                  | No                |
 
@@ -593,11 +593,11 @@ Duplicar una regla del negocio del sistema rompe la fuente única de verdad y es
 
 ## Resumen de Regla de Dirección de Dependencias
 
-| Desde ↓ \ Hacia → | Feature | Core | Shared |
-|-------------------|---------|------|--------|
-| **Feature**       | ❌     | ✅   | ✅    |
-| **Core**          | ❌     | ✅\* | ✅    |
-| **Shared**        | ❌     | ❌   | ✅    |
+| Desde ↓ \ Hacia →   | Feature   | Core   | Shared   |
+| ------------------- | --------- | ------ | -------- |
+| **Feature**         | ❌       | ✅     | ✅       |
+| **Core**            | ❌       | ✅\*   | ✅       |
+| **Shared**          | ❌       | ❌     | ✅       |
 
 \* core → core es válido solo en una dirección; queda prohibido si forma un ciclo (ver "Procesos del Dominio en Core").
 
@@ -1272,9 +1272,9 @@ export default function MyComponent() {
 * `<style jsx>`
 * `<style jsx global>`
 * `<style>`
-* `style={{}}` estilos en línea 
+* `style={{}}` estilos en línea
 * `import './styles.scss'` Importar archivos .scss
-* `import './styles.css'` Importar archivos .css 
+* `import './styles.css'` Importar archivos .css
 
 ### 🚫 En Sass global
 
