@@ -396,26 +396,6 @@ Además, estarías acoplando un módulo compartido a una única feature, lo que 
 
 Por eso `src/core` vive **fuera** de `src/app`: aloja las reglas del negocio del sistema, que existen de forma independiente de cualquier feature específica y no participan directamente en la definición de rutas.
 
-## Diferencia entre `components` y `ui`
-
-### ui
-
-`ui` contiene exclusivamente componentes de presentación y maquetación.
-
-Los componentes de `ui` deben ser completamente agnósticos al dominio.
-
-Un componente de `ui` no puede conocer logica de negocio, entidades del sistema ni casos de uso.
-
-Su única responsabilidad es renderizar interfaz reutilizable.
-
-### components
-
-`components` contiene componentes con lógica de negocio específica de la feature donde están definidos.
-
-Un componente pertenece a `components` cuando conoce el dominio, participa en un caso de uso o implementa comportamiento propio de la funcionalidad.
-
-La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
-
 ## 🚫 Archivos y Carpetas Prohibidas de Crear
 
 Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, porque ocultan responsabilidades distintas dentro de un mismo contenedor en lugar de expresar **una única responsabilidad clara**. Cada carpeta debe nombrar de forma específica lo que contiene (`validators/`, `components/`, `utils/`, etc).
@@ -620,6 +600,26 @@ Duplicar una regla del negocio del sistema rompe la fuente única de verdad y es
 | **Shared**        | ❌     | ❌   | ✅    |
 
 \* core → core es válido solo en una dirección; queda prohibido si forma un ciclo (ver "Procesos del Dominio en Core").
+
+## Diferencia entre `components` y `ui`
+
+### ui
+
+`ui` contiene exclusivamente componentes de presentación y maquetación.
+
+Los componentes de `ui` deben ser completamente agnósticos al dominio.
+
+Un componente de `ui` no puede conocer logica de negocio, entidades del sistema ni casos de uso.
+
+Su única responsabilidad es renderizar interfaz reutilizable.
+
+### components
+
+`components` contiene componentes con lógica de negocio específica de la feature donde están definidos.
+
+Un componente pertenece a `components` cuando conoce el dominio, participa en un caso de uso o implementa comportamiento propio de la funcionalidad.
+
+La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
 
 # 📝 Formularios - Integración Prime React y React Hook Form
 
