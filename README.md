@@ -38,7 +38,7 @@ npm i
 
 Esta sección está diseñada para utilizarse como contexto en herramientas de IA.
 
-## Principales Herramientas de IA para Desarrollo de Software
+## Principales IA para Desarrollo de Software
 
 | Empresa ↓ \ Plataforma → | Web                                                                                     | Desktop                                                               | Terminal / Bash / CLI                                              |
 | ------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------ |
