@@ -663,7 +663,7 @@ Que una **segunda** feature necesite el mismo código **no** es, por sí solo, m
 
 3. Verificar que el módulo movido **no conserve imports hacia ninguna feature** porque violaría la Regla de Dirección de Dependencias
 
-4. Confirmar que ahora **ambas** features lo consumen desde `core`.
+4. Confirmar que ahora **todas** las features que lo necesitan lo consumen desde `core`, sin importar cuántas sean.
 
 Está prohibido **duplicar** el código en la segunda feature para evitar el movimiento: duplicar lógica de dominio rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
 
