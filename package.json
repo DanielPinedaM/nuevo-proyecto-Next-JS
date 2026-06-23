@@ -5,11 +5,9 @@
   "scripts": {
     "build:prod": "env-cmd -f ./environments/.env.production node --max_old_space_size=100000 ./node_modules/next/dist/bin/next build",
     "build:test": "env-cmd -f ./environments/.env.test node --max_old_space_size=100000 ./node_modules/next/dist/bin/next build",
-
     "start:local": "env-cmd -f ./environments/.env.localhost next dev --turbopack -p 4100",
     "start:prod": "env-cmd -f ./environments/.env.production next dev --turbopack -p 4100",
     "start:test": "env-cmd -f ./environments/.env.test next dev --turbopack -p 4100",
-
     "lint": "next lint",
     "start": "next start"
   },
@@ -35,7 +33,7 @@
     "next-auth": "^4.24.11",
     "postcss": "^8.5.6",
     "primeicons": "^7.0.0",
-    "primereact": "^10.9.6",
+    "primereact": "^10.9.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.61.0",
