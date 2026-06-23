@@ -818,37 +818,39 @@ src/shared/ui/prime-react/react-hook-form
 ### 4. Flujo de React Hook Form y Prime React
 
 ```text
-Feature (Padre)
-    useForm()
-    defaultValues
-    handleSubmit()
-    control
-    rules
-    watch()
-    lógica condicional
-    estado derivado
-
-            │
-            ▼
-
-src\shared\ui\prime-react\react-hook-form
-    useController()
-    Controller
-    field.value
-    field.onChange
-    field.onBlur
-    field.ref
-    fieldState.error
-
-            │
-            ▼
-
-PrimeReact
-    InputText
-    Dropdown
-    Calendar
-    Checkbox
-    ...
+┌──────────────────────┐
+│ Feature (Padre)      │
+│   useForm()          │
+│   defaultValues      │
+│   handleSubmit()     │
+│   control            │
+│   rules              │
+│   watch()            │
+│   lógica condicional │
+│   estado derivado    │
+└──────────────────────┘
+           │
+           ▼
+┌─────────────────────────────────────────────┐
+│ src/shared/ui/prime-react/react-hook-form   │
+│   useController()                           │
+│   Controller                                │
+│   field.value                               │
+│   field.onChange                            │
+│   field.onBlur                              │
+│   field.ref                                 │
+│   fieldState.error                          │
+└─────────────────────────────────────────────┘
+           │
+           ▼
+┌───────────────┐
+│ PrimeReact    │
+│   InputText   │
+│   Dropdown    │
+│   Calendar    │
+│   Checkbox    │
+│   ...         │
+└───────────────┘
 ```
 
 ### 5. React Hook Form (RHF)
