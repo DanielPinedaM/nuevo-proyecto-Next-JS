@@ -30,6 +30,11 @@ interface IFormLogin {
   password: string;
 }
 
+interface IUserDataResponse {
+  expiresIn: number;
+  [key: string]: unknown;
+}
+
 export default function FormLogin() {
   const {
     formState: { errors },
@@ -60,7 +65,7 @@ export default function FormLogin() {
     }
   };
 
-  const iterateUserData = (data: any): void => {
+  const iterateUserData = (data: unknown): void => {
     if (!data) {
       console.error(
         '❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n',
@@ -85,8 +90,10 @@ export default function FormLogin() {
       return;
     }
 
+    const userData = data as IUserDataResponse;
+
     // el tiempo de expiracion de las cookies en front y el token en back son los mismos
-    const maxAge: number = data?.expiresIn;
+    const maxAge: number = userData.expiresIn;
 
     if (!maxAge) {
       console.error(
@@ -96,7 +103,7 @@ export default function FormLogin() {
       return;
     }
 
-    Object.entries(data).forEach((entry) => {
+    Object.entries(userData).forEach((entry) => {
       const [key, value] = entry;
       if (!key || !value) {
         console.error(
