@@ -13,7 +13,9 @@
 
 * Escribir el código en inglés, salvo las excepciones indicadas más abajo.
 
-* Como excepción a la regla anterior, escribir en español los valores de `path` de las rutas definidas en `src/app/app.routes.ts` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El nombre del archivo y de la clase del componente asociado permanecen en inglés.
+* Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
+
+* Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
 
 ## Commits
 ### Fuente única de verdad para los commits

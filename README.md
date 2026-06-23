@@ -114,7 +114,9 @@ Al copiar este contenido hacia una IA:
 
 * Escribir el código en inglés, salvo las excepciones indicadas más abajo.
 
-* Como excepción a la regla anterior, escribir en español los valores de `path` de las rutas definidas en `src/app/app.routes.ts` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El nombre del archivo y de la clase del componente asociado permanecen en inglés.
+* Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
+
+* Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
 
 ## Commits
 ### Fuente única de verdad para los commits
@@ -629,7 +631,7 @@ src/core/
 
 Regla práctica: si no puedes responder "¿de qué entidad es esto?" con **una sola** entidad, probablemente es un **proceso** y merece su propia carpeta en `core`, no un lugar prestado dentro de otra entidad.
 
-Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (representa una regla del negocio del sistema, es independiente de cualquier feature específica, no genera ruta URL).
+Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (conoce el dominio, es compartido por varias features, no genera ruta URL).
 
 ***✅ Caso especial - core → core cíclico:***
 
@@ -649,9 +651,21 @@ El movimiento de código a `core` **NO depende de la reutilización** ni del nú
 
 > El hecho de que un código sea reutilizado en dos o más features NO define que deba ser movido a core.
 
-Un código se mueve a `core` cuando representa una **regla del negocio del sistema** que existe de forma independiente de cualquier feature o pantalla. Si nació dentro de una feature pero en realidad es una regla del dominio del sistema, su lugar correcto es `core`. Que un archivo nazca dentro de una feature y luego se promueva a `core` es un movimiento esperado y normal del ciclo de vida del proyecto, no un error de diseño previo.
+Un código se mueve a `core` cuando representa una **regla del negocio del sistema** que existe de forma independiente de cualquier feature o pantalla. Si nació dentro de una feature pero en realidad es una regla del dominio del sistema, su lugar correcto es `core`. Que un archivo nazca dentro de una feature y luego se mueva a `core` es un movimiento esperado y normal del ciclo de vida del proyecto, no un error de diseño previo.
 
 Que una **segunda** feature necesite el mismo código **no** es, por sí solo, motivo para moverlo a `core`: solo indica que ese código no pertenece en exclusiva a una feature. Para decidir su destino se vuelve a aplicar la "Regla de Decisión".
+
+***Procedimiento para mover código de una feature a core:***
+
+1. Mover el archivo (o carpeta) desde `src/app/(features)/<feature>/...` hacia la entidad o proceso correspondiente en `src/core/...`.
+
+2. Reescribir todos los imports que apuntaban a la ubicación anterior.
+
+3. Verificar que el módulo movido **no conserve imports hacia ninguna feature** porque violaría la Regla de Dirección de Dependencias
+
+4. Confirmar que ahora **ambas** features lo consumen desde `core`.
+
+Está prohibido **duplicar** el código en la segunda feature para evitar el movimiento: duplicar lógica de dominio rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
 
 ### Casos críticos
 
