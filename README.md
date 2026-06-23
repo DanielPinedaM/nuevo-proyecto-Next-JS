@@ -229,20 +229,20 @@ Cuando se solicite hacer un commit desde un prompt, después de crearlo mostrar 
 # Stack Frontend del Proyecto
 
 * Node JS 24.16.0
-* Next JS 16 con App Router (`app`)
-* React 19
-* TypeScript 6
-* PrimeReact 10
-* React Hook Form 7
-* hookform/error-message
-* Tailwind CSS 4
+* Next JS 16.2.9 con App Router (`app`)
+* React 19.2.7
+* TypeScript 6.0.3
+* PrimeReact 10.9.8
+* React Hook Form 7.80.0
+* hookform/error-message 2.0.1
+* Tailwind CSS 4.3.1
 * Sass (versión moderna con `@use` y `@forward`, no utilizar `@import`)
-* Zustand 5
-* Luxon
-* tailwind-merge
-* clsx
-* react-icons
-* cookies-next
+* Zustand 5.0.14
+* Luxon 3.7.2
+* tailwind-merge 3.6.0
+* clsx 2.1.1
+* react-icons 5.6.0
+* cookies-next 6.1.1
 
 # Reglas Obligatorias
 
