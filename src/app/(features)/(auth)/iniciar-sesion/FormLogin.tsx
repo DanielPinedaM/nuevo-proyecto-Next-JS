@@ -48,6 +48,8 @@ export default function FormLogin() {
 
   useEffect(() => {
     deleteStorageAndCookies();
+
+    console.log("ENV ", process.env.NEXT_PUBLIC_NODE_ENV)
   }, []);
 
   const deleteStorageAndCookies = (): void => {
