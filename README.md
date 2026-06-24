@@ -173,30 +173,32 @@ En este ejemplo, las líneas que comienzan con `-` son el `body`: detallan punto
 
 ### Emojis por Tipo de Commit
 
-| Tipo de commit | Emoji | Descripción (definición)                                                                                              |
-| -------------- | ----- | --------------------------------------------------------------------------------------------------------------------- |
-| feat           | ✨    | Nueva funcionalidad o capacidad del sistema                                                                           |
-| fix            | 🐛    | Corrección de errores o fallos                                                                                        |
-| hotfix         | 🚑    | Corrección urgente de errores críticos en producción                                                                  |
-| docs           | 📝    | Cambios únicamente en documentación: archivos Markdown, README, carpeta docs, guías, manuales y contenido informativo |
-| style          | 💄    | Cambios visuales, estilos, maquetación, UI/UX, responsive y textos visibles sin modificar lógica del negocio          |
-| refactor       | ♻️    | Reestructuración del código sin cambiar comportamiento                                                                |
-| perf           | ⚡    | Mejoras de rendimiento o eficiencia                                                                                   |
-| test           | ✅    | Creación o modificación de pruebas                                                                                    |
-| build          | 📦    | Cambios relacionados con build, compilación o empaquetado                                                             |
-| ci             | 👷    | Cambios en integración continua o automatización de pipelines                                                         |
-| chore          | 🔧    | Tareas de mantenimiento general que no modifican funcionalidad                                                        |
-| revert         | ⏪    | Reversión de cambios, versiones o despliegues anteriores                                                              |
-| docker         | 🐳    | Cambios relacionados con Docker, Kubernetes y contenedores                                                            |
-| deps           | ⬆️    | Cambios relacionados con dependencias: agregar, actualizar o eliminar paquetes del proyecto                           |
-| wip            | 🚧    | Trabajo en progreso no finalizado                                                                                     |
-| init           | 🎉    | Inicialización del proyecto o configuración inicial                                                                   |
-| merge          | 🔀    | Integración de ramas, combinación de cambios y resolución de conflictos de Git                                        |
-| remove         | ⚰️    | Eliminación definitiva de código, archivos, carpetas, funcionalidades o dependencias que ya no son necesarias         |
-| i18n           | 🌐    | Internacionalización o traducciones                                                                                   |
-| lint           | 🚨    | Cambios relacionados con análisis estático, reglas de calidad de código y configuración de herramientas como ESLint   |
-| accessibility  | ♿    | Mejoras de accesibilidad                                                                                              |
-| mock           | 🤡    | Cambios relacionados con mocks, datos simulados o datos quemados utilizados para pruebas y desarrollo                 |
+### Emojis por Tipo de Commit
+
+| Tipo de commit | Emoji | Definición                                                                                                                                                                                                   |
+| -------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| feat           | ✨    | Nueva funcionalidad o capacidad del sistema                                                                                                                                                                  |
+| fix            | 🐛    | Corrección de errores o fallos                                                                                                                                                                               |
+| hotfix         | 🚑    | Corrección urgente de errores críticos en producción                                                                                                                                                         |
+| docs           | 📝    | Cambios únicamente en documentación: archivos Markdown, README.md, CLAUDE.md, carpeta docs, guías, manuales y contenido informativo                                                                          |
+| style          | 💄    | Cambios visuales, estilos (CSS, Sass, Tailwind), maquetación, UI/UX, responsive, textos visibles, animaciones, transiciones sin modificar lógica del negocio                                                 |
+| refactor       | ♻️    | Reestructuración del código sin cambiar comportamiento                                                                                                                                                       |
+| perf           | ⚡    | Mejoras de rendimiento o eficiencia                                                                                                                                                                          |
+| test           | ✅    | Creación o modificación de pruebas                                                                                                                                                                           |
+| build          | 📦    | Cambios relacionados con build, compilación o empaquetado                                                                                                                                                    |
+| ci             | 👷    | Cambios en integración continua o automatización de pipelines                                                                                                                                                |
+| chore          | 🔧    | Cualquier cambio que no afecte la funcionalidad del proyecto: tareas de mantenimiento general, configuración del entorno o de herramientas, scripts, comentarios de código y archivos auxiliares, .gitignore |
+| revert         | ⏪    | Reversión de cambios, versiones o despliegues anteriores                                                                                                                                                     |
+| docker         | 🐳    | Cambios relacionados con Docker, Kubernetes y contenedores                                                                                                                                                   |
+| deps           | ⬆️    | Cambios relacionados con dependencias: agregar, actualizar o eliminar paquetes del proyecto                                                                                                                  |
+| wip            | 🚧    | Trabajo en progreso no finalizado                                                                                                                                                                            |
+| init           | 🎉    | Inicialización del proyecto o configuración inicial                                                                                                                                                          |
+| merge          | 🔀    | Integración de ramas, combinación de cambios y resolución de conflictos de Git                                                                                                                               |
+| remove         | ⚰️    | Eliminación definitiva de código, archivos, carpetas, funcionalidades o dependencias que ya no son necesarias                                                                                                |
+| i18n           | 🌐    | Internacionalización o traducciones                                                                                                                                                                          |
+| lint           | 🎨    | Identación, formateo de código, análisis estático, reglas de calidad de código y configuración de herramientas como ESLint y Prettier sin modificar la lógica ni el comportamiento                           |
+| accessibility  | ♿    | Mejoras de accesibilidad                                                                                                                                                                                     |
+| mock           | 🤡    | Cambios relacionados con mocks, datos simulados o datos quemados utilizados para pruebas y desarrollo                                                                                                        |
 
 ### Reglas para el Scope
 
