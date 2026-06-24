@@ -48,8 +48,6 @@ export default function FormLogin() {
 
   useEffect(() => {
     deleteStorageAndCookies();
-
-    console.log("ENV ", process.env.NEXT_PUBLIC_NODE_ENV)
   }, []);
 
   const deleteStorageAndCookies = (): void => {
@@ -71,7 +69,7 @@ export default function FormLogin() {
     if (!data) {
       console.error(
         '❌ error, NO se puede setear las cookies porque la api ha respondido con un valor falsy\n',
-        data
+        data,
       );
       return;
     }
@@ -79,7 +77,7 @@ export default function FormLogin() {
     if (!isLiteralObject(data)) {
       console.error(
         '❌ error, NO se puede setear las cookies porque la api NO ha respondido con un objeto literal\n',
-        data
+        data,
       );
       return;
     }
@@ -87,7 +85,7 @@ export default function FormLogin() {
     if (literalObjectLength(data) <= 0) {
       console.error(
         '❌ error, NO se puede setear las cookies porque la api ha respondido con un objeto literal vacio\n',
-        data
+        data,
       );
       return;
     }
@@ -100,7 +98,7 @@ export default function FormLogin() {
     if (!maxAge) {
       console.error(
         '❌ error, NO se puede setear las cookies porque la api no ha respondido con el tiempo de expiracion de las cookies\n',
-        maxAge
+        maxAge,
       );
       return;
     }
@@ -113,7 +111,7 @@ export default function FormLogin() {
           '\nkey ',
           key,
           '\nvalue ',
-          value
+          value,
         );
         return;
       }
@@ -124,7 +122,7 @@ export default function FormLogin() {
 
   const encryptCredentials = async (
     decryptedEmail: string,
-    decryptedPassword: string
+    decryptedPassword: string,
   ): Promise<{ encryptedEmail: string; encryptedPassword: string }> => {
     const [encryptedEmail, encryptedPassword] = await Promise.all([
       await encrypt(decryptedEmail),
@@ -140,7 +138,7 @@ export default function FormLogin() {
 
     const { encryptedEmail, encryptedPassword } = await encryptCredentials(
       user!.trim(),
-      password!.trim()
+      password!.trim(),
     );
 
     const optionsApi: IRequestOptions<IBodyLogin> = {
