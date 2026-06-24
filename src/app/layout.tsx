@@ -3,11 +3,11 @@ import '../styles/global/tailwind/index-tailwind.css';
 import '../styles/global/scss/main.scss';
 //#endregion
 
+import FixedLoaderProvider from '@/shared/ui/loader/FixedLoaderProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
-import FixedLoader from '@/shared/ui/FixedLoader';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang='es-ES'>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <FixedLoader />
+        <FixedLoaderProvider />
 
         <Toaster position='top-right' reverseOrder={true} />
 
