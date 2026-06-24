@@ -2,48 +2,19 @@
 
 A continuación, se presenta un resumen de las tecnologías principales del proyecto. No incluye la totalidad de dependencias:
 
-* Node JS 24.18.0
-* Next JS 16 con App Router (`app`)
-* React 19
-* TypeScript 6
-* Prime React 10
-* React Hook Form 7
-* Sass
-* Tailwind CSS 4
-* tailwind-merge 3
-* clsx 2
-* Zustand 5
-* Luxon 3
-* react-icons 5
-
-# 🟢 Versión de Node JS
-
-Este proyecto debe ejecutarse utilizando:
-
-```bash
-Node JS 24.18.0
-```
-
-# 📦 Instalar paquetes
-
-```console
-npm i
-```
-
-# ▶️ Ejecutar proyecto
-
-| comando                | apunta a... | ruta archivo                   |
-| ---------------------- | ----------- | ------------------------------ |
-| node --run start:local | local host  | `environments/.env.localhost`  |
-| node --run start:test  | pruebas     | `environments/.env.test`       |
-| node --run start:prod  | producción  | `environments/.env.production` |
-
-# 🚀 Generar build (dist) para desplegar
-
-| comando               | apunta a... | ruta archivo                   |
-| --------------------- | ----------- | ------------------------------ |
-| node --run build:test | pruebas     | `environments/.env.test`       |
-| node --run build:prod | producción  | `environments/.env.production` |
+- Node JS 24.18.0
+- Next JS 16 con App Router (`app`)
+- React 19
+- TypeScript 6
+- Prime React 10
+- React Hook Form 7
+- Sass
+- Tailwind CSS 4
+- tailwind-merge 3
+- clsx 2
+- Zustand 5
+- Luxon 3
+- react-icons 5
 
 # 🤖 Uso de IA
 
@@ -64,7 +35,7 @@ Esta sección está diseñada para utilizarse como contexto en herramientas de I
 | Google                   | [Google AI Studio](https://aistudio.google.com/) / [Gemini](https://gemini.google.com/) | [Antigravity 2.0](https://antigravity.google/product/antigravity-2)   | [Antigravity CLI](https://youtu.be/bdEqIchP4x4?si=gRf6iLggXuzy_cq) |
 | Anomaly Innovations      | [`opencode web`](https://opencode.ai/docs/web/)                                         | [Open Code Desktop](https://youtu.be/_SVSv2Y59P0?si=LT2S0z10t1FBxlB6) | [Open Code CLI](https://youtu.be/2gO8WyctqMk?si=aNvHlf23tKfrN-Z3)  |
 
-## Recomendación
+## 💡 Recomendación
 
 Usar la IA en el siguiente orden:
 
@@ -72,7 +43,7 @@ Usar la IA en el siguiente orden:
 2. Claude Code para editar el código.
 3. Chat GPT para realizar preguntas sobre el código.
 
-## Razón
+## 🧠 Razón
 
 Como Chat GPT es gratis, se recomienda utilizarlo para mejorar el prompt antes de enviarlo a Claude Code, lo que permite que Claude haga mejores modificaciones en el código. Además Chat GPT, puede usarse para resolver dudas sobre el código sin consumir los tokens de Claude Code.
 
@@ -82,7 +53,7 @@ No es obligatorio utilizar el CLI de Claude Code, pero sí es necesario pagar un
 
 La razón por la que es necesario pagar una IA es que este `README.md` es muy extenso y las IAs gratuitas tienen limitaciones.
 
-## Edición de Código
+## ✏️ Edición de Código
 
 Evitar copiar y pegar código desde una plataforma web de IA. Siempre utilizar el CLI para editar el código, ya que el CLI tiene:
 
@@ -91,7 +62,7 @@ Evitar copiar y pegar código desde una plataforma web de IA. Siempre utilizar e
 - Acceso al sistema operativo (archivos y carpetas).
 - Capacidad para realizar cambios respetando la arquitectura del proyecto.
 
-## Uso de Git y de IA
+## 🌿 Uso de Git y de IA
 
 Por cada feature terminada hacer un commit antes de solicitar nuevas modificaciones a la IA. Evita acumular demasiados cambios, ya que puedes perder el contexto de lo que la IA está realizando y cometer errores.
 
@@ -99,7 +70,7 @@ Trabajar bajo el principio:
 
 > 1 commit = 1 feature
 
-## Contexto para la IA
+## 📋 Contexto para la IA
 
 Antes de realizar cualquier pregunta sobre este proyecto en una IA, se debe proporcionar este contexto completo para que la IA pueda seguir la arquitectura del proyecto.
 
@@ -110,12 +81,82 @@ Este contenido puede utilizarse dentro de archivos de configuración como:
 
 Al copiar este contenido hacia una IA:
 
-- Copiar únicamente desde esta sección hacia abajo.
 - Copiar todas las secciones posteriores completas sin omitir reglas.
 - No copiar secciones anteriores de este `README.md`.
 - Antes de pegarlo en la IA, eliminar todos los emojis del `README.md`.
+- Copiar únicamente desde esta sección hacia abajo ⬇️
 
 # `CLAUDE.md`
+
+# ⚙️ Entorno de Ejecución
+
+Obligatorio el uso de Node.js, prohibido usar alternativas como:
+
+- Bun
+- Deno
+
+# 📦 Manejador de Paquetes
+
+Obligatorio el uso de `pnpm` y `pnpm-lock.yaml`, prohibido usar alternativas como:
+
+- npm
+- npx
+- package-lock.json
+- yarn
+
+# 🟢 Administrador de Versiones para Node.js
+
+Obligatorio el uso de `fnm`, prohibido usar alternativas como:
+
+- nvm
+- volta
+
+Para instalar paquetes y ejecutar este proyecto, se tiene que usar:
+
+```console
+fnm use 24.18.0
+```
+
+# 🔗 Alias
+
+Para todos los comandos de `pnpm` usar el alias `pn`
+
+# 📦 Instalar Paquetes
+
+```console
+pn i
+```
+
+# ▶️ Ejecutar Proyecto
+
+| Comando          | Apunta a... | Ruta Archivo                   |
+| ---------------- | ----------- | ------------------------------ |
+| `pn start:local` | Local host  | `environments/.env.localhost`  |
+| `pn start:test`  | Pruebas     | `environments/.env.test`       |
+| `pn start:prod`  | Producción  | `environments/.env.production` |
+
+# 🚀 Generar build (dist) para Desplegar
+
+| Comando         | Apunta a... | Ruta Archivo                   |
+| --------------- | ----------- | ------------------------------ |
+| `pn build:test` | Pruebas     | `environments/.env.test`       |
+| `pn build:prod` | Producción  | `environments/.env.production` |
+
+# 🚫 Reglas Obligatorias para la IA
+
+- No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
+
+- Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
+
+- No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
+
+- Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
+
+- Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
+
+- Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
+
+- La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
 # 🌐 Reglas de Idioma
 
@@ -137,9 +178,9 @@ Al copiar este contenido hacia una IA:
 
 - Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
 
-## Commits
+# 💾 Commits
 
-### Fuente única de verdad para los commits
+## 🎯 Fuente Única de Verdad para los Commits
 
 - La tabla de la sección "Emojis por Tipo de Commit" es la única fuente de verdad para construir cualquier commit. El tipo y el emoji deben seleccionarse exclusivamente desde sus filas.
 
@@ -153,7 +194,7 @@ Al copiar este contenido hacia una IA:
 
 - Está prohibido eliminar, agregar, editar o alterar la tabla de la sección "Emojis por Tipo de Commit".
 
-### Formato del Mensaje de Commit
+## ✍️ Formato del Mensaje de Commit
 
 `<emoji>` `<type>`(`<scope>`): `<mensaje en español>`
 
@@ -173,7 +214,7 @@ Elementos obligatorios en todo commit:
 
 - El `body` nunca debe ser idéntico al `<mensaje en español>`. El `<mensaje en español>` resume el cambio, mientras que el `body` lo detalla punto por punto. Aunque el cambio sea muy pequeño y ambos puedan parecer similares, desarrollar el `body` con los puntos concretos del cambio en lugar de repetir el `<mensaje en español>`.
 
-### Ejemplo
+## Ejemplo
 
 El encabezado es el `<emoji> <type>(<scope>): <mensaje en español>` y, debajo, el `body` desarrolla los cambios como lista de puntos.
 
@@ -187,9 +228,7 @@ El encabezado es el `<emoji> <type>(<scope>): <mensaje en español>` y, debajo, 
 
 En este ejemplo, las líneas que comienzan con `-` son el `body`: detallan punto por punto lo que resume el `<mensaje en español>` "agregar validación de token JWT", sin repetirlo literalmente.
 
-### Emojis por Tipo de Commit
-
-### Emojis por Tipo de Commit
+## Emojis por Tipo de Commit
 
 | Tipo de commit | Emoji | Definición                                                                                                                                                                                                   |
 | -------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -216,7 +255,7 @@ En este ejemplo, las líneas que comienzan con `-` son el `body`: detallan punto
 | accessibility  | ♿    | Mejoras de accesibilidad                                                                                                                                                                                     |
 | mock           | 🤡    | Cambios relacionados con mocks, datos simulados o datos quemados utilizados para pruebas y desarrollo                                                                                                        |
 
-### Reglas para el Scope
+## Reglas para el Scope
 
 - El `<scope>` es opcional.
 
@@ -244,31 +283,15 @@ Flujo para determinar el `<scope>`:
 
 5. Si el `<scope>` genera duda, omitirlo.
 
-### Regla Cuando el Cambio no Coincide Exactamente con la Tabla
+## Regla Cuando el Cambio no Coincide Exactamente con la Tabla
 
 - Nunca omitir el emoji.
 
 - Priorizar la coherencia semántica sobre la coincidencia exacta: elegir el tipo y el emoji de la tabla que mejor representen la intención del cambio.
 
-### Mostrar el Commit Después de Realizarlo
+## Mostrar el Commit Después de Realizarlo
 
 Cuando se solicite hacer un commit desde un prompt, después de crearlo mostrar en la respuesta el encabezado con el formato `<emoji>` `<type>`(`<scope>`): `<mensaje en español>` y el `body` correspondiente al commit realizado.
-
-# Reglas Obligatorias
-
-- No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
-
-- Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
-
-- No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
-
-- Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
-
-- Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
-
-- Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
-
-- La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
 # 📁 Estructura Base del Proyecto
 
