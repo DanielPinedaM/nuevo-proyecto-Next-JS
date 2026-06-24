@@ -1,4 +1,32 @@
-# ⚛️ Next JS 16 + React 19 + Prime React 10 + React Hook Form + Tailwind 4 + Sass + Zustand
+# ⚛️ Stack Frontend del Proyecto
+
+A continuación, se presenta un resumen de las tecnologías principales del proyecto. No incluye la totalidad de dependencias:
+
+- Node JS 24.18.0
+
+- Next JS 16 con App Router (`app`)
+
+- React 19
+
+- TypeScript 6
+
+- Prime React 10
+
+- React Hook Form 7
+
+- Sass
+
+- Tailwind CSS 4
+
+- tailwind-merge 3
+
+- clsx 2
+
+- Zustand 5
+
+- Luxon 3
+
+- react-icons 5
 
 # 🟢 Versión de Node JS
 
@@ -237,24 +265,6 @@ Flujo para determinar el `<scope>`:
 ### Mostrar el Commit Después de Realizarlo
 
 Cuando se solicite hacer un commit desde un prompt, después de crearlo mostrar en la respuesta el encabezado con el formato `<emoji>` `<type>`(`<scope>`): `<mensaje en español>` y el `body` correspondiente al commit realizado.
-
-# Stack Frontend del Proyecto
-
-- Node JS 24.18.0
-- Next JS 16.2.9 con App Router (`app`)
-- React 19.2.7
-- TypeScript 6.0.3
-- PrimeReact 10.9.8
-- React Hook Form 7.80.0
-- hookform/error-message 2.0.1
-- Tailwind CSS 4.3.1
-- Sass (versión moderna con `@use` y `@forward`, no utilizar `@import`)
-- Zustand 5.0.14
-- Luxon 3.7.2
-- tailwind-merge 3.6.0
-- clsx 2.1.1
-- react-icons 5.6.0
-- cookies-next 6.1.1
 
 # Reglas Obligatorias
 
