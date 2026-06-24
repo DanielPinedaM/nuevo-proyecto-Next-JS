@@ -236,7 +236,7 @@ export default function FormLogin() {
 
         <div className='flex justify-end'>
           <Button theme='primary' variant='background' type='submit'>
-            ingresar
+            Ingresar
           </Button>
         </div>
       </form>
