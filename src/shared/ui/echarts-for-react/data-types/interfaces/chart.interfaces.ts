@@ -13,7 +13,7 @@ import {
   TShape,
   TTop,
   TType,
-} from "@/shared/ui/echarts-for-react/data-types/types/chart.types";
+} from '@/shared/ui/echarts-for-react/data-types/types/chart.types';
 
 /**
 tipo de dato para mostrar grafica con la data */

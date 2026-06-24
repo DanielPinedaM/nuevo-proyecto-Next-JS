@@ -16,12 +16,12 @@ const DEFAULT_CHART_COLORS: string[] = [
   'oklch(60.71% 0.172 323.97)', // #AB47BC
 
   // Coral / Naranjas suaves (tonalidad de #FF8A65)
-  'oklch(75.77% 0.157 41.24)',  // #FF8A65
-  'oklch(84.63% 0.098 38.15)',  // #FFAB91
-  'oklch(69.53% 0.191 39.82)',  // #FF7043
-  'oklch(81.76% 0.157 71.42)',  // #FFB74D
-  'oklch(67.87% 0.221 41.12)',  // #FF5722
-  'oklch(69.83% 0.166 61.44)',  // #F57C00
+  'oklch(75.77% 0.157 41.24)', // #FF8A65
+  'oklch(84.63% 0.098 38.15)', // #FFAB91
+  'oklch(69.53% 0.191 39.82)', // #FF7043
+  'oklch(81.76% 0.157 71.42)', // #FFB74D
+  'oklch(67.87% 0.221 41.12)', // #FF5722
+  'oklch(69.83% 0.166 61.44)', // #F57C00
 
   // Verdes suaves / tiernos (tonalidad de #81C784)
   'oklch(76.72% 0.118 142.35)', // #81C784

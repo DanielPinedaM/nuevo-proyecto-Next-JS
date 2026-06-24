@@ -1,9 +1,12 @@
-
-import { EChartsOption } from "echarts-for-react";
-import { IChartData, IDataChart, ISeries } from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
-import { isNumber } from "@/shared/utils/func/dataType.utils";
-import { getRandomItem } from "@/shared/utils/func/general.utils";
-import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
+import { EChartsOption } from 'echarts-for-react';
+import {
+  IChartData,
+  IDataChart,
+  ISeries,
+} from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
+import { isNumber } from '@/shared/utils/func/dataType.utils';
+import { getRandomItem } from '@/shared/utils/func/general.utils';
+import DEFAULT_CHART_COLORS from '@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const';
 
 /**
 opciones de echarts-for-react
@@ -18,26 +21,26 @@ const bar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
   // eje x <->
   xAxis: {
     ...(data?.xAxis ?? {}),
-    type: data?.xAxis?.type ?? "category",
+    type: data?.xAxis?.type ?? 'category',
 
     axisLabel: {
       ...(data?.xAxis?.axisLabel ?? {}),
-      color: data?.xAxis?.axisLabel?.color ?? "#00008B",
+      color: data?.xAxis?.axisLabel?.color ?? '#00008B',
       fontSize: data?.xAxis?.axisLabel?.fontSize ?? 14,
-      fontWeight: data?.xAxis?.axisLabel?.fontWeight ?? "normal",
+      fontWeight: data?.xAxis?.axisLabel?.fontWeight ?? 'normal',
     },
   },
 
   // eje y ↕
   yAxis: {
     ...(data?.yAxis ?? {}),
-    type: data?.yAxis?.type ?? "value",
+    type: data?.yAxis?.type ?? 'value',
 
     axisLabel: {
       ...(data?.yAxis?.axisLabel ?? {}),
-      color: data?.yAxis?.axisLabel?.color ?? "#00008B",
+      color: data?.yAxis?.axisLabel?.color ?? '#00008B',
       fontSize: data?.yAxis?.axisLabel?.fontSize ?? 14,
-      fontWeight: data?.yAxis?.axisLabel?.fontWeight ?? "normal",
+      fontWeight: data?.yAxis?.axisLabel?.fontWeight ?? 'normal',
     },
   },
 
@@ -47,13 +50,13 @@ const bar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
 
       return {
         ...serie,
-        type: "bar",
+        type: 'bar',
         // es array de numeros number[] - usar un solo color para todas las barras
         ...(isNumberArray || serie?.itemStyle
           ? {
               itemStyle: {
                 ...(serie?.itemStyle ?? {}),
-                color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
+                color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
               },
             }
           : {}),
@@ -68,7 +71,7 @@ const bar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
               ...obj,
               itemStyle: {
                 ...(obj?.itemStyle ?? {}),
-                color: obj?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
+                color: obj?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
               },
             };
           }) ?? [],

@@ -5,10 +5,10 @@ export const cookieOptions = ({ maxAge }: { maxAge: number }) => ({
   httpOnly: false,
 
   // usar cookie solo en HTTPS y en producción
-  secure: process.env.NEXT_PUBLIC_NODE_ENV === "production",
+  secure: process.env.NEXT_PUBLIC_NODE_ENV === 'production',
 
   // la cookie solamente esta disponible en el mismo dominio donde se genera
-  sameSite: "strict" as const,
+  sameSite: 'strict' as const,
 
   // tiempo de espiracion de la cookie en segundos
   maxAge,
@@ -17,5 +17,5 @@ export const cookieOptions = ({ maxAge }: { maxAge: number }) => ({
   domain: process.env.NEXT_PUBLIC_DOMAIN,
 
   // la cookie es accesible desde todas las rutas en el dominio donde se esta ejecutando la pagina web
-  path: "/",
+  path: '/',
 });

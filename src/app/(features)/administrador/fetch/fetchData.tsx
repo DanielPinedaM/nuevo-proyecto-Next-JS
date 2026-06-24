@@ -10,7 +10,7 @@ export default async function FetchData() {
 
   const { success, data } = await GET(
     `${process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER}/todos`,
-    optionsApi
+    optionsApi,
   );
 
   let posts = [];

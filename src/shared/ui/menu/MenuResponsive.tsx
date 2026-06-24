@@ -1,7 +1,6 @@
 'use client';
 import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 
-
 import { titleCase } from '@/shared/utils/func/general.utils';
 import {
   sessionStorageDeleteSpecific,
@@ -103,7 +102,7 @@ export default function MenuResponsive() {
               clsx({
                 'bg-amber-300 text-amber-800 font-semibold': pathname.includes(item.url),
               }),
-              'border-2 border-blue-600 rounded-md p-2'
+              'border-2 border-blue-600 rounded-md p-2',
             )}
           >
             {titleCase(item.text)}

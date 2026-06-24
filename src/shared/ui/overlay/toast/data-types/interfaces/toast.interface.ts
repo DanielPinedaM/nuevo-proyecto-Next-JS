@@ -1,4 +1,4 @@
-import { ToastPosition } from "react-hot-toast";
+import { ToastPosition } from 'react-hot-toast';
 
 /**
 opciones de mensaje emergente */

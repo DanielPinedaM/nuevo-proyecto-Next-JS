@@ -22,7 +22,7 @@ export const downloadBlob = (blob: Blob, fileName: string | undefined): void => 
       '❌ error, no se puede descargar archivo ',
       fileName,
       'porque no hay un blob ',
-      blob
+      blob,
     );
 
     ErrorToast(message);
@@ -41,7 +41,7 @@ export const downloadBlob = (blob: Blob, fileName: string | undefined): void => 
       '❌ error, no se puede descargar archivo ',
       fileName,
       'porque se necesita el nombre de la extension ',
-      extension
+      extension,
     );
 
     ErrorToast(message);
@@ -66,7 +66,7 @@ export const viewBlob = (blob: Blob): void => {
 
     setTimeout(() => URL.revokeObjectURL(fileURL), 5000);
   } else {
-    ErrorToast("Al ver archivo");
+    ErrorToast('Al ver archivo');
     console.error('❌ error, para poder ver el archivo, tiene q ser tipo blob\n', blob);
   }
 };
@@ -75,7 +75,7 @@ export const viewBlob = (blob: Blob): void => {
 descargar Excel a partir de un array de objetos NO anidado */
 export const downloadExcel = async (
   nonNestedArrayOfObjects: Array<Record<string, any>>,
-  fileName: string
+  fileName: string,
 ): Promise<void> => {
   if (!isUseClient()) {
     console.error("❌ error, no se puede descargar Excel en un componente servidor 'use server'");
@@ -86,18 +86,15 @@ export const downloadExcel = async (
 
   if (!nonNestedArrayOfObjects) {
     ErrorToast(message);
-    console.error(
-      '❌ el array de objetos NO puede ser falsy\n',
-      nonNestedArrayOfObjects
-    );
+    console.error('❌ el array de objetos NO puede ser falsy\n', nonNestedArrayOfObjects);
     return;
   }
 
-  if (!(Array.isArray(nonNestedArrayOfObjects))) {
+  if (!Array.isArray(nonNestedArrayOfObjects)) {
     ErrorToast(message);
     console.error(
       '❌ el parametro nonNestedArrayOfObjects tiene q ser un array de objetos NO anidado\n',
-      nonNestedArrayOfObjects
+      nonNestedArrayOfObjects,
     );
     return;
   }
@@ -106,7 +103,7 @@ export const downloadExcel = async (
     ErrorToast(message);
     console.error(
       '❌ la longitud del array de objetos NO puede ser cero\n',
-      nonNestedArrayOfObjects
+      nonNestedArrayOfObjects,
     );
     return;
   }
@@ -117,7 +114,7 @@ export const downloadExcel = async (
     return;
   }
 
-  if (!(String(fileName).includes('.xlsx'))) {
+  if (!String(fileName).includes('.xlsx')) {
     ErrorToast(message);
     console.error('❌ fileName tiene q contener la extension .xlsx\n', fileName);
     return;

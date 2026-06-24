@@ -23,7 +23,6 @@ export default function composableButtonClass({
   modifiers,
   effects,
 }: ComposableButtonClassParams): string {
-
   return clsx(
     // ── Reset CSS para botón - requerido siempre ──────────────────────────────────────
     'btn',

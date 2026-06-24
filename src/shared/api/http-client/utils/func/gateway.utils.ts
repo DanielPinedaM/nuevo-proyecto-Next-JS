@@ -1,4 +1,4 @@
-import ErrorToast from "@/shared/ui/overlay/toast/ErrorToast";
+import ErrorToast from '@/shared/ui/overlay/toast/ErrorToast';
 import {
   IObjectLogs,
   IParamsValidateOptions,
@@ -6,27 +6,27 @@ import {
   IResponse,
   IIsValidOptions,
   IValidateApiResponse,
-} from "@/shared/api/http-client/data-types/interfaces/gateway.interface";
-import { Method } from "@/shared/api/http-client/data-types/types/gateway.type";
+} from '@/shared/api/http-client/data-types/interfaces/gateway.interface';
+import { Method } from '@/shared/api/http-client/data-types/types/gateway.type';
 import {
   isFile,
   isLiteralObject,
   isNumber,
   isString,
   literalObjectLength,
-} from "@/shared/utils/func/dataType.utils";
-import { isUseClient } from "@/shared/utils/func/general.utils";
-import { currentDateAndTime } from "@/shared/utils/func/luxon.utils";
-import { getCookie } from "cookies-next";
-import { redirect } from "next/navigation";
+} from '@/shared/utils/func/dataType.utils';
+import { isUseClient } from '@/shared/utils/func/general.utils';
+import { currentDateAndTime } from '@/shared/utils/func/luxon.utils';
+import { getCookie } from 'cookies-next';
+import { redirect } from 'next/navigation';
 
 function pathnameIsLogin(): boolean {
   if (!isUseClient()) {
-    console.error("❌ error, NO se puede determinar si la URL actual es iniciar sesion /");
+    console.error('❌ error, NO se puede determinar si la URL actual es iniciar sesion /');
     return false;
   }
 
-  const login: string = "/iniciar-sesion";
+  const login: string = '/iniciar-sesion';
 
   const pathname: string = window.location.pathname;
 
@@ -35,11 +35,11 @@ function pathnameIsLogin(): boolean {
 
 function redirectToLoginInUseClient(): void {
   if (!isUseClient()) {
-    console.error("❌ error al re-dirigir a /iniciar-sesion");
+    console.error('❌ error al re-dirigir a /iniciar-sesion');
     return;
   }
 
-  const login: string = "/iniciar-sesion";
+  const login: string = '/iniciar-sesion';
 
   if (!pathnameIsLogin()) {
     window.location.href = login;
@@ -49,12 +49,12 @@ function redirectToLoginInUseClient(): void {
 /**
 http status sin contenido Content-Length 0 */
 export function isNoContentStatus(status: number): boolean {
-  if (typeof status !== "number") {
+  if (typeof status !== 'number') {
     console.error(
-      "❌ error: el HTTP status NO es un numero\n status",
+      '❌ error: el HTTP status NO es un numero\n status',
       status,
-      "\ntypeof status ",
-      typeof status
+      '\ntypeof status ',
+      typeof status,
     );
     return false;
   }
@@ -68,10 +68,10 @@ export function isValidUrl({ url, method, options }: IParamsValidateOptions): II
   const urlString: string = String(url);
 
   const invalidUrl: boolean =
-    !urlString.startsWith("http") || urlString === process.env.NEXT_PUBLIC_API;
+    !urlString.startsWith('http') || urlString === process.env.NEXT_PUBLIC_API;
 
   if (invalidUrl) {
-    const message: string = "URL invalida";
+    const message: string = 'URL invalida';
 
     errorLogs({
       message,
@@ -95,11 +95,11 @@ export function validateBodyWithGetMethod({
 }: IParamsValidateOptions): IIsValidOptions {
   const body: any = options?.body;
 
-  const isInvalid: boolean = Boolean(body) && method === "GET";
+  const isInvalid: boolean = Boolean(body) && method === 'GET';
 
   if (isInvalid) {
     const message: string = `❌ error el método HTTP GET NO puede tener body ${JSON.stringify(
-      body
+      body,
     )}`;
 
     errorLogs({
@@ -122,17 +122,17 @@ export async function getToken(): Promise<string | null> {
 
   // 'use client'
   if (isUseClient()) {
-    token = (await getCookie("token")) ?? null;
+    token = (await getCookie('token')) ?? null;
   } else {
     // 'use server'
     try {
-      const headers = await import("next/headers");
+      const headers = await import('next/headers');
       const cookieStore = await headers.cookies();
-      token = cookieStore.get("token")?.value ?? null;
+      token = cookieStore.get('token')?.value ?? null;
     } catch (error) {
       console.error(
         "❌ error en dynamic import de import { headers } from 'next/headers', NO se puedo obtener el token en componente servidor 'use server'",
-        error
+        error,
       );
 
       token = null;
@@ -145,7 +145,7 @@ export async function getToken(): Promise<string | null> {
 /**
 funcion para cerrar sesion en 'use client' y 'use server', */
 export function handleUnauthorized(): void {
-  const login: string = "/iniciar-sesion";
+  const login: string = '/iniciar-sesion';
 
   // 1) eliminar token
   // 2) re-dirigir a iniciar sesion
@@ -164,7 +164,7 @@ export function handleUnauthorized(): void {
 /**
 funcion para devolver a la pagina web anterior en 'use client' y 'use server', */
 export function returnToBrowserHistory(): void {
-  const login: string = "/iniciar-sesion";
+  const login: string = '/iniciar-sesion';
 
   // 'use client'
   if (isUseClient()) {
@@ -184,7 +184,7 @@ export function returnToBrowserHistory(): void {
 logs de peticiones HTTP erroneas ❌ */
 export function errorLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_NODE_ENV === "production") return;
+  if (process.env.NEXT_PUBLIC_NODE_ENV === 'production') return;
 
   const { message, method, url, options, result, response, showLogger } = objectLogs;
 
@@ -216,28 +216,28 @@ export function errorLogs(objectLogs: IObjectLogs): void {
   if (literalObjectLength(options) > 0) objError.options = options;
 
   objError.isJsonResponse =
-    response?.headers?.get("content-type")?.includes("application/json") ?? false;
+    response?.headers?.get('content-type')?.includes('application/json') ?? false;
 
   objError.apiResponse = result ? result : response;
 
-  console.error("❌ error en peticion HTTP, informacion del error:\n", objError);
+  console.error('❌ error en peticion HTTP, informacion del error:\n', objError);
 }
 
 /**
 logs de peticiones HTTP exitosas ✅ */
 export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
-  if (process.env.NEXT_PUBLIC_NODE_ENV === "production") return;
+  if (process.env.NEXT_PUBLIC_NODE_ENV === 'production') return;
 
   const { method, url, options, response, result, validateResponse, showLogger } = objectLogs;
 
   if (!showLogger) return;
 
-  console.info("\n", "✅ ", "[", method, "]", url);
+  console.info('\n', '✅ ', '[', method, ']', url);
 
-  if (isFile(options?.body)) console.info("✅ archivo(s) subido(s)");
+  if (isFile(options?.body)) console.info('✅ archivo(s) subido(s)');
 
-  if (options?.body) console.info("body ", options?.body);
+  if (options?.body) console.info('body ', options?.body);
 
   const componentType: string = isUseClient()
     ? "componente CLIENTE 'use client'"
@@ -257,22 +257,22 @@ export function successLogs(objectLogs: IObjectLogs): void {
   };
 
   if (isNoContentStatus(response?.status as number)) {
-    console.info(objectSuccesResponse, "\n");
+    console.info(objectSuccesResponse, '\n');
     return;
   }
 
-  let dataMessage: string = "";
+  let dataMessage: string = '';
 
   const newData: any = validateResponse ? dataApi : result;
 
   if (newData) {
     if (Array.isArray(newData)) {
       if (newData?.length === 0) {
-        dataMessage = "array vacío ➡️ (0) []";
+        dataMessage = 'array vacío ➡️ (0) []';
       } else {
         // data es un array de objetos [{}]
         const areAllObjects: boolean = newData?.every(
-          (item) => typeof item === "object" && item && item !== null
+          (item) => typeof item === 'object' && item && item !== null,
         );
         if (areAllObjects) {
           dataMessage = `array de objetos con ${newData.length} elemento ➡️ (${newData.length}) [{}]`;
@@ -288,7 +288,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
       const length: number | null = literalObjectLength(newData);
 
       if (length === 0) {
-        dataMessage = "objeto literal vacío ➡️ (0) {}";
+        dataMessage = 'objeto literal vacío ➡️ (0) {}';
       } else {
         dataMessage = `objeto literal con ${length} keys ➡️ (${length}) {}`;
       }
@@ -297,14 +297,14 @@ export function successLogs(objectLogs: IObjectLogs): void {
 
   objectSuccesResponse.data = dataMessage;
 
-  console.info(objectSuccesResponse, "\n");
+  console.info(objectSuccesResponse, '\n');
 }
 
 /**
 manejar mensajes de error q vienen del servidor (API) */
 export function errorHandling(status: number | undefined, url: string): void {
-  if (typeof status !== "number") {
-    console.error("❌ error: no se pudo obtener el HTTP status de la respuesta de la API ");
+  if (typeof status !== 'number') {
+    console.error('❌ error: no se pudo obtener el HTTP status de la respuesta de la API ');
     return;
   }
 
@@ -315,46 +315,43 @@ export function errorHandling(status: number | undefined, url: string): void {
     url !== process.env.NEXT_PUBLIC_AUTH_PROFILE
   ) {
     console.error(
-      "❌ http.service.ts - Error 401: unauthenticated",
-      "\nDetalle: El usuario no está autenticado o la sesión ha expirado",
-      "\nAcción: Re-dirigir al usuario a la página de inicio de sesión",
-      "\nURL solicitada: ",
-      url
+      '❌ http.service.ts - Error 401: unauthenticated',
+      '\nDetalle: El usuario no está autenticado o la sesión ha expirado',
+      '\nAcción: Re-dirigir al usuario a la página de inicio de sesión',
+      '\nURL solicitada: ',
+      url,
     );
 
     // re-dirigir a /iniciar-sesion cuando el status de la respuesta de la api sea 401
     handleUnauthorized();
 
-    if (!pathnameIsLogin() && isUseClient()) ErrorToast("Inicie sesión para continuar");
+    if (!pathnameIsLogin() && isUseClient()) ErrorToast('Inicie sesión para continuar');
   } else if (status === 403) {
     console.error(
-      "❌ http.service.ts - Error 403: Forbidden",
-      "\nDetalle: El usuario está autenticado pero no tiene permisos para acceder al recurso",
+      '❌ http.service.ts - Error 403: Forbidden',
+      '\nDetalle: El usuario está autenticado pero no tiene permisos para acceder al recurso',
       "\nAcción: Mostrar un mensaje de 'acceso denegado' o re-dirigir y re-dirigir a la pagina web anterior en el historial del navegador",
-      "\nURL solicitada:",
-      url
+      '\nURL solicitada:',
+      url,
     );
 
     // devolverme a la web anterior en el historial cuando el status de la respuesta de la api sea 403
     returnToBrowserHistory();
 
-    if (isUseClient())
-      ErrorToast("Acceso denegado, no tiene permisos para realizar esta acción");
+    if (isUseClient()) ErrorToast('Acceso denegado, no tiene permisos para realizar esta acción');
   } else if (status === 404) {
     console.error(
-      `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`
+      `❌ http.service.ts - error 404: Not Found - endpoint no encontrado, la URL solicitada "${url}" NO existe en el servidor`,
     );
 
     if (isUseClient())
-      ErrorToast(
-        "Ha ocurrido un error, por favor comuniquese con el administrador del sistema"
-      );
+      ErrorToast('Ha ocurrido un error, por favor comuniquese con el administrador del sistema');
   } else if (status >= 500) {
     console.error(`❌ http.service.ts - error en el servidor en la URL ${url}`);
 
     if (isUseClient())
       ErrorToast(
-        "Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo"
+        'Ha ocurrido un error, intentalo de nuevo mas tarde, estamos trabajando para solucionarlo',
       );
   }
 }
@@ -372,10 +369,10 @@ export function validateApiResponse({
   options,
 }: IValidateApiResponse): IResponse | Blob | FormData {
   const errorMessage: string =
-    "❌ Error 503 Service Unavailable - Posibles causas: \n" +
-    "1) La API del backend podría estar caída. \n" +
-    "2) El backend no está respondiendo con el tipo esperado (IResponse). \n" +
-    "3) Si está intentando descargar un archivo, asegúrese de que el backend responda con el tipo json | text | blob | arrayBuffer | formData";
+    '❌ Error 503 Service Unavailable - Posibles causas: \n' +
+    '1) La API del backend podría estar caída. \n' +
+    '2) El backend no está respondiendo con el tipo esperado (IResponse). \n' +
+    '3) Si está intentando descargar un archivo, asegúrese de que el backend responda con el tipo json | text | blob | arrayBuffer | formData';
 
   /* -------- ❌ respuesta ERRONEA -------- */
   const safeResult: IResponse | any = result ?? {};
@@ -393,7 +390,7 @@ export function validateApiResponse({
   };
 
   // retorna el archivo o texto plano recibido del backend
-  if (isFile(result) || ["text", "blob", "arrayBuffer", "formData"].includes(responseType))
+  if (isFile(result) || ['text', 'blob', 'arrayBuffer', 'formData'].includes(responseType))
     return result;
 
   // a partir de aqui la respuesta de la api tiene q ser un responseType === "json"
@@ -401,7 +398,7 @@ export function validateApiResponse({
   if (
     !result ||
     !isLiteralObject(result) ||
-    typeof result?.success !== "boolean" ||
+    typeof result?.success !== 'boolean' ||
     !isNumber(result?.status)
   ) {
     errorLogs({
@@ -419,12 +416,12 @@ export function validateApiResponse({
   /* -------- ✅ respuesta EXITOSA -------- */
   // siempre extraer `data` en un solo nivel, eliminando `data.data`
   let searchData: any = result?.data;
-  while (typeof searchData === "object" && "data" in searchData) {
+  while (typeof searchData === 'object' && 'data' in searchData) {
     searchData = searchData.data;
   }
 
   const searchMessage: string =
-    isString(result?.message) || isNumber(result?.message) ? result.message : "";
+    isString(result?.message) || isNumber(result?.message) ? result.message : '';
 
   return {
     ...(result ?? {}),
@@ -443,7 +440,7 @@ export function defaultSecurityEndpoint(url: string): boolean {
     if (!isString(item)) {
       console.error(
         `❌ ERROR CRÍTICO\n verifica q el env ${item} este agregado a las variables de entorno \n unprotectedURLs`,
-        unprotectedURLs
+        unprotectedURLs,
       );
       return false;
     }
@@ -457,16 +454,16 @@ export function defaultSecurityEndpoint(url: string): boolean {
 la API respondio con un tipo archivo */
 export async function responseFile<T>(
   response: Response,
-  responseType: "blob" | "arrayBuffer" | "formData",
+  responseType: 'blob' | 'arrayBuffer' | 'formData',
   method: Method,
   url: string,
   options: IRequestOptions,
-  message: string
+  message: string,
 ): Promise<T> {
   // capturar respuesta de error de la API cuando falla la descarga del archivo
-  const contentType: string = response?.headers?.get("content-type") ?? "";
+  const contentType: string = response?.headers?.get('content-type') ?? '';
 
-  if (contentType && contentType?.includes("application/json")) {
+  if (contentType && contentType?.includes('application/json')) {
     const result = await response.json();
 
     errorLogs({
@@ -481,9 +478,9 @@ export async function responseFile<T>(
     return result;
   }
 
-  if (responseType === "blob") return (await response.blob()) as T;
-  if (responseType === "arrayBuffer") return (await response.arrayBuffer()) as T;
-  if (responseType === "formData") return (await response.formData()) as T;
+  if (responseType === 'blob') return (await response.blob()) as T;
+  if (responseType === 'arrayBuffer') return (await response.arrayBuffer()) as T;
+  if (responseType === 'formData') return (await response.formData()) as T;
 
   return {
     success: false,

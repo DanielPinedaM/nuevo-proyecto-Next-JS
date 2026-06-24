@@ -9,13 +9,18 @@ import {
 } from '@/shared/ui/buttons/data-types/interfaces/buttons.interface';
 import composableButtonClass from '@/shared/ui/buttons/utils/composableButtonClass.utils';
 
-type NextLinkButtonProps = ButtonVisualProps & Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>;
+type NextLinkButtonProps = ButtonVisualProps &
+  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>;
 
 type StandardNextLinkProps = SharedStandardButtonProps &
-  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & { ref?: React.Ref<HTMLAnchorElement> };
+  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & {
+    ref?: React.Ref<HTMLAnchorElement>;
+  };
 
 type LinkNextLinkProps = SharedLinkButtonProps &
-  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & { ref?: React.Ref<HTMLAnchorElement> };
+  Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'> & {
+    ref?: React.Ref<HTMLAnchorElement>;
+  };
 
 type NextLinkComponent = {
   (props: StandardNextLinkProps): ReactElement | null;
@@ -66,18 +71,7 @@ type NextLinkComponent = {
  * </NextLink>
  */
 const NextLink = forwardRef<HTMLAnchorElement, NextLinkButtonProps>(
-  (
-    {
-      theme,
-      variant,
-      size = 'base',
-      modifiers,
-      effects,
-      children,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ theme, variant, size = 'base', modifiers, effects, children, ...rest }, ref) => {
     return (
       <Link
         ref={ref}
@@ -87,7 +81,7 @@ const NextLink = forwardRef<HTMLAnchorElement, NextLinkButtonProps>(
         {children}
       </Link>
     );
-  }
+  },
 ) as unknown as NextLinkComponent;
 
 NextLink.displayName = 'NextLink';

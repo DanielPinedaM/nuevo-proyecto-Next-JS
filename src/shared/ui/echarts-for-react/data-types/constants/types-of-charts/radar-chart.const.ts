@@ -2,10 +2,10 @@ import {
   IChartData,
   IDataChart,
   ISeries,
-} from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
-import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
-import { getRandomItem } from "@/shared/utils/func/general.utils";
-import { EChartsOption } from "echarts-for-react";
+} from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
+import DEFAULT_CHART_COLORS from '@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const';
+import { getRandomItem } from '@/shared/utils/func/general.utils';
+import { EChartsOption } from 'echarts-for-react';
 
 /**
 opciones de echarts-for-react
@@ -20,13 +20,13 @@ const radar = (baseOption: EChartsOption, data: IChartData | undefined) => ({
   series:
     (data?.series as ISeries[])?.map((serie: ISeries) => ({
       ...serie,
-      type: "radar",
+      type: 'radar',
       data:
         (serie?.data as IDataChart[])?.map((item: IDataChart) => ({
           ...item,
           itemStyle: {
             ...(item?.itemStyle ?? {}),
-            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
+            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
           },
         })) ?? [],
     })) ?? [],

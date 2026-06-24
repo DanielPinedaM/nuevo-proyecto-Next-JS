@@ -8,7 +8,8 @@ import {
 } from '@/shared/ui/buttons/data-types/interfaces/buttons.interface';
 import composableButtonClass from '@/shared/ui/buttons/utils/composableButtonClass.utils';
 
-type AnchorButtonProps = ButtonVisualProps & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>;
+type AnchorButtonProps = ButtonVisualProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'>;
 
 type StandardAnchorButtonProps = SharedStandardButtonProps &
   Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> & { ref?: Ref<HTMLAnchorElement> };
@@ -74,7 +75,7 @@ const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
   (
     { theme, variant, size = 'base', modifiers, effects, children, target, rel, ...rest },
 
-    ref
+    ref,
   ) => {
     const safeRel: string | undefined =
       target === '_blank'
@@ -92,7 +93,7 @@ const AnchorButton = forwardRef<HTMLAnchorElement, AnchorButtonProps>(
         {children}
       </a>
     );
-  }
+  },
 ) as unknown as AnchorButtonComponent;
 
 AnchorButton.displayName = 'AnchorButton';

@@ -56,13 +56,7 @@
   },
 
   // Configurar auto-completado, formatear codigo y linter
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-    "jsx",
-    "javascriptreact",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "typescript", "jsx", "javascriptreact", "typescriptreact"],
   "eslint.run": "onType",
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

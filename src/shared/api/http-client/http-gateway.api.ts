@@ -1,5 +1,9 @@
-import { isUseClient } from "@/shared/utils/func/general.utils";
-import { forceConvertToString, isFile, literalObjectLength } from "@/shared/utils/func/dataType.utils";
+import { isUseClient } from '@/shared/utils/func/general.utils';
+import {
+  forceConvertToString,
+  isFile,
+  literalObjectLength,
+} from '@/shared/utils/func/dataType.utils';
 import {
   defaultSecurityEndpoint,
   errorHandling,
@@ -11,14 +15,14 @@ import {
   successLogs,
   validateApiResponse,
   validateBodyWithGetMethod,
-} from "@/shared/api/http-client/utils/func/gateway.utils";
+} from '@/shared/api/http-client/utils/func/gateway.utils';
 import {
   IRequestOptions,
   IResponse,
   IIsValidOptions,
-} from "@/shared/api/http-client/data-types/interfaces/gateway.interface";
-import { Method } from "@/shared/api/http-client/data-types/types/gateway.type";
-import { ILoaderState } from "@/shared/stores/loader/loader.store";
+} from '@/shared/api/http-client/data-types/interfaces/gateway.interface';
+import { Method } from '@/shared/api/http-client/data-types/types/gateway.type';
+import { ILoaderState } from '@/shared/stores/loader/loader.store';
 
 /*
  ***************************
@@ -26,22 +30,20 @@ import { ILoaderState } from "@/shared/stores/loader/loader.store";
  *************************** */
 async function executeRequest<T = any>(
   method: Method,
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
   const {
     body,
     queryParams,
     headers = {},
-    responseType = "json",
+    responseType = 'json',
 
     // ¿mostrar icono de cargando?
     showLoader = true,
 
     // ¿mostrar logs en consola?
-    showLogger = Boolean(
-      process.env.NEXT_PUBLIC_NODE_ENV !== "production"
-    ),
+    showLogger = Boolean(process.env.NEXT_PUBLIC_NODE_ENV !== 'production'),
 
     // ¿la API responde con el tipo IResponse?
     validateResponse = true,
@@ -51,7 +53,7 @@ async function executeRequest<T = any>(
 
     // enviar token en TODOS los endpoint, EXCEPTO los q estan en const unprotectedURLs: string[]
     //tokenInHeaders = defaultSecurityEndpoint(url),
-    cookieHttpOnly = defaultSecurityEndpoint(url) ? "include" : "same-origin",
+    cookieHttpOnly = defaultSecurityEndpoint(url) ? 'include' : 'same-origin',
   } = options;
 
   // validar URL q llama al endpoint
@@ -60,7 +62,7 @@ async function executeRequest<T = any>(
     return {
       success: false,
       status: 400,
-      message: "URL invalida",
+      message: 'URL invalida',
       data: [],
     };
   }
@@ -85,7 +87,7 @@ async function executeRequest<T = any>(
 
   // acceder al valor booleano del loader
   if (isUseClient() && showLoader) {
-    const { useLoaderStore } = await import("@/shared/stores/loader/loader.store");
+    const { useLoaderStore } = await import('@/shared/stores/loader/loader.store');
     loaderStore = useLoaderStore.getState();
     loaderStore.showLoader();
   }
@@ -95,13 +97,13 @@ async function executeRequest<T = any>(
 
   if (literalObjectLength(headers) > 0) {
     finalHeaders = Object.fromEntries(
-      Object.entries(headers).map(([key, value]) => [key, String(forceConvertToString(value))])
+      Object.entries(headers).map(([key, value]) => [key, String(forceConvertToString(value))]),
     );
   }
 
   // No establecer 'Content-Type' si el body es un archivo
   if (!isFile(body)) {
-    finalHeaders["Content-Type"] = "application/json";
+    finalHeaders['Content-Type'] = 'application/json';
   }
 
   // Agregar token si el endpoint lo necesita
@@ -138,7 +140,7 @@ async function executeRequest<T = any>(
   // Convertir queryParams si el endpoint es por query
   const queryString = queryParams
     ? `?${new URLSearchParams(queryParams as Record<string, string>).toString()}`
-    : "";
+    : '';
   const requestUrl: string = `${url}${queryString}`;
 
   // Configurar opciones de fetch
@@ -166,7 +168,7 @@ async function executeRequest<T = any>(
   let result: IResponse | any = {
     success: false,
     status: 500,
-    message: "sin procesar",
+    message: 'sin procesar',
     data: [],
   };
 
@@ -187,23 +189,23 @@ async function executeRequest<T = any>(
       return {
         success: true,
         status: response.status,
-        message: response?.statusText ?? "sin contenido",
+        message: response?.statusText ?? 'sin contenido',
         data: [],
       };
     }
 
-    if (responseType === "json") {
+    if (responseType === 'json') {
       result = (await response.json()) as T;
-    } else if (responseType === "text") {
+    } else if (responseType === 'text') {
       result = (await response.text()) as T;
-    } else if (["blob", "arrayBuffer", "formData"].includes(responseType)) {
+    } else if (['blob', 'arrayBuffer', 'formData'].includes(responseType)) {
       result = (await responseFile(
         response,
         responseType,
         method,
         url,
         options,
-        `error la API respondió con tipo JSON y se espera un tipo responseType ${responseType}`
+        `error la API respondió con tipo JSON y se espera un tipo responseType ${responseType}`,
       )) as T;
     } else {
       const message = `al http.service.ts se le ha enviado parametro con formato de respuesta responseType ${responseType} no valido`;
@@ -228,7 +230,7 @@ async function executeRequest<T = any>(
 
     // true   -> API responde con JSON:           array, objeto literal, etc.
     // false  -> API responde con tipo archivo:   FormData, Blob, etc.
-    const responseTypeIsJson = Boolean(responseType === "json");
+    const responseTypeIsJson = Boolean(responseType === 'json');
 
     // error: el http status de fetch response.status es diferente al de la respuesta de la API result.status
     if (
@@ -271,7 +273,7 @@ async function executeRequest<T = any>(
     if (noFetchResponse || fetchError || noApiResult || apiError) {
       errorLogs({
         message:
-          validateResponse && result?.message ? result.message : "error al ejecutar peticion HTTP",
+          validateResponse && result?.message ? result.message : 'error al ejecutar peticion HTTP',
         method,
         url,
         options,
@@ -293,7 +295,7 @@ async function executeRequest<T = any>(
       });
     }
   } catch (error: any) {
-    console.error("❌ error en http.service.ts \n", error);
+    console.error('❌ error en http.service.ts \n', error);
   } finally {
     // ocultar loader en componente cliente 'use cliente'
     if (isUseClient() && showLoader) {
@@ -317,13 +319,13 @@ async function executeRequest<T = any>(
       return validateApiResponse({ result, response, responseType, method, url, options });
     } else {
       // la API puede responder con lo q sea
-      if (isFile(result) || ["text", "blob", "arrayBuffer", "formData"].includes(responseType)) {
+      if (isFile(result) || ['text', 'blob', 'arrayBuffer', 'formData'].includes(responseType)) {
         return result;
       } else {
         return {
           success: response?.ok ?? false,
           status: response?.status ?? 500,
-          message: response?.statusText ?? "Error al ejecutar la petición HTTP",
+          message: response?.statusText ?? 'Error al ejecutar la petición HTTP',
           data: result,
         };
       }
@@ -337,36 +339,36 @@ async function executeRequest<T = any>(
  ********************************************************************* */
 
 export async function GET(
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
-  return executeRequest("GET", url, options);
+  return executeRequest('GET', url, options);
 }
 
 export async function POST(
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
-  return executeRequest("POST", url, options);
+  return executeRequest('POST', url, options);
 }
 
 export async function PUT(
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
-  return executeRequest("PUT", url, options);
+  return executeRequest('PUT', url, options);
 }
 
 export async function PATCH(
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
-  return executeRequest("PATCH", url, options);
+  return executeRequest('PATCH', url, options);
 }
 
 export async function DELETE(
-  url: string = "",
-  options: IRequestOptions = {}
+  url: string = '',
+  options: IRequestOptions = {},
 ): Promise<IResponse | any> {
-  return executeRequest("DELETE", url, options);
+  return executeRequest('DELETE', url, options);
 }

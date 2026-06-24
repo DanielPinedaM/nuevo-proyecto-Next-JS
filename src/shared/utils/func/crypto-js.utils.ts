@@ -1,9 +1,8 @@
+import { enc, mode, pad, AES } from 'crypto-js';
+import { isValidJSONparse } from '@/shared/utils/func/dataType.utils';
 
-import { enc, mode, pad, AES } from "crypto-js";
-import { isValidJSONparse } from "@/shared/utils/func/dataType.utils";
-
-const SECRET_KEY_AUTHENTICATION: string = "GestionAlcaldeCO";
-const IV_AUTH: string = "encryptionIntVec";
+const SECRET_KEY_AUTHENTICATION: string = 'GestionAlcaldeCO';
+const IV_AUTH: string = 'encryptionIntVec';
 
 /**
 encriptar texto */
@@ -53,6 +52,6 @@ export const decryptJSON = async (encryptedJSON: string): Promise<any | null> =>
 
   if (isValidJSONparse(decryptedJSON as string)) return JSON.parse(decryptedJSON as string);
 
-  console.error("❌ [decryptJSON] error no es JSON valido ", decryptedJSON);
+  console.error('❌ [decryptJSON] error no es JSON valido ', decryptedJSON);
   return null;
 };

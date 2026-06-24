@@ -23,7 +23,7 @@ export default function Chart({
   const hasData = () =>
     Boolean(
       (Array.isArray(data?.series) && data?.series?.length > 0) ||
-        (isLiteralObject(data?.series) && literalObjectLength(data?.series) > 0)
+      (isLiteralObject(data?.series) && literalObjectLength(data?.series) > 0),
     );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Chart({
       type,
       'no soportado, los tipos de graficos soportados son ',
       CHART_TYPES,
-      '\npara mostrar otro tipo de grafico, agregar mas opciones a getChartOptions'
+      '\npara mostrar otro tipo de grafico, agregar mas opciones a getChartOptions',
     );
     return null;
   }

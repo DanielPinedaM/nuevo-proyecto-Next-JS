@@ -28,7 +28,7 @@ const errorMessage = (functionName: string, property: any, value?: TSessionStora
       property,
       'tiene que ser un string que no sea vacio "" \n \nel valor de la propiedad es ',
       value,
-      '\n \nsessionStorage solamente admite guardar propiedades y valores que son tipo string'
+      '\n \nsessionStorage solamente admite guardar propiedades y valores que son tipo string',
     );
   } else {
     console.error(
@@ -37,7 +37,7 @@ const errorMessage = (functionName: string, property: any, value?: TSessionStora
       ')',
       'porque la propiedad ',
       property,
-      'tiene que ser un string que no sea vacio "" \n \nsessionStorage solamente admite guardar propiedades y valores que son tipo string'
+      'tiene que ser un string que no sea vacio "" \n \nsessionStorage solamente admite guardar propiedades y valores que son tipo string',
     );
   }
 };
@@ -189,7 +189,7 @@ export const sessionStorageUpdate = (property: string, value: TSessionStorageVal
   sessionStorageSaveAndUpdate() = sessionStorageSave() + sessionStorageUpdate() */
 export const sessionStorageSaveAndUpdate = (
   property: string,
-  value: TSessionStorageValue
+  value: TSessionStorageValue,
 ): boolean => {
   if (!isValidString(property)) {
     errorMessage('sessionStorageSaveAndUpdate', property, value);
@@ -226,7 +226,7 @@ export const sessionStorageDeleteExcept = (properties: string[]): boolean => {
   if (!sessionStorage.length) {
     console.error(
       '❌ error: NO existen propiedades en el sessionStorage para eliminar \n',
-      sessionStorage
+      sessionStorage,
     );
     return false;
   }
@@ -237,7 +237,7 @@ export const sessionStorageDeleteExcept = (properties: string[]): boolean => {
       properties,
       'de la funcion sessionStorageDeleteExcept(',
       properties,
-      ') tiene q ser un array de string con las propiedades del sessionStorage que NO se eliminan'
+      ') tiene q ser un array de string con las propiedades del sessionStorage que NO se eliminan',
     );
     return false;
   }
@@ -252,13 +252,13 @@ export const sessionStorageDeleteExcept = (properties: string[]): boolean => {
       properties,
       'tiene ',
       properties.length,
-      'elemento(s)'
+      'elemento(s)',
     );
     return false;
   }
 
   const anElementIsNotString: boolean = properties.some(
-    (property: string) => typeof property !== 'string' || property?.trim() === ''
+    (property: string) => typeof property !== 'string' || property?.trim() === '',
   );
   if (anElementIsNotString) {
     errorMessage('sessionStorageDeleteExcept', properties);

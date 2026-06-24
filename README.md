@@ -16,25 +16,26 @@ npm i
 
 # ▶️ Ejecutar proyecto
 
-| comando                | apunta a...   | ruta archivo                   |
-| ---------------------- | ------------- | ------------------------------ |
-| node --run start:local | local host    | `environments/.env.localhost`  |
-| node --run start:test  | pruebas       | `environments/.env.test`       |
-| node --run start:prod  | producción    | `environments/.env.production` |
+| comando                | apunta a... | ruta archivo                   |
+| ---------------------- | ----------- | ------------------------------ |
+| node --run start:local | local host  | `environments/.env.localhost`  |
+| node --run start:test  | pruebas     | `environments/.env.test`       |
+| node --run start:prod  | producción  | `environments/.env.production` |
 
 # 🚀 Generar build (dist) para desplegar
 
-| comando               | apunta a...   | ruta archivo                   |
-| --------------------- | ------------- | ------------------------------ |
-| node --run build:test | pruebas       | `environments/.env.test`       |
-| node --run build:prod | producción    | `environments/.env.production` |
+| comando               | apunta a... | ruta archivo                   |
+| --------------------- | ----------- | ------------------------------ |
+| node --run build:test | pruebas     | `environments/.env.test`       |
+| node --run build:prod | producción  | `environments/.env.production` |
 
 # 🤖 Uso de IA
 
 > [!WARNING]
-> # ⚠️ ****IMPORTANTE**** 🚨
 >
-> ****Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas****
+> # ⚠️ \***\*IMPORTANTE\*\*** 🚨
+>
+> \***\*Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas\*\***
 
 Esta sección está diseñada para utilizarse como contexto en herramientas de IA.
 
@@ -69,10 +70,10 @@ La razón por la que es necesario pagar una IA es que este `README.md` es muy ex
 
 Evitar copiar y pegar código desde una plataforma web de IA. Siempre utilizar el CLI para editar el código, ya que el CLI tiene:
 
-* Mayor contexto del proyecto.
-* Conocimiento de la estructura completa del código.
-* Acceso al sistema operativo (archivos y carpetas).
-* Capacidad para realizar cambios respetando la arquitectura del proyecto.
+- Mayor contexto del proyecto.
+- Conocimiento de la estructura completa del código.
+- Acceso al sistema operativo (archivos y carpetas).
+- Capacidad para realizar cambios respetando la arquitectura del proyecto.
 
 ## Uso de Git y de IA
 
@@ -83,75 +84,81 @@ Trabajar bajo el principio:
 > 1 commit = 1 feature
 
 ## Contexto para la IA
+
 Antes de realizar cualquier pregunta sobre este proyecto en una IA, se debe proporcionar este contexto completo para que la IA pueda seguir la arquitectura del proyecto.
 
 Este contenido puede utilizarse dentro de archivos de configuración como:
 
-* `CLAUDE.md`
-* Archivos equivalentes de instrucciones para otras IA
+- `CLAUDE.md`
+- Archivos equivalentes de instrucciones para otras IA
 
 Al copiar este contenido hacia una IA:
 
-* Copiar únicamente desde esta sección hacia abajo.
-* Copiar todas las secciones posteriores completas sin omitir reglas.
-* No copiar secciones anteriores de este `README.md`.
-* Antes de pegarlo en la IA, eliminar todos los emojis del `README.md`.
+- Copiar únicamente desde esta sección hacia abajo.
+- Copiar todas las secciones posteriores completas sin omitir reglas.
+- No copiar secciones anteriores de este `README.md`.
+- Antes de pegarlo en la IA, eliminar todos los emojis del `README.md`.
 
 # `CLAUDE.md`
 
 # 🌐 Reglas de Idioma
-* Responder siempre en español. Es decir, redactar en español todas las explicaciones, respuestas, preguntas, descripciones, análisis, recomendaciones, documentación y mensajes dirigidos al usuario.
 
-* Mantener en español el razonamiento explicativo que se muestra al usuario para justificar una respuesta o decisión.
+- Responder siempre en español. Es decir, redactar en español todas las explicaciones, respuestas, preguntas, descripciones, análisis, recomendaciones, documentación y mensajes dirigidos al usuario.
 
-* El razonamiento explicativo es generado y mostrado únicamente a criterio de la IA cuando sea necesario para justificar o aclarar una respuesta o decisión. Cuando este razonamiento se muestre al usuario, debe estar redactado en español.
+- Mantener en español el razonamiento explicativo que se muestra al usuario para justificar una respuesta o decisión.
 
-* No traducir términos técnicos de uso común en desarrollo de software (por ejemplo: middleware, service, controller, repository, signal, interceptor, provider, endpoint, payload).
+- El razonamiento explicativo es generado y mostrado únicamente a criterio de la IA cuando sea necesario para justificar o aclarar una respuesta o decisión. Cuando este razonamiento se muestre al usuario, debe estar redactado en español.
 
-* No traducir nombres de frameworks, librerías, paquetes, APIs ni patrones de diseño.
+- No traducir términos técnicos de uso común en desarrollo de software (por ejemplo: middleware, service, controller, repository, signal, interceptor, provider, endpoint, payload).
 
-* Mantener el código, identificadores, nombres de archivos, clases, interfaces, métodos, funciones y variables en inglés.
+- No traducir nombres de frameworks, librerías, paquetes, APIs ni patrones de diseño.
 
-* Escribir el código en inglés, salvo las excepciones indicadas más abajo.
+- Mantener el código, identificadores, nombres de archivos, clases, interfaces, métodos, funciones y variables en inglés.
 
-* Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
+- Escribir el código en inglés, salvo las excepciones indicadas más abajo.
 
-* Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
+- Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
+
+- Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
 
 ## Commits
+
 ### Fuente única de verdad para los commits
-* La tabla de la sección "Emojis por Tipo de Commit" es la única fuente de verdad para construir cualquier commit. El tipo y el emoji deben seleccionarse exclusivamente desde sus filas.
 
-* Antes de crear un commit, dar prioridad absoluta a la tabla: tomar siempre el tipo y el emoji desde ella.
+- La tabla de la sección "Emojis por Tipo de Commit" es la única fuente de verdad para construir cualquier commit. El tipo y el emoji deben seleccionarse exclusivamente desde sus filas.
 
-* El uso de Conventional Commits y Gitmoji está estrictamente limitado a la tabla. Está prohibido usar tipos, emojis o definiciones que no aparezcan en ella.
+- Antes de crear un commit, dar prioridad absoluta a la tabla: tomar siempre el tipo y el emoji desde ella.
 
-* Está prohibido inventar nuevos tipos de commit, nuevos emojis o nuevas definiciones de commit.
+- El uso de Conventional Commits y Gitmoji está estrictamente limitado a la tabla. Está prohibido usar tipos, emojis o definiciones que no aparezcan en ella.
 
-* Si los cambios no encajan exactamente con ninguna fila de la tabla, está prohibido crear un tipo o un emoji nuevo. En ese caso, utilizar el tipo y el emoji existentes que más se aproximen a la intención real del cambio.
+- Está prohibido inventar nuevos tipos de commit, nuevos emojis o nuevas definiciones de commit.
 
-* Está prohibido eliminar, agregar, editar o alterar la tabla de la sección "Emojis por Tipo de Commit".
+- Si los cambios no encajan exactamente con ninguna fila de la tabla, está prohibido crear un tipo o un emoji nuevo. En ese caso, utilizar el tipo y el emoji existentes que más se aproximen a la intención real del cambio.
+
+- Está prohibido eliminar, agregar, editar o alterar la tabla de la sección "Emojis por Tipo de Commit".
 
 ### Formato del Mensaje de Commit
+
 `<emoji>` `<type>`(`<scope>`): `<mensaje en español>`
 
 El `<emoji>` siempre va al inicio, antes del `<type>`. A continuación del encabezado, escribir siempre el `body` como una lista de puntos con los cambios realizados.
 
 Elementos obligatorios en todo commit:
 
-* `<emoji>`: tomado de la tabla.
+- `<emoji>`: tomado de la tabla.
 
-* `<type>`: tomado de la tabla y escrito en inglés.
+- `<type>`: tomado de la tabla y escrito en inglés.
 
-* El único elemento opcional es `<scope>`, regido por la sección "Reglas para el Scope".
+- El único elemento opcional es `<scope>`, regido por la sección "Reglas para el Scope".
 
-* `<mensaje en español>`: resumen conciso de lo que se hizo (`subject`), redactado en español.
+- `<mensaje en español>`: resumen conciso de lo que se hizo (`subject`), redactado en español.
 
-* `body`: explicación descriptiva de los cambios realizados, redactada en español como una lista de puntos, no como un párrafo. Es obligatorio en todo commit.
+- `body`: explicación descriptiva de los cambios realizados, redactada en español como una lista de puntos, no como un párrafo. Es obligatorio en todo commit.
 
-* El `body` nunca debe ser idéntico al `<mensaje en español>`. El `<mensaje en español>` resume el cambio, mientras que el `body` lo detalla punto por punto. Aunque el cambio sea muy pequeño y ambos puedan parecer similares, desarrollar el `body` con los puntos concretos del cambio en lugar de repetir el `<mensaje en español>`.
+- El `body` nunca debe ser idéntico al `<mensaje en español>`. El `<mensaje en español>` resume el cambio, mientras que el `body` lo detalla punto por punto. Aunque el cambio sea muy pequeño y ambos puedan parecer similares, desarrollar el `body` con los puntos concretos del cambio en lugar de repetir el `<mensaje en español>`.
 
 ### Ejemplo
+
 El encabezado es el `<emoji> <type>(<scope>): <mensaje en español>` y, debajo, el `body` desarrolla los cambios como lista de puntos.
 
 ```
@@ -166,45 +173,46 @@ En este ejemplo, las líneas que comienzan con `-` son el `body`: detallan punto
 
 ### Emojis por Tipo de Commit
 
-| Tipo de commit | Emoji | Descripción (definición)                                                                                          |
-| ------------- | --- | -------------------------------------------------------------------------------------------------------------------- |
-| feat          | ✨ | Nueva funcionalidad o capacidad del sistema                                                                           |
-| fix           | 🐛 | Corrección de errores o fallos                                                                                        |
-| hotfix        | 🚑 | Corrección urgente de errores críticos en producción                                                                  |
-| docs          | 📝 | Cambios únicamente en documentación: archivos Markdown, README, carpeta docs, guías, manuales y contenido informativo |
-| style         | 💄 | Cambios visuales, estilos, maquetación, UI/UX, responsive y textos visibles sin modificar lógica del negocio          |
-| refactor      | ♻️ | Reestructuración del código sin cambiar comportamiento                                                                |
-| perf          | ⚡ | Mejoras de rendimiento o eficiencia                                                                                   |
-| test          | ✅ | Creación o modificación de pruebas                                                                                    |
-| build         | 📦 | Cambios relacionados con build, compilación o empaquetado                                                             |
-| ci            | 👷 | Cambios en integración continua o automatización de pipelines                                                         |
-| chore         | 🔧 | Tareas de mantenimiento general que no modifican funcionalidad                                                        |
-| revert        | ⏪ | Reversión de cambios, versiones o despliegues anteriores                                                              |
-| docker        | 🐳 | Cambios relacionados con Docker, Kubernetes y contenedores                                                            |
-| deps          | ⬆️ | Cambios relacionados con dependencias: agregar, actualizar o eliminar paquetes del proyecto                           |
-| wip           | 🚧 | Trabajo en progreso no finalizado                                                                                     |
-| init          | 🎉 | Inicialización del proyecto o configuración inicial                                                                   |
-| merge         | 🔀 | Integración de ramas, combinación de cambios y resolución de conflictos de Git                                        |
-| remove        | ⚰️ | Eliminación definitiva de código, archivos, carpetas, funcionalidades o dependencias que ya no son necesarias         |
-| i18n          | 🌐 | Internacionalización o traducciones                                                                                   |
-| lint          | 🚨 | Cambios relacionados con análisis estático, reglas de calidad de código y configuración de herramientas como ESLint   |
-| accessibility | ♿ | Mejoras de accesibilidad                                                                                              |
-| mock          | 🤡 | Cambios relacionados con mocks, datos simulados o datos quemados utilizados para pruebas y desarrollo                 |
+| Tipo de commit | Emoji | Descripción (definición)                                                                                              |
+| -------------- | ----- | --------------------------------------------------------------------------------------------------------------------- |
+| feat           | ✨    | Nueva funcionalidad o capacidad del sistema                                                                           |
+| fix            | 🐛    | Corrección de errores o fallos                                                                                        |
+| hotfix         | 🚑    | Corrección urgente de errores críticos en producción                                                                  |
+| docs           | 📝    | Cambios únicamente en documentación: archivos Markdown, README, carpeta docs, guías, manuales y contenido informativo |
+| style          | 💄    | Cambios visuales, estilos, maquetación, UI/UX, responsive y textos visibles sin modificar lógica del negocio          |
+| refactor       | ♻️    | Reestructuración del código sin cambiar comportamiento                                                                |
+| perf           | ⚡    | Mejoras de rendimiento o eficiencia                                                                                   |
+| test           | ✅    | Creación o modificación de pruebas                                                                                    |
+| build          | 📦    | Cambios relacionados con build, compilación o empaquetado                                                             |
+| ci             | 👷    | Cambios en integración continua o automatización de pipelines                                                         |
+| chore          | 🔧    | Tareas de mantenimiento general que no modifican funcionalidad                                                        |
+| revert         | ⏪    | Reversión de cambios, versiones o despliegues anteriores                                                              |
+| docker         | 🐳    | Cambios relacionados con Docker, Kubernetes y contenedores                                                            |
+| deps           | ⬆️    | Cambios relacionados con dependencias: agregar, actualizar o eliminar paquetes del proyecto                           |
+| wip            | 🚧    | Trabajo en progreso no finalizado                                                                                     |
+| init           | 🎉    | Inicialización del proyecto o configuración inicial                                                                   |
+| merge          | 🔀    | Integración de ramas, combinación de cambios y resolución de conflictos de Git                                        |
+| remove         | ⚰️    | Eliminación definitiva de código, archivos, carpetas, funcionalidades o dependencias que ya no son necesarias         |
+| i18n           | 🌐    | Internacionalización o traducciones                                                                                   |
+| lint           | 🚨    | Cambios relacionados con análisis estático, reglas de calidad de código y configuración de herramientas como ESLint   |
+| accessibility  | ♿    | Mejoras de accesibilidad                                                                                              |
+| mock           | 🤡    | Cambios relacionados con mocks, datos simulados o datos quemados utilizados para pruebas y desarrollo                 |
 
 ### Reglas para el Scope
-* El `<scope>` es opcional.
 
-* Cuando se use, escribir el `<scope>` en inglés.
+- El `<scope>` es opcional.
 
-* Antes de omitirlo, intentar determinarlo revisando los archivos modificados, las rutas, los nombres de carpetas y los módulos o features afectados.
+- Cuando se use, escribir el `<scope>` en inglés.
 
-* Usar el `<scope>` únicamente cuando la funcionalidad, el módulo o el área modificada pueda identificarse de forma clara y directa.
+- Antes de omitirlo, intentar determinarlo revisando los archivos modificados, las rutas, los nombres de carpetas y los módulos o features afectados.
 
-* No inventar un `<scope>` basado en suposiciones.
+- Usar el `<scope>` únicamente cuando la funcionalidad, el módulo o el área modificada pueda identificarse de forma clara y directa.
 
-* No invertir demasiado tiempo en deducir un `<scope>` ambiguo.
+- No inventar un `<scope>` basado en suposiciones.
 
-* Si tras revisar los cambios no hay información suficiente para determinarlo con seguridad, omitir el `<scope>`.
+- No invertir demasiado tiempo en deducir un `<scope>` ambiguo.
+
+- Si tras revisar los cambios no hay información suficiente para determinarlo con seguridad, omitir el `<scope>`.
 
 Flujo para determinar el `<scope>`:
 
@@ -219,51 +227,54 @@ Flujo para determinar el `<scope>`:
 5. Si el `<scope>` genera duda, omitirlo.
 
 ### Regla Cuando el Cambio no Coincide Exactamente con la Tabla
-* Nunca omitir el emoji.
 
-* Priorizar la coherencia semántica sobre la coincidencia exacta: elegir el tipo y el emoji de la tabla que mejor representen la intención del cambio.
+- Nunca omitir el emoji.
+
+- Priorizar la coherencia semántica sobre la coincidencia exacta: elegir el tipo y el emoji de la tabla que mejor representen la intención del cambio.
 
 ### Mostrar el Commit Después de Realizarlo
+
 Cuando se solicite hacer un commit desde un prompt, después de crearlo mostrar en la respuesta el encabezado con el formato `<emoji>` `<type>`(`<scope>`): `<mensaje en español>` y el `body` correspondiente al commit realizado.
 
 # Stack Frontend del Proyecto
 
-* Node JS 24.16.0
-* Next JS 16.2.9 con App Router (`app`)
-* React 19.2.7
-* TypeScript 6.0.3
-* PrimeReact 10.9.8
-* React Hook Form 7.80.0
-* hookform/error-message 2.0.1
-* Tailwind CSS 4.3.1
-* Sass (versión moderna con `@use` y `@forward`, no utilizar `@import`)
-* Zustand 5.0.14
-* Luxon 3.7.2
-* tailwind-merge 3.6.0
-* clsx 2.1.1
-* react-icons 5.6.0
-* cookies-next 6.1.1
+- Node JS 24.16.0
+- Next JS 16.2.9 con App Router (`app`)
+- React 19.2.7
+- TypeScript 6.0.3
+- PrimeReact 10.9.8
+- React Hook Form 7.80.0
+- hookform/error-message 2.0.1
+- Tailwind CSS 4.3.1
+- Sass (versión moderna con `@use` y `@forward`, no utilizar `@import`)
+- Zustand 5.0.14
+- Luxon 3.7.2
+- tailwind-merge 3.6.0
+- clsx 2.1.1
+- react-icons 5.6.0
+- cookies-next 6.1.1
 
 # Reglas Obligatorias
 
-* No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
+- No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
 
-* Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
+- Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
 
-* No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
+- No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
 
-* Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
+- Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
 
-* Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
+- Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
 
-* Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
+- Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
 
-* La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
+- La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
 # 📁 Estructura Base del Proyecto
 
 > [!WARNING]
-> # ***ESTO HAY Q CORREGIRLO:***
+>
+> # **_ESTO HAY Q CORREGIRLO:_**
 
 La estructura de carpetas definida a continuación **no representa la totalidad completa del proyecto**, representa la **arquitectura base de referencia**.
 
@@ -309,9 +320,9 @@ La arquitectura es **agnóstica al framework**: describe un modelo reutilizable 
 
 La arquitectura define **únicamente tres capas**:
 
-* **Feature**
-* **Core**
-* **Shared**
+- **Feature**
+- **Core**
+- **Shared**
 
 ## Definición de las Capas
 
@@ -325,9 +336,9 @@ Código que pertenece a **una sola** funcionalidad o flujo del sistema. Contiene
 
 Ejemplos:
 
-* `src/app/(features)/tasks/components/ListTasks.tsx`
-* `src/app/(features)/tasks/hooks/useTasks.ts`
-* `src/app/(features)/tasks/store/tasks.store.ts`
+- `src/app/(features)/tasks/components/ListTasks.tsx`
+- `src/app/(features)/tasks/hooks/useTasks.ts`
+- `src/app/(features)/tasks/store/tasks.store.ts`
 
 ### Core
 
@@ -337,9 +348,9 @@ Core **no** se define por reutilización, se define por **significado del negoci
 
 Ejemplos:
 
-* `src/core/users/actions/update-user.ts`
-* `src/core/users/data-types/interfaces/user.interface.ts`
-* `src/core/permissions/get-user-permissions.ts`
+- `src/core/users/actions/update-user.ts`
+- `src/core/users/data-types/interfaces/user.interface.ts`
+- `src/core/permissions/get-user-permissions.ts`
 
 ### Shared
 
@@ -347,17 +358,17 @@ Código **completamente agnóstico al dominio**: utilidades técnicas reutilizab
 
 Ejemplos:
 
-* `src/shared/ui/prime-react/react-hook-form/InputText.tsx`
-* `src/shared/utils/func/luxon.utils.ts`
-* `src/shared/ui/buttons/Button.tsx`
+- `src/shared/ui/prime-react/react-hook-form/InputText.tsx`
+- `src/shared/utils/func/luxon.utils.ts`
+- `src/shared/ui/buttons/Button.tsx`
 
 ## Resumen de las Capas de Arquitectura
 
-| Capa                      | Ubicación                      | ¿Qué contiene?                                          | ¿Conoce el dominio? | ¿Genera ruta URL? |
-| ------------------------- | ------------------------------ | ------------------------------------------------------- | ------------------- | ----------------- |
-| Feature                   | `src/app/(features)/<feature>` | Lógica de una sola funcionalidad o flujo                | Sí                  | Sí                |
-| Core (dominio del sistema)| `src/core`                     | Reglas del negocio del sistema, independientes de la UI | Sí                  | No                |
-| Shared (agnóstico)        | `src/shared`                   | Código técnico reutilizable sin conocimiento del negocio| No                  | No                |
+| Capa                       | Ubicación                      | ¿Qué contiene?                                           | ¿Conoce el dominio? | ¿Genera ruta URL? |
+| -------------------------- | ------------------------------ | -------------------------------------------------------- | ------------------- | ----------------- |
+| Feature                    | `src/app/(features)/<feature>` | Lógica de una sola funcionalidad o flujo                 | Sí                  | Sí                |
+| Core (dominio del sistema) | `src/core`                     | Reglas del negocio del sistema, independientes de la UI  | Sí                  | No                |
+| Shared (agnóstico)         | `src/shared`                   | Código técnico reutilizable sin conocimiento del negocio | No                  | No                |
 
 > El número de features que usan un código **no** aparece como criterio en esta tabla porque **no define la capa**. La capa se decide por el significado del código (ver "Regla de Decisión").
 
@@ -369,21 +380,21 @@ Esta es la **única** sección para decidir dónde ubicar cualquier archivo o ca
 
 Es decir, una regla del dominio que existe por sí misma, independientemente de cualquier feature o pantalla (permisos, autorización, validaciones del dominio, cálculos globales del negocio, entidades del sistema).
 
-* **Sí** → `src/core`.
-* **No** → continuar con la pregunta 2.
+- **Sí** → `src/core`.
+- **No** → continuar con la pregunta 2.
 
 **2. ¿El código pertenece a una sola funcionalidad o flujo?**
 
 Es decir, código que solo tiene sentido dentro de esa feature y dejaría de tenerlo fuera de ella.
 
-* **Sí** → dentro de esa feature, en `src/app/(features)/<feature>`.
-* **No** → continuar con la pregunta 3.
+- **Sí** → dentro de esa feature, en `src/app/(features)/<feature>`.
+- **No** → continuar con la pregunta 3.
 
 **3. ¿El código es completamente agnóstico al dominio?**
 
 Es decir, código técnico que no conoce el negocio y funcionaría igual en cualquier proyecto.
 
-* **Sí** → `src/shared`.
+- **Sí** → `src/shared`.
 
 > **Reutilizar un código en dos o más features NO lo convierte automáticamente en core.** Que dos features compartan un código solo indica que no pertenece en exclusiva a una de ellas; para saber su capa hay que volver a aplicar estas preguntas: si es una regla del negocio del sistema va a `core`, y si es técnico y agnóstico va a `shared`.
 
@@ -391,9 +402,9 @@ Es decir, código técnico que no conoce el negocio y funcionaría igual en cual
 
 Cada capa utiliza un criterio de organización diferente según su responsabilidad:
 
-* **Feature** se organiza por **funcionalidades del producto**.
-* **Core** se organiza por **conceptos o entidades del dominio**.
-* **Shared** se organiza por **capacidades técnicas reutilizables**.
+- **Feature** se organiza por **funcionalidades del producto**.
+- **Core** se organiza por **conceptos o entidades del dominio**.
+- **Shared** se organiza por **capacidades técnicas reutilizables**.
 
 Las carpetas internas representan responsabilidades específicas dentro de cada contexto, pero no todas las capas siguen la misma estructura:
 
@@ -461,23 +472,23 @@ src/
 
 ## Diferencia entre `(features)` y `<feature>`
 
-* **`(features)`** es un *route group* de App Router de Next.js (los paréntesis lo definen). Por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es el contenedor de todas las features.
+- **`(features)`** es un _route group_ de App Router de Next.js (los paréntesis lo definen). Por estar entre paréntesis, **no aporta ningún segmento a la URL**. No es una feature: es el contenedor de todas las features.
 
-* **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
+- **`<feature>`** es el marcador de posición de **una feature concreta** (por ejemplo `orders`, `products`, `dashboard`). Cada `<feature>` **sí** representa una funcionalidad real y **genera una ruta URL** a través de su `page.tsx`.
 
 ## Prohibido Modificar o Crear Nuevas Capas de Arquitectrua
 
 Está estrictamente prohibido modificar, reemplazar, eliminar o crear nuevas capas arquitectónicas fuera de las tres capas oficiales definidas en este documento:
 
-* Feature
-* Core
-* Shared
+- Feature
+- Core
+- Shared
 
 Toda carpeta, módulo, archivo (componente) o estructura nueva debe pertenecer obligatoriamente a una de estas tres capas; no se permite introducir una clasificación alternativa ni una reorganización paralela de las responsabilidades ya definidas.
 
 Sí está permitido crear **subcarpetas dentro de una capa existente**, siempre que no introduzcan una nueva capa y respeten las responsabilidades de esa capa.
 
-***✅ Ejemplos válidos:***
+**_✅ Ejemplos válidos:_**
 
 ```text
 src/shared
@@ -519,25 +530,25 @@ Por eso `src/core` vive **fuera** de `src/app`: aloja las reglas del negocio del
 
 Esta arquitectura prohíbe crear carpetas cuyo nombre sea genérico o ambiguo, porque ocultan responsabilidades distintas dentro de un mismo contenedor en lugar de expresar **una única responsabilidad clara**. Cada carpeta debe nombrar de forma específica lo que contiene (`validators/`, `components/`, `utils/`, etc).
 
-* `services/`: No es una convención propia de React ni de Next.js, su nombre no expresa qué responsabilidad contiene y mezcla lógica de negocio, acceso a datos, validaciones y acciones en un mismo lugar. No debe reemplazarse por otra carpeta genérica equivalente (`helpers/`, `logic/`, etc.): el objetivo no es renombrarla, sino **separar responsabilidades**.
+- `services/`: No es una convención propia de React ni de Next.js, su nombre no expresa qué responsabilidad contiene y mezcla lógica de negocio, acceso a datos, validaciones y acciones en un mismo lugar. No debe reemplazarse por otra carpeta genérica equivalente (`helpers/`, `logic/`, etc.): el objetivo no es renombrarla, sino **separar responsabilidades**.
 
-* `common/`: Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
+- `common/`: Es un nombre comodín que no describe ninguna responsabilidad concreta y termina convirtiéndose en un depósito de código sin dueño, acoplando elementos no relacionados. Cada arhivo debe pertenecer a la carpeta que describe su responsabilidad real.
 
-* `**/utils/func/general.utils.ts` / `**/utils/func/global.utils.ts`: Un archivo cuyo nombre no describe ninguna responsabilidad concreta termina acumulando funciones sin relación entre sí. Un nombre genérico (`general`, `global`, `misc`, `helpers`, etc.) invita a meter cualquier cosa, lo que convierte el archivo en un depósito sin dueño que rompe la separación de responsabilidades. Cada utilidad debe residir en un archivo que nombre explícitamente **su responsabilidad concreta** (la capacidad técnica en `shared`, la entidad o concepto en `core`). Ejemplo: `luxon.utils.ts`, `string.utils.ts`, `user.utils.ts`. No basta con renombrar a otro nombre comodín equivalente: el objetivo es **separar responsabilidades**, no reetiquetarlas. Por eso **NO** debe existir en ninguna de estas rutas:
+- `**/utils/func/general.utils.ts` / `**/utils/func/global.utils.ts`: Un archivo cuyo nombre no describe ninguna responsabilidad concreta termina acumulando funciones sin relación entre sí. Un nombre genérico (`general`, `global`, `misc`, `helpers`, etc.) invita a meter cualquier cosa, lo que convierte el archivo en un depósito sin dueño que rompe la separación de responsabilidades. Cada utilidad debe residir en un archivo que nombre explícitamente **su responsabilidad concreta** (la capacidad técnica en `shared`, la entidad o concepto en `core`). Ejemplo: `luxon.utils.ts`, `string.utils.ts`, `user.utils.ts`. No basta con renombrar a otro nombre comodín equivalente: el objetivo es **separar responsabilidades**, no reetiquetarlas. Por eso **NO** debe existir en ninguna de estas rutas:
 
-  * `src/shared/utils/func/general.utils.ts`
-  * `src/shared/utils/func/global.utils.ts`
+  - `src/shared/utils/func/general.utils.ts`
+  - `src/shared/utils/func/global.utils.ts`
 
-  * `src/core/<entity>/utils/func/general.utils.ts`
-  * `src/core/<entity>/utils/func/global.utils.ts`
+  - `src/core/<entity>/utils/func/general.utils.ts`
+  - `src/core/<entity>/utils/func/global.utils.ts`
 
-  * `src/app/(features)/<feature>/utils/func/general.utils.ts`
-  * `src/app/(features)/<feature>/utils/func/global.utils.ts`
+  - `src/app/(features)/<feature>/utils/func/general.utils.ts`
+  - `src/app/(features)/<feature>/utils/func/global.utils.ts`
 
-* `shared/components`: Combina conceptos incompatibles: `shared` es código agnóstico al dominio, mientras que `components` contiene lógica de negocio asociada a una feature. Un componente agnóstico pertenece a `src/shared/ui` y un componente con lógica de negocio a `src/app/(features)/<feature>/components`. Por eso **NO** debe existir en ninguna de estas rutas:
-  * `src/shared/components`
-  * `src/app/shared/components`
-  * `src/app/(features)/*/shared/components`
+- `shared/components`: Combina conceptos incompatibles: `shared` es código agnóstico al dominio, mientras que `components` contiene lógica de negocio asociada a una feature. Un componente agnóstico pertenece a `src/shared/ui` y un componente con lógica de negocio a `src/app/(features)/<feature>/components`. Por eso **NO** debe existir en ninguna de estas rutas:
+  - `src/shared/components`
+  - `src/app/shared/components`
+  - `src/app/(features)/*/shared/components`
 
 ## Regla de Dirección de Dependencias
 
@@ -549,18 +560,19 @@ Las dependencias fluyen en **una sola dirección**:
 feature  →  core  →  shared
 ```
 
-***Reglas:***
-* **Feature** puede importar de **Core** y de **Shared**.
+**_Reglas:_**
 
-* **Core** puede importar de **Shared** y de otras entidades o procesos dentro de **Core**.
+- **Feature** puede importar de **Core** y de **Shared**.
 
-* **Shared** no importa de **Core** ni de ninguna **Feature**. Solo depende de librerías externas y de otros módulos dentro de **Shared**.
+- **Core** puede importar de **Shared** y de otras entidades o procesos dentro de **Core**.
 
-* Una **Feature** **nunca** importa de otra **Feature**.
+- **Shared** no importa de **Core** ni de ninguna **Feature**. Solo depende de librerías externas y de otros módulos dentro de **Shared**.
 
-* **Core** **nunca** importa de una **Feature**.
+- Una **Feature** **nunca** importa de otra **Feature**.
 
-* Las dependencias entre módulos de **Core** deben ser **acíclicas**: si `A` importa de `B`, entonces `B` no puede importar de `A`.
+- **Core** **nunca** importa de una **Feature**.
+
+- Las dependencias entre módulos de **Core** deben ser **acíclicas**: si `A` importa de `B`, entonces `B` no puede importar de `A`.
 
 Cuando una **Feature** necesita lógica que vive dentro de otra **Feature**, esa lógica **no** se importa de forma cruzada: se **promueve a una capa compartida** (`core` si es una regla del negocio del sistema, `shared` si es código técnico agnóstico) y ambas la consumen desde ahí. La capa destino se decide con la "Regla de Decisión", nunca por el hecho de que dos features la necesiten (ver "Mover de Feature a Core").
 
@@ -568,48 +580,48 @@ Cuando una **Feature** necesita lógica que vive dentro de otra **Feature**, esa
 
 Esta regla es la que mantiene la arquitectura escalable cuando el número de features crece. Sin ella, `core` puede terminar importando de una feature (invirtiendo la dependencia y atando el dominio compartido a una pantalla concreta), o dos features pueden acoplarse directamente entre sí (creando dependencias ocultas imposibles de rastrear). La dirección única garantiza que lo más reutilizable (`shared`) sea también lo más estable, y que lo más volátil (`feature`) dependa de lo estable y nunca al revés.
 
-***✅ Ejemplos válidos:***
+**_✅ Ejemplos válidos:_**
 
 ```ts
 // feature → core      (una feature usa una regla del negocio del sistema)
 // src/app/(features)/orders/components/OrderList.tsx
-import { getUserPermissions } from '@/core/permissions/get-user-permissions'
+import { getUserPermissions } from '@/core/permissions/get-user-permissions';
 
 // feature → shared    (una feature usa código agnóstico)
 // src/app/(features)/orders/components/OrderList.tsx
-import { Button } from '@/shared/ui/buttons/Button'
+import { Button } from '@/shared/ui/buttons/Button';
 
 // core → shared       (el dominio usa código agnóstico)
 // src/core/users/actions/update-user.ts
-import { formatDate } from '@/shared/utils/func/luxon.utils'
+import { formatDate } from '@/shared/utils/func/luxon.utils';
 
 // core → core         (una entidad usa otra, en UNA sola dirección y sin ciclo)
 // src/core/orders/validators/order.validator.ts
-import { isActiveUser } from '@/core/users/utils/user.utils'
+import { isActiveUser } from '@/core/users/utils/user.utils';
 
 // shared → shared     (un módulo agnóstico usa otro módulo agnóstico)
 // src/shared/ui/overlay/dialog/ConfirmDialog.tsx
-import { Button } from '@/shared/ui/buttons/Button'
+import { Button } from '@/shared/ui/buttons/Button';
 ```
 
-***🚫 Ejemplos prohibidos:***
+**_🚫 Ejemplos prohibidos:_**
 
 ```ts
 // ❌ feature → feature   (una feature nunca importa de otra feature)
 // src/app/(features)/orders/components/OrderList.tsx
-import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'
+import { useTasks } from '@/app/(features)/tasks/hooks/useTasks';
 
 // ❌ core → feature       (core nunca importa de una feature)
 // src/core/users/actions/update-user.ts
-import { OrderForm } from '@/app/(features)/orders/components/OrderForm'
+import { OrderForm } from '@/app/(features)/orders/components/OrderForm';
 
 // ❌ shared → feature     (shared nunca importa de una feature)
 // src/shared/ui/buttons/Button.tsx
-import { useTasks } from '@/app/(features)/tasks/hooks/useTasks'
+import { useTasks } from '@/app/(features)/tasks/hooks/useTasks';
 
 // ❌ shared → core        (shared nunca importa de core)
 // src/shared/ui/buttons/Button.tsx
-import { User } from '@/core/users/data-types/interfaces/user.interface'
+import { User } from '@/core/users/data-types/interfaces/user.interface';
 ```
 
 ## Procesos del Dominio en Core
@@ -633,16 +645,16 @@ Regla práctica: si no puedes responder "¿de qué entidad es esto?" con **una s
 
 Esto **no introduce una nueva capa**: un proceso vive dentro de `core` y respeta todas sus reglas (conoce el dominio, es compartido por varias features, no genera ruta URL).
 
-***✅ Caso especial - core → core cíclico:***
+**_✅ Caso especial - core → core cíclico:_**
 
 Importar de una entidad a otra dentro de core sí está permitido, pero solo en una dirección. Queda prohibido cuando se forma un ciclo (A importa de B y B importa de A):
 
 ```ts
 // src/core/users/utils/user.utils.ts
-import { getOrdersByUser } from '@/core/orders/actions/get-orders-by-user'  // users depende de orders
+import { getOrdersByUser } from '@/core/orders/actions/get-orders-by-user'; // users depende de orders
 
 // src/core/orders/validators/order.validator.ts
-import { isActiveUser } from '@/core/users/utils/user.utils'                // orders depende de users
+import { isActiveUser } from '@/core/users/utils/user.utils'; // orders depende de users
 ```
 
 ## Mover de Feature a Core
@@ -655,7 +667,7 @@ Un código se mueve a `core` cuando representa una **regla del negocio del siste
 
 Que una **segunda** feature necesite el mismo código **no** es, por sí solo, motivo para moverlo a `core`: solo indica que ese código no pertenece en exclusiva a una feature. Para decidir su destino se vuelve a aplicar la "Regla de Decisión".
 
-***Procedimiento para mover código de una feature a core:***
+**_Procedimiento para mover código de una feature a core:_**
 
 1. Mover el archivo (o carpeta) desde `src/app/(features)/<feature>/...` hacia la entidad o proceso correspondiente en `src/core/...`.
 
@@ -673,11 +685,11 @@ Está prohibido **duplicar** el código en la segunda feature para evitar el mov
 
 **No** se mueve automáticamente a `core`. Debe evaluarse su significado:
 
-* **Si es técnico o reutilizable genérico** → se mueve a `shared`.
+- **Si es técnico o reutilizable genérico** → se mueve a `shared`.
 
   Ejemplos: `formatDate`, `debounce`, utilidades de strings, componentes de UI reutilizables.
 
-* **Si representa una regla del negocio del sistema** → se mueve a `core`.
+- **Si representa una regla del negocio del sistema** → se mueve a `core`.
 
   Ejemplos: permisos de usuario, reglas de validación del dominio, lógica de autorización.
 
@@ -685,32 +697,32 @@ Está prohibido **duplicar** el código en la segunda feature para evitar el mov
 
 Se permite la duplicación **solo si** se cumplen todas estas condiciones:
 
-* Es lógica específica de cada feature.
-* No representa una regla del negocio del sistema.
-* No es reutilizable sin acoplar el contexto de la feature.
+- Es lógica específica de cada feature.
+- No representa una regla del negocio del sistema.
+- No es reutilizable sin acoplar el contexto de la feature.
 
 En este caso **no** se mueve a `core` ni a `shared`.
 
 ### Qué SÍ puede repetirse en features
 
-* Lógica específica de la UI de esa feature.
-* Lógica de presentación.
-* Lógica que depende del contexto de esa feature.
-* Código pequeño que no representa una regla del sistema.
+- Lógica específica de la UI de esa feature.
+- Lógica de presentación.
+- Lógica que depende del contexto de esa feature.
+- Código pequeño que no representa una regla del sistema.
 
 Ejemplos válidos de repetición:
 
-* Validaciones de formularios específicas de la feature.
-* Mapeo de datos de UI.
-* Lógica de estados locales.
-* Hooks específicos de la feature.
+- Validaciones de formularios específicas de la feature.
+- Mapeo de datos de UI.
+- Lógica de estados locales.
+- Hooks específicos de la feature.
 
 ### Qué NO debe repetirse en features
 
-* Reglas de negocio del sistema → `core`.
-* Lógica de permisos o autenticación → `core`.
-* Cálculos globales del dominio → `core`.
-* Utilidades técnicas genéricas → `shared`.
+- Reglas de negocio del sistema → `core`.
+- Lógica de permisos o autenticación → `core`.
+- Cálculos globales del dominio → `core`.
+- Utilidades técnicas genéricas → `shared`.
 
 Duplicar una regla del negocio del sistema rompe la fuente única de verdad y es precisamente lo que `core` existe para impedir.
 
@@ -724,11 +736,11 @@ Duplicar una regla del negocio del sistema rompe la fuente única de verdad y es
 
 ## Resumen de Regla de Dirección de Dependencias
 
-| Desde ↓ \ Hacia →   | Feature   | Core   | Shared   |
-| ------------------- | --------- | ------ | -------- |
-| **Feature**         | ❌       | ✅     | ✅       |
-| **Core**            | ❌       | ✅\*   | ✅       |
-| **Shared**          | ❌       | ❌     | ✅       |
+| Desde ↓ \ Hacia → | Feature | Core | Shared |
+| ----------------- | ------- | ---- | ------ |
+| **Feature**       | ❌      | ✅   | ✅     |
+| **Core**          | ❌      | ✅\* | ✅     |
+| **Shared**        | ❌      | ❌   | ✅     |
 
 \* core → core es válido solo en una dirección; queda prohibido si forma un ciclo (ver "Procesos del Dominio en Core").
 
@@ -756,8 +768,8 @@ La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
 
 Todos los formularios del proyecto deben utilizar obligatoriamente:
 
-* React Hook Form
-* Componentes ubicados en `src/shared/ui/prime-react/react-hook-form`
+- React Hook Form
+- Componentes ubicados en `src/shared/ui/prime-react/react-hook-form`
 
 No crear formularios con manejo manual de estado cuando exista un componente React Hook Form equivalente.
 
@@ -769,36 +781,37 @@ Su responsabilidad es únicamente encapsular y estandarizar la UI.
 
 Estos componentes:
 
-* No conocen features
-* No contienen lógica de negocio
-* No contienen reglas del dominio
+- No conocen features
+- No contienen lógica de negocio
+- No contienen reglas del dominio
 
 ## `src/shared/ui/prime-react/react-hook-form`
 
 Contiene adaptadores entre:
 
-* Prime React
-* React Hook Form
-* Componentes visuales
+- Prime React
+- React Hook Form
+- Componentes visuales
 
 Su única responsabilidad es conectar el formulario con la UI.
 
 Estos componentes solamente manejan integración técnica:
 
-* `useController`
-* `Controller`
-* `value`
-* `onChange`
-* `onBlur`
-* errores visuales del formulario
+- `useController`
+- `Controller`
+- `value`
+- `onChange`
+- `onBlur`
+- errores visuales del formulario
 
 No representan formularios del negocio.
 
 ## Reglas obligatorias del sistema de formularios
 
 ### 1. Framework y renderizado
-* Se trabaja en Next.js (App Router).
-* Todos los componentes de formularios deben ser `"use client"`.
+
+- Se trabaja en Next.js (App Router).
+- Todos los componentes de formularios deben ser `"use client"`.
 
 ### 2. Ubicación obligatoria de componentes
 
@@ -809,11 +822,12 @@ src/shared/ui/prime-react/react-hook-form
 ```
 
 ### 3. Restricciones estrictas
-* Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
-* Obligatorio usar componentes de PrimeReact para todos los campos.
-* Prohibido usar formularios controlados con `useState`.
-* Prohibido usar formularios no controlados con `useRef`.
-* React Hook Form es la única fuente válida de estado del formulario.
+
+- Prohibido usar inputs HTML nativos (`<input />`, `<select />`, etc.).
+- Obligatorio usar componentes de PrimeReact para todos los campos.
+- Prohibido usar formularios controlados con `useState`.
+- Prohibido usar formularios no controlados con `useRef`.
+- React Hook Form es la única fuente válida de estado del formulario.
 
 ### 4. Flujo de React Hook Form y Prime React
 
@@ -854,75 +868,84 @@ src/shared/ui/prime-react/react-hook-form
 ```
 
 ### 5. React Hook Form (RHF)
-* Es el único responsable del estado del formulario.
-* `defaultValues` se define exclusivamente en `useForm` en el componente padre.
-* `watch` es obligatorio para lógica derivada en el componente padre.
-* `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
+
+- Es el único responsable del estado del formulario.
+- `defaultValues` se define exclusivamente en `useForm` en el componente padre.
+- `watch` es obligatorio para lógica derivada en el componente padre.
+- `onChange` manual está prohibido fuera de los inputs controlados por `Controller`.
 
 ### 6. Uso obligatorio de `watch`
-* Toda lógica condicional del formulario debe resolverse con `watch`.
 
-* `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
+- Toda lógica condicional del formulario debe resolverse con `watch`.
 
-* Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
+- `watch` **NO** debe usarse dentro de componentes reutilizables de input que estan en `src/shared/components/react-hook-form`
 
-* Ejemplos: `disabled`, visibilidad, dependencias entre campos.
+- Prohibido usar `useState` + `onChange` para manejar formularios. Lo correcto es usar `watch` en el componente padre.
+
+- Ejemplos: `disabled`, visibilidad, dependencias entre campos.
 
 ### 7. Componentes reutilizables
+
 Un input reutilizable debe:
-* Encapsular `Controller` de React Hook Form.
-* Ser genérico (`T extends FieldValues`).
-* Usar `control`, `name`, `rules`, `errors` como contrato base.
-* No contener lógica de negocio.
-* No definir reglas internas.
-* No usar `watch`.
-* Representar un único tipo de campo/input.
-* No mezclar múltiples tipos de input en un mismo componente reutilizable.
 
-***✅ Correcto***
+- Encapsular `Controller` de React Hook Form.
+- Ser genérico (`T extends FieldValues`).
+- Usar `control`, `name`, `rules`, `errors` como contrato base.
+- No contener lógica de negocio.
+- No definir reglas internas.
+- No usar `watch`.
+- Representar un único tipo de campo/input.
+- No mezclar múltiples tipos de input en un mismo componente reutilizable.
 
-* `InputText`
-* `InputPassword`
-* `InputNumber`
-* `InputEmail`
-* `InputPhone`
-* `InputSelect`
+**_✅ Correcto_**
 
-***❌ Incorrecto***
+- `InputText`
+- `InputPassword`
+- `InputNumber`
+- `InputEmail`
+- `InputPhone`
+- `InputSelect`
 
-* `GenericInput`
-* `BaseInput`
-* `DynamicInput`
-* Un único componente que maneje:
-  * `input type="text"`
-  * `input type="password"`
-  * `input type="number"`
-  * `input type="email"`
+**_❌ Incorrecto_**
+
+- `GenericInput`
+- `BaseInput`
+- `DynamicInput`
+- Un único componente que maneje:
+  - `input type="text"`
+  - `input type="password"`
+  - `input type="number"`
+  - `input type="email"`
 
 ### 8. UI (Prime React)
-* PrimeReact solo maneja la capa visual.
-* `disabled`, `placeholder`, `className` son props de UI.
-* Prime React no puede modificar el estado del formulario.
-* Solo refleja el estado final derivado de React Hook Form.
+
+- PrimeReact solo maneja la capa visual.
+- `disabled`, `placeholder`, `className` son props de UI.
+- Prime React no puede modificar el estado del formulario.
+- Solo refleja el estado final derivado de React Hook Form.
 
 ### 9. Validaciones
-* Todas las validaciones se definen en el padre mediante `rules`.
-* Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
-* El input solo ejecuta las validaciones, no las define.
+
+- Todas las validaciones se definen en el padre mediante `rules`.
+- Se soportan múltiples validaciones (`required`, `minLength`, `pattern`, etc.).
+- El input solo ejecuta las validaciones, no las define.
 
 ### 10. Formularios dinámicos
-* La estructura del formulario debe definirse en el padre (config-driven).
-* No se permite lógica condicional dentro de los componentes de input.
+
+- La estructura del formulario debe definirse en el padre (config-driven).
+- No se permite lógica condicional dentro de los componentes de input.
 
 ### 11. Mensajes de error de formulario
-* Todo componente de campo ubicado en `src/shared/ui/prime-react/react-hook-form` debe usar `FormErrorMessages` para mostrar los mensajes de error de React Hook Form.
 
-- Prohibido mostrar errores de validación con elementos HTML propios, lógica manual o cualquier otro componente alternativo.
+- Todo componente de campo ubicado en `src/shared/ui/prime-react/react-hook-form` debe usar `FormErrorMessages` para mostrar los mensajes de error de React Hook Form.
+
+* Prohibido mostrar errores de validación con elementos HTML propios, lógica manual o cualquier otro componente alternativo.
 
 ## Regla clave de arquitectura
-* Input (componente hijo) = UI + conexión React Hook Form
 
-* Padre = lógica + `watch` + validaciones + estado derivado
+- Input (componente hijo) = UI + conexión React Hook Form
+
+- Padre = lógica + `watch` + validaciones + estado derivado
 
 ## Flujo obligatorio de datos
 
@@ -933,37 +956,39 @@ Un input reutilizable debe:
 5. PrimeReact renderiza UI.
 
 ## Prohibido
-* Usar `watch` dentro de inputs reutilizables.
-* Usar `useState` para formularios controlados
-* Usar `useRef` para formularios no controlados
-* Usar inputs nativos de HTML.
-* Mezclar lógica de negocio dentro de inputs.
-* Definir `defaultValues` fuera de `useForm`.
-* Duplicar control de estado entre RHF y UI.
-* Usar `map` para renderizar los campos de los formularios.
-* Mostrar errores de validación sin usar `FormErrorMessages` en componentes de `src/shared/ui/prime-react/react-hook-form`.
+
+- Usar `watch` dentro de inputs reutilizables.
+- Usar `useState` para formularios controlados
+- Usar `useRef` para formularios no controlados
+- Usar inputs nativos de HTML.
+- Mezclar lógica de negocio dentro de inputs.
+- Definir `defaultValues` fuera de `useForm`.
+- Duplicar control de estado entre RHF y UI.
+- Usar `map` para renderizar los campos de los formularios.
+- Mostrar errores de validación sin usar `FormErrorMessages` en componentes de `src/shared/ui/prime-react/react-hook-form`.
 
 ## Resultado esperado
-* Formularios escalables y consistentes.
-* Componentes reutilizables reales (design system).
-* Cero duplicación de lógica de `Controller`.
-* Separación estricta entre lógica y UI.
-* Mantenimiento simple en proyectos grandes.
+
+- Formularios escalables y consistentes.
+- Componentes reutilizables reales (design system).
+- Cero duplicación de lógica de `Controller`.
+- Separación estricta entre lógica y UI.
+- Mantenimiento simple en proyectos grandes.
 
 ## Prohibido agregar lógica de negocio dentro de src/shared/ui/prime-react/react-hook-form
 
 En `src/shared/ui/prime-react/react-hook-form` nunca agregar:
 
-* Reglas de negocio
-* Reglas específicas de una feature
-* Validaciones de dominio
-* Condiciones de negocio
-* if relacionados con entidades del sistema
-* Permisos
-* Roles
-* Lógica de cualquier feature. Ejemplo: tareas, productos, usuarios, etc.
+- Reglas de negocio
+- Reglas específicas de una feature
+- Validaciones de dominio
+- Condiciones de negocio
+- if relacionados con entidades del sistema
+- Permisos
+- Roles
+- Lógica de cualquier feature. Ejemplo: tareas, productos, usuarios, etc.
 
-***Ejemplo prohibido:***
+**_Ejemplo prohibido:_**
 
 ```tsx
 if (user.role === "admin") {
@@ -972,7 +997,8 @@ if (user.role === "admin") {
 ```
 
 > [!WARNING]
-> # ***INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM***
+>
+> # **_INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM_**
 
 # 📅 Fechas
 
@@ -980,24 +1006,24 @@ Usar la librería **Luxon** para el manejo de fechas. **NO** usar `new Date()` *
 
 Esto se debe a que:
 
-* `new Date()` tiene comportamientos inconsistentes entre zonas horarias.
+- `new Date()` tiene comportamientos inconsistentes entre zonas horarias.
 
-* `new Date()` Es difícil de formatear y manipular de forma segura.
+- `new Date()` Es difícil de formatear y manipular de forma segura.
 
-* `new Date()` No maneja bien timezones ni conversiones complejas.
+- `new Date()` No maneja bien timezones ni conversiones complejas.
 
-* [Moment.js está en modo legacy/deprecado y ya no se recomienda para proyectos modernos.](https://momentjs.com/docs/#/-project-status/)
+- [Moment.js está en modo legacy/deprecado y ya no se recomienda para proyectos modernos.](https://momentjs.com/docs/#/-project-status/)
 
-* Luxon ofrece una API más clara, moderna y robusta para fechas, tiempos y zonas horarias.
+- Luxon ofrece una API más clara, moderna y robusta para fechas, tiempos y zonas horarias.
 
-***❌ Incorrecto - usar `new Date()`***
+**_❌ Incorrecto - usar `new Date()`_**
 
 ```ts
 const now = new Date();
 const formatted = now.toLocaleDateString();
 ```
 
-***❌ Incorrecto - usar moment.js***
+**_❌ Incorrecto - usar moment.js_**
 
 ```ts
 import moment from 'moment';
@@ -1005,7 +1031,7 @@ import moment from 'moment';
 const today = moment().format('YYYY-MM-DD');
 ```
 
-***✅ Correcto - usar Luxon***
+**_✅ Correcto - usar Luxon_**
 
 ```ts
 import { DateTime } from 'luxon';
@@ -1016,13 +1042,13 @@ const formatted = now.toFormat('yyyy-MM-dd');
 
 En `src\shared\utils\func\luxon.utils.ts` hay funciones para el manejo (formateo) de fecha y hora usando Luxon.
 
-***❌ Incorrecto - NO usar `formatDate`, usar Luxon directo***
+**_❌ Incorrecto - NO usar `formatDate`, usar Luxon directo_**
 
 Problemas de este enfoque:
 
-* Repetición de código en múltiples componentes
+- Repetición de código en múltiples componentes
 
-* cada dev formatea fechas de forma distinta, sin estandarización.
+- cada dev formatea fechas de forma distinta, sin estandarización.
 
 ```ts
 'use client';
@@ -1048,7 +1074,7 @@ export default function MyComponent() {
 }
 ```
 
-***✅ Correcto - usar `formatDate`***
+**_✅ Correcto - usar `formatDate`_**
 
 ```ts
 'use client';
@@ -1076,13 +1102,13 @@ export default function MyComponent() {
 
 En `src\shared\utils\func\luxon.utils.ts` hay función para obtener fecha y hora actual con formato de fecha y hora personalizada
 
-***❌ Incorrecto - usar Luxon directamente para obtener fecha y hora actual***
+**_❌ Incorrecto - usar Luxon directamente para obtener fecha y hora actual_**
 
 Problemas de este enfoque:
 
-* Repetición de código en múltiples componentes
+- Repetición de código en múltiples componentes
 
-* cada dev formatea fechas de forma distinta, sin estandarización.
+- cada dev formatea fechas de forma distinta, sin estandarización.
 
 ```ts
 'use client';
@@ -1111,7 +1137,7 @@ export default function MyComponent() {
 }
 ```
 
-***✅ Ejemplo correcto - usar `luxon.utils.ts`***
+**_✅ Ejemplo correcto - usar `luxon.utils.ts`_**
 
 ```ts
 'use client';
@@ -1147,7 +1173,7 @@ La configuración de Tailwind ahora se realiza en el archivo `src/styles/global/
 
 Esto permite centralizar la definición de tokens de diseño (colores, media queries, etc.) sin necesidad de configuración en archivo JavaScript.
 
-***❌ Incorrecto - Configurar Tailwind 3 con `.js`***
+**_❌ Incorrecto - Configurar Tailwind 3 con `.js`_**
 
 ```js
 /* tailwind.config.js */
@@ -1163,7 +1189,7 @@ module.exports = {
 };
 ```
 
-***✅ Correcto - Configurar Tailwind 4 con `.css`***
+**_✅ Correcto - Configurar Tailwind 4 con `.css`_**
 
 ```CSS
 /* src/styles/global/tailwind/index-tailwind.css */
@@ -1192,15 +1218,15 @@ En VS Code o en cualquier editor basado en VS Code (Antigravity, Cursor, Windsur
 /* Tailwind 4 */
 
 {
-  "tailwindCSS.experimental.configFile": "src/styles/global/tailwind/index-tailwind.css", /* ruta del archivo .css de configuracion de Tailwind 4 */
+  "tailwindCSS.experimental.configFile": "src/styles/global/tailwind/index-tailwind.css" /* ruta del archivo .css de configuracion de Tailwind 4 */,
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.includeLanguages": {
-      "javascript": "javascript",
-      "javascriptreact": "javascriptreact",
-      "plaintext": "html",
-      "typescript": "typescript",
-      "typescriptreact": "typescriptreact"
-  },
+    "javascript": "javascript",
+    "javascriptreact": "javascriptreact",
+    "plaintext": "html",
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact"
+  }
 }
 ```
 
@@ -1212,7 +1238,7 @@ Las variables con nombres de los colores de **Sass** en `src/styles/global/scss/
 
 Esto garantiza que los colores sean los mismos entre los estilos globales definidos en Sass y los estilos de cada componente definidos con Tailwind.
 
-***✅ Ejemplo Correcto:***
+**_✅ Ejemplo Correcto:_**
 
 En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-color` y son el mismo valor con color rojo `oklch(62.8% 0.258 29.23)`
 
@@ -1221,7 +1247,7 @@ En Sass y Tailwind ambos colores tienen exactamente el mismo nombre `primary-col
 src/styles/global/scss/_variable.scss
 
 colores de Sass */
-$primary-color: oklch(62.8% 0.258 29.23) ;
+$primary-color: oklch(62.8% 0.258 29.23);
 ```
 
 ```CSS
@@ -1234,10 +1260,9 @@ colores de Tailwind */
 }
 ```
 
-***❌ Ejemplo Incorrecto:***
+**_❌ Ejemplo Incorrecto:_**
 
 Los nombres o valores no coinciden entre Sass y Tailwind.
-
 
 ```scss
 /*
@@ -1261,13 +1286,13 @@ colores de Tailwind */
 
 Todos los colores del proyecto se definen utilizando el formato `oklch`.
 
-***✅ Ejemplo Correcto***
+**_✅ Ejemplo Correcto_**
 
 ```scss
 oklch(62.8% 0.258 29.23)
 ```
 
-***❌ Ejemplo Incorrecto***
+**_❌ Ejemplo Incorrecto_**
 
 ```scss
 /* Hexadecimal */
@@ -1290,29 +1315,39 @@ hsla(0, 100%, 50%, 0.5)
 
 Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color también debe estar definido en formato `oklch`.
 
-***✅ Ejemplo Correcto***
+**_✅ Ejemplo Correcto_**
 
 ```tsx
-<div className="bg-[oklch(62.8%_0.258_29.23)]"></div>
+<div className='bg-[oklch(62.8%_0.258_29.23)]'></div>
 ```
 
-***❌ Ejemplo Incorrecto***
+**_❌ Ejemplo Incorrecto_**
 
 ```tsx
-{/* Hexadecimal */}
-<div className="bg-[#FF0000]"></div>
+{
+  /* Hexadecimal */
+}
+<div className='bg-[#FF0000]'></div>;
 
-{/* RGB */}
-<div className="bg-[rgb(255_0_0)]"></div>
+{
+  /* RGB */
+}
+<div className='bg-[rgb(255_0_0)]'></div>;
 
-{/* RGBA */}
-<div className="bg-[rgba(255_0_0_/_50%)]"></div>
+{
+  /* RGBA */
+}
+<div className='bg-[rgba(255_0_0_/_50%)]'></div>;
 
-{/* HSL */}
-<div className="bg-[hsl(0_100%_50%)]"></div>
+{
+  /* HSL */
+}
+<div className='bg-[hsl(0_100%_50%)]'></div>;
 
-{/* HSLA */}
-<div className="bg-[hsla(0,_100%,_50%,_0.5)]"></div>
+{
+  /* HSLA */
+}
+<div className='bg-[hsla(0,_100%,_50%,_0.5)]'></div>;
 ```
 
 ## 🤔 ¿Cómo Usar Tailwind y Sass Juntos?
@@ -1321,7 +1356,7 @@ Cuando se utilicen colores mediante valores arbitrarios de Tailwind, el color ta
 
 👉 Separación estricta de responsabilidades:
 
-* ***Sass*** para estilos globales en `src/styles/global/...`
+- **_Sass_** para estilos globales en `src/styles/global/...`
 
 ```scss
 // estilo global para tablas en src/styles/global/scss/prime-react/data/_data-table.scss
@@ -1357,67 +1392,63 @@ const PRODUCTS = [
 export default function MyComponent() {
   return (
     <DataTable value={PRODUCTS}>
-      <Column field="id" header="ID" />
-      <Column field="name" header="Nombre" />
-      <Column field="price" header="Precio" />
+      <Column field='id' header='ID' />
+      <Column field='name' header='Nombre' />
+      <Column field='price' header='Precio' />
     </DataTable>
   );
 }
 ```
 
-* ***Tailwind*** para estilos especificos de cada componente en: 
+- **_Tailwind_** para estilos especificos de cada componente en:
 
-* `src/app/...`
+- `src/app/...`
 
-* `src/shared/components/...`
+- `src/shared/components/...`
 
-* `src/shared/ui/...`
+- `src/shared/ui/...`
 
 ```tsx
 // MyComponent.tsx
 
 export default function MyComponent() {
-  return (
-    <h1 className="text-center text-blue-600">
-      Guardar
-    </h1>
-  );
+  return <h1 className='text-center text-blue-600'>Guardar</h1>;
 }
 ```
 
 ### 🚨 PRINCIPIO BASE (INNEGOCIABLE)
 
-* ❌ Tailwind y Sass **NO** se mezclan en la capa de UI
-* ❌ **NO** existen overrides entre Sass y Tailwind
-* ❌ **NO** se resuelve con especificidad
-* ❌ **NO** está permitido usar `!important` ni en Sass ni en Tailwind
-* ❌ **NO** se duplican responsabilidades de estilos
-* ❌ **NO** se crean estilos visuales en Sass para componentes
+- ❌ Tailwind y Sass **NO** se mezclan en la capa de UI
+- ❌ **NO** existen overrides entre Sass y Tailwind
+- ❌ **NO** se resuelve con especificidad
+- ❌ **NO** está permitido usar `!important` ni en Sass ni en Tailwind
+- ❌ **NO** se duplican responsabilidades de estilos
+- ❌ **NO** se crean estilos visuales en Sass para componentes
 
 👉 Si esto ocurre, la arquitectura está mal diseñada.
 
 ### ❌ LOS COMPONENTES DE REACT NO PUEDEN USAR:
 
-* `.scss`
-* `.css`
-* CSS Modules (`.module.scss`, `.module.css`)
-* Styled Components
-* `<style jsx>`
-* `<style jsx global>`
-* `<style>`
-* `style={{}}` estilos en línea
-* `import './styles.scss'` Importar archivos .scss
-* `import './styles.css'` Importar archivos .css
+- `.scss`
+- `.css`
+- CSS Modules (`.module.scss`, `.module.css`)
+- Styled Components
+- `<style jsx>`
+- `<style jsx global>`
+- `<style>`
+- `style={{}}` estilos en línea
+- `import './styles.scss'` Importar archivos .scss
+- `import './styles.css'` Importar archivos .css
 
 ### 🚫 En Sass global
 
 Está prohibido:
 
-* Estilos de UI de componentes
-* Cards, layouts
-* Selectores por ID para componentes
-* Overrides de Tailwind
-* Diseño de interfaces completas
+- Estilos de UI de componentes
+- Cards, layouts
+- Selectores por ID para componentes
+- Overrides de Tailwind
+- Diseño de interfaces completas
 
 ### 🚨 ANTIPATRÓN - ERROR CRÍTICO
 
@@ -1429,17 +1460,13 @@ import styles from './MyComponent.module.scss';
 export default function MyComponent() {
   return (
     <>
-      <button id="btn-guardar" className="bg-red-600!">
+      <button id='btn-guardar' className='bg-red-600!'>
         Guardar
       </button>
 
-      <div className="card">
-        Contenido de la card
-      </div>
+      <div className='card'>Contenido de la card</div>
 
-      <section className={styles.panel}>
-        Contenido del panel
-      </section>
+      <section className={styles.panel}>Contenido del panel</section>
 
       <style jsx global>{`
         .card {
@@ -1477,18 +1504,19 @@ export default function MyComponent() {
 
 En estos enlaces el creador de Tailwind explica porque **NO** usar `@apply`:
 
-* [Tutorial](https://x.com/adamwathan/status/1226511611592085504)
+- [Tutorial](https://x.com/adamwathan/status/1226511611592085504)
 
-* [X (Twitter)](https://x.com/adamwathan/status/1559250403547652097)
+- [X (Twitter)](https://x.com/adamwathan/status/1559250403547652097)
 
 Está estrictamente prohibido utilizar la directiva `@apply` de Tailwind.
 
 Esto incluye cualquier uso dentro de archivos:
-* `.css`
-* `.scss`
-* cualquier archivo de estilos globales o de componentes
 
-***❌ EJEMPLO INCORRECTO USANDO  `@apply`***
+- `.css`
+- `.scss`
+- cualquier archivo de estilos globales o de componentes
+
+**_❌ EJEMPLO INCORRECTO USANDO `@apply`_**
 
 ```scss
 /* src/styles/global/global.scss
@@ -1504,11 +1532,7 @@ Esto incluye cualquier uso dentro de archivos:
 // MyComponent.tsx
 
 export default function MyComponent() {
-  return (
-    <button className="button">
-      Boton
-    </button>
-  );
+  return <button className='button'>Boton</button>;
 }
 ```
 
@@ -1523,20 +1547,20 @@ public/
     └── img/
 ```
 
-***✅ Correcto:***
+**_✅ Correcto:_**
 
 Al usar las etiquetas `<img>` nativa de HTML y `<Image>` de Next JS, siempre utilizar rutas **absolutas** desde `/assets`.
 
 ```tsx
 // MyComponent.tsx
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function MyComponent() {
   return (
     <Image
-      src="/assets/img/logo.png" /* usar slash al principio de /assets */
-      alt="Logo"
+      src='/assets/img/logo.png' /* usar slash al principio de /assets */
+      alt='Logo'
       width={200}
       height={200}
     />
@@ -1544,20 +1568,20 @@ export default function MyComponent() {
 }
 ```
 
-***❌ Incorrecto***
+**_❌ Incorrecto_**
 
 **NO** usar rutas relativas para acceder a imágenes e iconos.
 
 ```tsx
 // MyComponent.tsx
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function MyComponent() {
   return (
     <Image
-      src="../../../assets/img/logo.png" /* es incorrecto porque se escribe ../ */
-      alt="Logo"
+      src='../../../assets/img/logo.png' /* es incorrecto porque se escribe ../ */
+      alt='Logo'
       width={200}
       height={200}
     />
@@ -1568,13 +1592,13 @@ export default function MyComponent() {
 ```tsx
 // MyComponent.tsx
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function MyComponent() {
   return (
     <Image
-      src="assets/img/logo.png" /* es incorrecto porque NO se escribio el slash al principio de assets */
-      alt="Logo"
+      src='assets/img/logo.png' /* es incorrecto porque NO se escribio el slash al principio de assets */
+      alt='Logo'
       width={200}
       height={200}
     />
@@ -1584,7 +1608,7 @@ export default function MyComponent() {
 
 ### Imagenes
 
-Las **imagenes** se tienen que guardar en `.`. 
+Las **imagenes** se tienen que guardar en `.`.
 
 ```txt
 public/assets/img/...
@@ -1623,7 +1647,7 @@ No agregar imágenes/SVGs manualmente si el icono ya existe en [React Icons](htt
 
 Cuando el icono no este en [React Icons](https://react-icons.github.io/react-icons/), entonces agregarlo dentro de la carpeta `public/assets/icon/...`.
 
-Los **iconos** del proyecto se deben guardar dentro de la carpeta 
+Los **iconos** del proyecto se deben guardar dentro de la carpeta
 
 ```txt
 public/assets/icon/...
@@ -1660,9 +1684,9 @@ La arquitectura está diseñada para proyectos grandes y escalables, separando r
 
 Usar los [botones de Prime React](https://primereact.org/button/):
 
-* Componente `Button`
+- Componente `Button`
 
-* Props visuales del componente: `severity`, `outlined`, `label`, `icon`, `severity`, `size`, etc.
+- Props visuales del componente: `severity`, `outlined`, `label`, `icon`, `severity`, `size`, etc.
 
 ```tsx
 import { Button } from 'primereact/button';
@@ -1670,10 +1694,10 @@ import { Button } from 'primereact/button';
 export default function MyComponent() {
   return (
     <Button
-      label="Guardar"
-      icon="pi pi-check"
-      severity="success"
-      size="large"
+      label='Guardar'
+      icon='pi pi-check'
+      severity='success'
+      size='large'
       rounded
       raised
       text
@@ -1695,14 +1719,12 @@ import { MdArrowForward } from 'react-icons/md';
 export default function MyComponent() {
   return (
     <>
-    <button className="btn btn-primary btn-background">
-       Primary
-    </button>
+      <button className='btn btn-primary btn-background'>Primary</button>
 
-    <button className="btn btn-secondary btn-background">
-      <MdArrowForward />
-      <span className="material-symbols-outlined">arrow_forward</span>
-    </button>
+      <button className='btn btn-secondary btn-background'>
+        <MdArrowForward />
+        <span className='material-symbols-outlined'>arrow_forward</span>
+      </button>
     </>
   );
 }
@@ -1723,7 +1745,7 @@ Esto rompe la consistencia visual y vuelve el código más difícil de mantener 
 
 ```tsx
 <button>
-  <img src="/assets/icon/delete.svg" alt="Eliminar" />
+  <img src='/assets/icon/delete.svg' alt='Eliminar' />
 </button>
 ```
 
@@ -1784,7 +1806,7 @@ import { MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-    <button className="btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow">
+    <button className='btn btn-primary btn-outline btn-icon-only btn-rounded-full btn-shadow'>
       <MdArrowForward />
     </button>
   );
@@ -1796,7 +1818,7 @@ export default function MyComponent() {
 Usar Tailwind CSS para definir estilos de botones directamente en cada componente, ya que esto genera estilos inconsistentes y no escalables:
 
 ```tsx
-<button className="rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer">
+<button className='rounded-2xl bg-blue-500 hover:bg-blue-600 px-4 py-2 text-white disabled:cursor-not-allowed enabled:cursor-pointer'>
   Aceptar
 </button>
 ```
@@ -1804,13 +1826,13 @@ Usar Tailwind CSS para definir estilos de botones directamente en cada component
 Mezclar las clases globales de botones (`.btn`, `.btn-primary`, `.btn-outline-*`, etc.) con clases de Tailwind CSS.
 
 ```tsx
-import { MdSave } from "react-icons/md";
+import { MdSave } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-    <button className="btn btn-primary bg-red-500 px-10 rounded-full">
+    <button className='btn btn-primary bg-red-500 px-10 rounded-full'>
       <MdSave />
-      <span className="text-blue-500">Guardar</span>
+      <span className='text-blue-500'>Guardar</span>
     </button>
   );
 }
@@ -1823,11 +1845,11 @@ Usar muchas clases de Sass para cada uno de los estilos de los botones, porque m
 - Borde
 
 ```tsx
-import { MdHome } from "react-icons/md";
+import { MdHome } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-    <button className="btn-with-icon-text-border">
+    <button className='btn-with-icon-text-border'>
       <MdHome />
       <span>Boton</span>
     </button>
@@ -1859,7 +1881,7 @@ En arquitectura CSS y de componentes, composable significa que una clase puede c
 Cada clase modifica únicamente una característica específica del botón. Esto permite combinar comportamientos sin duplicar estilos:
 
 | Archivo              | Descripción                                                                                                                                                                  | Ejemplo de código                                                |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `index-buttons.scss` | Archivo orquestador. Importa todos los módulos SCSS mediante `@use`. No debe contener estilos CSS, variables ni lógica visual.                                               | `@use "./base.scss";`                                            |
 | `_base.scss`         | Define la estructura base del sistema de botones: reset CSS, layout, alineación, box model y estilos fundamentales de `.btn`. Todas las variantes parten de esta clase base. | `.btn {} `                                                       |
 | `_variants.scss`     | Define la apariencia principal del botón (fondo, borde y comportamiento visual). Las variantes pueden combinarse con cualquier tema, tamaño o modificador.                   | `.btn-background {} .btn-outline {} .btn-ghost {} .btn-link {} ` |
@@ -1920,9 +1942,7 @@ Por defecto, `.btn` tiene `background-color: transparent`, por lo que **no repre
 - Botones **desactivados** usan `cursor: not-allowed` 🚫 para indicar que el botón no está disponible y no puede ser clickeado.
 
 ```tsx
-<button className="btn">
-  Base class
-</button>
+<button className='btn'>Base class</button>
 ```
 
 ### Enlaces
@@ -2034,13 +2054,7 @@ Algunos botones usan colores claros en el texto o borde, por lo que deben coloca
 ![botones-con-sombra](./docs/readme-md/img/button/botones-con-sombra.png)
 
 ```tsx
-import {
-  MdWarning,
-  MdCheckCircle,
-  MdDelete,
-  MdInfo,
-  MdArrowForward,
-} from "react-icons/md";
+import { MdWarning, MdCheckCircle, MdDelete, MdInfo, MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
@@ -2097,38 +2111,32 @@ Es obligatorio que, cuando el botón contenga únicamente un icono (sin texto), 
 ![solo-icono](./docs/readme-md/img/button/solo-icono.png)
 
 ```tsx
-import {
-  MdWarning,
-  MdDelete,
-  MdSettings,
-  MdInfo,
-  MdArrowForward,
-} from "react-icons/md";
+import { MdWarning, MdDelete, MdSettings, MdInfo, MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
       {/* bordes redondeados */}
-      <button className="btn btn-warning btn-background btn-icon-only">
+      <button className='btn btn-warning btn-background btn-icon-only'>
         <MdWarning />
       </button>
 
       {/* btn-rounded-full forma de circulo */}
-      <button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+      <button className='btn btn-outline btn-danger btn-icon-only btn-rounded-full'>
         <MdDelete />
       </button>
 
-      <button className="btn btn-ghost btn-dark btn-icon-only btn-rounded-full">
+      <button className='btn btn-ghost btn-dark btn-icon-only btn-rounded-full'>
         <MdSettings />
       </button>
 
       {/* xs boton muy pequeño */}
-      <button className="btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs">
+      <button className='btn btn-info btn-background btn-icon-only btn-rounded-full btn-xs'>
         <MdInfo />
       </button>
 
       {/* 2xl boton muy grande*/}
-      <button className="btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl">
+      <button className='btn btn-primary btn-background btn-icon-only btn-rounded-full btn-2xl'>
         <MdArrowForward />
       </button>
     </>
@@ -2150,40 +2158,40 @@ import {
   MdInfo,
   MdLightMode,
   MdDarkMode,
-} from "react-icons/md";
+} from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-background btn-icon-only">
+      <button className='btn btn-primary btn-background btn-icon-only'>
         <MdArrowForward />
       </button>
 
-      <button className="btn btn-secondary btn-background btn-icon-only">
+      <button className='btn btn-secondary btn-background btn-icon-only'>
         <MdClose />
       </button>
 
-      <button className="btn btn-success btn-background btn-icon-only">
+      <button className='btn btn-success btn-background btn-icon-only'>
         <MdCheckCircle />
       </button>
 
-      <button className="btn btn-danger btn-background btn-icon-only">
+      <button className='btn btn-danger btn-background btn-icon-only'>
         <MdDelete />
       </button>
 
-      <button className="btn btn-warning btn-background btn-icon-only">
+      <button className='btn btn-warning btn-background btn-icon-only'>
         <MdWarning />
       </button>
 
-      <button className="btn btn-info btn-background btn-icon-only">
+      <button className='btn btn-info btn-background btn-icon-only'>
         <MdInfo />
       </button>
 
-      <button className="btn btn-light btn-background btn-icon-only">
+      <button className='btn btn-light btn-background btn-icon-only'>
         <MdLightMode />
       </button>
 
-      <button className="btn btn-dark btn-background btn-icon-only">
+      <button className='btn btn-dark btn-background btn-icon-only'>
         <MdDarkMode />
       </button>
     </>
@@ -2205,40 +2213,40 @@ import {
   MdInfo,
   MdLightMode,
   MdDarkMode,
-} from "react-icons/md";
+} from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-outline btn-icon-only">
+      <button className='btn btn-primary btn-outline btn-icon-only'>
         <MdArrowForward />
       </button>
 
-      <button className="btn btn-secondary btn-outline btn-icon-only">
+      <button className='btn btn-secondary btn-outline btn-icon-only'>
         <MdClose />
       </button>
 
-      <button className="btn btn-success btn-outline btn-icon-only">
+      <button className='btn btn-success btn-outline btn-icon-only'>
         <MdCheckCircle />
       </button>
 
-      <button className="btn btn-danger btn-outline btn-icon-only">
+      <button className='btn btn-danger btn-outline btn-icon-only'>
         <MdDelete />
       </button>
 
-      <button className="btn btn-warning btn-outline btn-icon-only">
+      <button className='btn btn-warning btn-outline btn-icon-only'>
         <MdWarning />
       </button>
 
-      <button className="btn btn-info btn-outline btn-icon-only">
+      <button className='btn btn-info btn-outline btn-icon-only'>
         <MdInfo />
       </button>
 
-      <button className="btn btn-light btn-outline btn-icon-only">
+      <button className='btn btn-light btn-outline btn-icon-only'>
         <MdLightMode />
       </button>
 
-      <button className="btn btn-dark btn-outline btn-icon-only">
+      <button className='btn btn-dark btn-outline btn-icon-only'>
         <MdDarkMode />
       </button>
     </>
@@ -2260,47 +2268,47 @@ import {
   MdInfo,
   MdLightMode,
   MdDarkMode,
-} from "react-icons/md";
+} from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-background">
+      <button className='btn btn-primary btn-background'>
         <MdArrowForward />
         <span>Primary</span>
       </button>
 
-      <button className="btn btn-secondary btn-background">
+      <button className='btn btn-secondary btn-background'>
         <MdClose />
         <span>Secondary</span>
       </button>
 
-      <button className="btn btn-success btn-background">
+      <button className='btn btn-success btn-background'>
         <MdCheckCircle />
         <span>Success</span>
       </button>
 
-      <button className="btn btn-danger btn-background">
+      <button className='btn btn-danger btn-background'>
         <MdDelete />
         <span>Danger</span>
       </button>
 
-      <button className="btn btn-warning btn-background">
+      <button className='btn btn-warning btn-background'>
         <MdWarning />
         <span>Warning</span>
       </button>
 
-      <button className="btn btn-info btn-background">
+      <button className='btn btn-info btn-background'>
         <MdInfo />
         <span>Info</span>
       </button>
 
-      <button className="btn btn-light btn-background">
+      <button className='btn btn-light btn-background'>
         <MdLightMode />
         <span>Light</span>
       </button>
 
-      <button className="btn btn-dark btn-background">
+      <button className='btn btn-dark btn-background'>
         <MdDarkMode />
         <span>Dark</span>
       </button>
@@ -2313,47 +2321,38 @@ export default function MyComponent() {
 
 `btn-rounded-full` redondea al maximo las esquinas de cualquier tipo de boton
 
-| Tipo de botón  | Condición (dimensiones) | Resultado visual                                  |
-|----------------|-------------------------|---------------------------------------------------|
-| Rectangular    | width ≠ height          | Esquinas totalmente redondeadas (forma alargada)  |
-| Cuadrado       | width = height          | Círculo perfecto (no óvalo)                       |
+| Tipo de botón | Condición (dimensiones) | Resultado visual                                 |
+| ------------- | ----------------------- | ------------------------------------------------ |
+| Rectangular   | width ≠ height          | Esquinas totalmente redondeadas (forma alargada) |
+| Cuadrado      | width = height          | Círculo perfecto (no óvalo)                      |
 
 ![botones-redondos](./docs/readme-md/img/button/botones-redondos.png)
 
 ```tsx
-import {
-  MdInfo,
-  MdDelete,
-  MdWarning,
-  MdCheckCircle,
-} from "react-icons/md";
+import { MdInfo, MdDelete, MdWarning, MdCheckCircle } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-background btn-rounded-full">
-        Primary
-      </button>
+      <button className='btn btn-primary btn-background btn-rounded-full'>Primary</button>
 
-      <button className="btn btn-secondary btn-outline btn-rounded-full">
-        Secondary
-      </button>
+      <button className='btn btn-secondary btn-outline btn-rounded-full'>Secondary</button>
 
-      <button className="btn btn-info btn-background btn-rounded-full">
+      <button className='btn btn-info btn-background btn-rounded-full'>
         <MdInfo />
         <span>Info</span>
       </button>
 
-      <button className="btn btn-outline btn-danger btn-icon-only btn-rounded-full">
+      <button className='btn btn-outline btn-danger btn-icon-only btn-rounded-full'>
         <MdDelete />
       </button>
 
-      <button className="btn btn-background btn-warning btn-icon-only btn-rounded-full">
+      <button className='btn btn-background btn-warning btn-icon-only btn-rounded-full'>
         <MdWarning />
       </button>
 
       {/* SIN btn-rounded-full tiene esquinas redondeadas */}
-      <button className="btn btn-background btn-success btn-icon-only">
+      <button className='btn btn-background btn-success btn-icon-only'>
         <MdCheckCircle />
       </button>
     </>
@@ -2371,30 +2370,28 @@ export default function MyComponent() {
 - **Hover:** Cambia color de fondo al situar mouse en boton.
 - **Uso:** acciones secundarias o discretas.
 
-***NO hover***
+**_NO hover_**
 
 ![botones-sin-fondo-ni-borde](./docs/readme-md/img/button/botones-sin-fondo-ni-borde.png)
 
-***hover***
+**_hover_**
 
 ![botones-sin-fondo-ni-borde-hover](./docs/readme-md/img/button/botones-sin-fondo-ni-borde-hover.png)
 
 ```tsx
-import { MdClose, MdWarning } from "react-icons/md";
+import { MdClose, MdWarning } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-ghost">
-        Primary
-      </button>
+      <button className='btn btn-primary btn-ghost'>Primary</button>
 
-      <button className="btn btn-secondary btn-ghost">
+      <button className='btn btn-secondary btn-ghost'>
         <MdClose />
         <span>Secondary</span>
       </button>
 
-      <button className="btn btn-warning btn-ghost btn-icon-only btn-rounded-full">
+      <button className='btn btn-warning btn-ghost btn-icon-only btn-rounded-full'>
         <MdWarning />
       </button>
     </>
@@ -2413,12 +2410,7 @@ El estilo de boton desactivado se aplica a cualquier tipo de boton.
 ```tsx
 'use client';
 
-import {
-  MdDelete,
-  MdWarning,
-  MdInfo,
-  MdDarkMode,
-} from "react-icons/md";
+import { MdDelete, MdWarning, MdInfo, MdDarkMode } from 'react-icons/md';
 
 export default function MyComponent() {
   const router = useRouter();
@@ -2429,27 +2421,27 @@ export default function MyComponent() {
 
   return (
     <>
-      <button disabled className="btn btn-primary btn-background">
+      <button disabled className='btn btn-primary btn-background'>
         Primary
       </button>
 
-      <button disabled className="btn btn-secondary btn-outline">
+      <button disabled className='btn btn-secondary btn-outline'>
         Secondary
       </button>
 
-      <button disabled className="btn btn-icon-only btn-outline btn-danger btn-rounded-full">
+      <button disabled className='btn btn-icon-only btn-outline btn-danger btn-rounded-full'>
         <MdDelete />
       </button>
 
-      <button disabled className="btn btn-icon-only btn-warning btn-background">
+      <button disabled className='btn btn-icon-only btn-warning btn-background'>
         <MdWarning />
       </button>
 
-      <button disabled className="btn btn-icon-only btn-outline btn-info">
+      <button disabled className='btn btn-icon-only btn-outline btn-info'>
         <MdInfo />
       </button>
 
-      <button disabled className="btn btn-dark btn-background">
+      <button disabled className='btn btn-dark btn-background'>
         <MdDarkMode />
         <span>Dark</span>
       </button>
@@ -2493,48 +2485,35 @@ Esto significa que no es necesario declararlo explícitamente: si no se especifi
 ![tamanos](./docs/readme-md/img/button/tamanos.png)
 
 ```tsx
-import {
-  MdCheckCircle,
-  MdDelete,
-  MdWarning,
-  MdRocketLaunch,
-} from "react-icons/md";
+import { MdCheckCircle, MdDelete, MdWarning, MdRocketLaunch } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
-      <button className="btn btn-primary btn-background btn-xs">
-        Muy pequeño
-      </button>
+      <button className='btn btn-primary btn-background btn-xs'>Muy pequeño</button>
 
-      <button className="btn btn-secondary btn-outline btn-sm">
-        Pequeño
-      </button>
+      <button className='btn btn-secondary btn-outline btn-sm'>Pequeño</button>
 
-      <button className="btn btn-secondary btn-outline">
-        Valor por defecto
-      </button>
+      <button className='btn btn-secondary btn-outline'>Valor por defecto</button>
 
-      <button className="btn btn-secondary btn-outline btn-base">
-        Valor por defecto
-      </button>
+      <button className='btn btn-secondary btn-outline btn-base'>Valor por defecto</button>
 
-      <button className="btn btn-success btn-background btn-lg">
+      <button className='btn btn-success btn-background btn-lg'>
         <MdCheckCircle />
         <span>Grande</span>
       </button>
 
-      <button className="btn btn-danger btn-outline btn-xl">
+      <button className='btn btn-danger btn-outline btn-xl'>
         <MdDelete />
         <span>Muy grande</span>
       </button>
 
-      <button className="btn btn-warning btn-background btn-2xl">
+      <button className='btn btn-warning btn-background btn-2xl'>
         <MdWarning />
         <span>Enorme</span>
       </button>
 
-      <button className="btn btn-info btn-background btn-3xl">
+      <button className='btn btn-info btn-background btn-3xl'>
         <MdRocketLaunch />
         <span>Gigante</span>
       </button>
@@ -2566,39 +2545,32 @@ Funciona para cualquier variante de botón, sin importar su estilo (fondo, borde
 ![boton-responsive](./docs/readme-md/img/button/boton-responsive.png)
 
 ```tsx
-import {
-  MdDarkMode,
-  MdCheckCircle,
-  MdInfo,
-  MdArrowForward,
-} from "react-icons/md";
+import { MdDarkMode, MdCheckCircle, MdInfo, MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
     <>
       {/* solo texto */}
-      <button className="btn btn-danger btn-background btn-full-width">
-        Danger
-      </button>
+      <button className='btn btn-danger btn-background btn-full-width'>Danger</button>
 
       {/* solo icono + fondo */}
-      <button className="btn btn-dark btn-background btn-icon-only btn-full-width">
+      <button className='btn btn-dark btn-background btn-icon-only btn-full-width'>
         <MdDarkMode />
       </button>
 
       {/* icono + fondo + texto */}
-      <button className="btn btn-success btn-background btn-full-width">
+      <button className='btn btn-success btn-background btn-full-width'>
         <MdCheckCircle />
         <span>Success</span>
       </button>
 
       {/* icono + borde */}
-      <button className="btn btn-outline btn-info btn-icon-only btn-full-width">
+      <button className='btn btn-outline btn-info btn-icon-only btn-full-width'>
         <MdInfo />
       </button>
 
       {/* sin fondo ni borde */}
-      <button className="btn btn-primary btn-icon-only btn-ghost btn-full-width">
+      <button className='btn btn-primary btn-icon-only btn-ghost btn-full-width'>
         <MdArrowForward />
       </button>
     </>
@@ -2613,14 +2585,14 @@ export default function MyComponent() {
 Usar [flex-direction](https://tailwindcss.com/docs/flex-direction) para cambiar ubicacion de iconos:
 
 ```tsx
-import { MdArrowForward } from "react-icons/md";
+import { MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-      <button className="btn btn-primary btn-background flex-row-reverse">
-        <MdArrowForward />
-        <span>Primary</span>
-      </button>
+    <button className='btn btn-primary btn-background flex-row-reverse'>
+      <MdArrowForward />
+      <span>Primary</span>
+    </button>
   );
 }
 ```
@@ -2629,36 +2601,36 @@ export default function MyComponent() {
 
 Cambiar la ubicación del icono y texto en el HTML, sin usar Sass ni Tailwind.
 
-*icono a la izquierda - texto a la derecha*
+_icono a la izquierda - texto a la derecha_
 
 ![icono-izquierda-texto-derecha](./docs/readme-md/img/button/icono-izquierda-texto-derecha.png)
 
 ```tsx
-import { MdArrowForward } from "react-icons/md";
+import { MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-      <button className="btn btn-primary btn-background">
-        <MdArrowForward />
-        <span>Primary</span>
-      </button>
+    <button className='btn btn-primary btn-background'>
+      <MdArrowForward />
+      <span>Primary</span>
+    </button>
   );
 }
 ```
 
-*icono a la derecha - texto a la izquierda*
+_icono a la derecha - texto a la izquierda_
 
 ![icono-derecha-texto-izquierda](./docs/readme-md/img/button/icono-derecha-texto-izquierda.png)
 
 ```tsx
-import { MdArrowForward } from "react-icons/md";
+import { MdArrowForward } from 'react-icons/md';
 
 export default function MyComponent() {
   return (
-      <button className="btn btn-primary btn-background">
-        <span>Primary</span>
-         <MdArrowForward />
-      </button>
+    <button className='btn btn-primary btn-background'>
+      <span>Primary</span>
+      <MdArrowForward />
+    </button>
   );
 }
 ```

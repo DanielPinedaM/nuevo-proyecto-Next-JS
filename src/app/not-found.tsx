@@ -29,7 +29,11 @@ export default function NotFound() {
             Pero no te preocupes, puedes encontrar muchas otras cosas en nuestra página
           </p>
 
-          <Button theme="primary" variant="background" onClick={() => onClickReturnToPreviousPage()}>
+          <Button
+            theme='primary'
+            variant='background'
+            onClick={() => onClickReturnToPreviousPage()}
+          >
             Volver
           </Button>
         </div>

@@ -1,4 +1,4 @@
-@use "./_tokens.scss" as token;
+@use './_tokens.scss' as token;
 
 /* *********************************************************************************
 * @mixin / @include                                                                *
@@ -7,8 +7,8 @@
 
 /* Tamaño por defecto de los botones */
 @mixin btn-base-size {
-  padding: token.$sp-2 token.$sp-3;   // py-2 = 0.5rem = 8px, px-3 = 0.75rem = 12px
+  padding: token.$sp-2 token.$sp-3; // py-2 = 0.5rem = 8px, px-3 = 0.75rem = 12px
 
-  font-size: token.$fs-base;           // text-base = 1rem = 16px
+  font-size: token.$fs-base; // text-base = 1rem = 16px
   line-height: calc(1.2 / 1);
 }

@@ -7,10 +7,7 @@ import { isString } from '@/shared/utils/func/dataType.utils';
 /**
 prime NG - calcular paginador y numero de filas q se muestran en <table>
 el algoritmo funciona mejor si rows es multiplo de 3, pero puede ser cualquier numero */
-export const rowsPerPageOptions = (
-  length: number = 0,
-  rows: number = 0,
-): number[] => {
+export const rowsPerPageOptions = (length: number = 0, rows: number = 0): number[] => {
   if (typeof length !== 'number') {
     console.error(
       'para calcular el numero de filas del paginador de prime NG la el parametro de la longitud length del array debe ser tipo number',
@@ -49,11 +46,9 @@ export const rowsPerPageOptions = (
   // 2) <= longitud de la data q se muestra en la tabla
   // 3) ...new Set todos los numeros de pagina tienen q ser unicos
   // 4) ordenar ascendente (de menor a mayor)
-  return [
-    ...new Set(
-      opciones.filter((option: number) => option >= rows && option <= length),
-    ),
-  ].sort((a, b) => a - b);
+  return [...new Set(opciones.filter((option: number) => option >= rows && option <= length))].sort(
+    (a, b) => a - b,
+  );
 };
 
 /**
@@ -66,10 +61,7 @@ export const listFormat = (array: any[]): string => {
 
 /**
 recortar un string a un tamaño de caracteres máximo, agregando "..." si excede la longitud especificada */
-export const truncateString = (
-  string: string | any,
-  maxLength: number,
-): string | any => {
+export const truncateString = (string: string | any, maxLength: number): string | any => {
   if (typeof string === 'string' && string.length > maxLength) {
     return string.slice(0, maxLength) + '...';
   }
@@ -79,10 +71,7 @@ export const truncateString = (
 
 /**
 hacer q los string tengan mayuscula inicial */
-export const titleCase = (
-  string: string,
-  options?: Partial<Options>,
-): string | any => {
+export const titleCase = (string: string, options?: Partial<Options>): string | any => {
   if (!isString(string)) return string;
   if (String(string).trim() === '') return '';
 
@@ -143,9 +132,7 @@ export const titleCase = (
 Concatenar los string de un array
 Ejemplo:
 ["esteban", "", "bolaños", "gomes"] devuelve "Esteban Bolaños Gomes" */
-export const concatenateArrayString = (
-  arrayString: (string | null)[],
-): string | any => {
+export const concatenateArrayString = (arrayString: (string | null)[]): string | any => {
   if (Array.isArray(arrayString)) {
     const concatenatedString = arrayString.filter(Boolean).join(' ');
     return titleCase(concatenatedString);
@@ -172,18 +159,13 @@ export const copyText = (text: string): void => {
   const errorMessage: string = 'No se pudo copiar el texto';
 
   if (!isUseClient()) {
-    console.error(
-      "❌ error, solamente se puede copiar texto en componente cliente 'use client'",
-    );
+    console.error("❌ error, solamente se puede copiar texto en componente cliente 'use client'");
     return;
   }
 
   if (!isString(text)) {
     ErrorToast(errorMessage);
-    console.error(
-      '❌ error, text NO es tipo string\ntypeof text ',
-      typeof text,
-    );
+    console.error('❌ error, text NO es tipo string\ntypeof text ', typeof text);
     return;
   }
 
@@ -224,12 +206,7 @@ export const getRandomItem = <T>(array: T[]): T | null => {
   const max: number = array.length;
 
   if (max === 0) {
-    console.error(
-      '❌ error - getRandomItem - el array ',
-      array,
-      'no puede estar vacío \nmax',
-      max,
-    );
+    console.error('❌ error - getRandomItem - el array ', array, 'no puede estar vacío \nmax', max);
     return null;
   }
 

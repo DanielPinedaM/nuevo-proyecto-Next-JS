@@ -52,10 +52,7 @@ export default function InputSearchParams({
     debounce((newInputSearch: string): void => {
       // actualizar ruta cuando se escribe texto en el <input>
       if (newInputSearch) {
-        setQueryParams(
-          { [keySearchParams]: newInputSearch },
-          { replaceAll: true }
-        );
+        setQueryParams({ [keySearchParams]: newInputSearch }, { replaceAll: true });
       } else {
         // cuando el input está vacío en la URL borrar el query params keySearchParams para buscar
         const params: URLSearchParams = new URLSearchParams(window.location.search);
@@ -68,19 +65,15 @@ export default function InputSearchParams({
         router.push(newUrl);
       }
     }, 300),
-    []
+    [],
   );
 
   return (
     <label>
-      {
-        label && (
-          <span className='cursor-pointer font-normal'>{label}</span>
-        )
-      }
+      {label && <span className='cursor-pointer font-normal'>{label}</span>}
       <InputText
         autoComplete='off'
-        placeholder={placeholder ?? ""}
+        placeholder={placeholder ?? ''}
         value={inputValue}
         onChange={(e) => onChangeInputValue(e.target.value)}
       />

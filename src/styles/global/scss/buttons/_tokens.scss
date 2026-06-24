@@ -20,43 +20,43 @@
 *                                                                               *
 ********************************************************************************* */
 
-$btn-text-color:        oklch(1 0 0);                        // #fff
+$btn-text-color: oklch(1 0 0); // #fff
 
-$primary:               oklch(54.62% 0.228 262.44);          // #0d6efd
-$primary-contrast:      oklch(48.84% 0.217 264.38);          // #0b5ed7
-$primary-emphasis:      oklch(54.62% 0.228 262.44 / 0.25);   // #0d6efd40
+$primary: oklch(54.62% 0.228 262.44); // #0d6efd
+$primary-contrast: oklch(48.84% 0.217 264.38); // #0b5ed7
+$primary-emphasis: oklch(54.62% 0.228 262.44 / 0.25); // #0d6efd40
 
-$secondary:             oklch(60% 0.06 250);                 // #7a8594
-$secondary-contrast:    oklch(52% 0.06 250);                 // #667182
-$secondary-emphasis:    oklch(60% 0.06 250 / 0.4);           // #7a8594
+$secondary: oklch(60% 0.06 250); // #7a8594
+$secondary-contrast: oklch(52% 0.06 250); // #667182
+$secondary-emphasis: oklch(60% 0.06 250 / 0.4); // #7a8594
 
-$success:               oklch(57.93% 0.126 158.62);          // #198754
-$success-contrast:      oklch(52.34% 0.113 158.91);          // #157347
-$success-emphasis:      oklch(57.93% 0.126 158.62 / 0.4);    // #19875466
+$success: oklch(57.93% 0.126 158.62); // #198754
+$success-contrast: oklch(52.34% 0.113 158.91); // #157347
+$success-emphasis: oklch(57.93% 0.126 158.62 / 0.4); // #19875466
 
-$danger:                oklch(60.24% 0.208 24.18);           // #dc3545
-$danger-contrast:       oklch(53.08% 0.183 22.64);           // #bb2d3b
-$danger-emphasis:       oklch(60.24% 0.208 24.18 / 0.4);     // #dc354566
+$danger: oklch(60.24% 0.208 24.18); // #dc3545
+$danger-contrast: oklch(53.08% 0.183 22.64); // #bb2d3b
+$danger-emphasis: oklch(60.24% 0.208 24.18 / 0.4); // #dc354566
 
-$warning:               oklch(87.73% 0.181 92.84);           // #e7b400
-$warning-contrast:      oklch(80% 0.2 92.84);                // #c98f00
-$warning-emphasis:      oklch(87.73% 0.181 92.84 / 0.4);     // #e7b400;
+$warning: oklch(87.73% 0.181 92.84); // #e7b400
+$warning-contrast: oklch(80% 0.2 92.84); // #c98f00
+$warning-emphasis: oklch(87.73% 0.181 92.84 / 0.4); // #e7b400;
 
-$info:                  oklch(78.44% 0.135 220.52);          // #0dcaf0
-$info-contrast:         oklch(81.36% 0.114 220.17);          // #31d2f2
-$info-emphasis:         oklch(78.44% 0.135 220.52 / 0.4);    // #0dcaf066
+$info: oklch(78.44% 0.135 220.52); // #0dcaf0
+$info-contrast: oklch(81.36% 0.114 220.17); // #31d2f2
+$info-emphasis: oklch(78.44% 0.135 220.52 / 0.4); // #0dcaf066
 
-$light:                 oklch(87.2% 0.01 258.338);           // #d1d5dc
-$light-contrast:        oklch(82% 0.012 258.338);            // #bfc4cc
-$light-emphasis:        oklch(87.2% 0.01 258.338 / 0.35);    // #d1d5dc
+$light: oklch(87.2% 0.01 258.338); // #d1d5dc
+$light-contrast: oklch(82% 0.012 258.338); // #bfc4cc
+$light-emphasis: oklch(87.2% 0.01 258.338 / 0.35); // #d1d5dc
 
-$dark:                  oklch(27.03% 0.015 264.05);          // #212529
-$dark-contrast:         oklch(35.18% 0.018 264.11);          // #343a40
-$dark-emphasis:         oklch(27.03% 0.015 264.05 / 0.4);    // #21252966
+$dark: oklch(27.03% 0.015 264.05); // #212529
+$dark-contrast: oklch(35.18% 0.018 264.11); // #343a40
+$dark-emphasis: oklch(27.03% 0.015 264.05 / 0.4); // #21252966
 
-$link:                 oklch(54.62% 0.228 262.44);
-$link-contrast:        oklch(48.84% 0.217 264.38);
-$link-emphasis:        oklch(54.62% 0.228 262.44 / 0.25);
+$link: oklch(54.62% 0.228 262.44);
+$link-contrast: oklch(48.84% 0.217 264.38);
+$link-emphasis: oklch(54.62% 0.228 262.44 / 0.25);
 
 /*
 ******************************************************************
@@ -65,19 +65,19 @@ $link-emphasis:        oklch(54.62% 0.228 262.44 / 0.25);
 * basado en Tailwind 4 https://tailwindcss.com/docs/font-size    *
 ****************************************************************** */
 
-$fs-xs: 0.75rem;    // text-xs    = 12px
-$fs-sm: 0.875rem;   // text-sm    = 14px
-$fs-base: 1rem;     // text-base  = 16px
-$fs-lg: 1.125rem;   // text-lg    = 18px
-$fs-xl: 1.25rem;    // text-xl    = 20px
-$fs-2xl: 1.5rem;    // text-2xl   = 24px
-$fs-3xl: 1.875rem;  // text-3xl   = 30px
-$fs-4xl: 2.25rem;   // text-4xl   = 36px
-$fs-5xl: 3rem;      // text-5xl   = 48px
-$fs-6xl: 3.75rem;   // text-6xl   = 60px
-$fs-7xl: 4.5rem;    // text-7xl   = 72px
-$fs-8xl: 6rem;      // text-8xl   = 96px
-$fs-9xl: 8rem;      // text-9xl   = 128px
+$fs-xs: 0.75rem; // text-xs    = 12px
+$fs-sm: 0.875rem; // text-sm    = 14px
+$fs-base: 1rem; // text-base  = 16px
+$fs-lg: 1.125rem; // text-lg    = 18px
+$fs-xl: 1.25rem; // text-xl    = 20px
+$fs-2xl: 1.5rem; // text-2xl   = 24px
+$fs-3xl: 1.875rem; // text-3xl   = 30px
+$fs-4xl: 2.25rem; // text-4xl   = 36px
+$fs-5xl: 3rem; // text-5xl   = 48px
+$fs-6xl: 3.75rem; // text-6xl   = 60px
+$fs-7xl: 4.5rem; // text-7xl   = 72px
+$fs-8xl: 6rem; // text-8xl   = 96px
+$fs-9xl: 8rem; // text-9xl   = 128px
 
 /*
 *************************************************************
@@ -87,25 +87,25 @@ $fs-9xl: 8rem;      // text-9xl   = 128px
 * basado en Tailwind 4 https://tailwindcss.com/docs/padding *
 ************************************************************* */
 
-$sp-0: 0rem;        // p-0   = 0px
-$sp-0_5: 0.125rem;  // p-0.5 = 2px
-$sp-1: 0.25rem;     // p-1   = 4px
-$sp-1_5: 0.375rem;  // p-1.5 = 6px
-$sp-2: 0.5rem;      // p-2   = 8px
-$sp-2_5: 0.625rem;  // p-2.5 = 10px
-$sp-3: 0.75rem;     // p-3   = 12px
-$sp-4: 1rem;        // p-4   = 16px
-$sp-5: 1.25rem;     // p-5   = 20px
-$sp-6: 1.5rem;      // p-6   = 24px
-$sp-7: 1.75rem;     // p-7   = 28px
-$sp-8: 2rem;        // p-8   = 32px
-$sp-9: 2.25rem;     // p-9   = 36px
-$sp-10: 2.5rem;     // p-10  = 40px
-$sp-11: 2.75rem;    // p-11  = 44px
-$sp-12: 3rem;       // p-12  = 48px
-$sp-14: 3.5rem;     // p-14  = 56px
-$sp-16: 4rem;       // p-16  = 64px
-$sp-20: 5rem;       // p-20  = 80px
-$sp-24: 6rem;       // p-24  = 96px
-$sp-28: 7rem;       // p-28  = 112px
-$sp-32: 8rem;       // p-32  = 128px
+$sp-0: 0rem; // p-0   = 0px
+$sp-0_5: 0.125rem; // p-0.5 = 2px
+$sp-1: 0.25rem; // p-1   = 4px
+$sp-1_5: 0.375rem; // p-1.5 = 6px
+$sp-2: 0.5rem; // p-2   = 8px
+$sp-2_5: 0.625rem; // p-2.5 = 10px
+$sp-3: 0.75rem; // p-3   = 12px
+$sp-4: 1rem; // p-4   = 16px
+$sp-5: 1.25rem; // p-5   = 20px
+$sp-6: 1.5rem; // p-6   = 24px
+$sp-7: 1.75rem; // p-7   = 28px
+$sp-8: 2rem; // p-8   = 32px
+$sp-9: 2.25rem; // p-9   = 36px
+$sp-10: 2.5rem; // p-10  = 40px
+$sp-11: 2.75rem; // p-11  = 44px
+$sp-12: 3rem; // p-12  = 48px
+$sp-14: 3.5rem; // p-14  = 56px
+$sp-16: 4rem; // p-16  = 64px
+$sp-20: 5rem; // p-20  = 80px
+$sp-24: 6rem; // p-24  = 96px
+$sp-28: 7rem; // p-28  = 112px
+$sp-32: 8rem; // p-32  = 128px

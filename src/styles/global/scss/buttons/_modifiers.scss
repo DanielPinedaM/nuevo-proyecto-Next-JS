@@ -58,5 +58,5 @@ btn-rounded-full redondea al maximo las esquinas de cualquier tipo de boton
   /* como la clase .btn usa flex entonces se necesita
   hacer que boton tenga medidas de width y height */
   flex-shrink: 0; // evitar q boton se ENCOJA
-  flex-grow: 0;   // evitar q boton se EXPANDA
+  flex-grow: 0; // evitar q boton se EXPANDA
 }

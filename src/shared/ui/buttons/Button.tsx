@@ -17,8 +17,8 @@ type LinkButtonProps = SharedLinkButtonProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & { ref?: Ref<HTMLButtonElement> };
 
 type ButtonComponent = {
-  (props: StandardButtonProps): ReactElement | null;  // variant: background|outline|ghost → theme: ButtonTheme (obligatorio)
-  (props: LinkButtonProps): ReactElement | null;      // variant: "link" → theme?: never (prohibido)
+  (props: StandardButtonProps): ReactElement | null; // variant: background|outline|ghost → theme: ButtonTheme (obligatorio)
+  (props: LinkButtonProps): ReactElement | null; // variant: "link" → theme?: never (prohibido)
   displayName?: string;
 };
 
@@ -83,17 +83,8 @@ type ButtonComponent = {
  */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    {
-      theme,
-      variant,
-      size = 'base',
-      modifiers,
-      effects,
-      children,
-      type = 'button',
-      ...rest
-    },
-    ref
+    { theme, variant, size = 'base', modifiers, effects, children, type = 'button', ...rest },
+    ref,
   ) => {
     return (
       <button
@@ -106,7 +97,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 ) as unknown as ButtonComponent;
 
 Button.displayName = 'Button';

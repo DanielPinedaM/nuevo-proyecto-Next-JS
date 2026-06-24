@@ -5,8 +5,6 @@ Este sistema implementa un sistema de botones basado en CSS composable.
 Inspirado en Bootstrap 5.3 y Tailwind 4.
 */
 
-
-
 /*
 ARCHITECTURE MAP (RESPONSABILIDAD DE ARCHIVOS)
 
@@ -29,8 +27,6 @@ src/
             ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\buttons
             └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón
 */
-
-
 
 /*
 STRICT DESIGN RULES (NO NEGOCIABLE)
@@ -79,8 +75,6 @@ STRICT DESIGN RULES (NO NEGOCIABLE)
 - La arquitectura prioriza legibilidad, simplicidad y mantenibilidad por encima de la reutilización excesiva.
 */
 
-
-
 /*
 ORCHESTRATION RULE
 
@@ -122,10 +116,10 @@ Ejemplo prohibido:
 @use "./index.scss" as *;
 */
 
-@use "./_base.scss";
-@use "./_themes.scss";
-@use "./_variants.scss";
-@use "./_sizes.scss";
-@use "./_states.scss";
-@use "./_effects.scss";
-@use "./_modifiers.scss";
+@use './_base.scss';
+@use './_themes.scss';
+@use './_variants.scss';
+@use './_sizes.scss';
+@use './_states.scss';
+@use './_effects.scss';
+@use './_modifiers.scss';

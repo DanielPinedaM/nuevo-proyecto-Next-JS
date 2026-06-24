@@ -1,6 +1,6 @@
-"use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
 import { forceConvertToString, literalObjectLength } from '@/shared/utils/func/dataType.utils';
 
 interface IOptionsSetQueryParams {
@@ -22,10 +22,7 @@ export const useQueryParams = () => {
    * @param {boolean} [options.replaceAll] — true = actualizar los nuevos valores cuando las keys de paramsObj existen en los query params, false = reemplazar POR COMPLETO por nuevos query params */
   const setQueryParams = useCallback(
     (paramsObj: Record<string, any> = {}, options?: IOptionsSetQueryParams): void => {
-      const {
-        replaceAll = false,
-        customPathname = null,
-      } = options ?? {};
+      const { replaceAll = false, customPathname = null } = options ?? {};
 
       // uso window.location.pathname porque usePathname() NO actualiza la ruta actual
       const pathname: string = window.location.pathname;
@@ -34,7 +31,9 @@ export const useQueryParams = () => {
       const currentParams = new URLSearchParams(window.location.search);
 
       // url ANTES de actualizar query params
-      const oldUrl: string = currentParams.toString() ? `${pathname}?${currentParams.toString()}` : pathname;
+      const oldUrl: string = currentParams.toString()
+        ? `${pathname}?${currentParams.toString()}`
+        : pathname;
 
       const params: URLSearchParams = replaceAll
         ? new URLSearchParams() // se parte de cero, sin query actual
@@ -47,14 +46,14 @@ export const useQueryParams = () => {
       }
 
       // url DESPUES de actualizar query params
-      const newUrl: string = `${customPathname ?? pathname}${params ? `?${params.toString()}`  : "" }`;
+      const newUrl: string = `${customPathname ?? pathname}${params ? `?${params.toString()}` : ''}`;
 
       // NO actualizar la URL cuando los query params no han cambiado
       if (oldUrl !== newUrl) {
         router.push(newUrl);
       }
     },
-    [router, searchParams]
+    [router, searchParams],
   );
 
   return { setQueryParams };

@@ -1,13 +1,13 @@
-import { EChartsOption } from "echarts-for-react";
-import { getRandomItem } from "@/shared/utils/func/general.utils";
-import { isLiteralObject } from "@/shared/utils/func/dataType.utils";
+import { EChartsOption } from 'echarts-for-react';
+import { getRandomItem } from '@/shared/utils/func/general.utils';
+import { isLiteralObject } from '@/shared/utils/func/dataType.utils';
 import {
   IAngleAxis,
   IChartData,
   IRadiusAxis,
   ISeries,
-} from "@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces";
-import DEFAULT_CHART_COLORS from "@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const";
+} from '@/shared/ui/echarts-for-react/data-types/interfaces/chart.interfaces';
+import DEFAULT_CHART_COLORS from '@/shared/ui/echarts-for-react/data-types/constants/default-chart-colors-const';
 
 /**
 opciones de echarts-for-react
@@ -22,12 +22,12 @@ const polarArea = (baseOption: EChartsOption, data: IChartData | undefined) => (
     Array.isArray(data?.polar)
       ? data.polar.map((p) => ({
           ...p,
-          radius: (p as any)?.radius ?? [30, "80%"],
+          radius: (p as any)?.radius ?? [30, '80%'],
         }))
       : // polar es objeto literal {}
         {
           ...(data?.polar ?? {}),
-          radius: data?.polar?.radius ?? [30, "80%"],
+          radius: data?.polar?.radius ?? [30, '80%'],
         },
 
   radiusAxis:
@@ -47,13 +47,13 @@ const polarArea = (baseOption: EChartsOption, data: IChartData | undefined) => (
     Array.isArray(data?.angleAxis)
       ? data?.angleAxis?.map((axis: IAngleAxis) => ({
           ...axis,
-          type: axis?.type ?? "category",
+          type: axis?.type ?? 'category',
           startAngle: axis?.startAngle ?? 75,
         }))
       : // angleAxis es objeto literal {}
         {
           ...(data?.angleAxis ?? {}),
-          type: data?.angleAxis?.type ?? "category",
+          type: data?.angleAxis?.type ?? 'category',
           startAngle: data?.angleAxis?.startAngle ?? 75,
         },
 
@@ -62,25 +62,25 @@ const polarArea = (baseOption: EChartsOption, data: IChartData | undefined) => (
     Array.isArray(data?.series)
       ? data?.series?.map((serie: ISeries) => ({
           ...serie,
-          type: "bar",
-          coordinateSystem: "polar",
+          type: 'bar',
+          coordinateSystem: 'polar',
           itemStyle: {
             ...(serie?.itemStyle ?? {}),
-            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
+            color: serie?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
           },
         }))
       : isLiteralObject(data?.series)
-      ? // series es objeto literal {}
-        {
-          ...(data?.series as ISeries),
-          type: "bar",
-          coordinateSystem: "polar",
-          itemStyle: {
-            ...(data?.series?.itemStyle ?? {}),
-            color: data?.series?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? "",
-          },
-        }
-      : [],
+        ? // series es objeto literal {}
+          {
+            ...(data?.series as ISeries),
+            type: 'bar',
+            coordinateSystem: 'polar',
+            itemStyle: {
+              ...(data?.series?.itemStyle ?? {}),
+              color: data?.series?.itemStyle?.color ?? getRandomItem(DEFAULT_CHART_COLORS) ?? '',
+            },
+          }
+        : [],
 });
 
 export default polarArea;

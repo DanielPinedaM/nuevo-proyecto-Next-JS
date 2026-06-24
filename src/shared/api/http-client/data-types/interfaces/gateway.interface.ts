@@ -4,7 +4,7 @@ import {
   THeaders,
   TQueryParams,
   TResponseType,
-} from "@/shared/api/http-client/data-types/types/gateway.type";
+} from '@/shared/api/http-client/data-types/types/gateway.type';
 
 /**
 parametros de funcion httpService para llamar a la API */

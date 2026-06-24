@@ -18,7 +18,7 @@ export default function MenuButton() {
       />
 
       <span className='tooltip-menu'>
-        <Button variant="link" modifiers={['icon-only']} onClick={handleMenu}>
+        <Button variant='link' modifiers={['icon-only']} onClick={handleMenu}>
           {showMenu ? <FaArrowLeft className='text-xl' /> : <CiMenuBurger className='text-xl' />}
         </Button>
       </span>
