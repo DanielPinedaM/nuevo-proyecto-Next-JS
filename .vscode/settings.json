@@ -24,5 +24,75 @@
   },
 
   // peacock extensión
-  "peacock.color": "#61DAFB"
+  "peacock.color": "#61DAFB",
+
+  // Prettier: formateador de codigo
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Configurar auto-completado, formatear codigo y linter
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "jsx",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "eslint.run": "onType",
+  "editor.formatOnSave": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabCompletion": "on",
+  "editor.linkedEditing": true,
+  "editor.codeActionsOnSave": {
+    "source.sortImports": "explicit"
+  },
+  "editor.quickSuggestions": {
+    "comments": false,
+    "other": true,
+    "strings": true
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "jsx-sublime-babel-tags": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "javascript.suggest.completeFunctionCalls": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  /* Tailwind 4 */
+  "tailwindCSS.experimental.configFile": "src/styles/global/tailwind/index-tailwind.css" /* cambiar por la ruta donde se importa Tailwind 4 en archivo .css, necesario para q funcione auto-completado en Tailwind 4 */,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "javascriptreact": "javascriptreact",
+    "plaintext": "html",
+    "typescript": "typescript",
+    "typescriptreact": "typescriptreact"
+  }
 }
