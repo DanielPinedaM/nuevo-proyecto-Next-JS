@@ -1,0 +1,15 @@
+# dependencias
+node_modules
+
+# build de Next.js
+.next
+out
+build
+
+# archivos generados
+next-env.d.ts
+package-lock.json
+
+# estilos y assets que no requieren formateo de Prettier
+*.woff
+*.woff2

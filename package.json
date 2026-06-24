@@ -9,7 +9,10 @@
     "start:prod": "env-cmd -f ./environments/.env.production -- next dev -p 4100",
     "start:test": "env-cmd -f ./environments/.env.test -- next dev -p 4100",
     "lint": "eslint",
-    "start": "next start"
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "start": "next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
@@ -49,6 +52,10 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.5.0",
     "eslint-config-next": "^16.2.9",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.4",
     "typescript": "^6.0.3"
   }
 }
