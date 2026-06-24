@@ -68,9 +68,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.tabCompletion": "on",
   "editor.linkedEditing": true,
-  "editor.codeActionsOnSave": {
-    "source.sortImports": "explicit"
-  },
   "editor.quickSuggestions": {
     "comments": false,
     "other": true,
