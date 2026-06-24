@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { GET } from '@/shared/api/http-client/http-gateway.api';
+import { NextResponse } from 'next/server';
 
-export async function proxy(request: NextRequest) {
+export async function proxy(request: Request) {
   const { url } = request;
 
   // ¿la ruta actual es la ruta raiz "/"?
