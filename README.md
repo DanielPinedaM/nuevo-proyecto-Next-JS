@@ -5,7 +5,7 @@
 Este proyecto debe ejecutarse utilizando:
 
 ```bash
-Node JS 24.16.0
+Node JS 24.18.0
 ```
 
 # 📦 Instalar paquetes
@@ -238,7 +238,7 @@ Cuando se solicite hacer un commit desde un prompt, después de crearlo mostrar 
 
 # Stack Frontend del Proyecto
 
-- Node JS 24.16.0
+- Node JS 24.18.0
 - Next JS 16.2.9 con App Router (`app`)
 - React 19.2.7
 - TypeScript 6.0.3
