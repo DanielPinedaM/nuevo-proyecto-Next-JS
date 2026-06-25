@@ -123,13 +123,18 @@ Obligatorio el uso de `pnpm` y `pnpm-lock.yaml`, prohibido usar alternativas com
 - yarn
 
 # 🟢 Administrador de Versiones para Node.js
+Es obligatorio el uso de `fnm`. Está prohibido usar alternativas como:
 
-Obligatorio el uso de `fnm`, prohibido usar alternativas como:
+* nvm
+* volta
 
-- nvm
-- volta
+Este proyecto requiere Node.js 24.18.0. Para que `fnm` seleccione su versión automáticamente al entrar a la carpeta, ejecuta en Git Bash:
 
-Para instalar paquetes y ejecutar este proyecto, se tiene que usar:
+```console
+eval "$(fnm env --use-on-cd)"
+```
+
+Así ya no será necesario ejecutar manualmente:
 
 ```console
 fnm use 24.18.0
