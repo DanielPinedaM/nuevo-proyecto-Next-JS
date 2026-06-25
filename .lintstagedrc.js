@@ -9,5 +9,5 @@ module.exports = {
   '*.{js,jsx,ts,tsx}': [buildEslintCommand, 'prettier --write'],
 
   // otros archivos: solo formatear con Prettier
-  '*.{json,css,scss,md}': ['prettier --write'],
+  '*.{json,css,scss}': ['prettier --write'],
 };
