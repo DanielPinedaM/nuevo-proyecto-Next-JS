@@ -27,7 +27,12 @@ Usar VS Code o cualquier editor basado en VS Code (Antigravity, Cursor, Windsurf
 
 * [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-La configuración de autocompletado, formateo de código y linter ya está incluida en `.vscode/settings.json`. No es necesario realizar modificaciones adicionales.
+La configuración de autocompletado, formateo de código y linter ya está incluida en los siguientes archivos. No es necesario realizar modificaciones adicionales:
+
+* `.vscode/settings.json`
+* `.editorconfig`
+* `.prettierrc`
+* `eslint.config.mjs`
 
 # 🤖 Uso de IA
 
