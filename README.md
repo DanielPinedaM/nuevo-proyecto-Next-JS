@@ -16,6 +16,46 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 * Luxon 3
 * react-icons 5
 
+# Configurar `fnm` **UNA SOLA VEZ**
+Para que `fnm` automáticamente al entrar a la carpeta del proyecto seleccione la versión correcta de Node.js que se especifica en el archivo `.nvmrc` que esta en la raiz del proyecto. Hacer esto:
+
+1. Abrir Git Bash.
+
+2. Instalar Node.js 24.18.0:
+
+```console
+fnm install 24.18.0
+```
+
+3. Copiar completo el siguiente comando y ejecutarlo:
+
+```console
+echo 'eval "$(fnm env --use-on-cd)"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+4. Cerrar y volver abrir Git Bash
+
+5. Para verificar que funcione ejecutar los siguientes comandos en el siguiente orden:
+
+```console
+cd /ruta/a/tu/proyecto
+```
+
+```console
+fnm current
+```
+
+```console
+node -v
+```
+
+6. Debería mostrarte `v24.18.0` automáticamente, sin que hayas escrito manualmente
+
+```console
+fnm use 24.18.0
+```
+
 # ⌨️ Configurar Autocompletado, Formatear Código y Linter
 Usar VS Code o cualquier editor basado en VS Code (Antigravity, Cursor, Windsurf, etc.) para instalar las siguientes extensiones:
 
@@ -107,41 +147,29 @@ Al copiar este contenido hacia una IA:
 # `CLAUDE.md`
 
 # ⚙️ Entorno de Ejecución
-
 Obligatorio el uso de Node.js, prohibido usar alternativas como:
 
-- Bun
-- Deno
+* Bun
+* Deno
 
 # 📦 Manejador de Paquetes
 
 Obligatorio el uso de `pnpm` y `pnpm-lock.yaml`, prohibido usar alternativas como:
 
-- npm
-- npx
-- package-lock.json
-- yarn
+* npm
+* npx
+* package-lock.json
+* yarn
 
 # 🟢 Administrador de Versiones para Node.js
-Es obligatorio el uso de `fnm`. Está prohibido usar alternativas como:
+Obligatorio el uso de `fnm`. Está prohibido usar alternativas como:
 
 * nvm
 * volta
 
-Este proyecto requiere Node.js 24.18.0. Para que `fnm` seleccione su versión automáticamente al entrar a la carpeta, ejecuta en Git Bash:
-
-```console
-eval "$(fnm env --use-on-cd)"
-```
-
-Así ya no será necesario ejecutar manualmente:
-
-```console
-fnm use 24.18.0
-```
+Este proyecto usa Node.js 24.18.0
 
 # 🔗 Alias
-
 Para todos los comandos de `pnpm` usar el alias `pn`
 
 # 📦 Instalar Paquetes
@@ -166,40 +194,39 @@ pn i
 | `pn build:prod` | Producción  | `environments/.env.production` |
 
 # 🚫 Reglas Obligatorias para la IA
+* No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
 
-- No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
+* Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
 
-- Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
+* No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
 
-- No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
+* Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
 
-- Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
+* Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
 
-- Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
+* Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
 
-- Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
-
-- La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
+* La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
 # 🌐 Reglas de Idioma
 
-- Responder siempre en español. Es decir, redactar en español todas las explicaciones, respuestas, preguntas, descripciones, análisis, recomendaciones, documentación y mensajes dirigidos al usuario.
+* Responder siempre en español. Es decir, redactar en español todas las explicaciones, respuestas, preguntas, descripciones, análisis, recomendaciones, documentación y mensajes dirigidos al usuario.
 
-- Mantener en español el razonamiento explicativo que se muestra al usuario para justificar una respuesta o decisión.
+* Mantener en español el razonamiento explicativo que se muestra al usuario para justificar una respuesta o decisión.
 
-- El razonamiento explicativo es generado y mostrado únicamente a criterio de la IA cuando sea necesario para justificar o aclarar una respuesta o decisión. Cuando este razonamiento se muestre al usuario, debe estar redactado en español.
+* El razonamiento explicativo es generado y mostrado únicamente a criterio de la IA cuando sea necesario para justificar o aclarar una respuesta o decisión. Cuando este razonamiento se muestre al usuario, debe estar redactado en español.
 
-- No traducir términos técnicos de uso común en desarrollo de software (por ejemplo: middleware, service, controller, repository, signal, interceptor, provider, endpoint, payload).
+* No traducir términos técnicos de uso común en desarrollo de software (por ejemplo: middleware, service, controller, repository, signal, interceptor, provider, endpoint, payload).
 
-- No traducir nombres de frameworks, librerías, paquetes, APIs ni patrones de diseño.
+* No traducir nombres de frameworks, librerías, paquetes, APIs ni patrones de diseño.
 
-- Mantener el código, identificadores, nombres de archivos, clases, interfaces, métodos, funciones y variables en inglés.
+* Mantener el código, identificadores, nombres de archivos, clases, interfaces, métodos, funciones y variables en inglés.
 
-- Escribir el código en inglés, salvo las excepciones indicadas más abajo.
+* Escribir el código en inglés, salvo las excepciones indicadas más abajo.
 
-- Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
+* Mantener en inglés los nombres de todas las carpetas del proyecto, salvo la excepción indicada en el siguiente punto.
 
-- Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
+* Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
 
 # 💾 Commits
 
