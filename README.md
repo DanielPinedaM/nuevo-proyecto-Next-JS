@@ -155,8 +155,7 @@ Obligatorio el uso de Node.js, prohibido usar alternativas como:
 * Deno
 
 # 📦 Manejador de Paquetes
-
-Obligatorio el uso de `pnpm` y `pnpm-lock.yaml`, prohibido usar alternativas como:
+Obligatorio el uso de `pnpm` y `pnpm-lock.yaml` version `>=11.0.0 <12.0.0`. Esta **BLOQUEADO** el uso de otras alternativas como:
 
 * npm
 * npx
