@@ -247,7 +247,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
 
   console.info(`respuesta de la API apuntando a ➡️ ${process.env.NEXT_PUBLIC_NODE_ENV} ⬅️ \n`);
 
-  let { success: successApi, status: statusApi, message: messageApi, data: dataApi } = result ?? {};
+  const { success: successApi, status: statusApi, message: messageApi, data: dataApi } = result ?? {};
 
   const objectSuccesResponse: IResponse = {
     success: (validateResponse ? successApi : response?.ok) as boolean,
