@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Manejadores de paquetes diferente a pnpm
+package-lock.json
+yarn.lock
