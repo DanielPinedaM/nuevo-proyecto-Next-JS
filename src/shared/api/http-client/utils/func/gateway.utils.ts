@@ -229,7 +229,7 @@ export function successLogs(objectLogs: IObjectLogs): void {
   // NO imprimir logs en produccion
   if (process.env.NEXT_PUBLIC_NODE_ENV === 'production') return;
 
-  const { method, url, options, response, result, validateResponse, showLogger } = objectLogs;
+  const { method, url, options, response, result, showLogger } = objectLogs;
 
   if (!showLogger) return;
 

@@ -45,9 +45,6 @@ async function executeRequest<T = any>(
     // ¿mostrar logs en consola?
     showLogger = Boolean(process.env.NEXT_PUBLIC_NODE_ENV !== 'production'),
 
-    // ¿la API responde con el tipo IResponse?
-    validateResponse = true,
-
     // ¿ejecutar funcion para manejo global de errores HTTP?
     executeErrorHandling = true,
 
@@ -182,7 +179,6 @@ async function executeRequest<T = any>(
         url,
         options,
         response,
-        validateResponse,
         showLogger,
       });
 
@@ -234,7 +230,6 @@ async function executeRequest<T = any>(
 
     // error: el http status de fetch response.status es diferente al de la respuesta de la API result.status
     if (
-      validateResponse &&
       responseTypeIsJson &&
       response?.status &&
       result?.status &&
@@ -266,14 +261,13 @@ async function executeRequest<T = any>(
 
     const noApiResult = !result;
     const apiError: boolean =
-      validateResponse &&
       responseTypeIsJson &&
       (result?.success === false || result?.status >= 400);
 
     if (noFetchResponse || fetchError || noApiResult || apiError) {
       errorLogs({
         message:
-          validateResponse && result?.message ? result.message : 'error al ejecutar peticion HTTP',
+          result?.message ? result.message : 'error al ejecutar peticion HTTP',
         method,
         url,
         options,
@@ -290,7 +284,6 @@ async function executeRequest<T = any>(
         options,
         result,
         response,
-        validateResponse,
         showLogger,
       });
     }

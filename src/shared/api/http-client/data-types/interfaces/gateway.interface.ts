@@ -14,7 +14,6 @@ export interface IRequestOptions<T = any> {
   headers?: THeaders;
   responseType?: TResponseType;
   showLoader?: boolean;
-  validateResponse?: boolean;
   showLogger?: boolean;
   executeErrorHandling?: boolean;
 
@@ -31,7 +30,6 @@ export interface IObjectLogs {
   options?: IRequestOptions;
   result?: IResponse;
   response?: Response | null;
-  validateResponse?: boolean;
   showLogger?: boolean;
 }
 

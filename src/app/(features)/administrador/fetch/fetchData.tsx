@@ -3,14 +3,8 @@ import { GET } from '@/shared/api/http-client/http-gateway.api';
 import { IRequestOptions } from '@/shared/api/http-client/data-types/interfaces/gateway.interface';
 
 export default async function FetchData() {
-  /* hacer peticion de la data del lado del servidor con SSR */
-  const optionsApi: IRequestOptions = {
-    validateResponse: false,
-  };
-
   const { success, data } = await GET(
     `${process.env.NEXT_PUBLIC_JSON_PLACE_HOLDER}/todos`,
-    optionsApi,
   );
 
   let posts = [];
