@@ -18,6 +18,16 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 
 # ⚙️ Configurar lo Siguiente **UNA SOLA VEZ**
 
+## Antes de Empezar
+Para que la configuración funcione, debes tener instalado:
+* VS Code o cualquier editor basado en VS Code (Antigravity, Cursor, Windsurf, etc.)
+
+* Git Bash
+
+* Node.js
+
+* Claude Code
+
 ## Instalar `pnpm`
 1. Abrir Git Bash
 
@@ -94,6 +104,23 @@ La configuración de autocompletado, formateo de código y linter ya está inclu
 * `.editorconfig`
 * `.prettierrc`
 * `eslint.config.mjs`
+
+## 👾 En Claude Code Configurar MCP de Documentación Oficial de Next JS
+1. Abrir Git Bash
+
+2. Abrir la carpeta del proyecto
+```console
+cd /ruta/a/tu/proyecto
+```
+
+3. Instalac MCP
+
+> [!WARNING]
+> # ⚠️ ****IMPORTANTE**** 🚨
+>
+> ESTA INCOMPLETA ESTA SECCION DE CONFIGURAR MCP DE NEXT JS
+
+## [🔗 Click aqui para ver los comandos del MCP de Next JS](https://nextjs.org/docs/app/guides/mcp)
 
 # 🤖 Uso de IA
 
