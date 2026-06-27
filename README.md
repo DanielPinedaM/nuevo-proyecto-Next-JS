@@ -16,7 +16,50 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 * Luxon 3
 * react-icons 5
 
-# Skill vs MCP — Context7
+# Skill vs MCP vs .claude/rules/ vs CLAUDE.md
+
+Comparativa general (no específica de Context7), basada en documentación oficial de Claude Code (code.claude.com/docs) y el blog oficial de Anthropic sobre estos 4 mecanismos.
+
+## Definiciones
+
+| Mecanismo | Definición |
+|---|---|
+| **Skill** | Directorio con un archivo `SKILL.md` (frontmatter YAML + instrucciones en markdown) que empaqueta conocimiento, procedimientos y opcionalmente scripts ejecutables para una tarea específica. |
+| **MCP (Model Context Protocol)** | Estándar abierto que conecta Claude Code a herramientas y fuentes de datos externas (APIs, bases de datos, servicios) mediante un servidor que expone *tools*, *resources* y *prompts*. |
+| **.claude/rules/** | Directorio de archivos `.md` con instrucciones de proyecto, segmentadas por tema o por ruta (`path-scoped`), en vez de un único CLAUDE.md gigante. |
+| **CLAUDE.md** | Archivo markdown raíz del proyecto (o personal en `~/.claude/CLAUDE.md`) con contexto general: convenciones, comandos de build, estructura del repo. |
+
+**Diferencia explícita en una frase:** CLAUDE.md y `.claude/rules/` son **contexto pasivo siempre cargado** (texto que Claude lee); Skill es **procedimiento activado por relevancia** (instrucciones + posibles scripts); MCP es **acción sobre sistemas externos** (tools reales que ejecutan algo fuera del modelo).
+
+## Tabla comparativa
+
+| Aspecto | Skill | MCP | .claude/rules/ | CLAUDE.md |
+|---|---|---|---|---|
+| **¿Cuándo se dispara (ejecuta)?** | Cuando Claude detecta match entre la tarea y la `description` del frontmatter, o se invoca con `/nombre-skill` | Cuando Claude decide llamar una tool del servidor para resolver parte de la tarea | Al inicio de sesión, automáticamente, si el archivo no tiene scoping de ruta; si tiene `paths:`, se activa al tocar archivos de esa ruta | Al inicio de sesión, siempre, sin excepción |
+| **¿Contra qué hace match para activarse?** | El texto de la `description` del frontmatter vs. el contenido del prompt/tarea actual | No hay "match" semántico — Claude elige la tool por su nombre/descripción cuando la necesita para una acción concreta | La ruta (`paths:`) de los archivos con los que se está trabajando, si está scopeado; si no, no hace match con nada, se carga igual | No hace match — se carga siempre, sin condición |
+| **¿En qué momento está disponible?** | Disponible desde el inicio (su metadata se carga), pero el cuerpo de instrucciones solo se lee cuando se dispara | Disponible desde que el servidor conecta; con Tool Search (default), solo nombres/instrucciones del servidor están "disponibles" de entrada, la tool completa se carga al necesitarse | Disponible (cargado) desde el inicio de sesión si aplica a la ruta actual | Disponible (cargado) desde el inicio de sesión, durante toda la sesión |
+| **¿Usa tools como `get_library_docs`?** | No directamente — puede invocar scripts propios vía bash, pero no expone "tools" tipo MCP | Sí — esa es exactamente la naturaleza de MCP (tools como `get-library-docs`, `query-database`, etc.) | No | No |
+| **¿Puede ejecutar comandos?** | **Sí** (puede incluir scripts en `scripts/` y ejecutarlos vía bash) | **Sí** (las tools del servidor ejecutan acciones reales: queries, llamadas a API, etc., aunque no "comandos bash" sino funciones del servidor) | **No** (es texto de instrucciones, no ejecuta nada) | **No** (es texto de instrucciones, no ejecuta nada) |
+| **Ejemplo de prompt para activarlo explícitamente** | `"Usa el skill codebase-visualizer para generar el árbol del proyecto"` o directo `/codebase-visualizer` | `"Usa la tool get-library-docs del MCP de Context7 para traer la doc de Next.js"` | *(No aplica — ver nota abajo)* | *(No aplica — ver nota abajo, pero distinto motivo)* |
+| **¿Consume menos tokens?** | **Sí, el más eficiente de los 4** — solo la metadata (nombre + description) se carga al inicio; el cuerpo y los recursos (`references/`, `scripts/`) se cargan on-demand y solo lo que se usa | Con Tool Search activo (default), bajo impacto: solo nombres se cargan de entrada. Sin Tool Search, o con `alwaysLoad: true`, el costo sube porque carga definiciones completas de tools | Costo fijo si no está scopeado por ruta (se carga siempre, igual que CLAUDE.md); si está scopeado, solo carga cuando aplica esa ruta | El más costoso de mantener "liviano" — se carga completo y permanece en contexto toda la sesión, sin excepciones ni progressive disclosure |
+
+## Nota sobre `.claude/rules/` y CLAUDE.md: no tienen "prompt de activación"
+
+A diferencia de Skill y MCP, **no existe un prompt para invocar manualmente `.claude/rules/` o CLAUDE.md**, porque no funcionan por invocación sino por carga automática de contexto:
+
+- **CLAUDE.md**: se carga siempre al iniciar sesión, sin condición. No hay "match" — es leído íntegro, todo el tiempo.
+- **.claude/rules/**: si el archivo no tiene scoping de ruta (`paths:`), se comporta igual que CLAUDE.md (siempre cargado). Si tiene scoping, se activa automáticamente cuando Claude lee o edita un archivo dentro de esa ruta — el "match" es la ruta del archivo en el que estás trabajando, no algo que el usuario solicite con una frase.
+
+Por eso no hay un equivalente a `"usa el skill X"` o `"usa el MCP Y"` para estos dos: no se "llaman", simplemente están o no están en el contexto según dónde estés parado en el proyecto.
+
+## Resumen en una línea por mecanismo
+
+- **Skill** → procedimiento activado por relevancia semántica, el más eficiente en tokens por su carga progresiva.
+- **MCP** → conexión a sistemas externos vía tools reales; con Tool Search, el costo de tenerlos conectados bajó mucho respecto a versiones anteriores de Claude Code.
+- **.claude/rules/** → fragmento de contexto de proyecto, automático por ruta si está scopeado, o siempre cargado si no lo está.
+- **CLAUDE.md** → contexto de proyecto siempre cargado, sin condición ni scoping; el de mayor costo fijo de los cuatro.
+
+# Skill vs MCP enfocado en Context7
 
 Comparativa basada en preguntas y respuestas sobre las dos formas de usar Context7 en Claude Code.
 
