@@ -16,6 +16,40 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 * Luxon 3
 * react-icons 5
 
+# Skill vs MCP — Context7
+
+Comparativa basada en preguntas y respuestas sobre las dos formas de usar Context7 en Claude Code.
+
+## Tabla Comparativa General
+
+| Aspecto | Skill | MCP |
+|---|---|---|
+| ¿Puede conectarse a documentación? | Sí | Sí |
+| Funcionalidad final | Misma documentación actualizada | Misma documentación actualizada |
+| Cuándo se carga | Solo cuando hay match con su descripción (relevancia) | Siempre — tools declaradas en cada turno de la conversación |
+| Disponibilidad | Disponible, pero pasivo hasta que se dispara | Siempre disponible activamente (tools visibles todo el tiempo) |
+| Costo fijo por turno (sin usarlo) | Ninguno | Sí — definiciones de las tools ocupan contexto aunque no se llamen |
+| Costo al ejecutar la búsqueda real | Tokens del output del comando (similar volumen) | Tokens del tool_result (similar volumen) |
+| Mecanismo de ejecución | Comando CLI vía bash (ej. `ctx7 docs <id> <query>`) | Llamada a tool del servidor (`resolve-library-id`, `get-library-docs`) |
+| ¿Se puede forzar/invocar explícitamente? | Sí — ej. "use context7 to..." | Sí — ej. "usa el MCP de Context7 para..." |
+| Ahorro de tokens relativo | Mayor, especialmente con muchos servidores/tools acumulados | Menor — overhead fijo escala con la cantidad de MCP servers activos |
+
+## Preguntas y Respuestas
+
+| Pregunta | Respuesta |
+|---|---|
+| ¿Ambos pueden conectarse a documentación? | Sí, ambos traen la misma documentación actualizada; solo cambia el mecanismo de acceso. |
+| ¿El skill consume tokens en cada llamada y el MCP no? | No es así. Ambos consumen tokens similares **cuando se ejecuta la búsqueda real** (el contenido de la doc pesa igual). La diferencia está en el costo fijo: MCP paga overhead en cada turno por tener las tools declaradas; el skill no paga nada si no se dispara. |
+| ¿El skill está disponible pero se invoca solo por match del description? | Sí, correcto. Claude Code lo evalúa por relevancia y solo lo ejecuta si el contexto de la pregunta coincide. |
+| ¿El MCP está siempre disponible y eso hace que importe que no se usen las tools? | Sí. Las tools del MCP quedan declaradas en cada turno se usen o no, lo cual genera un costo fijo de contexto independiente del uso real. |
+| Al final, ¿cuándo ambos se invocan consumen tokens parecidos? | Sí. La respuesta con la documentación pesa lo mismo sea por tool_result (MCP) o por output de bash (skill). |
+| ¿El skill ahorra más tokens que el MCP? | Sí, en general — pero la diferencia es marginal con un solo servidor de pocas tools (como Context7). Se vuelve notoria con muchos MCP servers acumulados. |
+| ¿Se puede forzar/invocar explícitamente cada uno? | Sí, ambos. Con MCP, se elige una tool ya disponible ("usa el MCP de Context7"). Con Skill, se fuerza el match explícito ("use context7 to...") aunque normalmente se dispare solo por relevancia. |
+
+## Resumen
+
+La funcionalidad es idéntica (ambos traen la misma documentación); la diferencia real está en **cuándo se carga el costo**: el MCP paga un overhead fijo por turno por tener las tools siempre declaradas, mientras que el skill solo "cuesta" cuando efectivamente se dispara.
+
 # ⚙️ Configurar lo Siguiente **UNA SOLA VEZ**
 
 ## Antes de Empezar
@@ -884,6 +918,167 @@ Un componente pertenece a `components` cuando conoce el dominio, participa en un
 
 La lógica de negocio siempre pertenece a `components`, nunca a `ui`.
 
+# 📅 Fechas
+
+Usar la librería **Luxon** para el manejo de fechas. **NO** usar `new Date()` **NI** librerías como Moment.js.
+
+Esto se debe a que:
+
+- `new Date()` tiene comportamientos inconsistentes entre zonas horarias.
+
+- `new Date()` Es difícil de formatear y manipular de forma segura.
+
+- `new Date()` No maneja bien timezones ni conversiones complejas.
+
+- [Moment.js está en modo legacy/deprecado y ya no se recomienda para proyectos modernos.](https://momentjs.com/docs/#/-project-status/)
+
+- Luxon ofrece una API más clara, moderna y robusta para fechas, tiempos y zonas horarias.
+
+**_❌ Incorrecto - usar `new Date()`_**
+
+```ts
+const now = new Date();
+const formatted = now.toLocaleDateString();
+```
+
+**_❌ Incorrecto - usar moment.js_**
+
+```ts
+import moment from 'moment';
+
+const today = moment().format('YYYY-MM-DD');
+```
+
+**_✅ Correcto - usar Luxon_**
+
+```ts
+import { DateTime } from 'luxon';
+
+const now = DateTime.now();
+const formatted = now.toFormat('yyyy-MM-dd');
+```
+
+En `src\shared\utils\func\luxon.utils.ts` hay funciones para el manejo (formateo) de fecha y hora usando Luxon.
+
+**_❌ Incorrecto - NO usar `formatDate`, usar Luxon directo_**
+
+Problemas de este enfoque:
+
+- Repetición de código en múltiples componentes
+
+- cada dev formatea fechas de forma distinta, sin estandarización.
+
+```ts
+'use client';
+import { DateTime } from 'luxon';
+
+export default function MyComponent() {
+
+  const getDate = () => {
+    const now = DateTime.now();
+
+    const formatted = now
+      .setLocale('es')
+      .toFormat('d-LLL-yyyy hh:mm:ss a');
+
+    console.log(formatted);
+  };
+
+  return (
+      <button onClick={getDate}>
+        Mostrar fecha
+      </button>
+  );
+}
+```
+
+**_✅ Correcto - usar `formatDate`_**
+
+```ts
+'use client';
+import { DateTime } from 'luxon';
+import { formatDate } from "@/shared/utils/func/luxon.utils";
+
+export default function MyComponent() {
+
+  const getDate = () => {
+    const formatted = formatDate(
+      DateTime.now(),
+      'd-LLL-yyyy hh:mm:ss a'
+    );
+
+    console.log(formatted);
+  };
+
+  return (
+      <button onClick={getDate}>
+        Mostrar fecha
+      </button>
+  );
+}
+```
+
+En `src\shared\utils\func\luxon.utils.ts` hay función para obtener fecha y hora actual con formato de fecha y hora personalizada
+
+**_❌ Incorrecto - usar Luxon directamente para obtener fecha y hora actual_**
+
+Problemas de este enfoque:
+
+- Repetición de código en múltiples componentes
+
+- cada dev formatea fechas de forma distinta, sin estandarización.
+
+```ts
+'use client';
+import { DateTime } from 'luxon';
+
+export default function MyComponent() {
+
+  const getCurrentDateTime = () => {
+    const now = DateTime.now()
+      .setLocale('es')
+      .toFormat('d-LLL-yyyy hh:mm:ss a')
+      .replace(/\.$/, '');
+
+    const fixed = now
+      .replace(/p\.\s?m/gi, 'p.m')
+      .replace(/a\.\s?m/gi, 'a.m');
+
+    console.log(fixed);
+  };
+
+  return (
+      <button onClick={getCurrentDateTime}>
+        Mostrar fecha actual
+      </button>
+  );
+}
+```
+
+**_✅ Ejemplo correcto - usar `luxon.utils.ts`_**
+
+```ts
+'use client';
+import { currentDateAndTime } from "@/shared/utils/func/luxon.utils";
+
+export default function MyComponent() {
+
+  const getCurrentDateTime = () => {
+    const current = currentDateAndTime(
+      'd-LLL-yyyy hh:mm:ss a'
+    );
+
+    console.log(current);
+  };
+
+  return (
+      <button onClick={getCurrentDateTime}>
+        Mostrar fecha actual
+      </button>
+  );
+}
+```
+
 # 📝 Formularios - Integración Prime React y React Hook Form
 
 Todos los formularios del proyecto deben utilizar obligatoriamente:
@@ -1120,166 +1315,131 @@ if (user.role === "admin") {
 >
 > # **_INCOMPLETO - AQUI ME FALTA AGREGAR EJEMPLO DE INPUTS Q ESTAN EN SRC/SHARED/COMPONENTS/REACT-HOOK-FORM_**
 
-# 📅 Fechas
+# 🔌 Consumo de API
+En este proyecto es **OBLIGATORIO**, sin ninguna excepción, usar `src\shared\api\http-client\http-gateway.api.ts` para realizar cualquier petición HTTP.
 
-Usar la librería **Luxon** para el manejo de fechas. **NO** usar `new Date()` **NI** librerías como Moment.js.
+Esta obligación aplica a **todos** los métodos HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) y a **todos** los endpoint, sin importar el tipo de servicio que se consuma.
 
-Esto se debe a que:
-
-- `new Date()` tiene comportamientos inconsistentes entre zonas horarias.
-
-- `new Date()` Es difícil de formatear y manipular de forma segura.
-
-- `new Date()` No maneja bien timezones ni conversiones complejas.
-
-- [Moment.js está en modo legacy/deprecado y ya no se recomienda para proyectos modernos.](https://momentjs.com/docs/#/-project-status/)
-
-- Luxon ofrece una API más clara, moderna y robusta para fechas, tiempos y zonas horarias.
-
-**_❌ Incorrecto - usar `new Date()`_**
+`http-gateway.api.ts` estandariza todas las llamadas a API y devuelve siempre la misma estructura:
 
 ```ts
-const now = new Date();
-const formatted = now.toLocaleDateString();
-```
-
-**_❌ Incorrecto - usar moment.js_**
-
-```ts
-import moment from 'moment';
-
-const today = moment().format('YYYY-MM-DD');
-```
-
-**_✅ Correcto - usar Luxon_**
-
-```ts
-import { DateTime } from 'luxon';
-
-const now = DateTime.now();
-const formatted = now.toFormat('yyyy-MM-dd');
-```
-
-En `src\shared\utils\func\luxon.utils.ts` hay funciones para el manejo (formateo) de fecha y hora usando Luxon.
-
-**_❌ Incorrecto - NO usar `formatDate`, usar Luxon directo_**
-
-Problemas de este enfoque:
-
-- Repetición de código en múltiples componentes
-
-- cada dev formatea fechas de forma distinta, sin estandarización.
-
-```ts
-'use client';
-import { DateTime } from 'luxon';
-
-export default function MyComponent() {
-
-  const getDate = () => {
-    const now = DateTime.now();
-
-    const formatted = now
-      .setLocale('es')
-      .toFormat('d-LLL-yyyy hh:mm:ss a');
-
-    console.log(formatted);
-  };
-
-  return (
-      <button onClick={getDate}>
-        Mostrar fecha
-      </button>
-  );
+{
+  success: boolean;
+  status: number;
+  message: string;
+  data: T;
 }
 ```
 
-**_✅ Correcto - usar `formatDate`_**
+El frontend **NUNCA** consume un endpoint de forma directa
+
+Toda petición tiene que pasa primero por `http-gateway.api.ts`, y desde ahí se dirige a las APIs internas y externas. Los dos destinos posibles del flujo son:
+
+## 🔀 Flujo para Consumir API:
+El flujo de comunicación de este frontend es **SIEMPRE** el mismo y nunca se omite el paso por `http-gateway.api.ts`:
+
+```txt
+Frontend
+    ↓
+http-gateway.api.ts
+    ↓
+┌────────┴────────┐
+↓                 ↓
+Internal APIs     External APIs
+(Servicio interno)（Servicio externo / Third-Party)
+```
+
+## Reglas de `http-gateway.api.ts`
+1. **PROHIBIDO** meter lógica de negocio **DENTRO** de  `http-gateway.api.ts`
+
+La lógica de negocio **TIENE** que estar en **DONDE SE LLAMA** a `http-gateway.api.ts` (component).
+
+`http-gateway.api.ts` es un wrapper de `fetch`. Su **ÚNICA** responsabilidad es infraestructura de transporte HTTP, **NUNCA** reglas de negocio o de dominio.
+
+✅ Esto **SI** es responsabilidad de `http-gateway.api.ts` (_lógica de infraestructura/transporte_):
+  * Hacer peticiones HTTP (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`).
+  * Mostrar/ocultar icono de cargando (loader).
+  * Manejo **centralizado** de errores HTTP por status code (401, 403, 404, 5xx). Esto es genérico y aplica a **CUALQUIER** endpoint, **NO** a un caso de negocio específico.
+  * Timeout de peticiones.
+  * Estandarización del formato de respuesta de la API.
+  * Logger de peticiones HTTP exitosas y erróneas.
+  * Construcción de opciones de la peticion HTTP: body, params, headers, responseType
+
+❌ Esto **JAMÁS** debe estar en `http-gateway.api.ts` (_lógica de negocio/dominio_):
+  * Métodos con nombre de dominio específico. Ejemplo: `getUserPermissionsById()`, `findTasksByFilters()`, `createInvoice()`, `cancelOrderById()`, `updateUserProfile()`, `sendPasswordResetEmail()`.
+  * Validaciones de reglas de negocio. Ejemplo: "si el usuario no tiene el rol X, no puede ver Y".
+  * Transformación o filtrado de datos según reglas de dominio. Ejemplo: `users.filter(user => user.active && user.role === 'admin')`.
+  * Decisiones específicas de un flujo de negocio (qué hacer con la respuesta según el contexto de la feature).
+
+Diferencia:
+  * **Lógica de infraestructura/transporte**: "¿cómo viaja la petición?" (timeout, headers, formato, errores HTTP genéricos).
+
+  * **Lógica de negocio/dominio**: "¿qué significa esta petición/respuesta para la aplicación?" (permisos, tareas, facturas, reglas de la feature).
+
+`http-gateway.api.ts` solo responde la primera pregunta. La segunda siempre se resuelve en el componente ó .ts que lo consume.
+
+## Reglas para Consumir API
+* **SIEMPRE** desestructurar la respuesta de la API para acceder directamente a sus propiedades (`success`, `status`, `message`, `data`):
 
 ```ts
-'use client';
-import { DateTime } from 'luxon';
-import { formatDate } from "@/shared/utils/func/luxon.utils";
+const { success, status, message, data } = await firstValueFrom(
+  this.http.POST(`${environment.api}AQUI_ESCRIBIR_EL_ENDPOINT`),
+);
+```
 
-export default function MyComponent() {
+**NUNCA** guardar la respuesta completa en una variable y acceder a sus propiedades con notación de punto (`response.success`, `response.status`, `response.message`, `response.data`):
 
-  const getDate = () => {
-    const formatted = formatDate(
-      DateTime.now(),
-      'd-LLL-yyyy hh:mm:ss a'
-    );
+```ts
+const response = await firstValueFrom(
+  this.http.POST(`${environment.api}AQUI_ESCRIBIR_EL_ENDPOINT`),
+);
+```
 
-    console.log(formatted);
-  };
+* Al llamar `GatewayApiService` **NUNCA** usar:
+  * `try/catch`
+  * Operador de RxJS `catchError`
+  * Callback `error` del objeto pasado a `subscribe()`
 
-  return (
-      <button onClick={getDate}>
-        Mostrar fecha
-      </button>
+* El manejo de errores se tiene que hacer con `if else` asi:
+
+```ts
+async getBots() {
+  const { success } = await firstValueFrom(
+    this.http.POST(`${environment.api}AQUI_ESCRIBIR_EL_ENDPOINT`),
   );
+
+  if (success) {
+    // codigo cuando peticion HTTP es exitosa
+  } else {
+    // codigo cuando peticion HTTP es erronea
+  }
 }
 ```
 
-En `src\shared\utils\func\luxon.utils.ts` hay función para obtener fecha y hora actual con formato de fecha y hora personalizada
+* **NO** propagar los errores de `GatewayApiService` con `throw new Error()` porque `GatewayApiService` ya centraliza el manejo de errores con `catchError`
 
-**_❌ Incorrecto - usar Luxon directamente para obtener fecha y hora actual_**
-
-Problemas de este enfoque:
-
-- Repetición de código en múltiples componentes
-
-- cada dev formatea fechas de forma distinta, sin estandarización.
+* Ejemplo correcto SIN propagar error y sin try catch
 
 ```ts
-'use client';
-import { DateTime } from 'luxon';
-
-export default function MyComponent() {
-
-  const getCurrentDateTime = () => {
-    const now = DateTime.now()
-      .setLocale('es')
-      .toFormat('d-LLL-yyyy hh:mm:ss a')
-      .replace(/\.$/, '');
-
-    const fixed = now
-      .replace(/p\.\s?m/gi, 'p.m')
-      .replace(/a\.\s?m/gi, 'a.m');
-
-    console.log(fixed);
-  };
-
-  return (
-      <button onClick={getCurrentDateTime}>
-        Mostrar fecha actual
-      </button>
-  );
+getUser(id: string) {
+  return this.http.get<User>(`/api/users/${id}`); // me olvidé de poner IResponse<T>
 }
 ```
 
-**_✅ Ejemplo correcto - usar `luxon.utils.ts`_**
-
-```ts
-'use client';
-import { currentDateAndTime } from "@/shared/utils/func/luxon.utils";
-
-export default function MyComponent() {
-
-  const getCurrentDateTime = () => {
-    const current = currentDateAndTime(
-      'd-LLL-yyyy hh:mm:ss a'
-    );
-
-    console.log(current);
-  };
-
-  return (
-      <button onClick={getCurrentDateTime}>
-        Mostrar fecha actual
-      </button>
-  );
-}
+```html
+@if (userRes.isLoading()) { <spinner /> }
+@else if (!userRes.value()?.success) { <p>No se pudo cargar</p> }  <!-- chequeás el flag -->
+@else { <p>{{ userRes.value()?.data?.name }}</p> }                 <!-- value() es IResponse<User> → ?.data?.name -->
 ```
+
+* La URL se construye concatenando el `environment.api` con el endpoint específico de la petición, lo que permite reutilizar la base de la API en todos los ambientes (local, test, producción).
+
+## ⏳ Icono de Loader Global
+Prohibido crear use state loading false/true para manejar el loading en componentes de React. `http-gateway.api.ts` ya se encarga de mostrar y ocultar fixed loader centrado en pantalla
+
+
+## ¿Como Desactivar el sticky loader icon de `http-gateway.api.ts`?
+
 
 # 💅 Maquetación
 
