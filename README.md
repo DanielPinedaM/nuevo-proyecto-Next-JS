@@ -16,9 +16,7 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 * Luxon 3
 * react-icons 5
 
-# Skill vs MCP vs .claude/rules/ vs CLAUDE.md
-
-Comparativa general (no específica de Context7), basada en la documentación oficial de Claude Code (code.claude.com/docs): páginas de Skills, de MCP (incluida la sección "Scale with MCP tool search") y de memoria/CLAUDE.md (incluida `.claude/rules/`).
+# Comparativa General (**NO** Específica de Context7) de Skill vs MCP vs .claude/rules/ vs CLAUDE.md
 
 ## Definiciones
 
@@ -59,9 +57,7 @@ Por eso no hay un equivalente a `"usa el skill X"` o `"usa el MCP Y"` para estos
 - **.claude/rules/** → fragmento de contexto de proyecto, automático por ruta si está scopeado, o siempre cargado si no lo está.
 - **CLAUDE.md** → contexto de proyecto sin scoping por ruta; el de la raíz se carga siempre y completo (los de subdirectorios cargan bajo demanda); el de mayor costo fijo de los cuatro.
 
-# Skill vs MCP enfocado en Context7
-
-Comparativa basada en preguntas y respuestas sobre las dos formas de usar Context7 en Claude Code.
+# Comparativa Enfocada en Context7 Sobre Skill vs MCP en Claude Code
 
 ## Tabla Comparativa General
 
