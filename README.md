@@ -500,9 +500,10 @@ src/
         │       ├── _mixins.scss → codigo de Sass que se repite en diferentes archivos de src\styles\global\scss\buttons
         │       └── _variants.scss → Variantes visuales (background, outline, ghost, link) que define la apariencia y comportamiento visual según el tipo de botón.
         │
-        └── tailwind/
-            ├── index-tailwind.css → archivo de configuración de Tailwind 4
-            └── preflight.css → Reset CSS basado en Tailwind 4
+        └── tailwind/ → Carpeta para configurar Tailwind 4
+            ├── import.css → importar Tailwind
+            ├── preflight.css → Reset CSS basado en Tailwind
+            └── theme.css → variables de Tailwind
 ```
 
 # Feature Architecture
@@ -1488,7 +1489,7 @@ Prohibido crear use state loading false/true para manejar el loading en componen
 
 En este proyecto se está utilizando **Tailwind CSS V4**, por lo tanto el archivo `tailwind.config.js` ya no se utiliza y se considera **obsoleto** en esta arquitectura.
 
-La configuración de Tailwind ahora se realiza en el archivo `src/styles/global/tailwind/index-tailwind.css`
+La configuración de Tailwind ahora se realiza en el archivo `src/styles/global/tailwind`
 
 Esto permite centralizar la definición de tokens de diseño (colores, media queries, etc.) sin necesidad de configuración en archivo JavaScript.
 
@@ -1511,7 +1512,7 @@ module.exports = {
 **_✅ Correcto - Configurar Tailwind 4 con `.css`_**
 
 ```CSS
-/* src/styles/global/tailwind/index-tailwind.css */
+/* src/styles/global/tailwind/theme.css */
 
 @theme {
   --color-primary-color: oklch(62.8% 0.258 29.23) ;
@@ -1522,7 +1523,7 @@ module.exports = {
 
 [Documentación de variables de Tailwind 4](https://tailwindcss.com/blog/tailwindcss-v4#css-theme-variables)
 
-Las variables con nombres de los colores de **Sass** en `src/styles/global/scss/_variable.scss` y **Tailwind** en `src/styles/global/tailwind/index-tailwind.css` deben mantener exactamente el mismo nombre y el mismo valor.
+Las variables con nombres de los colores de **Sass** en `src/styles/global/scss/_variable.scss` y **Tailwind** en `src/styles/global/tailwind/theme.css` deben mantener exactamente el mismo nombre y el mismo valor.
 
 Esto garantiza que los colores sean los mismos entre los estilos globales definidos en Sass y los estilos de cada componente definidos con Tailwind.
 
@@ -1540,7 +1541,7 @@ $primary-color: oklch(62.8% 0.258 29.23);
 
 ```CSS
 /*
-src/styles/global/tailwind/index-tailwind.css
+src/styles/global/tailwind/theme.css
 
 colores de Tailwind */
 @theme {
@@ -1562,7 +1563,7 @@ $primary-color: oklch(62.8% 0.258 29.23); // color rojo
 
 ```css
 /*
-src/styles/global/tailwind/index-tailwind.css
+src/styles/global/tailwind/theme.css
 
 colores de Tailwind */
 @theme {
