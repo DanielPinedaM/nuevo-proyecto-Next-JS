@@ -116,7 +116,7 @@ cd /ruta/a/tu/proyecto
 
 Este proyecto ya tiene configurado lo siguiente:
 
-1. **[Archivo AGENTS.md](https://nextjs.org/docs/app/guides/ai-agents) en la raíz del proyecto:** permite a la IA acceder a la documentación que está en `node_modules\next\dist\docs` de la versión de Next.js instalada.
+1. **[Archivo AGENTS.md](https://nextjs.org/docs/app/guides/ai-agents) en la raíz del proyecto:** Permite a la IA acceder a la documentación oficial que está en `node_modules\next\dist\docs` de la versión de Next.js instalada.
 
 Para probar que funcione:
 
