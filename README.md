@@ -137,8 +137,25 @@ Cita textual de node_modules/next/dist/docs
 Para probar que funcione:
 
 ```txt
-/react-best-practices
+/react-best-practices explicame como consumir API REST con React
 ```
+
+> [!NOTE]
+>
+> **NO** debes hacer lo siguiente
+>
+> Pasos para configurar skill `react-best-practices`
+>
+> Instalar
+>
+> ```bash
+> pnpm dlx skills add vercel-labs/agent-skills/skills/react-best-practices
+> ```
+>
+> mover `.agents\skills\vercel-react-best-practices` a `.claude\skills\vercel-react-best-practices`
+>
+> eliminar `skills-lock.json`
+
 
 # 🔗 Enlaces - Click Aqui para Ver ...
 * [Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
@@ -147,7 +164,7 @@ Para probar que funcione:
 
 > [!WARNING]
 >
-> # ⚠️ \***\*IMPORTANTE\*\*** 🚨
+> # ⚠️ ***IMPORTANTE*** 🚨
 >
 > *Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas*
 
