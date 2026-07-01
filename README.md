@@ -166,22 +166,9 @@ El skill `.claude\skills\git-commit\SKILL.md` te permite realizar commits. Ejemp
 commit y push
 ```
 
-## 📋 Contexto para la IA
-Antes de realizar cualquier pregunta sobre este proyecto en una IA, se debe proporcionar este contexto completo para que la IA pueda seguir la arquitectura del proyecto.
+---
 
-Este contenido puede utilizarse dentro de archivos de configuración como:
-
-- `CLAUDE.md`
-- Archivos equivalentes de instrucciones para otras IA
-
-Al copiar este contenido hacia una IA:
-
-- Copiar todas las secciones posteriores completas sin omitir reglas.
-- No copiar secciones anteriores de este `README.md`.
-- Antes de pegarlo en la IA, eliminar todos los emojis del `README.md`.
-- Copiar únicamente desde esta sección hacia abajo ⬇️
-
-# `CLAUDE.md`
+# 📋 Contexto para la IA
 
 # ⚙️ Entorno de Ejecución
 Obligatorio el uso de Node.js, prohibido usar alternativas como:
