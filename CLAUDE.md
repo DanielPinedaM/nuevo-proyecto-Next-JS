@@ -1,72 +1,47 @@
+# Documentación de Next.js
+
+@AGENTS.md
+
 # Entorno de Ejecución
-
-Obligatorio el uso de Node.js, prohibido usar alternativas como:
-
-- Bun
-- Deno
+Node.js
 
 # Manejador de Paquetes
-
-Obligatorio el uso de `pnpm` y `pnpm-lock.yaml`, prohibido usar alternativas como:
-
-- npm
-- npx
-- package-lock.json
-- yarn
+`pnpm` y `pnpm-lock.yaml`
 
 # Administrador de Versiones para Node.js
+`fnm`
 
-Obligatorio el uso de `fnm`, prohibido usar alternativas como:
-
-- nvm
-- volta
-
-Para instalar paquetes y ejecutar este proyecto, se tiene que usar:
-
-```console
-fnm use 24.18.0
-```
-
-# Alias
-
-Para todos los comandos de `pnpm` usar el alias `pn`
-
-# Instalar Paquetes
-
-```console
-pn i
-```
+# Comandos
 
 # Ejecutar Proyecto
 
-| Comando          | Apunta a... | Ruta Archivo                   |
-| ---------------- | ----------- | ------------------------------ |
-| `pn start:local` | Local host  | `environments/.env.localhost`  |
-| `pn start:test`  | Pruebas     | `environments/.env.test`       |
-| `pn start:prod`  | Producción  | `environments/.env.production` |
+| Comando            | Apunta a... | Ruta Archivo                   |
+| ------------------ | ----------- | ------------------------------ |
+| `pnpm start:local` | Local host  | `environments/.env.localhost`  |
+| `pnpm start:test`  | Pruebas     | `environments/.env.test`       |
+| `pnpm start:prod`  | Producción  | `environments/.env.production` |
 
 # Generar build (dist) para Desplegar
 
-| Comando         | Apunta a... | Ruta Archivo                   |
-| --------------- | ----------- | ------------------------------ |
-| `pn build:test` | Pruebas     | `environments/.env.test`       |
-| `pn build:prod` | Producción  | `environments/.env.production` |
+| Comando           | Apunta a... | Ruta Archivo                   |
+| ----------------- | ----------- | ------------------------------ |
+| `pnpm build:test` | Pruebas     | `environments/.env.test`       |
+| `pnpm build:prod` | Producción  | `environments/.env.production` |
 
 # Reglas Obligatorias para la IA
+* No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
 
-- No generes análisis, recomendaciones ni comentarios adicionales hasta que empiece a realizar preguntas.
+* Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
 
-- Todas las respuestas, recomendaciones y fragmentos de código deben respetar obligatoriamente la arquitectura, reglas, patrones y convenciones definidas en este documento.
+* No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
 
-- No cuestiones, reemplaces, contradigas ni ignores las decisiones de arquitectura definidas en este proyecto.
+* Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
 
-- Siempre que respondas con código, debes indicar explícitamente la ubicación exacta de cada archivo basándote en la estructura base del proyecto definida en este documento.
+* Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
 
-- Si existe alguna ambigüedad, falta de contexto o algún aspecto importante de arquitectura, estructura o convenciones que no esté definido, primero debes preguntar antes de asumir una implementación.
+* Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
 
-- Si durante la conversación recibes instrucciones contradictorias, debes priorizar siempre las reglas y decisiones definidas inicialmente en este documento.
-
-- La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
+* La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
 # Reglas de Idioma
 
