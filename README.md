@@ -106,9 +106,9 @@ La configuración de autocompletado, formateo de código y linter ya está inclu
 * `eslint.config.mjs`
 
 # Configuración de Next.js con IA
-Estas configuraciones son oficiales del equipo de Vercel que es quien desarrolla Next.js
+Estas configuraciones son oficiales del equipo de Vercel, que es quien desarrolla Next.js.
 
-No tiene que hacer nada, ya todo esta configurado. Solo tiene que abrir una IA en el bash/CLI en la ruta de este proyecto y funcionara
+No tiene que hacer nada, ya todo está configurado. Solo tiene que abrir una IA en el bash/CLI en la ruta de este proyecto y funcionará.
 
 ```console
 cd /ruta/a/tu/proyecto
@@ -116,21 +116,23 @@ cd /ruta/a/tu/proyecto
 
 Este proyecto ya tiene configurado lo siguiente:
 
-1. **[Archivo AGENTS.md](https://nextjs.org/docs/app/guides/ai-agents) en la raiz del proyecto:** Permite a la IA acceder a la documentación que esta en `node_modules\next\dist\docs` de la version de Next.js instalada.
+1. **[Archivo AGENTS.md](https://nextjs.org/docs/app/guides/ai-agents) en la raíz del proyecto:** permite a la IA acceder a la documentación que está en `node_modules\next\dist\docs` de la versión de Next.js instalada.
 
 Para probar que funcione:
 
 ```txt
-
+citarme textualmente de documentación como activar reactCompiler babel-plugin-react-compiler
 ```
 
 La salida debe contener algo similar a esto:
 
 ```bash
 ● Search(pattern: "", path: "\node_modules\next\dist\docs")
+
+Cita textual de node_modules/next/dist/docs
 ```
 
-2. **[Skill `react-best-practices`](https://vercel.com/blog/introducing-react-best-practices):** Permite escribir codigo limpio de React
+2. **[Skill `react-best-practices`](https://vercel.com/blog/introducing-react-best-practices):** permite escribir código limpio de React.
 
 Para probar que funcione:
 
