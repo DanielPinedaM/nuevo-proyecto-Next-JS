@@ -163,9 +163,29 @@ Read 57 lines
 >
 > eliminar `skills-lock.json`
 
-
 # 🔗 Enlaces - Click Aqui para Ver ...
 * [Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
+
+# Skills
+
+## 🌿 `git-commit`
+Por cada feature terminada hacer un commit antes de solicitar nuevas modificaciones a la IA. Evita acumular demasiados cambios, ya que puedes perder el contexto de lo que la IA está realizando y cometer errores.
+
+Trabajar bajo el principio:
+
+> 1 commit = 1 feature
+
+El skill `.claude\skills\git-commit\SKILL.md` te permite realizar commits.
+
+***Ejemplos:***
+
+```console
+/git-commit
+```
+
+```console
+hacer commit y push
+```
 
 # 🤖 Uso de IA
 
@@ -193,23 +213,6 @@ Evitar copiar y pegar código desde una plataforma web de IA. Siempre utilizar e
 - Conocimiento de la estructura completa del código.
 - Acceso al sistema operativo (archivos y carpetas).
 - Capacidad para realizar cambios respetando la arquitectura del proyecto.
-
-## 🌿 Uso de Git y de IA
-Por cada feature terminada hacer un commit antes de solicitar nuevas modificaciones a la IA. Evita acumular demasiados cambios, ya que puedes perder el contexto de lo que la IA está realizando y cometer errores.
-
-Trabajar bajo el principio:
-
-> 1 commit = 1 feature
-
-El skill `.claude\skills\git-commit\SKILL.md` te permite realizar commits. Ejemplo:
-
-```console
-/git-commit
-```
-
-```console
-commit y push
-```
 
 ---
 
