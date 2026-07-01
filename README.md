@@ -120,7 +120,8 @@ cd /ruta/a/tu/proyecto
 >
 > ESTA INCOMPLETA ESTA SECCION DE CONFIGURAR MCP DE NEXT JS
 
-## [🔗 Click aqui para ver los comandos del MCP de Next JS](https://nextjs.org/docs/app/guides/mcp)
+# 🔗 Enlaces - Click Aqui para Ver ...
+* [Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
 
 # 🤖 Uso de IA
 
