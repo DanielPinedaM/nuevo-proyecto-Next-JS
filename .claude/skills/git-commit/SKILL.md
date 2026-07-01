@@ -12,8 +12,8 @@ Antes de crear cualquier commit, copiar este checklist y marcarlo a medida que s
 
 ```
 - [ ] 1. Verificar que el usuario pidió explícitamente el commit; si no lo pidió, NO commitear.
-- [ ] 2. Revisar los cambios e identificar cuántas features distintas contiene el staging area.
-- [ ] 3. Por cada feature: agregar al staging únicamente los archivos que le corresponden.
+- [ ] 2. Revisar los cambios e identificar cuántas features distintas contiene el working directory.
+- [ ] 3. Por cada feature: mover al staging area únicamente los archivos que le corresponden.
 - [ ] 4. Elegir `<emoji>` y `<type>` desde la tabla y determinar el `<scope>`.
 - [ ] 5. Redactar el encabezado y el `body` como lista de puntos.
 - [ ] 6. Ejecutar el commit; si quedan más features, volver al paso 3.
@@ -26,10 +26,10 @@ Está PROHIBIDO hacer un commit de forma autónoma al terminar una tarea, fase, 
 ## Granularidad de Commits: 1 Commit = 1 Feature
 Cada commit debe representar exactamente una feature, corrección o cambio atómico. Está PROHIBIDO agrupar varias features en un solo commit.
 
-Antes de crear cualquier commit, revisar el staging area para identificar cuántas features distintas contiene:
+Antes de crear cualquier commit, revisar el working directory para identificar cuántas features distintas contiene:
 
-* Si el staging area tiene cambios de **una sola feature**: crear un único commit con esos cambios.
-* Si el staging area tiene cambios de **N features distintas**: crear N commits separados, uno por feature. Para cada commit, agregar al staging area únicamente los archivos que correspondan a esa feature, ejecutar el commit y luego repetir el proceso con la siguiente feature.
+* Si el working directory tiene cambios de **una sola feature**: agregar todos esos cambios al staging area y crear un único commit.
+* Si el working directory tiene cambios de **N features distintas**: crear N commits separados, uno por feature. Para cada commit, agregar al staging area únicamente los archivos que correspondan a esa feature, ejecutar el commit y luego repetir el proceso con la siguiente feature.
 
 Una "feature" es cualquier unidad de cambio con una intención semántica propia: una nueva funcionalidad, una corrección de bug, un cambio de estilo, una actualización de documentación, etc. Dos cambios pertenecen a la misma feature si comparten el mismo tipo de commit y el mismo scope.
 
