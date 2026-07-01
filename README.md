@@ -132,12 +132,19 @@ La salida debe contener algo similar a esto:
 Cita textual de node_modules/next/dist/docs
 ```
 
-2. **[Skill `react-best-practices`](https://vercel.com/blog/introducing-react-best-practices):** permite escribir código limpio de React.
+2. **[Skill `vercel-react-best-practices`](https://vercel.com/blog/introducing-react-best-practices):** permite escribir código limpio de React.
 
 Para probar que funcione:
 
 ```txt
-/react-best-practices explicame como consumir API REST con React
+/vercel-react-best-practices explicame como consumir API REST con React
+```
+
+La salida debe contener algo similar a esto:
+
+```bash
+● Read(\.claude\skills\vercel-react-best-practices\rules\[nombre_archivo].md)
+Read 57 lines
 ```
 
 > [!NOTE]
