@@ -149,7 +149,7 @@ Read 57 lines
 
 > [!NOTE]
 >
-> **NO** debes hacer lo siguiente
+> **NO** debes hacer lo siguiente porque ya esta configurado
 >
 > Pasos para configurar skill `vercel-react-best-practices`
 >
