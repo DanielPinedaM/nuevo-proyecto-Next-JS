@@ -163,9 +163,6 @@ Read 57 lines
 >
 > eliminar `skills-lock.json`
 
-# 🔗 Enlaces - Click Aqui para Ver ...
-* [Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
-
 # Skills
 
 ## 🌿 `git-commit`
@@ -196,6 +193,8 @@ hacer commit y push
 > *Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas*
 
 Esta sección está diseñada para utilizarse como contexto en herramientas de IA.
+
+# [🔗 Enlace - Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
 
 ## Principales IA para Desarrollo de Software
 
