@@ -105,20 +105,38 @@ La configuración de autocompletado, formateo de código y linter ya está inclu
 * `.prettierrc`
 * `eslint.config.mjs`
 
-## 👾 En Claude Code Configurar MCP de Documentación Oficial de Next JS
-1. Abrir Git Bash
+# Configuración de Next.js con IA
+Estas configuraciones son oficiales del equipo de Vercel que es quien desarrolla Next.js
 
-2. Abrir la carpeta del proyecto
+No tiene que hacer nada, ya todo esta configurado. Solo tiene que abrir una IA en el bash/CLI en la ruta de este proyecto y funcionara
+
 ```console
 cd /ruta/a/tu/proyecto
 ```
 
-3. Instalac MCP
+Este proyecto ya tiene configurado lo siguiente:
 
-> [!WARNING]
-> # ⚠️ ****IMPORTANTE**** 🚨
->
-> ESTA INCOMPLETA ESTA SECCION DE CONFIGURAR MCP DE NEXT JS
+1. **[Archivo AGENTS.md](https://nextjs.org/docs/app/guides/ai-agents) en la raiz del proyecto:** Permite a la IA acceder a la documentación que esta en `node_modules\next\dist\docs` de la version de Next.js instalada.
+
+Para probar que funcione:
+
+```txt
+
+```
+
+La salida debe contener algo similar a esto:
+
+```bash
+● Search(pattern: "", path: "\node_modules\next\dist\docs")
+```
+
+2. **[Skill `react-best-practices`](https://vercel.com/blog/introducing-react-best-practices):** Permite escribir codigo limpio de React
+
+Para probar que funcione:
+
+```txt
+/react-best-practices
+```
 
 # 🔗 Enlaces - Click Aqui para Ver ...
 * [Prompts para trabajar con IA](https://github.com/DanielPinedaM/prompt-engineering/tree/main/2_prompts-full-stack)
@@ -129,7 +147,7 @@ cd /ruta/a/tu/proyecto
 >
 > # ⚠️ \***\*IMPORTANTE\*\*** 🚨
 >
-> \***\*Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas\*\***
+> *Ignorar esta sección ocasionará que la IA genere código que no respete la arquitectura, estructura ni las convenciones del proyecto, produciendo código inconsistente, desordenado y con malas practicas*
 
 Esta sección está diseñada para utilizarse como contexto en herramientas de IA.
 
