@@ -151,7 +151,7 @@ Read 57 lines
 >
 > **NO** debes hacer lo siguiente
 >
-> Pasos para configurar skill `react-best-practices`
+> Pasos para configurar skill `vercel-react-best-practices`
 >
 > Instalar
 >
