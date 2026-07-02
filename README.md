@@ -1,9 +1,9 @@
 # ⚛️ Stack Frontend del Proyecto
 
-A continuación, se presenta un resumen de las tecnologías principales del proyecto. No incluye la totalidad de dependencias:
+A continuación, se presenta un resumen de las tecnologías mas importantes del proyecto. No incluye la totalidad de dependencias:
 
-* Node JS 24.18.0
-* Next JS 16 con App Router (`app`)
+* Node.js 24.18.0
+* Next.js 16 con App Router (`app`)
 * React 19
 * TypeScript 6
 * Prime React 10
@@ -244,7 +244,7 @@ Obligatorio el uso de `fnm`. Está prohibido usar alternativas como:
 
 Este proyecto usa Node.js 24.18.0
 
-# 🔗 Alias
+# 🏷️ Alias
 Para todos los comandos de `pnpm` usar el alias `pn`
 
 # 📦 Instalar Paquetes
