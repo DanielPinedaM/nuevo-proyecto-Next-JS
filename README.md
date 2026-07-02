@@ -20,13 +20,17 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 
 ## Antes de Empezar
 Para que la configuración funcione, debes tener instalado:
-* VS Code o cualquier editor basado en VS Code (Antigravity, Cursor, Windsurf, etc.)
+* [VS Code](https://code.visualstudio.com/) o cualquier editor basado en VS Code ([Antigravity](https://antigravity.google/product), [Cursor](https://cursor.com/get-started), Windsurf, etc.)
 
-* Git Bash
+* [Git Bash](https://git-scm.com/install/)
 
-* Node.js
+* [Node.js](https://nodejs.org/)
 
-* Claude Code
+* [Claude Code](https://code.claude.com/docs/en/quickstart)
+
+* [pnpm](https://pnpm.io/installation)
+
+* [fnm](https://github.com/Schniz/fnm)
 
 ## Instalar `pnpm`
 1. Abrir Git Bash
