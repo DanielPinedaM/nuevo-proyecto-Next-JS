@@ -18,7 +18,7 @@ A continuación, se presenta un resumen de las tecnologías principales del proy
 
 # ⚙️ Configurar lo Siguiente **UNA SOLA VEZ**
 
-## Antes de Empezar
+## 🛠️ Antes de Empezar
 Para que la configuración funcione, debes tener instalado:
 * [VS Code](https://code.visualstudio.com/) o cualquier editor basado en VS Code ([Antigravity](https://antigravity.google/product), [Cursor](https://cursor.com/get-started), Windsurf, etc.)
 
