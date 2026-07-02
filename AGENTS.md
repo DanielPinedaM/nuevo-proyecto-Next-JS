@@ -47,16 +47,6 @@ Node.js
 
 * La arquitectura, reglas y convenciones definidas en este documento tienen prioridad absoluta. Sin embargo, como no todos los casos posibles están documentados, si un problema no puede resolverse respetando la arquitectura actual o requiere una solución no contemplada en el README, primero debes advertir explícitamente que dicha solución se sale de la arquitectura o convenciones establecidas antes de generar una implementación.
 
-
-
-
-
-
-
-- Como excepción a la regla anterior, escribir en español el nombre de las carpetas que definen una ruta URL del navegador en el App Router de Next.js, es decir, las carpetas que contienen un archivo `page.tsx` dentro de `src/app/(features)/<feature>` (por ejemplo, `iniciar-sesion` o `recuperar-clave`). El resto de carpetas, el nombre del archivo `page.tsx` y el nombre de la función o clase del componente asociado permanecen en inglés.
-
-
-
 # Reglas de Idioma
 
 ## Responder en Español
@@ -69,7 +59,7 @@ Es decir, redactar en español todas las explicaciones, comentarios de codigo, r
 
 * Nombres de frameworks, librerías, paquetes, APIs
 
-* Código fuente (todo, **excepto los comentarios de codigo**): Identificadores, nombres de archivos y carpetas, clases, interface, enum, métodos, funciones, parámetros, variables, nombres de archivos reservados de Next.js (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `not-found.tsx`, `route.ts`), route groups `(nombre)`, carpetas privadas `_nombre`, segmentos dinámicos `[param]`
+* Código fuente (todo, **excepto los comentarios de codigo**): Identificadores, nombres de archivos y carpetas, route group de Next.js, clases, interface, enum, métodos, funciones, parámetros, variables, nombres de archivos reservados de Next.js (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `not-found.tsx`, `route.ts`, `proxy.ts`), route groups `(nombre)`, carpetas privadas `_nombre`, segmentos dinámicos `[param]`
 
 ## Excepciones dentro de las Excepciones, esto debe estar en Español
 Aunque la sección anterior indica que los "nombres de archivos y carpetas" van en inglés, existe un caso puntual que queda **excluido de esa excepción** y por lo tanto debe estar en español:
@@ -80,14 +70,25 @@ Aunque la sección anterior indica que los "nombres de archivos y carpetas" van 
 ### Explicación
 En Next.js App Router no existe un archivo central de rutas: el nombre de la carpeta dentro de `app/` **es** el segmento de la URL. Por eso, toda carpeta dentro de `src/app/` que aparezca en la URL final debe estar en español. Quedan excluidos de esta regla (se mantienen en inglés): route groups `(nombre)`, carpetas privadas `_nombre`, segmentos dinámicos `[param]` y archivos reservados como `page.tsx`.
 
+```console
 src/app/
-├── (features)/                    # route group, no aparece en la URL -> ingles
-│   ├── iniciar-sesion/        # segmento de ruta -> español
-│   │   └── page.tsx
-│   ├── recuperar-clave/       # segmento de ruta -> español
-│   │   └── page.tsx
-│   └── asignar-nueva-clave/   # segmento de ruta -> español
-│       └── [id]/              # segmento dinamico -> ingles
-│           └── page.tsx
-└── bots/                       # segmento de ruta -> español
-└── page.tsx
+├── (features)/                     # route group, no aparece en la URL  -> ingles
+│   ├── (auth)/                     # route group, no aparece en la URL  -> ingles
+│   │   └── iniciar-sesion/         # segmento de ruta                   -> español
+│   │       ├── components/         # carpeta de codigo, no es ruta      -> ingles
+│   │       │   └── example.tsx     # nombre de archivo                  -> ingles
+│   │       └── page.tsx            # archivo reservado de Next.js       -> ingles
+│   └── asignar-nueva-clave/        # segmento de ruta                   -> español
+│       └── [id]/                   # segmento dinamico                  -> ingles
+│           └── page.tsx            # archivo reservado de Next.js       -> ingles
+└── page.tsx                        # archivo reservado de Next.js       -> ingles
+```
+
+Resultado: URLs `/iniciar-sesion`, `/asignar-nueva-clave/123`
+
+Es decir:
+1. Dentro de `src/features/<feature>` existen carpetas que representan páginas/rutas y están en español.
+2. Esas carpetas están asociadas a su respectivo segmento de ruta dentro de `src/app/`.
+3. El nombre de la carpeta dentro de `src/app/` (el segmento de ruta) va en español.
+
+Ejemplo: `src/features/auth/recuperar-clave/` asociada a `src/app/(auth)/recuperar-clave/page.tsx` — ambos en español. El resto del código dentro de esa carpeta (archivos `.tsx`, componentes, funciones, hooks, variables) sigue en inglés según la sección anterior.
